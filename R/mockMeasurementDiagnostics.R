@@ -16,11 +16,9 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
-#'
 #' cdm <- mockMeasurementDiagnostics()
-#'
 #' cdm
-#' }
+#'}
 mockMeasurementDiagnostics <- function(nPerson = 100,
                                        con = DBI::dbConnect(duckdb::duckdb()),
                                        writeSchema = "main",

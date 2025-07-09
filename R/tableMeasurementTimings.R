@@ -10,17 +10,13 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
-#'
 #' cdm <- mockMeasurementDiagnostics()
 #' result <- summariseMeasurementUse(
 #'               cdm = cdm,
 #'               codes = list("test_codelist" = c(3001467L, 45875977L)))
-#'
 #' tableMeasurementTimings(result)
-#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
-#' }
-#'
+#'}
 tableMeasurementTimings <- function(result,
                                     type = "gt",
                                     header = c(visOmopResults::strataColumns(result)),

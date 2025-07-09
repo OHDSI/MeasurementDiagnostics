@@ -38,16 +38,14 @@ A ggplot.
 Plot summariseMeasurementTiming results.
 }
 \examples{
-\dontrun{
+\donttest{
 library(MeasurementDiagnostics)
-
 cdm <- mockMeasurementDiagnostics()
-
 result <- summariseMeasurementUse(
               cdm = cdm,
-              codes = list("test_codelist" = c(3001467L, 45875977L)))
+              codes = list("test_codelist" = c(3001467L, 45875977L))
+           )
 plotMeasurementTimings(result)
-
-cdmDisconnect(cdm)
+CDMConnector::cdmDisconnect(cdm)
 }
 }
