@@ -31,9 +31,7 @@ the package works
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-
 cdm <- mockMeasurementDiagnostics()
-
 cdm
 }
 }

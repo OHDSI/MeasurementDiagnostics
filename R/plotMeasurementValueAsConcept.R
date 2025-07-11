@@ -7,18 +7,15 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(MeasurementDiagnostics)
-#'
 #' cdm <- mockMeasurementDiagnostics()
-#'
 #' result <- summariseMeasurementUse(
 #'               cdm = cdm,
 #'               bySex = TRUE,
 #'               codes = list("test_codelist" = c(3001467L, 45875977L)))
 #' plotMeasurementValueAsConcept(result)
-#'
-#' cdmDisconnect(cdm)
+#' CDMConnector::cdmDisconnect(cdm)
 #' }
 plotMeasurementValueAsConcept <- function(result,
                                           x = "count",

@@ -10,7 +10,7 @@ tableMeasurementTimings(
   header = c(visOmopResults::strataColumns(result)),
   groupColumn = c("codelist_name"),
   settingsColumn = character(),
-  hide = c("variable_name", "variable_level"),
+  hide = c("variable_level"),
   style = "default",
   .options = list()
 )
@@ -51,15 +51,11 @@ Format a measurement_timings object into a visual table
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-
 cdm <- mockMeasurementDiagnostics()
 result <- summariseMeasurementUse(
               cdm = cdm,
               codes = list("test_codelist" = c(3001467L, 45875977L)))
-
 tableMeasurementTimings(result)
-
 CDMConnector::cdmDisconnect(cdm = cdm)
 }
-
 }

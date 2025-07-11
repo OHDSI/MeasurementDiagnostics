@@ -8,17 +8,13 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
-#'
 #' cdm <- mockMeasurementDiagnostics()
-#'
 #' result <- summariseCohortMeasurementUse(
 #'   codes = list("test_codelist" = c(3001467L, 45875977L)),
 #'   cohort = cdm$my_cohort, timing = "cohort_start_date"
 #' )
-#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
-#' }
-#'
+#'}
 summariseCohortMeasurementUse <- function(codes,
                                           cohort,
                                           timing = "during",

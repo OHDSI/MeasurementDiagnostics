@@ -7,18 +7,15 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(MeasurementDiagnostics)
-#'
 #' cdm <- mockMeasurementDiagnostics()
-#'
 #' result <- summariseMeasurementUse(
 #'               cdm = cdm,
 #'               bySex = TRUE,
 #'               codes = list("test_codelist" = c(3001467L, 45875977L)))
 #' plotMeasurementValueAsNumeric(result)
-#'
-#' cdmDisconnect(cdm)
+#' CDMConnector::cdmDisconnect(cdm)
 #' }
 plotMeasurementValueAsNumeric <- function(result,
                                           x = c("unit_concept_name"),
