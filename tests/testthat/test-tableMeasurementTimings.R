@@ -54,4 +54,3 @@ test_that("check that it works ", {
 
   CDMConnector::cdmDisconnect(cdm = cdm)
 })
-

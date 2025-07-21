@@ -23,7 +23,10 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    as.character(c('0', '0', '11', '1206', '14', '1506', '1761', '20', '2316', '4322.75', '5026', '651', '9', '96'))
+    as.character(c(
+      '0', '0', '1', '1', '1', '1', '1', '11', '1206', '14', '1506', '1761', '2',
+      '2', '2.25', '20', '2316', '4', '4', '4322.75', '5026', '651', '9', '96'
+      ))
   )
   expect_equal(
     res |>
@@ -31,7 +34,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c("number records", "number records", "number subjects", "number subjects", rep("time", 10))
+    c(rep("measurements_per_subject", 10), "number records", "number records", "number subjects", "number subjects", rep("time", 10))
   )
   expect_equal(
     res |>
@@ -39,7 +42,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), rep("max", 2), rep("median", 2), rep("min", 2), rep("q25", 2), rep("q75", 2))
+    c(rep("count", 4), rep("max", 4), rep("median", 4), rep("min", 4), rep("q25", 4), rep("q75", 4))
   )
   expect_equal(
     res |>
@@ -134,8 +137,9 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1035', '12852', '1487', '2329', '2442', '2656', '31573', '31880', '3493',
-      '38', '39', '4961.5', '5498', '7481')
+    c('1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656', '3',
+      '31573', '31880', '3493', '38', '39', '4', '4', '4961.5', '5498', '6',
+      '7481', '8', '9')
   )
   expect_equal(
     res_during |>
@@ -143,8 +147,9 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602',
-      '1602', '28', '29', '60', '61')
+    c('1', '1', '1', '1', '1', '1', '1', '1', '1602', '1602', '1602', '1602',
+      '1602', '1602', '1602', '1602', '1602', '1602', '2', '2', '28', '29',
+      '60', '61')
   )
   expect_equal(
     res_start |>
@@ -152,7 +157,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c("0", "0", "1", "1")
+    c('0', '0', '1', '1', '1', '1', '1', '1', '1')
   )
   expect_equal(
     res_any |>
