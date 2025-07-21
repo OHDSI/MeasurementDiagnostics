@@ -118,7 +118,6 @@ summariseMeasurementUseInternal <- function(cdm,
   cli::cli_inform(c(">" = "Subsetting records to the subjects and timing of interest."))
   # subset to cohort and timing
   measurement <- subsetMeasurementTable(cdm, cohortName, timing, measurementCohortName, dateRange)
-
   measurement <- measurement |>
     dplyr::rename("subject_id" = "person_id", "cohort_start_date" = "record_date") |>
     dplyr::mutate(cohort_definition_id = 1L, cohort_end_date = .data$cohort_start_date) |>
@@ -145,7 +144,10 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::group_by(.data$codelist_name, .data$subject_id) |>
       dplyr::arrange(.data$cohort_start_date) |>
       dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) %>%
-      dplyr::mutate(time = !!CDMConnector::datediff("previous_measurement", "cohort_start_date")) |>
+      dplyr::mutate(
+        time = !!CDMConnector::datediff("previous_measurement", "cohort_start_date"),
+        measurements_per_subject = n()
+      ) |>
       dplyr::ungroup() |>
       dplyr::collect() |>
       PatientProfiles::summariseResult(
@@ -153,7 +155,7 @@ summariseMeasurementUseInternal <- function(cdm,
         includeOverallGroup = FALSE,
         strata = strata,
         includeOverallStrata = TRUE,
-        variables = "time",
+        variables = c("time", "measurements_per_subject"),
         estimates = c("min", "q25", "median", "q75", "max"),
         counts = TRUE
       ) |>

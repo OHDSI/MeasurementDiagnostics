@@ -28,7 +28,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '100', '1426.75', '14973', '3521.5', '5334', '64', '96')
+    c('0', '0', '1', '1', '100', '1426.75', '14973', '2', '2', '3', '3521.5', '5334', '64', '96')
   )
   expect_equal(
     res |>
@@ -36,7 +36,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("number records", 2), rep("number subjects", 2), rep("time", 5))
+    c(rep("measurements_per_subject", 5), rep("number records", 2), rep("number subjects", 2), rep("time", 5))
   )
   expect_equal(
     res |>
@@ -44,7 +44,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), "max",  "median", "min", "q25", "q75")
+    c(rep("count", 4), "max",  "max", "median", "median", "min", "min", "q25", "q25", "q75", "q75")
   )
   expect_equal(
     res |>
@@ -217,6 +217,7 @@ test_that("summariseMeasurementUse checks", {
     dateRange = as.Date(c("2000-01-01", "2005-01-01")),
     checks = "measurement_timings"
   )
+
   expect_true(unique(res$result_id) == 1)
   expect_true(omopgenerics::settings(res)$result_type == "measurement_timings")
 
@@ -266,8 +267,4 @@ test_that("summariseMeasurementUse observation domain", {
     tab$domain_id |> sort(),
     c("Measurement", "Observation", "overall")
   )
-
 })
-
-
-
