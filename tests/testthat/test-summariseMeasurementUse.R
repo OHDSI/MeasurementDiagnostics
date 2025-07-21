@@ -49,7 +49,7 @@ test_that("summariseMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('114.848484848485', '114.848484848485', '115.580808080808', '115.580808080808',
@@ -62,7 +62,7 @@ test_that("summariseMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
     c('count', 'count', 'count', 'count', 'count_missing', 'count_missing',
@@ -70,6 +70,16 @@ test_that("summariseMeasurementUse works", {
       'median', 'median', 'median', 'min', 'min', 'min', 'min', 'percentage_missing',
       'percentage_missing', 'percentage_missing', 'percentage_missing', 'q25',
       'q25', 'q25', 'q25', 'q75', 'q75', 'q75', 'q75')
+  )
+  expect_equal(
+    res |>
+      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
+      dplyr::filter(strata_name == "overall") |>
+      dplyr::pull(estimate_name) |>
+      sort() |>
+      unique(),
+    c("count", "count_missing", "density_x", "density_y", "max", "median",
+      "min","percentage_missing", "q25", "q75")
   )
   expect_equal(
     res |>
@@ -268,6 +278,4 @@ test_that("summariseMeasurementUse observation domain", {
   )
 
 })
-
-
 

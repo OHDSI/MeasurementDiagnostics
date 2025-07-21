@@ -44,7 +44,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('0', '0', '0', '0', '0', '0', '0', '0', '10', '10', '10', '10', '101.666666666667',
@@ -63,7 +63,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
     c('count', 'count', 'count', 'count', 'count', 'count', 'count', 'count',
@@ -75,6 +75,16 @@ test_that("summariseCohortMeasurementUse works", {
       'percentage_missing', 'percentage_missing', 'percentage_missing', 'percentage_missing',
       'percentage_missing', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25',
       'q75', 'q75', 'q75', 'q75', 'q75', 'q75', 'q75', 'q75')
+  )
+  expect_equal(
+    res |>
+      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
+      dplyr::filter(strata_name == "overall") |>
+      dplyr::pull(estimate_name) |>
+      sort() |>
+      unique(),
+    c("count", "count_missing", "density_x", "density_y", "max", "median",
+      "min","percentage_missing", "q25", "q75")
   )
   expect_equal(
     res |>
@@ -147,7 +157,11 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_any |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall", group_name != "cohort_name &&& codelist_name &&& unit_concept_name") |>
+      dplyr::filter(
+        strata_name == "overall",
+        group_name != "cohort_name &&& codelist_name &&& unit_concept_name",
+        estimate_name != "density_x", estimate_name != "density_y"
+      ) |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('100', '100', '12852', '12852', '5498', '5498')
@@ -155,7 +169,11 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_during |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall", group_name != "cohort_name &&& codelist_name &&& unit_concept_name") |>
+      dplyr::filter(
+        strata_name == "overall",
+        group_name != "cohort_name &&& codelist_name &&& unit_concept_name",
+        estimate_name != "density_x", estimate_name != "density_y"
+      ) |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('100', '100', '29', '29', '61', '61')
@@ -163,7 +181,11 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_start |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall", group_name != "cohort_name &&& codelist_name &&& unit_concept_name") |>
+      dplyr::filter(
+        strata_name == "overall",
+        group_name != "cohort_name &&& codelist_name &&& unit_concept_name",
+        estimate_name != "density_x", estimate_name != "density_y"
+      ) |>
       dplyr::pull(estimate_value) |>
       sort(),
     c("1", "1", "100")
