@@ -20,7 +20,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     as.character(c(
@@ -31,7 +31,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
     c(rep("measurements_per_subject", 10), "number records", "number records", "number subjects", "number subjects", rep("time", 10))
@@ -39,7 +39,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
     c(rep("count", 4), rep("max", 4), rep("median", 4), rep("min", 4), rep("q25", 4), rep("q75", 4))
@@ -134,7 +134,7 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_any |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656', '3',
@@ -144,7 +144,7 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_during |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('1', '1', '1', '1', '1', '1', '1', '1', '1602', '1602', '1602', '1602',
@@ -154,7 +154,7 @@ test_that("test timings with eunomia", {
   expect_equal(
     res_start |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('0', '0', '1', '1', '1', '1', '1', '1', '1')

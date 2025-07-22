@@ -11,7 +11,7 @@ test_that("plotMeasurementValueAsNumeric works", {
   # Table types
   expect_no_error(x <- plotMeasurementValueAsNumeric(result))
   expect_true(ggplot2::is_ggplot(x))
-  expect_no_error(x <- plotMeasurementValueAsNumeric(result, type = "densityplot"))
+  expect_no_error(x <- plotMeasurementValueAsNumeric(result, plotType = "densityplot"))
   expect_true(ggplot2::is_ggplot(x))
 
   # Summarise measurement use ----

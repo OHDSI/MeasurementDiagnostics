@@ -146,7 +146,7 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) %>%
       dplyr::mutate(
         time = !!CDMConnector::datediff("previous_measurement", "cohort_start_date"),
-        measurements_per_subject = n()
+        measurements_per_subject = dplyr::n()
       ) |>
       dplyr::ungroup() |>
       dplyr::collect() |>
@@ -156,7 +156,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = c("time", "measurements_per_subject"),
-        estimates = c("min", "q25", "median", "q75", "max"),
+        estimates = c("min", "q25", "median", "q75", "max", "density"),
         counts = TRUE
       ) |>
       suppressMessages() |>
