@@ -19,8 +19,10 @@
 #' }
 plotMeasurementValueAsNumeric <- function(result,
                                           x = c("unit_concept_name"),
+                                          type = "boxplot",
                                           facet = c("codelist_name", "concept_name"),
-                                          colour = c("cdm_name", visOmopResults::strataColumns(result))){
+                                          colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result))) {
+  omopgenerics::assertChoice(type, choices = c("boxplot", "densityplot"))
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
 
@@ -30,21 +32,28 @@ plotMeasurementValueAsNumeric <- function(result,
   facet <- intersect(facet, plotCols)
   colour <- intersect(colour, plotCols)
 
-  # subset to rows of interest
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric") |>
-    dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))
+    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric")
+
+  if (nrow(result) == 0) {
+    cli::cli_warn("There are no results with `result_type = measurement_value_as_numeric`")
+    return(visOmopResults::emptyPlot())
+  }
+
+  # subset to rows of interest
+  if (type == "boxplot") {
+    result <- result |>
+      dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))
+  } else if (type == "densityplot"){
+    result <- result |>
+      dplyr::filter(grepl("density", .data$estimate_name))
+  }
 
   # Remove overall option when byConcept is TRUE
   if("codelist_name &&& concept_name" %in% result$group_name){
     result <- result |>
       dplyr::filter(.data$group_name %in% c("codelist_name &&& concept_name &&& unit_concept_name",
                                             "codelist_name &&& concept_name"))
-  }
-
-  if (nrow(result) == 0) {
-    cli::cli_warn("There are no results with `result_type = measurement_value_as_numeric`")
-    return(visOmopResults::emptyPlot())
   }
 
   if(length(result |> dplyr::pull("estimate_value") |> unique()) == 1 && is.na((result |> dplyr::pull("estimate_value") |> unique()))){
@@ -58,14 +67,31 @@ plotMeasurementValueAsNumeric <- function(result,
     x, custom = c("unit_concept_name" = "Unit as concept name", "unit_concept_id" = "Unit as concept ID")
   )
 
-  visOmopResults::boxPlot(
-    result = result,
-    x = x,
-    facet = facet,
-    colour = colour,
-    label = visOmopResults::plotColumns(result)
-  ) +
-    ggplot2::xlab(label = paste0(xLab, collapse = ", and ")) +
+  if (type == "boxplot") {
+    p <-   visOmopResults::boxPlot(
+      result = result,
+      x = x,
+      facet = facet,
+      colour = colour,
+      label = visOmopResults::plotColumns(result)
+    ) +
+      ggplot2::xlab(label = paste0(xLab, collapse = ", and "))
+  } else if (type == "densityplot") {
+    p <- visOmopResults::scatterPlot(
+      result = result,
+      x = "density_x",
+      y = "density_y",
+      line = TRUE,
+      point = FALSE,
+      ribbon = FALSE,
+      ymin = NULL,
+      ymax = NULL,
+      facet = facet,
+      colour = colour,
+      label = visOmopResults::plotColumns(result)
+    )
+  }
+  p +
     ggplot2::ylab(label = "Measurement numeric value") +
     visOmopResults::themeVisOmop()
 }

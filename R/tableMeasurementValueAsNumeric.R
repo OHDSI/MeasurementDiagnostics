@@ -32,7 +32,8 @@ tableMeasurementValueAsNumeric <- function(result,
 
   # subset to rows of interest
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric")
+    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric") |>
+    dplyr::filter(!grepl("density", .data$estimate_name))
 
   if (nrow(result) == 0) {
     cli::cli_warn("There are no results with `result_type = measurement_value_as_numeric`")

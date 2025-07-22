@@ -182,7 +182,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = "value_as_number",
-        estimates = c("min", "q25", "median", "q75", "max", "count_missing", "percentage_missing"),
+        estimates = c("min", "q25", "median", "q75", "max", "count_missing", "percentage_missing", "density"),
         counts = TRUE,
         weights = NULL
       ) |>
