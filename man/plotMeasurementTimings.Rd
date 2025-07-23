@@ -40,7 +40,9 @@ result <- summariseMeasurementUse(
               cdm = cdm,
               codes = list("test_codelist" = c(3001467L, 45875977L))
            )
-plotMeasurementTimings(result)
+result |>
+  dplyr::filter(variable_name == "time") |>
+  plotMeasurementTimings()
 CDMConnector::cdmDisconnect(cdm)
 }
 }

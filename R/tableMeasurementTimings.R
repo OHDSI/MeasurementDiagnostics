@@ -61,7 +61,7 @@ tableMeasurementTimings <- function(result,
 
   result |>
     dplyr::filter(!.data$estimate_name %in% c("density_x", "density_y")) |>
-    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name)) |>
+    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name, custom = c("Time (days)" = "time"))) |>
     visOmopResults::visOmopTable(
       estimateName = c(
         "N" = "<count>",
