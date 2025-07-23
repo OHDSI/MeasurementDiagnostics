@@ -19,10 +19,10 @@
 #' }
 plotMeasurementValueAsNumeric <- function(result,
                                           x = c("unit_concept_name"),
-                                          type = "boxplot",
+                                          plotType = "boxplot",
                                           facet = c("codelist_name", "concept_name"),
                                           colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result))) {
-  omopgenerics::assertChoice(type, choices = c("boxplot", "densityplot"))
+  omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
 
@@ -41,10 +41,10 @@ plotMeasurementValueAsNumeric <- function(result,
   }
 
   # subset to rows of interest
-  if (type == "boxplot") {
+  if (plotType == "boxplot") {
     result <- result |>
       dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))
-  } else if (type == "densityplot"){
+  } else if (plotType == "densityplot"){
     result <- result |>
       dplyr::filter(grepl("density", .data$estimate_name))
   }
@@ -67,7 +67,7 @@ plotMeasurementValueAsNumeric <- function(result,
     x, custom = c("unit_concept_name" = "Unit as concept name", "unit_concept_id" = "Unit as concept ID")
   )
 
-  if (type == "boxplot") {
+  if (plotType == "boxplot") {
     p <-   visOmopResults::boxPlot(
       result = result,
       x = x,
@@ -76,7 +76,7 @@ plotMeasurementValueAsNumeric <- function(result,
       label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::xlab(label = paste0(xLab, collapse = ", and "))
-  } else if (type == "densityplot") {
+  } else if (plotType == "densityplot") {
     p <- visOmopResults::scatterPlot(
       result = result,
       x = "density_x",

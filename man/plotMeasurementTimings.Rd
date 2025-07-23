@@ -6,21 +6,16 @@
 \usage{
 plotMeasurementTimings(
   result,
-  x = "codelist_name",
   plotType = "boxplot",
   timeScale = "days",
   facet = visOmopResults::strataColumns(result),
-  colour = "cdm_name"
+  colour = c("cdm_name", "codelist_name")
 )
 }
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{x}{Columns to use as horizontal axes. See options with
-`visOmopResults::plotColumns(result)`.}
-
-\item{plotType}{Type of desired formatted table, possibilities are "boxplot" and
-"densityplot".}
+\item{plotType}{Type of plot, either "boxplot" or "densityplot".}
 
 \item{timeScale}{Time scale to show, it can be "days" or "years".}
 
@@ -45,7 +40,9 @@ result <- summariseMeasurementUse(
               cdm = cdm,
               codes = list("test_codelist" = c(3001467L, 45875977L))
            )
-plotMeasurementTimings(result)
+result |>
+  dplyr::filter(variable_name == "time") |>
+  plotMeasurementTimings()
 CDMConnector::cdmDisconnect(cdm)
 }
 }

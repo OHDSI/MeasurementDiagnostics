@@ -25,7 +25,7 @@ test_that("summariseMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
     c('0', '0', '1', '1', '100', '1426.75', '14973', '2', '2', '3', '3521.5', '5334', '64', '96')
@@ -33,7 +33,7 @@ test_that("summariseMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
     c(rep("measurements_per_subject", 5), rep("number records", 2), rep("number subjects", 2), rep("time", 5))
@@ -41,10 +41,19 @@ test_that("summariseMeasurementUse works", {
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
-      dplyr::filter(strata_name == "overall") |>
+      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
     c(rep("count", 4), "max",  "max", "median", "median", "min", "min", "q25", "q25", "q75", "q75")
+  )
+  expect_equal(
+    res |>
+      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      dplyr::filter(strata_name == "overall") |>
+      dplyr::pull(estimate_name) |>
+      sort() |>
+      unique(),
+    c("count", "density_x", "density_y", "max", "median", "min", "q25", "q75")
   )
   expect_equal(
     res |>
