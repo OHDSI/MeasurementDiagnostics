@@ -41,7 +41,6 @@ plotMeasurementTimings <- function(result,
   }
 
   # Check variables
-  browser()
   variables <- result$variable_name |> unique()
   time <- "time" %in% variables
   nmeasurements <- "measurements_per_subject" %in% variables
