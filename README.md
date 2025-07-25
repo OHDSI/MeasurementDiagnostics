@@ -1,11 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MeasurementDiagnostics <img src="man/HexstickerMeasurementDiagnostics.png" align="right" height="180"/>
+# MeasurementDiagnostics <img src="man/figures/logo.png" align="right" height="180"/>
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/MeasurementDiagnostics)](https://CRAN.R-project.org/package=MeasurementDiagnostics)
 [![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/workflows/R-CMD-check/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics?branch=main)
@@ -37,35 +40,14 @@ For this example we’ll use the Eunomia data.
 
 ``` r
 library(duckdb)
-#> Loading required package: DBI
 library(omopgenerics)
-#> 
-#> Attaching package: 'omopgenerics'
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
 library(CDMConnector)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(MeasurementDiagnostics)
 ```
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database C:/Users/nmercade/Dropbox/Documents/IDIAP/Formations/Curs_Introduccio_OMOP/MockDB/GiBleed_5.3.zip
-#> ■■■■■■■■■■■■■■■■                  51% | ETA:  2s
-#> ■■■■■■■■■■■■■■■■■■■               61% | ETA:  2s
-#> ■■■■■■■■■■■■■■■■■■■■■             66% | ETA:  1s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  1s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% | ETA:  1s
-#>                                                  
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -88,10 +70,8 @@ Now we have a cdm reference with our data, we will create a codelist
 with measurement concepts.
 
 ``` r
-repiratory_function_codes <- newCodelist(list("respiratory function" = c(4052083L, 4133840L, 3011505L)))
-repiratory_function_codes
-#> 
-#> ── 1 codelist ──────────────────────────────────────────────────────────────────
+respiratory_function_codes <- newCodelist(list("respiratory function" = c(4052083L, 4133840L, 3011505L)))
+respiratory_function_codes
 #> 
 #> - respiratory function (3 codes)
 ```
@@ -100,18 +80,7 @@ And now we can run a set of measurement diagnostic checks, here
 stratifying results by sex.
 
 ``` r
-repiratory_function_measurements <- summariseMeasurementUse(cdm, repiratory_function_codes, bySex = TRUE)
-#> → Getting measurement records based on 3 concepts.
-#> → Subsetting records to the subjects and timing of interest.
-#> Warning: cohort_name must be snake case and have less than 100 characters, the following
-#> cohorts will be renamed:
-#> • respiratory function_4052083 -> respiratory_function_4052083
-#> • respiratory function_4133840 -> respiratory_function_4133840
-#> • respiratory function_3011505 -> respiratory_function_3011505
-#> → Getting time between records per person.
-#> → Summarising results - value as number.
-#> → Summarising results - value as concept.
-#> → Binding all diagnostic results.
+respiratory_function_measurements <- summariseMeasurementUse(cdm, respiratory_function_codes, bySex = TRUE)
 ```
 
 Among our results is a summary of timings between measurements for
@@ -119,7 +88,8 @@ individuals in our dataset. We can quickly create a plot of these
 results like so
 
 ``` r
-plotMeasurementTimings(repiratory_function_measurements)
+plotMeasurementTimings(respiratory_function_measurements |> 
+    dplyr::filter(variable_name == "time"))
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
