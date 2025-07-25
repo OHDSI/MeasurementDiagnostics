@@ -3,7 +3,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# MeasurementDiagnostics <img src="man/figures/HexstickerMeasurementDiagnostics.png" align="right" height="180"/>
+# MeasurementDiagnostics <img src="man/figures/logo.png" align="right" height="180"/>
 
 <!-- badges: start -->
 
