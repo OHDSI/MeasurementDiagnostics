@@ -70,7 +70,7 @@ tableMeasurementValueAsNumeric <- function(result,
     visOmopResults::visOmopTable(
       estimateName = c(
         "N" = "<count>",
-        "Median [Q25 - Q75]" = "<median> [<q25> - <q75>]",
+        "Median [Q01, Q05, Q25 - Q75, Q95, Q99]" = "<median> [<q01>, <q05>, <q25> - <q75>, <q95>, <q99>]",
         "Range" = "<min> to <max>",
         "Missing value, N (%)" = "<count_missing> (<percentage_missing>%)"
       ),
