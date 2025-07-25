@@ -1,5 +1,7 @@
 #' Plot summariseMeasurementTiming results.
 #'
+#' @param y Variable to plot on y axis, it can be "time" or
+#' measurements_per_subject".
 #' @inheritParams resultDoc
 #' @inheritParams timeScaleDoc
 #' @inheritParams plotDoc
@@ -21,11 +23,13 @@
 #' CDMConnector::cdmDisconnect(cdm)
 #'}
 plotMeasurementTimings <- function(result,
+                                   y = "time",
                                    plotType = "boxplot",
                                    timeScale = "days",
                                    facet = visOmopResults::strataColumns(result),
                                    colour = c("cdm_name", "codelist_name")) {
   # specific checks
+  omopgenerics::assertChoice(y, c("time", "measurements_per_subject"), length = 1)
   omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
   omopgenerics::assertChoice(timeScale, c("days", "years"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
@@ -40,24 +44,24 @@ plotMeasurementTimings <- function(result,
     return(emptyPlot(mes))
   }
 
-  # Check variables
-  variables <- result$variable_name |> unique()
-  time <- "time" %in% variables
-  nmeasurements <- "measurements_per_subject" %in% variables
-  if ((time & nmeasurements) | (!time & !nmeasurements)) {
-    cli::cli_abort("Variables to plot must be either `time` or `measurements_per_subject`")
+  result <- result |>
+    omopgenerics::filter(.data$variable_name == .env$y)
+
+  if (nrow(result) == 0) {
+    mes <- cli::cli_warn("No results found with `variable_name == {y}`")
+    return(emptyPlot(mes))
   }
 
   checkVersion(result)
 
-  if (time) {
+  if (y == "time") {
     lab <- "Days between measurements"
     if (timeScale == "years") {
       result <- result |>
         dplyr::mutate("estimate_value" = as.character(as.numeric(.data$estimate_value)/365.25))
       lab <- "Years between measurements"
     }
-  } else if (nmeasurements) {
+  } else {
     lab <- "Number of measurements per subject"
   }
 
