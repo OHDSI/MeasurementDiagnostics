@@ -9,7 +9,9 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%", 
+  message = FALSE, 
+  warning = FALSE
 )
 ```
 
@@ -59,16 +61,17 @@ cdm
 
 Now we have a cdm reference with our data, we will create a codelist with measurement concepts.
 ```{r}
-repiratory_function_codes <- newCodelist(list("respiratory function" = c(4052083L, 4133840L, 3011505L)))
-repiratory_function_codes
+respiratory_function_codes <- newCodelist(list("respiratory function" = c(4052083L, 4133840L, 3011505L)))
+respiratory_function_codes
 ```
 
 And now we can run a set of measurement diagnostic checks, here stratifying results by sex.
 ```{r}
-repiratory_function_measurements <- summariseMeasurementUse(cdm, repiratory_function_codes, bySex = TRUE)
+respiratory_function_measurements <- summariseMeasurementUse(cdm, respiratory_function_codes, bySex = TRUE)
 ```
 
 Among our results is a summary of timings between measurements for individuals in our dataset. We can quickly create a plot of these results like so
 ```{r}
-plotMeasurementTimings(repiratory_function_measurements)
+plotMeasurementTimings(respiratory_function_measurements |> 
+    dplyr::filter(variable_name == "time"))
 ```
