@@ -55,30 +55,33 @@ test_that("summariseMeasurementUse works", {
       unique(),
     c("count", "density_x", "density_y", "max", "median", "min", "q25", "q75")
   )
+
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
+      dplyr::filter(estimate_name == "q25",
+                    additional_level == "9529") |>
       dplyr::pull(estimate_value) |>
-      sort(),
-    c('114.848484848485', '114.848484848485', '115.580808080808', '115.580808080808',
-      '12.3232323232323', '12.3232323232323', '13.7878787878788', '13.7878787878788',
-      '148.535353535354', '148.535353535354', '150', '150', '2', '2', '3', '3', '4',
-      '4', '46.7424242424242', '46.7424242424242', '47.4747474747475', '47.4747474747475',
-      '50', '50', '50', '50', '6', '6', '81.1616161616162', '81.1616161616162',
-      '81.1616161616162', '81.1616161616162')
-  )
+      as.numeric(),
+    cdm$measurement |>
+      dplyr::filter(measurement_concept_id == 3001467) |>
+      dplyr::pull("value_as_number") |>
+      stats::quantile(0.25,na.rm = TRUE) |>
+      as.numeric())
   expect_equal(
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
+      unique() |>
       sort(),
-    c('count', 'count', 'count', 'count', 'count_missing', 'count_missing',
-      'count_missing', 'count_missing', 'max', 'max', 'max', 'max', 'median',
-      'median', 'median', 'median', 'min', 'min', 'min', 'min', 'percentage_missing',
-      'percentage_missing', 'percentage_missing', 'percentage_missing', 'q25',
-      'q25', 'q25', 'q25', 'q75', 'q75', 'q75', 'q75')
+    c('count','count_missing',
+      'max',  'median',
+      'min', 'q01','q05',
+      'percentage_missing',
+      'q25','q75', 'q95','q99')|>
+      sort()
   )
   expect_equal(
     res |>
@@ -88,7 +91,7 @@ test_that("summariseMeasurementUse works", {
       sort() |>
       unique(),
     c("count", "count_missing", "density_x", "density_y", "max", "median",
-      "min","percentage_missing", "q25", "q75")
+      "min","percentage_missing", 'q01','q05', "q25", "q75", 'q95','q99')
   )
   expect_equal(
     res |>

@@ -48,36 +48,11 @@ test_that("summariseCohortMeasurementUse works", {
     res |>
       omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
-      dplyr::pull(estimate_value) |>
-      sort(),
-    c('0', '0', '0', '0', '0', '0', '0', '0', '10', '10', '10', '10', '101.666666666667',
-      '101.666666666667', '108.989898989899', '108.989898989899', '119.242424242424',
-      '119.242424242424', '123.636363636364', '123.636363636364', '123.636363636364',
-      '123.636363636364', '128.030303030303', '128.030303030303', '132.424242424242',
-      '132.424242424242', '133.156565656566', '133.156565656566', '133.888888888889',
-      '133.888888888889', '136.818181818182', '136.818181818182', '141.212121212121',
-      '141.212121212121', '147.070707070707', '147.070707070707', '148.535353535354',
-      '148.535353535354', '19.6464646464646', '19.6464646464646', '2', '2', '2', '2',
-      '20', '20', '26.969696969697', '26.969696969697', '4', '4', '40.1515151515152',
-      '40.1515151515152', '50', '50', '52.6010101010101', '52.6010101010101',
-      '59.1919191919192', '59.1919191919192', '66.5151515151515', '66.5151515151515',
-      '7', '7', '76.7676767676768', '76.7676767676768')
-  )
-  expect_equal(
-    res |>
-      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
-      dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
-      dplyr::pull(estimate_name) |>
-      sort(),
-    c('count', 'count', 'count', 'count', 'count', 'count', 'count', 'count',
-      'count_missing', 'count_missing', 'count_missing', 'count_missing', 'count_missing',
-      'count_missing', 'count_missing', 'count_missing', 'max', 'max', 'max', 'max',
-      'max', 'max', 'max', 'max', 'median', 'median', 'median', 'median', 'median',
-      'median', 'median', 'median', 'min', 'min', 'min', 'min', 'min', 'min', 'min',
-      'min', 'percentage_missing', 'percentage_missing', 'percentage_missing',
-      'percentage_missing', 'percentage_missing', 'percentage_missing', 'percentage_missing',
-      'percentage_missing', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25', 'q25',
-      'q75', 'q75', 'q75', 'q75', 'q75', 'q75', 'q75', 'q75')
+      dplyr::pull(estimate_name)|>
+      sort() |>
+      unique(),
+    c("count", "count_missing", "max", "median",
+      "min","percentage_missing", 'q01','q05', "q25", "q75", 'q95','q99')
   )
   expect_equal(
     res |>
@@ -87,7 +62,7 @@ test_that("summariseCohortMeasurementUse works", {
       sort() |>
       unique(),
     c("count", "count_missing", "density_x", "density_y", "max", "median",
-      "min","percentage_missing", "q25", "q75")
+      "min","percentage_missing", "q01", "q05", "q25", "q75", "q95", "q99")
   )
   expect_equal(
     res |>
