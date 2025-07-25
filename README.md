@@ -7,6 +7,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/MeasurementDiagnostics)](https://CRAN.R-project.org/package=MeasurementDiagnostics)
 [![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/workflows/R-CMD-check/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics?branch=main)
