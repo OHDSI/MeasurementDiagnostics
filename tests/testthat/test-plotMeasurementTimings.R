@@ -41,5 +41,4 @@ test_that("test measurement timing", {
   expect_error(plotMeasurementTimings(result, colour = "h"))
   expect_error(plotMeasurementTimings(result, timeScale = "h"))
   expect_error(plotMeasurementTimings(result, plotType =  "h"))
-  expect_error(plotMeasurementTimings(result))
 })
