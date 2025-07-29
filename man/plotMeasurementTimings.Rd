@@ -6,6 +6,7 @@
 \usage{
 plotMeasurementTimings(
   result,
+  y = "time",
   plotType = "boxplot",
   timeScale = "days",
   facet = visOmopResults::strataColumns(result),
@@ -14,6 +15,9 @@ plotMeasurementTimings(
 }
 \arguments{
 \item{result}{A summarised_result object.}
+
+\item{y}{Variable to plot on y axis, it can be "time" or
+measurements_per_subject".}
 
 \item{plotType}{Type of plot, either "boxplot" or "densityplot".}
 
