@@ -27,7 +27,8 @@ plotMeasurementTimings <- function(result,
                                    plotType = "boxplot",
                                    timeScale = "days",
                                    facet = visOmopResults::strataColumns(result),
-                                   colour = c("cdm_name", "codelist_name")) {
+                                   colour = c("cdm_name", "codelist_name"),
+                                   style = NULL) {
   # specific checks
   omopgenerics::assertChoice(y, c("time", "measurements_per_subject"), length = 1)
   omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
@@ -40,16 +41,18 @@ plotMeasurementTimings <- function(result,
     omopgenerics::filterSettings(.data$result_type == "measurement_timings")
 
   if (nrow(result) == 0) {
-    mes <- cli::cli_warn("No results found with `result_type == 'measurement_timings'`")
-    return(emptyPlot(mes))
+    mes <- "No results found with `result_type == 'measurement_timings'`"
+    cli::cli_warn("{mes}")
+    return(visOmopResults::emptyPlot(subtitle = mes))
   }
 
   result <- result |>
     omopgenerics::filter(.data$variable_name == .env$y)
 
   if (nrow(result) == 0) {
-    mes <- cli::cli_warn("No results found with `variable_name == {y}`")
-    return(emptyPlot(mes))
+    mes <- glue::glue("No results found with `variable_name == {y}`")
+    cli::cli_warn("{mes}")
+    return(visOmopResults::emptyPlot(subtitle = mes))
   }
 
   checkVersion(result)
@@ -79,6 +82,7 @@ plotMeasurementTimings <- function(result,
       ymax = NULL,
       facet = facet,
       colour = colour,
+      style = style,
       label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::labs(
@@ -99,6 +103,7 @@ plotMeasurementTimings <- function(result,
       ymax = "max",
       facet  = facet,
       colour = colour,
+      style = style,
       label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::labs(
@@ -107,9 +112,6 @@ plotMeasurementTimings <- function(result,
         x = ggplot2::element_blank()
       )
   }
-
-  p  +
-    visOmopResults::themeVisOmop()
 }
 
 # change to visOmopResults in next release
