@@ -44,10 +44,9 @@ NULL
 #' @param hide Columns to hide from the visualisation. See options with
 #' `visOmopResults::tableColumns(result)`.
 #' @param style Named list that specifies how to style the different parts of
-#'  the table generated. It can either be a pre-defined style ("default" or
-#'  "darwin" - the latter just for gt and flextable), NULL to get the table type
-#'  default style, or custom. Keep in mind that styling code is different for
-#'  all table styles. To see the different styles use visOmopResults::tableStyle().
+#' the table generated. It can either be a pre-defined style ("default" or
+#' "darwin" - the latter just for gt and flextable), or NULL which converts to
+#' "default" style, or custom code.
 #' @param .options A named list with additional formatting options.
 #' `visOmopResults::tableOptions()` shows allowed arguments and their default values.
 #'
@@ -67,6 +66,9 @@ NULL
 #' specify rows and columns.
 #' @param colour Columns to color by. See options with
 #' `visOmopResults::plotColumns(result)`.
+#' @param style Pre-defined style to apply: "default" or
+#' "darwin" - the latter just for gt and flextable. If NULL the "default" style
+#' is used.
 #'
 #' @name plotDoc
 #' @keywords internal

@@ -10,7 +10,8 @@ plotMeasurementTimings(
   plotType = "boxplot",
   timeScale = "days",
   facet = visOmopResults::strataColumns(result),
-  colour = c("cdm_name", "codelist_name")
+  colour = c("cdm_name", "codelist_name"),
+  style = NULL
 )
 }
 \arguments{
@@ -29,6 +30,10 @@ specify rows and columns.}
 
 \item{colour}{Columns to color by. See options with
 `visOmopResults::plotColumns(result)`.}
+
+\item{style}{Pre-defined style to apply: "default" or
+"darwin" - the latter just for gt and flextable. If NULL the "default" style
+is used.}
 }
 \value{
 A ggplot.

@@ -23,7 +23,7 @@ tableMeasurementTimings <- function(result,
                                     groupColumn = c("codelist_name"),
                                     settingsColumn = character(),
                                     hide = c("variable_level"),
-                                    style = "default",
+                                    style = NULL,
                                     .options = list()){
   rlang::check_installed("visOmopResults")
 
