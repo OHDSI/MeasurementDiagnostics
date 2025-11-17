@@ -85,6 +85,19 @@ test_that("summariseCohortMeasurementUse works", {
     'percentage', 'percentage', 'percentage', 'percentage', 'percentage', 'percentage',
     'percentage', 'percentage')
   )
+
+  # use codelist attribute ----
+  cdm$my_cohort <- cdm$my_cohort |>
+    omopgenerics::newCohortTable(
+      cohortCodelistRef = dplyr::tibble(
+        cohort_definition_id = 1:2L,
+        codelist_name = "test",
+        concept_id = 3001467L,
+        codelist_type = "index event"
+      )
+    )
+  resAttribute <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, timing = "any")
+  expect_equal(res |> dplyr::arrange(group_level, estimate_value), resAttribute |> dplyr::arrange(group_level, estimate_value))
 })
 
 test_that("test timings with eunomia", {

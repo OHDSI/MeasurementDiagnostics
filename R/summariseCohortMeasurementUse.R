@@ -15,8 +15,8 @@
 #' )
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
-summariseCohortMeasurementUse <- function(codes,
-                                          cohort,
+summariseCohortMeasurementUse <- function(cohort,
+                                          codes = attr(cohort, "cohort_codelist"),
                                           timing = "during",
                                           byConcept = TRUE,
                                           byYear = FALSE,
