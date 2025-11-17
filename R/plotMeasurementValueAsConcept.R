@@ -21,7 +21,8 @@ plotMeasurementValueAsConcept <- function(result,
                                           x = "count",
                                           y = "codelist_name",
                                           facet = c("cdm_name"),
-                                          colour = c("concept_name", "variable_level", visOmopResults::strataColumns(result))) {
+                                          colour = c("concept_name", "variable_level", visOmopResults::strataColumns(result)),
+                                          style = NULL) {
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
   plotCols <- visOmopResults::plotColumns(result)

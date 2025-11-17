@@ -23,7 +23,7 @@ tableMeasurementValueAsNumeric <- function(result,
                                            groupColumn = c("codelist_name"),
                                            settingsColumn = character(),
                                            hide = c("variable_name", "variable_level"),
-                                           style = "default",
+                                           style = NULL,
                                            .options = list()){
   rlang::check_installed("visOmopResults")
 

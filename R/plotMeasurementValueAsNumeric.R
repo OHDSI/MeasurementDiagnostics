@@ -21,7 +21,8 @@ plotMeasurementValueAsNumeric <- function(result,
                                           x = c("unit_concept_name"),
                                           plotType = "boxplot",
                                           facet = c("codelist_name", "concept_name"),
-                                          colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result))) {
+                                          colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result)),
+                                          style = NULL) {
   omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
