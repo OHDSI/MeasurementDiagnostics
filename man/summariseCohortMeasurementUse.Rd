@@ -6,7 +6,7 @@
 \usage{
 summariseCohortMeasurementUse(
   cohort,
-  codes = attr(cohort, "cohort_codelist"),
+  codes = NULL,
   timing = "during",
   byConcept = TRUE,
   byYear = FALSE,
@@ -22,7 +22,7 @@ summariseCohortMeasurementUse(
 codes provided.}
 
 \item{codes}{A codelist of measurement/observation codes for which to perform
-diagnostics.}
+diagnostics. If NULL it uses the codelist used to create each of the cohorts.}
 
 \item{timing}{Three options: 1) "any" if the interest is on measurement
 recorded any time, 2) "during", if interested in measurements while the

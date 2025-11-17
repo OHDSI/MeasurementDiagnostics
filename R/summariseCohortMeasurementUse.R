@@ -1,5 +1,6 @@
 #' Diagnostics of a codelist of measurement codes within a cohort
-#'
+#' @param codes A codelist of measurement/observation codes for which to perform
+#' diagnostics. If NULL it uses the codelist used to create each of the cohorts.
 #' @inheritParams summariseMeasurementDoc
 #'
 #' @return A summarised result
@@ -16,7 +17,7 @@
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 summariseCohortMeasurementUse <- function(cohort,
-                                          codes = attr(cohort, "cohort_codelist"),
+                                          codes = NULL,
                                           timing = "during",
                                           byConcept = TRUE,
                                           byYear = FALSE,
