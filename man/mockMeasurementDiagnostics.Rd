@@ -4,25 +4,17 @@
 \alias{mockMeasurementDiagnostics}
 \title{Function to create a mock cdm reference.}
 \usage{
-mockMeasurementDiagnostics(
-  nPerson = 100,
-  con = DBI::dbConnect(duckdb::duckdb()),
-  writeSchema = "main",
-  seed = 111
-)
+mockMeasurementDiagnostics(nPerson = 100, recordPerson = 2, seed = 111)
 }
 \arguments{
-\item{nPerson}{number of people in the cdm.}
+\item{nPerson}{Number of people in the cdm.}
 
-\item{con}{A DBI connection to create the cdm mock object.}
+\item{recordPerson}{Average number of measurement records per person.}
 
-\item{writeSchema}{Name of an schema on the same connection with writing
-permissions.}
-
-\item{seed}{seed to use when creating the mock data.}
+\item{seed}{Seed to use when creating the mock data.}
 }
 \value{
-cdm object
+A cdm object in a temporary duckdb database
 }
 \description{
 Creates an example dataset that can be used to show how
