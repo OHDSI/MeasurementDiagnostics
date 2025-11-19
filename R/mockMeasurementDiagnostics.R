@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' library(MeasurementDiagnostics)
 #' cdm <- mockMeasurementDiagnostics()
 #' cdm
