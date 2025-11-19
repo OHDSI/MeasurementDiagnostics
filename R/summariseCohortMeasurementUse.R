@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' library(MeasurementDiagnostics)
 #' cdm <- mockMeasurementDiagnostics()
 #' result <- summariseCohortMeasurementUse(

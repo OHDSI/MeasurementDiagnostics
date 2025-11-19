@@ -51,7 +51,7 @@ A summarised result
 Diagnostics of a codelist of measurement codes within a cohort
 }
 \examples{
-\donttest{
+\dontrun{
 library(MeasurementDiagnostics)
 cdm <- mockMeasurementDiagnostics()
 result <- summariseCohortMeasurementUse(
