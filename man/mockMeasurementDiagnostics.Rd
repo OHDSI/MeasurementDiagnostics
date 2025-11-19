@@ -21,7 +21,7 @@ Creates an example dataset that can be used to show how
 the package works
 }
 \examples{
-\donttest{
+\dontrun{
 library(MeasurementDiagnostics)
 cdm <- mockMeasurementDiagnostics()
 cdm
