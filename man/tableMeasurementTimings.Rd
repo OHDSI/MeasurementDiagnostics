@@ -48,7 +48,7 @@ A formatted table
 Format a measurement_timings object into a visual table
 }
 \examples{
-\donttest{
+\dontrun{
 library(MeasurementDiagnostics)
 cdm <- mockMeasurementDiagnostics()
 result <- summariseMeasurementUse(

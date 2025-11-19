@@ -39,7 +39,7 @@ A ggplot.
 Plot summariseMeasurementTiming results.
 }
 \examples{
-\donttest{
+\dontrun{
 library(MeasurementDiagnostics)
 cdm <- mockMeasurementDiagnostics()
 result <- summariseMeasurementUse(

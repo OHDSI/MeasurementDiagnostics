@@ -43,7 +43,7 @@ A summarised result
 Diagnostics of a codelist of measurement codes in the database
 }
 \examples{
-\donttest{
+\dontrun{
 library(MeasurementDiagnostics)
 cdm <- mockMeasurementDiagnostics()
 result <- summariseMeasurementUse(
