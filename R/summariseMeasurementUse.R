@@ -225,8 +225,8 @@ summariseMeasurementUseInternal <- function(cdm,
   if ("measurement_source_code" %in% checks) {
     cli::cli_inform(c(">" = "Summarising results - source_value and source_concept_id."))
     measurementSource <- measurement |>
-      dplyr::mutate(source_value = ifelse(is.na(source_value), "NA", source_value)) |>
-      dplyr::mutate(measurement_source_concept_and_value = paste0(as.character(source_concept_id), " (", source_value, ")")) |>
+      dplyr::mutate(source_value = ifelse(is.na(.data$source_value), "NA", .data$source_value)) |>
+      dplyr::mutate(measurement_source_concept_and_value = paste0(as.character(.data$source_concept_id), " (", .data$source_value, ")")) |>
       PatientProfiles::summariseResult(
         group = list(baseGroup, c(baseGroup, "concept_id"))[c(TRUE, byConcept)],
         includeOverallGroup = FALSE,
@@ -528,7 +528,7 @@ transformMeasurementSource <- function(x, cdm, newSet, cohortName,
                                        installedVersion, timing, byConcept, dateRange) {
   x <- x |>
     dplyr::select(!c("additional_name", "additional_level")) |>
-    dplyr::mutate(source_concept_id = stringr::str_extract(.data$variable_level, "^\\d+")) |>
+    dplyr::mutate(source_concept_id = sub("^([0-9]+).*", "\\1", .data$variable_level)) |>
     dplyr::rename("source_concept_id_and_value" = "variable_level") |>
     dplyr::left_join(
       cdm$concept |>
@@ -543,7 +543,7 @@ transformMeasurementSource <- function(x, cdm, newSet, cohortName,
     dplyr::mutate(
       variable_name = gsub("_id", "_name", "source_concept_id"),
       cohort_table = cohortName,
-      source_concept_id = dplyr::if_else(is.na(.data$source_concept_id_and_value), "-", stringr::str_trim(.data$source_concept_id_and_value)),
+      source_concept_id = dplyr::if_else(is.na(.data$source_concept_id_and_value), "-", trimws(.data$source_concept_id_and_value)),
       variable_level = dplyr::if_else(is.na(.data$variable_level), "-", .data$variable_level)
     )
 
