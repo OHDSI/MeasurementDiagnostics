@@ -169,7 +169,7 @@ summariseMeasurementUseInternal <- function(cdm,
       )
 
     measurements2 <- measurementLocal |>
-      dplyr::mutate(.data$measurements_per_subject = ifelse(.data$measurements_per_subject > 100, ">100", as.character(.data$measurements_per_subject))) |>
+      dplyr::mutate(measurements_per_subject = ifelse(.data$measurements_per_subject > 100, ">100", as.character(.data$measurements_per_subject))) |>
       PatientProfiles::summariseResult(
         group = list(baseGroup),
         includeOverallGroup = FALSE,

@@ -69,27 +69,50 @@ plotMeasurementTimings <- function(result,
   }
 
   if (plotType == "densityplot") {
-    result <- result |>
-      dplyr::filter(grepl("density", .data$estimate_name))
-    p <- visOmopResults::scatterPlot(
-      result = result,
-      x = "density_x",
-      y = "density_y",
-      line = TRUE,
-      point = FALSE,
-      ribbon = FALSE,
-      ymin = NULL,
-      ymax = NULL,
-      facet = facet,
-      colour = colour,
-      style = style,
-      label = visOmopResults::plotColumns(result)
-    ) +
-      ggplot2::labs(
-        title = ggplot2::element_blank(),
-        x = lab,
-        y = ggplot2::element_blank()
-      )
+    if (y == "measurements_per_subject") {
+      result <- result |>
+        dplyr::filter(.data$estimate_name == "count",
+                      .data$variable_name == "measurements_per_subject",
+                      !is.na(.data$variable_level))
+      p <- visOmopResults::barPlot(
+        result = result,
+        x = "variable_level",
+        y = "count",
+        facet = facet,
+        colour = colour,
+        style = style,
+        type = "ggplot",
+        width = .9,
+        label = visOmopResults::plotColumns(result)
+      ) +
+        ggplot2::labs(
+          title = ggplot2::element_blank(),
+          x = lab,
+          y = ggplot2::element_blank()
+        )
+    } else {
+      result <- result |>
+        dplyr::filter(grepl("density", .data$estimate_name))
+      p <- visOmopResults::scatterPlot(
+        result = result,
+        x = "density_x",
+        y = "density_y",
+        line = TRUE,
+        point = FALSE,
+        ribbon = FALSE,
+        ymin = NULL,
+        ymax = NULL,
+        facet = facet,
+        colour = colour,
+        style = style,
+        label = visOmopResults::plotColumns(result)
+      ) +
+        ggplot2::labs(
+          title = ggplot2::element_blank(),
+          x = lab,
+          y = ggplot2::element_blank()
+        )
+    }
   } else if (plotType == "boxplot") {
     result <- result |>
       dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))

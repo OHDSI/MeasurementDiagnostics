@@ -28,7 +28,8 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '1', '1', '100', '1427', '14973', '2', '2', '3', '3522', '5334', '64', '96')
+    c("0", "0", "1", "1", "100", "1427", "14973", "2", "2", "24",
+      "24", "3", "3522", "36", "36", "40", "40", "5334", "64", "96")
   )
   expect_equal(
     res |>
@@ -36,7 +37,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 5), rep("number records", 2), rep("number subjects", 2), rep("time", 5))
+    c(rep("measurements_per_subject", 11), rep("number records", 2), rep("number subjects", 2), rep("time", 5))
   )
   expect_equal(
     res |>
@@ -44,7 +45,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), "max",  "max", "median", "median", "min", "min", "q25", "q25", "q75", "q75")
+    c(rep("count", 7), "max",  "max", "median", "median", "min", "min", rep("percentage", 3), "q25", "q25", "q75", "q75")
   )
   expect_equal(
     res |>
@@ -53,7 +54,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::pull(estimate_name) |>
       sort() |>
       unique(),
-    c("count", "density_x", "density_y", "max", "median", "min", "q25", "q75")
+    c("count", "density_x", "density_y", "max", "median", "min", "percentage", "q25", "q75")
   )
 
   expect_equal(
@@ -272,7 +273,7 @@ test_that("summariseMeasurementUse observation domain", {
   cdm <- copyCdm(cdm)
   res <- summariseMeasurementUse(
     cdm = cdm,
-    codes = list("mix" = c(3001467, 45875977, 194152, 4092121, 1033535)),
+    codes = list("mix" = c(3001467L, 45875977L, 194152L, 4092121L, 1033535L)),
     bySex = FALSE,
     byYear = FALSE,
     ageGroup = NULL,
