@@ -21,7 +21,7 @@ summariseMeasurementUse <- function(cdm,
                                     bySex = FALSE,
                                     ageGroup = NULL,
                                     dateRange = as.Date(c(NA, NA)),
-                                    checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")) {
+                                    checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept", "measurement_source_code")) {
   # check inputs
   cdm <- omopgenerics::validateCdmArgument(cdm)
   prefix <- omopgenerics::tmpPrefix()
@@ -63,7 +63,7 @@ summariseMeasurementUseInternal <- function(cdm,
   omopgenerics::assertLogical(bySex, length = 1)
   omopgenerics::assertDate(dateRange, length = 2, na = TRUE)
   omopgenerics::assertChoice(
-    checks, choices = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")
+    checks, choices = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept", "measurement_source_code")
   )
   if (all(!is.na(dateRange))) {
     if (dateRange[1] > dateRange[2]) {
@@ -221,12 +221,38 @@ summariseMeasurementUseInternal <- function(cdm,
     measurementConcept <- NULL
   }
 
+  ## counts by source_concept_id and source_value
+  if ("measurement_source_code" %in% checks) {
+    cli::cli_inform(c(">" = "Summarising results - source_value and source_concept_id."))
+    measurementSource <- measurement |>
+      dplyr::mutate(source_value = ifelse(is.na(source_value), "NA", source_value)) |>
+      dplyr::mutate(measurement_source_concept_and_value = paste0(as.character(source_concept_id), " (", source_value, ")")) |>
+      PatientProfiles::summariseResult(
+        group = list(baseGroup, c(baseGroup, "concept_id"))[c(TRUE, byConcept)],
+        includeOverallGroup = FALSE,
+        strata = strata,
+        includeOverallStrata = TRUE,
+        variables = "measurement_source_concept_and_value",
+        estimates = c("count", "percentage"),
+        counts = FALSE,
+        weights = NULL
+      ) |>
+      suppressMessages() |>
+      transformMeasurementSource(
+        cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
+        cohortName = cohortName, installedVersion = installedVersion,
+        timing = timingName, byConcept = byConcept, dateRange
+      )
+  } else {
+    measurementSource <- NULL
+  }
+
   cli::cli_inform(c(">" = "Binding all diagnostic results."))
   omopgenerics::dropSourceTable(cdm = cdm, name = dplyr::starts_with(prefix))
 
   return(
     omopgenerics::bind(
-      measurementTiming, measurementNumeric, measurementConcept
+      measurementTiming, measurementNumeric, measurementConcept, measurementSource
     )
   )
 }
@@ -274,7 +300,7 @@ subsetMeasurementTable <- function(cdm, cohortName, timing, name, dateRange) {
       dplyr::compute(name = name, temporary = FALSE)
   }
   if (timing == "cohort_start_date") {
-    measurement <-   measurement <- cdm[[name]] |>
+    measurement <- cdm[[name]] |>
       dplyr::inner_join(
         cohort |>
           PatientProfiles::addCohortName() |>
@@ -287,7 +313,7 @@ subsetMeasurementTable <- function(cdm, cohortName, timing, name, dateRange) {
       dplyr::compute(name = name, temporary = FALSE)
   }
   if (timing == "any") {
-    measurement <-   measurement <- cdm[[name]] |>
+    measurement <- cdm[[name]] |>
       dplyr::inner_join(
         cohort |>
           PatientProfiles::addCohortName() |>
@@ -498,6 +524,47 @@ transformMeasurementConcept <- function(x, cdm, newSet, cohortName,
   return(x)
 }
 
+transformMeasurementSource <- function(x, cdm, newSet, cohortName,
+                                       installedVersion, timing, byConcept, dateRange) {
+  x <- x |>
+    dplyr::select(!c("additional_name", "additional_level")) |>
+    dplyr::mutate(source_concept_id = stringr::str_extract(.data$variable_level, "^\\d+")) |>
+    dplyr::rename("source_concept_id_and_value" = "variable_level") |>
+    dplyr::left_join(
+      cdm$concept |>
+        dplyr::select(
+          "variable_level" = "concept_name",
+          "source_concept_id" = "concept_id"
+        )|>
+        dplyr::collect() |>
+        dplyr::mutate(source_concept_id = as.character(.data$source_concept_id)),
+      by = "source_concept_id"
+    ) |>
+    dplyr::mutate(
+      variable_name = gsub("_id", "_name", "source_concept_id"),
+      cohort_table = cohortName,
+      source_concept_id = dplyr::if_else(is.na(.data$source_concept_id_and_value), "-", stringr::str_trim(.data$source_concept_id_and_value)),
+      variable_level = dplyr::if_else(is.na(.data$variable_level), "-", .data$variable_level)
+    )
+
+  if (byConcept) {
+    x <- x |>
+      omopgenerics::splitGroup() |>
+      groupIdToName(newSet = newSet, cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "concept_name")) |>
+      omopgenerics::uniteAdditional(cols = c("concept_id", "source_concept_id", "domain_id")) |>
+      dplyr::select(omopgenerics::resultColumns())
+  } else {
+    x <- x |>
+      omopgenerics::uniteAdditional(cols = c("source_concept_id")) |>
+      dplyr::select(omopgenerics::resultColumns())
+  }
+
+  x <- x|>
+    updateSummarisedResultSettings(resultType = "measurement_source_concept_and_value", installedVersion, timing, dateRange)
+
+  return(x)
+}
+
 addStrata <- function(x, bySex, byYear, ageGroup, name) {
   if (bySex | length(ageGroup)>0) {
     x <- x |>
@@ -571,11 +638,14 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
         "concept_id",
         "unit_concept_id",
         "value_as_number",
-        "value_as_concept_id"
+        "value_as_concept_id",
+        "source_value" = paste0(tab, "_source_value"),
+        "source_concept_id" = paste0(tab, "_source_concept_id")
       ))) |>
       dplyr::mutate(
         unit_concept_id = as.integer(.data$unit_concept_id),
-        value_as_concept_id = as.integer(.data$value_as_concept_id)
+        value_as_concept_id = as.integer(.data$value_as_concept_id),
+        source_concept_id = as.integer(.data$source_concept_id)
       )
   }
 
