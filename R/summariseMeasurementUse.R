@@ -137,10 +137,10 @@ summariseMeasurementUseInternal <- function(cdm,
   strata <- as.list(c("sex", "age_group", "year")[c(bySex, length(ageGroup)>0, byYear)])
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
-  ## measurements per subject
+  ## time between measurements and measurements per subject
   if ("measurement_timings" %in% checks) {
     cli::cli_inform(c(">" = "Getting time between records per person."))
-    measurementTiming <- measurement |>
+    measurementLocal <- measurement |>
       dplyr::group_by(.data$codelist_name, .data$subject_id) |>
       dplyr::arrange(.data$cohort_start_date) |>
       dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) %>%
@@ -149,14 +149,17 @@ summariseMeasurementUseInternal <- function(cdm,
         measurements_per_subject = dplyr::n()
       ) |>
       dplyr::ungroup() |>
-      dplyr::collect() |>
+      dplyr::collect()
+
+    measurements1 <- measurementLocal |>
       PatientProfiles::summariseResult(
         group = list(baseGroup),
         includeOverallGroup = FALSE,
         strata = strata,
         includeOverallStrata = TRUE,
-        variables = c("time", "measurements_per_subject"),
-        estimates = c("min", "q25", "median", "q75", "max", "density"),
+        variables = list("time", "measurements_per_subject"),
+        estimates = list(c("min", "q25", "median", "q75", "max", "density"),
+                         c("min", "q25", "median", "q75", "max")),
         counts = TRUE
       ) |>
       suppressMessages() |>
@@ -164,6 +167,25 @@ summariseMeasurementUseInternal <- function(cdm,
         cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
         installedVersion, timingName, cohortName, dateRange
       )
+
+    measurements2 <- measurementLocal |>
+      dplyr::mutate(measurements_per_subject = ifelse(measurements_per_subject > 100, ">100", as.character(measurements_per_subject))) |>
+      PatientProfiles::summariseResult(
+        group = list(baseGroup),
+        includeOverallGroup = FALSE,
+        strata = strata,
+        includeOverallStrata = TRUE,
+        variables = c("measurements_per_subject"),
+        estimates = c("count", "percentage"),
+        counts = FALSE
+      ) |>
+      suppressMessages() |>
+      transformMeasurementRecords(
+        cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
+        installedVersion, timingName, cohortName, dateRange
+      )
+
+    measurementTiming <- omopgenerics::bind(measurements1, measurements2)
   } else {
     measurementTiming <- NULL
   }
