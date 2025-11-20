@@ -13,7 +13,7 @@ summariseMeasurementUse(
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
   checks = c("measurement_timings", "measurement_value_as_numeric",
-    "measurement_value_as_concept")
+    "measurement_value_as_concept", "measurement_source_code")
 )
 }
 \arguments{
