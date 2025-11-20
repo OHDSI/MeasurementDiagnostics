@@ -23,10 +23,11 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    as.character(c(
-      '0', '0', '1', '1', '1', '1', '1', '11', '1206', '14', '1506', '1761', '2',
-      '2', '2.25', '20', '2316', '4', '4', '4323', '5026', '651', '9', '96'
-      ))
+    c("0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "11", "1206",
+      "14", "1506", "1761", "2", "2", "2", "20", "22.2222222222222",
+      "2316", "28.5714285714286", "3", "4", "4323", "5026", "64.2857142857143",
+      "651", "7", "7.14285714285714", "77.7777777777778", "9", "9",
+      "96")
   )
   expect_equal(
     res |>
@@ -34,7 +35,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 10), "number records", "number records", "number subjects", "number subjects", rep("time", 10))
+    c(rep("measurements_per_subject", 20), "number records", "number records", "number subjects", "number subjects", rep("time", 10))
   )
   expect_equal(
     res |>
@@ -42,7 +43,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), rep("max", 4), rep("median", 4), rep("min", 4), rep("q25", 4), rep("q75", 4))
+    c(rep("count", 9), rep("max", 4), rep("median", 4), rep("min", 4), rep("percentage", 5), rep("q25", 4), rep("q75", 4))
   )
   expect_equal(
     res |>
@@ -112,9 +113,18 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656', '3',
-      '31573', '31880', '3493', '38', '39', '4', '4', '4962', '5498', '6',
-      '7481', '8', '9')
+    c("0.08587376556462", "0.112951807228916", "0.17174753112924",
+      "0.188253012048193", "0.414156626506024", "0.640060240963855",
+      "0.68699012451696", "1", "1", "1", "1.09186746987952", "1.80334907685702",
+      "1.9578313253012", "10.0527108433735", "10.9059682267067", "10.9939759036145",
+      "1035", "11", "12.4246987951807", "12852", "14.8719879518072",
+      "145", "1487", "15", "15.3990963855422", "16", "161", "17", "17.0557228915663",
+      "2", "2", "21.7260626878489", "2329", "2442", "254", "2656",
+      "267", "29", "292", "3", "3", "3", "3.27560240963855", "3.56376127093173",
+      "30.4422498926578", "30.613997423787", "31573", "31880", "330",
+      "3493", "38", "39", "395", "4", "409", "42", "453", "4962", "5",
+      "5", "5.45933734939759", "506", "52", "5498", "6", "6.06174698795181",
+      "709", "713", "7481", "83", "87", "9")
   )
   expect_equal(
     res_during |>
@@ -122,17 +132,18 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1', '1', '1', '1', '1', '1', '1602', '1602', '1602', '1602',
-      '1602', '1602', '1602', '1602', '1602', '1602', '2', '2', '28', '29',
-      '60', '61')
+    c("1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1.66666666666667",
+      "1602", "1602", "1602", "1602", "1602", "1602", "1602", "1602",
+      "1602", "1602", "2", "2", "27", "28", "29", "3.57142857142857",
+      "59", "60", "61", "96.4285714285714", "98.3333333333333")
   )
   expect_equal(
-    res_start |>
+   res_start |>
       omopgenerics::filterSettings(result_type == "measurement_timings") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '1', '1', '1', '1', '1', '1', '1')
+   c("0", "0", "1", "1", "1", "1", "1", "1", "1", "1", "100")
   )
   expect_equal(
     res_any |>
