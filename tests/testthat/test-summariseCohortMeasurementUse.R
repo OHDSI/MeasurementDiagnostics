@@ -2,6 +2,7 @@ test_that("summariseCohortMeasurementUse works", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseCohortMeasurementUse(codes = list("test" = 3001467L), cohort = cdm$my_cohort, timing = "any")
   expect_equal(
     omopgenerics::settings(res),
@@ -85,14 +86,15 @@ test_that("summariseCohortMeasurementUse works", {
     'percentage', 'percentage', 'percentage', 'percentage', 'percentage', 'percentage',
     'percentage', 'percentage')
   )
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("test timings with eunomia", {
   skip_on_cran()
-  skip_if(Sys.getenv("EUNOMIA_DATA_FOLDER") == "")
-  # without cohort
-  con <- DBI::dbConnect(duckdb::duckdb(), CDMConnector::eunomiaDir())
-  cdm <- CDMConnector::cdmFromCon(con, cdmName = "eunomia", cdmSchema = "main", writeSchema = "main")
+  cdm <- omock::mockCdmFromDataset(datasetName = "GiBleed", source = "local") |>
+    copyCdm()
+
   cohort <- CohortConstructor::conceptCohort(cdm = cdm, conceptSet = list("condition" = 40481087L), name = "cohort")
   res_any <- summariseCohortMeasurementUse(
     codes = list("bmi" = c(4024958L, 36304833L), "egfr" = c(1619025L, 1619026L, 3029829L, 3006322L)),
@@ -194,12 +196,15 @@ test_that("test timings with eunomia", {
       sort(),
     c("1", "100")
   )
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseCohortMeasurementUse straifications work", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseCohortMeasurementUse(
     cohort = cdm$my_cohort,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -262,12 +267,15 @@ test_that("summariseCohortMeasurementUse straifications work", {
       dplyr::pull("estimate_value"),
     c("0", "0")
   )
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseMeasurementUse checks", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseCohortMeasurementUse(
     cohort = cdm$my_cohort,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -300,4 +308,6 @@ test_that("summariseMeasurementUse checks", {
       checks = character()
     )
   )
+
+  dropCreatedTables(cdm = cdm)
 })
