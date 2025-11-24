@@ -26,18 +26,18 @@ Imports:
 Suggests: 
     CDMConnector (>= 2.0.0),
     CodelistGenerator (>= 3.5.0),
-    visOmopResults (>= 1.4.0),
     duckdb,
-    knitr,
-    omock (>= 0.4.0),
-    rmarkdown,
-    testthat,
+    flextable,
     ggplot2,
     gt,
-    flextable,
-    RPostgres,
+    knitr,
     lubridate,
-    odbc
+    odbc,
+    omock (>= 0.4.0),
+    rmarkdown,
+    RPostgres,
+    testthat,
+    visOmopResults (>= 1.4.0)
 Depends: 
     R (>= 4.1)
 License: Apache License (>= 2)
