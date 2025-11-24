@@ -145,11 +145,11 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::arrange(.data$cohort_start_date) |>
       dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) |>
       dplyr::mutate(
-        time = clock::date_count_between(
+        time = as.integer(clock::date_count_between(
           start = .data$previous_measurement,
           end = .data$cohort_start_date,
           precision = "day"
-        ),
+        )),
         measurements_per_subject = dplyr::n()
       ) |>
       dplyr::ungroup() |>
