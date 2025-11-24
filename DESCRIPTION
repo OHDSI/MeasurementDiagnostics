@@ -16,6 +16,7 @@ Imports:
     DBI,
     dplyr,
     glue,
+    lifecycle,
     magrittr,
     omopgenerics (>= 1.2.0),
     PatientProfiles (>= 1.4.0),

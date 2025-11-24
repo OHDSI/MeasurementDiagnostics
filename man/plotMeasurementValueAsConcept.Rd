@@ -42,7 +42,7 @@ Plot summariseMeasurementTiming results.
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-cdm <- mockMeasurementDiagnostics()
+cdm <- mockMeasurementDiagnostics(source = "duckdb")
 result <- summariseMeasurementUse(
               cdm = cdm,
               bySex = TRUE,

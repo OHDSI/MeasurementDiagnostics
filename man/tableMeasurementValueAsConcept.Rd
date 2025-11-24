@@ -50,7 +50,7 @@ Format a measurement_timings object into a visual table
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-cdm <- mockMeasurementDiagnostics()
+cdm <- mockMeasurementDiagnostics(source = "duckdb")
 result <- summariseMeasurementUse(
               cdm = cdm,
               codes = list("test_codelist" = c(3001467L, 45875977L)))

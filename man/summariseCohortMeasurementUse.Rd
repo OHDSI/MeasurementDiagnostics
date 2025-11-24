@@ -53,7 +53,7 @@ Diagnostics of a codelist of measurement codes within a cohort
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-cdm <- mockMeasurementDiagnostics()
+cdm <- mockMeasurementDiagnostics(source = "duckdb")
 result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date"
