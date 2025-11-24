@@ -143,9 +143,13 @@ summariseMeasurementUseInternal <- function(cdm,
     measurementTiming <- measurement |>
       dplyr::group_by(.data$codelist_name, .data$subject_id) |>
       dplyr::arrange(.data$cohort_start_date) |>
-      dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) %>%
+      dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) |>
       dplyr::mutate(
-        time = !!CDMConnector::datediff("previous_measurement", "cohort_start_date"),
+        time = clock::date_count_between(
+          start = .data$previous_measurement,
+          end = .data$cohort_start_date,
+          precision = "day"
+        ),
         measurements_per_subject = dplyr::n()
       ) |>
       dplyr::ungroup() |>
@@ -511,8 +515,8 @@ addStrata <- function(x, bySex, byYear, ageGroup, name) {
   }
 
   if (byYear) {
-    x <- x %>%
-      dplyr::mutate(year = !!CDMConnector::datepart("cohort_start_date", "year")) |>
+    x <- x |>
+      dplyr::mutate(year = clock::get_year(.data$cohort_start_date)) |>
       dplyr::compute(name = name, temporary = FALSE)
   }
 
