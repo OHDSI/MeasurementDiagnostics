@@ -5,43 +5,67 @@
 #' the package works
 #'
 #' @param nPerson number of people in the cdm.
-#' @param con  A DBI connection to create the cdm mock object.
-#' @param writeSchema Name of an schema on the same connection with writing
-#' permissions.
-#' @param seed seed to use when creating the mock data.
+#' @param source The source where the cdm_reference object is inserted. Choice
+#' between 'local' or 'duckdb'.
+#' @param con deprecated.
+#' @param writeSchema deprecated.
+#' @param seed deprecated.
 #'
-#' @return cdm object
+#' @return cdm_reference object
 #' @export
 #'
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
-#' cdm <- mockMeasurementDiagnostics()
+#'
+#' cdm <- mockMeasurementDiagnostics(source = "duckdb")
+#'
 #' cdm
 #'}
 mockMeasurementDiagnostics <- function(nPerson = 100,
-                                       con = DBI::dbConnect(duckdb::duckdb()),
-                                       writeSchema = "main",
-                                       seed = 111) {
-
+                                       source = "local",
+                                       con = lifecycle::deprecated(),
+                                       writeSchema = lifecycle::deprecated(),
+                                       seed = lifecycle::deprecated()) {
   rlang::check_installed("omock")
-  rlang::check_installed("CDMConnector")
-
   omopgenerics::assertNumeric(nPerson, length = 1, na = FALSE, null = FALSE)
-  omopgenerics::assertNumeric(seed, length = 1, na = FALSE, null = FALSE)
-  omopgenerics::assertCharacter(writeSchema, length = 1, na = FALSE, null = FALSE)
+  omopgenerics::assertChoice(source, c("duckdb", "local"), length = 1)
 
-  cdm_local <- omock::mockCdmReference() |>
-    omock::mockPerson(nPerson = 100, seed = seed) |>
-    omock::mockObservationPeriod(seed = seed) |>
-    omock::mockConditionOccurrence(seed = seed) |>
-    omock::mockVisitOccurrence(seed = seed) |>
-    omock::mockDrugExposure(seed = seed) |>
-    omock::mockObservation(seed = seed) |>
-    omock::mockMeasurement(seed = seed) |>
-    omock::mockProcedureOccurrence(seed = seed) |>
-    omock::mockCohort(name = "my_cohort", numberCohorts = 2, seed = seed)
-  cdm_local$measurement <- cdm_local$measurement |>
+  if (lifecycle::is_present(con)) {
+    lifecycle::deprecate_soft(
+      when = "0.2.0",
+      what = "mockMeasurementDiagnostics(con=)",
+      with = "omopgenerics::insertCdmTo()"
+    )
+  }
+  if (lifecycle::is_present(writeSchema)) {
+    lifecycle::deprecate_soft(
+      when = "0.2.0",
+      what = "mockMeasurementDiagnostics(writeSchema=)",
+      with = "omopgenerics::insertCdmTo()"
+    )
+  }
+  if (lifecycle::is_present(seed)) {
+    lifecycle::deprecate_soft(
+      when = "0.2.0",
+      what = "mockMeasurementDiagnostics(seed=)",
+      with = "set.seed()"
+    )
+  }
+
+  cdm <- omock::mockCdmReference() |>
+    omock::mockPerson(nPerson = 100) |>
+    omock::mockObservationPeriod() |>
+    omock::mockConditionOccurrence() |>
+    omock::mockVisitOccurrence() |>
+    omock::mockDrugExposure() |>
+    omock::mockObservation() |>
+    omock::mockMeasurement() |>
+    omock::mockProcedureOccurrence() |>
+    omock::mockCohort(name = "my_cohort", numberCohorts = 2)
+
+  # further customisation
+  cdm$measurement <- cdm$measurement |>
     dplyr::mutate(
       unit_concept_id = dplyr::if_else(dplyr::row_number()%%2 == 0, 9529, NA),
       value_as_number = dplyr::if_else(dplyr::row_number()<6, NA, seq(from = 5, to = 150, length.out = 2000)),
@@ -51,8 +75,8 @@ mockMeasurementDiagnostics <- function(nPerson = 100,
         dplyr::row_number()%%3 == 2 ~ NA,
       )
     )
-  cdm_local$concept <- dplyr::bind_rows(
-    cdm_local$concept,
+  cdm$concept <- dplyr::bind_rows(
+    cdm$concept,
     dplyr::tibble(
       concept_id = c(4328749L, 4267416L),
       concept_name = c("High", "Low"),
@@ -67,12 +91,12 @@ mockMeasurementDiagnostics <- function(nPerson = 100,
     )
   )
 
-  cdm <- CDMConnector::copyCdmTo(con = con,
-                                 cdm = cdm_local,
-                                 schema = writeSchema,
-                                 overwrite = TRUE)
-
-  attr(cdm, "write_schema") <- writeSchema
+  if (source == "duckdb") {
+    rlang::check_installed("CDMConnector")
+    con <- duckdb::dbConnect(drv = duckdb::duckdb(dbdir = tempfile(fileext = ".duckdb")))
+    src <- CDMConnector::dbSource(con = con, writeSchema = "main")
+    cdm <- omopgenerics::insertCdmTo(cdm = cdm, to = src)
+  }
 
   return(cdm)
 }

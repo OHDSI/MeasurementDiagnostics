@@ -6,23 +6,26 @@
 \usage{
 mockMeasurementDiagnostics(
   nPerson = 100,
-  con = DBI::dbConnect(duckdb::duckdb()),
-  writeSchema = "main",
-  seed = 111
+  source = "local",
+  con = lifecycle::deprecated(),
+  writeSchema = lifecycle::deprecated(),
+  seed = lifecycle::deprecated()
 )
 }
 \arguments{
 \item{nPerson}{number of people in the cdm.}
 
-\item{con}{A DBI connection to create the cdm mock object.}
+\item{source}{The source where the cdm_reference object is inserted. Choice
+between 'local' or 'duckdb'.}
 
-\item{writeSchema}{Name of an schema on the same connection with writing
-permissions.}
+\item{con}{deprecated.}
 
-\item{seed}{seed to use when creating the mock data.}
+\item{writeSchema}{deprecated.}
+
+\item{seed}{deprecated.}
 }
 \value{
-cdm object
+cdm_reference object
 }
 \description{
 Creates an example dataset that can be used to show how
@@ -31,7 +34,9 @@ the package works
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
-cdm <- mockMeasurementDiagnostics()
+
+cdm <- mockMeasurementDiagnostics(source = "duckdb")
+
 cdm
 }
 }
