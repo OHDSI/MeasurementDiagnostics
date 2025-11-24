@@ -8,10 +8,13 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
+#'
 #' cdm <- mockMeasurementDiagnostics()
+#'
 #' result <- summariseMeasurementUse(
 #'   cdm = cdm, codes = list("test_codelist" = c(3001467L, 45875977L))
 #' )
+#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 summariseMeasurementUse <- function(cdm,

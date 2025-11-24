@@ -10,11 +10,16 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
+#'
 #' cdm <- mockMeasurementDiagnostics()
+#'
 #' result <- summariseMeasurementUse(
-#'               cdm = cdm,
-#'               codes = list("test_codelist" = c(3001467L, 45875977L)))
+#'   cdm = cdm,
+#'   codes = list("test_codelist" = c(3001467L, 45875977L))
+#' )
+#'
 #' tableMeasurementValueAsNumeric(result)
+#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 tableMeasurementValueAsNumeric <- function(result,
