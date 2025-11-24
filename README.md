@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # MeasurementDiagnostics <img src="man/figures/logo.png" align="right" height="180"/>
@@ -9,10 +8,11 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/MeasurementDiagnostics)](https://CRAN.R-project.org/package=MeasurementDiagnostics)
-[![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/workflows/R-CMD-check/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions)
+[![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics?branch=main)
-[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
 <!-- badges: end -->
 
@@ -54,13 +54,13 @@ cdm <- cdmFromCon(
 cdm
 #> 
 #> ── # OMOP CDM reference (duckdb) of Eunomia ────────────────────────────────────
-#> • omop tables: person, observation_period, visit_occurrence, visit_detail,
-#> condition_occurrence, drug_exposure, procedure_occurrence, device_exposure,
-#> measurement, observation, death, note, note_nlp, specimen, fact_relationship,
-#> location, care_site, provider, payer_plan_period, cost, drug_era, dose_era,
-#> condition_era, metadata, cdm_source, concept, vocabulary, domain,
-#> concept_class, concept_relationship, relationship, concept_synonym,
-#> concept_ancestor, source_to_concept_map, drug_strength
+#> • omop tables: care_site, cdm_source, concept, concept_ancestor, concept_class,
+#> concept_relationship, concept_synonym, condition_era, condition_occurrence,
+#> cost, death, device_exposure, domain, dose_era, drug_era, drug_exposure,
+#> drug_strength, fact_relationship, location, measurement, metadata, note,
+#> note_nlp, observation, observation_period, payer_plan_period, person,
+#> procedure_occurrence, provider, relationship, source_to_concept_map, specimen,
+#> visit_detail, visit_occurrence, vocabulary
 #> • cohort tables: -
 #> • achilles tables: -
 #> • other tables: -
@@ -91,5 +91,3 @@ results like so
 plotMeasurementTimings(respiratory_function_measurements |> 
     dplyr::filter(variable_name == "time"))
 ```
-
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
