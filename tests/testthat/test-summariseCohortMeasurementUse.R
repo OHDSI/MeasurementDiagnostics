@@ -25,8 +25,8 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::pull(estimate_value) |>
       sort(),
     as.character(c(
-      '0', '0', '1', '1', '1', '1', '1', '11', '1206', '14', '1506', '1761', '2',
-      '2', '2.25', '20', '2316', '4', '4', '4323', '5026', '651', '9', '96'
+      '1', '1', '1', '1', '1', '1093', '11', '1206', '14', '1761', '2', '2', '2',
+      '2', '20', '2316', '3', '3320', '4354', '5026', '651', '9', '96', '96'
       ))
   )
   expect_equal(
@@ -87,6 +87,38 @@ test_that("summariseCohortMeasurementUse works", {
     'percentage', 'percentage')
   )
 
+  # use codelist attribute ----
+  cdm$my_cohort <- cdm$my_cohort |>
+    omopgenerics::newCohortTable(
+      cohortCodelistRef = dplyr::tibble(
+        cohort_definition_id = 1:2L,
+        codelist_name = "test",
+        concept_id = 3001467L,
+        codelist_type = "index event"
+      )
+    )
+  resAttribute <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, timing = "any")
+  expect_equal(res |> dplyr::arrange(group_level, estimate_value), resAttribute |> dplyr::arrange(group_level, estimate_value))
+
+  cdm$my_cohort <- cdm$my_cohort |>
+    omopgenerics::newCohortTable(
+      cohortCodelistRef = dplyr::tibble(
+        cohort_definition_id = 1:2L,
+        codelist_name = "test",
+        concept_id = c(3001467L, 45875977L),
+        codelist_type = "index event"
+      )
+    )
+  resAttribute <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, timing = "any")
+  expect_equal(
+    resAttribute$group_level |> unique() |> sort(),
+    c('cohort_1 &&& test', 'cohort_1 &&& test &&& -',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& -',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& kilogram',
+      'cohort_1 &&& test &&& kilogram', 'cohort_2 &&& test')
+  )
+  
   dropCreatedTables(cdm = cdm)
 })
 
