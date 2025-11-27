@@ -44,4 +44,5 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3
 URL: https://ohdsi.github.io/MeasurementDiagnostics/
+BugReports: https://github.com/ohdsi/MeasurementDiagnostics/issues
 VignetteBuilder: knitr
