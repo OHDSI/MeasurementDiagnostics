@@ -28,7 +28,7 @@ tableMeasurementValueAsNumeric <- function(result,
   rlang::check_installed("visOmopResults")
 
   # check inputs
-  result <- omopgenerics::validateResultArgument(result, call = call)
+  result <- omopgenerics::validateResultArgument(result)
 
   # subset to rows of interest
   result <- result |>
