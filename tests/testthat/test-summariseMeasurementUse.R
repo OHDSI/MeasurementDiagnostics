@@ -2,6 +2,7 @@ test_that("summariseMeasurementUse works", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -113,12 +114,15 @@ test_that("summariseMeasurementUse works", {
   # suppress
   resSup <- res |> omopgenerics::suppress(minCellCount = 68)
   expect_equal(resSup$estimate_value |> unique(), c("100", "-", "81", "0"))
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseMeasurementUse straifications work", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -176,6 +180,7 @@ test_that("summariseMeasurementUse straifications work", {
     c("0", "0")
   )
 
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseMeasurementUse expected fails", {
@@ -223,12 +228,15 @@ test_that("summariseMeasurementUse expected fails", {
     ageGroup = NULL,
     checks = "measurement_records"
   ))
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseMeasurementUse checks", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -264,12 +272,15 @@ test_that("summariseMeasurementUse checks", {
       checks = character()
     )
   )
+
+  dropCreatedTables(cdm = cdm)
 })
 
 test_that("summariseMeasurementUse observation domain", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   res <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("mix" = c(3001467, 45875977, 194152, 4092121, 1033535)),
@@ -288,5 +299,6 @@ test_that("summariseMeasurementUse observation domain", {
     tab$domain_id |> sort(),
     c("Measurement", "Observation", "overall")
   )
-})
 
+  dropCreatedTables(cdm = cdm)
+})

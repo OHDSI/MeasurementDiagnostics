@@ -51,5 +51,5 @@ test_that("table works", {
   result <- result |> dplyr::filter(variable_name != "number records")
   expect_no_error(x <- tableMeasurementValueAsNumeric(result, settingsColumn = "timing"))
 
-  CDMConnector::cdmDisconnect(cdm = cdm)
+  dropCreatedTables(cdm = cdm)
 })

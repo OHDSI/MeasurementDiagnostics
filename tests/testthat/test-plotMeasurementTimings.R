@@ -2,6 +2,7 @@ test_that("test measurement timing", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
+
   result <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("test_codelist" = c(3001467L, 45875977L)))
@@ -41,4 +42,6 @@ test_that("test measurement timing", {
   expect_error(plotMeasurementTimings(result, colour = "h"))
   expect_error(plotMeasurementTimings(result, timeScale = "h"))
   expect_error(plotMeasurementTimings(result, plotType =  "h"))
+
+  dropCreatedTables(cdm = cdm)
 })

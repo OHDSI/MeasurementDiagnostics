@@ -23,4 +23,6 @@ test_that("plotMeasurementValueAsNumeric works", {
   # Table types
   expect_no_error(x <- plotMeasurementValueAsNumeric(result))
   expect_true(ggplot2::is_ggplot(x))
+
+  dropCreatedTables(cdm = cdm)
 })

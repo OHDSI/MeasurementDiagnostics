@@ -52,5 +52,5 @@ test_that("check that it works ", {
       '[header_name]Sex\n[header_level]overall', '[header_name]Sex\n[header_level]Male') %in%
       colnames(x$`_data`)))
 
-  CDMConnector::cdmDisconnect(cdm = cdm)
+  dropCreatedTables(cdm = cdm)
 })
