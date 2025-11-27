@@ -74,5 +74,5 @@ respiratory_function_measurements <- summariseMeasurementUse(cdm, respiratory_fu
 Among our results is a summary of timings between measurements for individuals in our dataset. We can quickly create a plot of these results like so
 ```{r}
 plotMeasurementTimings(respiratory_function_measurements |> 
-    dplyr::filter(variable_name == "time"))
+  filter(variable_name == "time"))
 ```

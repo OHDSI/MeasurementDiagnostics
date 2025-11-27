@@ -41,12 +41,17 @@ Plot summariseMeasurementTiming results.
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
+
 cdm <- mockMeasurementDiagnostics()
+
 result <- summariseMeasurementUse(
-              cdm = cdm,
-              bySex = TRUE,
-              codes = list("test_codelist" = c(3001467L, 45875977L)))
+  cdm = cdm,
+  bySex = TRUE,
+  codes = list("test_codelist" = c(3001467L, 45875977L))
+)
+
 plotMeasurementValueAsNumeric(result)
+
 CDMConnector::cdmDisconnect(cdm)
 }
 }

@@ -12,14 +12,19 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
+#' library(dplyr)
+#'
 #' cdm <- mockMeasurementDiagnostics()
+#'
 #' result <- summariseMeasurementUse(
-#'               cdm = cdm,
-#'               codes = list("test_codelist" = c(3001467L, 45875977L))
-#'            )
+#'   cdm = cdm,
+#'   codes = list("test_codelist" = c(3001467L, 45875977L))
+#' )
+#'
 #' result |>
-#'   dplyr::filter(variable_name == "time") |>
+#'   filter(variable_name == "time") |>
 #'   plotMeasurementTimings()
+#'
 #' CDMConnector::cdmDisconnect(cdm)
 #'}
 plotMeasurementTimings <- function(result,

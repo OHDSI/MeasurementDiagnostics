@@ -89,5 +89,5 @@ results like so
 
 ``` r
 plotMeasurementTimings(respiratory_function_measurements |> 
-    dplyr::filter(variable_name == "time"))
+  filter(variable_name == "time"))
 ```
