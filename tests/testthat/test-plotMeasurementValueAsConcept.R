@@ -17,4 +17,6 @@ test_that("plotMeasurementValueAsConcept works", {
   # Table types
   expect_no_error(x <- plotMeasurementValueAsConcept(result))
   expect_true(ggplot2::is_ggplot(x))
+
+  dropCreatedTables(cdm = cdm)
 })

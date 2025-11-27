@@ -50,11 +50,16 @@ Format a measurement_timings object into a visual table
 \examples{
 \donttest{
 library(MeasurementDiagnostics)
+
 cdm <- mockMeasurementDiagnostics()
+
 result <- summariseMeasurementUse(
-              cdm = cdm,
-              codes = list("test_codelist" = c(3001467L, 45875977L)))
+  cdm = cdm,
+  codes = list("test_codelist" = c(3001467L, 45875977L))
+)
+
 tableMeasurementValueAsConcept(result)
+
 CDMConnector::cdmDisconnect(cdm = cdm)
 }
 }

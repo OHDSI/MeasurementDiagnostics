@@ -10,11 +10,16 @@
 #' @examples
 #' \donttest{
 #' library(MeasurementDiagnostics)
+#'
 #' cdm <- mockMeasurementDiagnostics()
+#'
 #' result <- summariseMeasurementUse(
-#'               cdm = cdm,
-#'               codes = list("test_codelist" = c(3001467L, 45875977L)))
+#'   cdm = cdm,
+#'   codes = list("test_codelist" = c(3001467L, 45875977L))
+#' )
+#'
 #' tableMeasurementValueAsConcept(result)
+#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 tableMeasurementValueAsConcept <- function(result,
@@ -28,7 +33,7 @@ tableMeasurementValueAsConcept <- function(result,
   rlang::check_installed("visOmopResults")
 
   # check inputs
-  result <- omopgenerics::validateResultArgument(result, call = call)
+  result <- omopgenerics::validateResultArgument(result)
 
   # subset to rows of interest
   result <- result |>

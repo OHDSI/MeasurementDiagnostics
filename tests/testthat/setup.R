@@ -1,12 +1,15 @@
-writeSchema <- function(dbToTest = Sys.getenv("DB_TO_TEST", "duckdb")) {
-  prefix <- paste0("coco_", sample(letters, 4) |> paste0(collapse = ""), "_")
+
+dbToTest <- Sys.getenv("DB_TO_TEST", "duckdb")
+
+writeSchema <- function() {
+  prefix <- paste0("mdiag_", paste0(sample(letters, 4), collapse = ""), "_")
   switch(dbToTest,
          "duckdb" = c(schema = "main", prefix = prefix),
          "sql server" = c(catalog = "ohdsi", schema = "dbo", prefix = prefix),
          "redshift" = c(schema = "resultsv281", prefix = prefix)
   )
 }
-connection <- function(dbToTest = Sys.getenv("DB_TO_TEST", "duckdb")) {
+connection <- function() {
   switch(dbToTest,
          "duckdb" = DBI::dbConnect(duckdb::duckdb(), ":memory:"),
          "sql server" = DBI::dbConnect(
@@ -30,9 +33,11 @@ connection <- function(dbToTest = Sys.getenv("DB_TO_TEST", "duckdb")) {
   )
 }
 copyCdm <- function(cdm) {
-  CDMConnector::copyCdmTo(
-    con = connection(), cdm = cdm, schema = writeSchema(), overwrite = TRUE
-  )
+  if (dbToTest != "local") {
+    src <- CDMConnector::dbSource(con = connection(), writeSchema = writeSchema())
+    cdm <- omopgenerics::insertCdmTo(cdm = cdm, to = src)
+  }
+  return(cdm)
 }
 testMockCdm <- function() {
 
@@ -270,7 +275,6 @@ testMockCdm <- function() {
     )
   return(cdm)
 }
-
 obsDate <- function(start, end) {
   r1 <- stats::runif(n = length(start))
   start <- start + floor((as.Date(end) - start) * r1)
@@ -278,4 +282,8 @@ obsDate <- function(start, end) {
   end <- start + ceiling((as.Date(end) - start) * r2)
   end <- pmax(start, end)
   list(start, end)
+}
+dropCreatedTables <- function(cdm) {
+  omopgenerics::dropSourceTable(cdm = cdm, name = dplyr::everything())
+  omopgenerics::cdmDisconnect(cdm = cdm)
 }

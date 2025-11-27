@@ -21,9 +21,9 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN
 status](https://www.r-pkg.org/badges/version/MeasurementDiagnostics)](https://CRAN.R-project.org/package=MeasurementDiagnostics)
-[![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/workflows/R-CMD-check/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions)
-[![Codecov test coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/branch/main/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics?branch=main)
-[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/OHDSI/MeasurementDiagnostics/graph/badge.svg)](https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
 <!-- badges: end -->
 
@@ -74,5 +74,5 @@ respiratory_function_measurements <- summariseMeasurementUse(cdm, respiratory_fu
 Among our results is a summary of timings between measurements for individuals in our dataset. We can quickly create a plot of these results like so
 ```{r}
 plotMeasurementTimings(respiratory_function_measurements |> 
-    dplyr::filter(variable_name == "time"))
+  filter(variable_name == "time"))
 ```
