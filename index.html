@@ -44,6 +44,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ohdsi/MeasurementDiagnostics/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -87,13 +88,13 @@
 <span><span class="va">cdm</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── # OMOP CDM reference (duckdb) of Eunomia ────────────────────────────────────</span></span>
-<span><span class="co">#&gt; • omop tables: person, observation_period, visit_occurrence, visit_detail,</span></span>
-<span><span class="co">#&gt; condition_occurrence, drug_exposure, procedure_occurrence, device_exposure,</span></span>
-<span><span class="co">#&gt; measurement, observation, death, note, note_nlp, specimen, fact_relationship,</span></span>
-<span><span class="co">#&gt; location, care_site, provider, payer_plan_period, cost, drug_era, dose_era,</span></span>
-<span><span class="co">#&gt; condition_era, metadata, cdm_source, concept, vocabulary, domain,</span></span>
-<span><span class="co">#&gt; concept_class, concept_relationship, relationship, concept_synonym,</span></span>
-<span><span class="co">#&gt; concept_ancestor, source_to_concept_map, drug_strength</span></span>
+<span><span class="co">#&gt; • omop tables: care_site, cdm_source, concept, concept_ancestor, concept_class,</span></span>
+<span><span class="co">#&gt; concept_relationship, concept_synonym, condition_era, condition_occurrence,</span></span>
+<span><span class="co">#&gt; cost, death, device_exposure, domain, dose_era, drug_era, drug_exposure,</span></span>
+<span><span class="co">#&gt; drug_strength, fact_relationship, location, measurement, metadata, note,</span></span>
+<span><span class="co">#&gt; note_nlp, observation, observation_period, payer_plan_period, person,</span></span>
+<span><span class="co">#&gt; procedure_occurrence, provider, relationship, source_to_concept_map, specimen,</span></span>
+<span><span class="co">#&gt; visit_detail, visit_occurrence, vocabulary</span></span>
 <span><span class="co">#&gt; • cohort tables: -</span></span>
 <span><span class="co">#&gt; • achilles tables: -</span></span>
 <span><span class="co">#&gt; • other tables: -</span></span></code></pre></div>
@@ -109,14 +110,15 @@
 <p>Among our results is a summary of timings between measurements for individuals in our dataset. We can quickly create a plot of these results like so</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/plotMeasurementTimings.html">plotMeasurementTimings</a></span><span class="op">(</span><span class="va">respiratory_function_measurements</span> <span class="op">|&gt;</span> </span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variable_name</span> <span class="op">==</span> <span class="st">"time"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variable_name</span> <span class="op">==</span> <span class="st">"time"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://cloud.r-project.org/package=MeasurementDiagnostics" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/ohdsi/MeasurementDiagnostics/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ohdsi/MeasurementDiagnostics/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -149,9 +151,9 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=MeasurementDiagnostics" class="external-link"><img src="https://www.r-pkg.org/badges/version/MeasurementDiagnostics" alt="CRAN status"></a></li>
-<li><a href="https://github.com/OHDSI/MeasurementDiagnostics/actions" class="external-link"><img src="https://github.com/OHDSI/MeasurementDiagnostics/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics?branch=main" class="external-link"><img src="https://codecov.io/gh/OHDSI/MeasurementDiagnostics/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="Lifecycle:Experimental"></a></li>
+<li><a href="https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/OHDSI/MeasurementDiagnostics/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/OHDSI/MeasurementDiagnostics" class="external-link"><img src="https://codecov.io/gh/OHDSI/MeasurementDiagnostics/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 </ul>
 </div>
 

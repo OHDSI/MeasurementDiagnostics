@@ -74,10 +74,12 @@ A summarised result
 ``` r
 # \donttest{
 library(MeasurementDiagnostics)
+
 cdm <- mockMeasurementDiagnostics()
 #> Warning: ! 2 casted column in measurement as do not match expected column type:
 #> • `value_as_concept_id` from numeric to integer
 #> • `unit_concept_id` from numeric to integer
+
 result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date"
@@ -89,6 +91,7 @@ result <- summariseCohortMeasurementUse(
 #> → Summarising results - value as number.
 #> → Summarising results - value as concept.
 #> → Binding all diagnostic results.
+
 CDMConnector::cdmDisconnect(cdm = cdm)
 # }
 ```

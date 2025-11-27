@@ -12,6 +12,9 @@
 
 ## Citation
 
+Source:
+[`DESCRIPTION`](https://github.com/ohdsi/MeasurementDiagnostics/blob/main/DESCRIPTION)
+
 Burn E, Mercade-Besora N, Alcalde-Herraiz M (2025).
 *MeasurementDiagnostics: Diagnostics for Lists of Codes Based on
 Measurements*. R package version 0.1.0.999,
