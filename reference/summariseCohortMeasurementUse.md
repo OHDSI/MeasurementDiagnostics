@@ -6,8 +6,8 @@ Diagnostics of a codelist of measurement codes within a cohort
 
 ``` r
 summariseCohortMeasurementUse(
-  codes,
   cohort,
+  codes = NULL,
   timing = "during",
   byConcept = TRUE,
   byYear = FALSE,
@@ -21,15 +21,16 @@ summariseCohortMeasurementUse(
 
 ## Arguments
 
-- codes:
-
-  A codelist of measurement/observation codes for which to perform
-  diagnostics.
-
 - cohort:
 
   A cohort in which to perform the diagnostics of the measurement codes
   provided.
+
+- codes:
+
+  A codelist of measurement/observation codes for which to perform
+  diagnostics. If NULL it uses the codelist used to create each of the
+  cohorts.
 
 - timing:
 
