@@ -34,7 +34,7 @@ NULL
 #' Helper for consistent documentation of `table`.
 #'
 #' @param type Type of table. Check supported types with
-#' `visOmopResults::tableType()`.
+#' `visOmopResults::tableType()`. If NULL 'gt' type will be used.
 #' @param header Columns to use as header. See options with
 #' `visOmopResults::tableColumns(result)`.
 #' @param groupColumn Columns to group by. See options with

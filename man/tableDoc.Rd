@@ -5,7 +5,7 @@
 \title{Helper for consistent documentation of `table`.}
 \arguments{
 \item{type}{Type of table. Check supported types with
-`visOmopResults::tableType()`.}
+`visOmopResults::tableType()`. If NULL 'gt' type will be used.}
 
 \item{header}{Columns to use as header. See options with
 `visOmopResults::tableColumns(result)`.}

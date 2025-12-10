@@ -23,12 +23,12 @@
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 tableMeasurementValueAsConcept <- function(result,
-                                           type = "gt",
                                            header = c(visOmopResults::strataColumns(result)),
                                            groupColumn = c("codelist_name"),
                                            settingsColumn = character(),
                                            hide = character(),
                                            style = NULL,
+                                           type = NULL,
                                            .options = list()){
   rlang::check_installed("visOmopResults")
 
