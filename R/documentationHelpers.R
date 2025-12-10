@@ -16,6 +16,14 @@
 #' @param ageGroup If not NULL, a list of ageGroup vectors of length two.
 #' @param dateRange Two dates. The first indicating the earliest measurement
 #' date and the second indicating the latest possible measurement date.
+#' @param estimates A named list indicating, for each measurement diagnostics
+#' check, which estimates to retrieve. The names of the list should correspond
+#' to the diagnostics checks, and each list element should be a character vector
+#' specifying the estimates to compute.
+#'
+#' Allowed estimates are those supported by the `summariseResult()` function in
+#' the **PatientProfiles** package. If omitted, all available estimates for
+#' each check will be returned.
 #' @param checks Diagnostics to run. Options are: "measurement_timing",
 #' "measurement_value_as_numeric", and "measurement_value_as_concept".
 #'
