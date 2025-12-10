@@ -87,16 +87,6 @@ subject is in the cohort (or in observation if cohort = NULL), and 3)
 date and the second indicating the latest possible measurement date.</p></dd>
 
 
-<dt id="arg-estimates">estimates<a class="anchor" aria-label="anchor" href="#arg-estimates"></a></dt>
-<dd><p>A named list indicating, for each measurement diagnostics
-check, which estimates to retrieve. The names of the list should correspond
-to the diagnostics checks, and each list element should be a character vector
-specifying the estimates to compute.</p>
-<p>Allowed estimates are those supported by the `summariseResult()` function in
-the **PatientProfiles** package. If omitted, all available estimates for
-each check will be returned.</p></dd>
-
-
 <dt id="arg-checks">checks<a class="anchor" aria-label="anchor" href="#arg-checks"></a></dt>
 <dd><p>Diagnostics to run. Options are: "measurement_timing",
 "measurement_value_as_numeric", and "measurement_value_as_concept".</p></dd>

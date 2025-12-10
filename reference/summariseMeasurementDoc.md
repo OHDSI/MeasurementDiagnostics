@@ -48,17 +48,6 @@ functions.
   Two dates. The first indicating the earliest measurement date and the
   second indicating the latest possible measurement date.
 
-- estimates:
-
-  A named list indicating, for each measurement diagnostics check, which
-  estimates to retrieve. The names of the list should correspond to the
-  diagnostics checks, and each list element should be a character vector
-  specifying the estimates to compute.
-
-  Allowed estimates are those supported by the \`summariseResult()\`
-  function in the \*\*PatientProfiles\*\* package. If omitted, all
-  available estimates for each check will be returned.
-
 - checks:
 
   Diagnostics to run. Options are: "measurement_timing",
