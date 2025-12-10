@@ -17,6 +17,8 @@
 #'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
+#'
+
 summariseMeasurementUse <- function(cdm,
                                     codes,
                                     byConcept = TRUE,
@@ -24,6 +26,11 @@ summariseMeasurementUse <- function(cdm,
                                     bySex = FALSE,
                                     ageGroup = NULL,
                                     dateRange = as.Date(c(NA, NA)),
+                                    estimates = list(
+                                      "measurement_timings" = c("min", "q25", "median", "q75", "max", "density"),
+                                      "measurement_value_as_numeric" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
+                                      "measurement_value_as_concept" = c("count", "percentage")
+                                    ),
                                     checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")) {
   # check inputs
   cdm <- omopgenerics::validateCdmArgument(cdm)
@@ -39,6 +46,7 @@ summariseMeasurementUse <- function(cdm,
     bySex = bySex,
     ageGroup = ageGroup,
     dateRange = dateRange,
+    estimates = estimates,
     checks = checks
   )
 
@@ -56,6 +64,7 @@ summariseMeasurementUseInternal <- function(cdm,
                                             bySex,
                                             ageGroup,
                                             dateRange,
+                                            estimates,
                                             checks) {
   # checks
   if (is.null(codes)) {
@@ -73,6 +82,7 @@ summariseMeasurementUseInternal <- function(cdm,
   omopgenerics::assertChoice(
     checks, choices = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")
   )
+  estimates <- validateEstimates(estimates, checks)
   if (all(!is.na(dateRange))) {
     if (dateRange[1] > dateRange[2]) {
       cli::cli_abort("First date component in `dateRange` must be smaller than the second.")
@@ -146,7 +156,7 @@ summariseMeasurementUseInternal <- function(cdm,
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
   ## measurements per subject
-  if ("measurement_timings" %in% checks) {
+  if ("measurement_timings" %in% checks & "measurement_timings" %in% names(estimates)) {
     cli::cli_inform(c(">" = "Getting time between records per person."))
     groupCols <- c("cohort_name"[!is.null(cohort)], "codelist_name", "subject_id")
     measurementTiming <- measurement |>
@@ -169,7 +179,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = c("time", "measurements_per_subject"),
-        estimates = c("min", "q25", "median", "q75", "max", "density"),
+        estimates = estimates$measurement_timings,
         counts = TRUE
       ) |>
       suppressMessages() |>
@@ -182,7 +192,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## measurement value
-  if ("measurement_value_as_numeric" %in% checks) {
+  if ("measurement_value_as_numeric" %in% checks & "measurement_value_as_numeric" %in% names(estimates)) {
     cli::cli_inform(c(">" = "Summarising results - value as number."))
     # as numeric
     # 1) summarise numeric distribution
@@ -195,7 +205,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = "value_as_number",
-        estimates = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
+        estimates = estimates$measurement_value_as_numeric,
         counts = TRUE,
         weights = NULL
       ) |>
@@ -210,7 +220,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## counts as concept
-  if ("measurement_value_as_concept" %in% checks) {
+  if ("measurement_value_as_concept" %in% checks & "measurement_value_as_concept" %in% names(estimates)) {
     cli::cli_inform(c(">" = "Summarising results - value as concept."))
     measurementConcept <- measurement |>
       dplyr::mutate(value_as_concept_id = as.character(.data$value_as_concept_id)) |>
@@ -220,7 +230,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = "value_as_concept_id",
-        estimates = c("count", "percentage"),
+        estimates = estimates$measurement_value_as_concept,
         counts = FALSE,
         weights = NULL
       ) |>
@@ -608,4 +618,48 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
 
   Reduce(dplyr::union_all, tables) |>
     dplyr::compute(name = name, temporary = FALSE)
+}
+
+validateEstimates <- function(estimates, checks) {
+
+  if (is.null(estimates)) cli::cli_abort("`estimates` cannot be NULL.")
+  if (any(!names(estimates) %in% checks)) {
+    cli::cli_abort(c(
+      "x" = "All elements of `estimates` must be named with valid diagnostics checks in `checks`.",
+      ">" = "Each check in `checks` must have corresponding estimates."
+    ))
+  }
+
+  allowedNumeric <- PatientProfiles::availableEstimates() |>
+    dplyr::filter(.data$variable_type == "numeric") |>
+    dplyr::pull("estimate_name")
+  allowedCategorical <- PatientProfiles::availableEstimates() |>
+    dplyr::filter(.data$variable_type == "categorical") |>
+    dplyr::pull("estimate_name")
+
+  # check numeric
+  for (nm in c("measurement_value_as_numeric", "measurement_timings")) {
+    if (nm %in% names(estimates)) {
+      estimatesNumeric <- estimates[[nm]][!grepl("q", estimates[[nm]])]
+      notAllowed <- !estimatesNumeric %in% allowedNumeric
+      if (sum(notAllowed) > 0) {
+        cli::cli_warn("{estimatesNumeric[notAllowed]} in `estimates` not allowed for '{nm}', and will be ignored.")
+        estimates[[nm]] <- estimates[[nm]][!estimates[[nm]] %in% estimatesNumeric[notAllowed]]
+      }
+    }
+  }
+
+  # check categorical
+  if ("measurement_value_as_concept" %in% names(estimates)) {
+    estimatesCategorical <- estimates[["measurement_value_as_concept"]]
+    notAllowed <- !estimatesCategorical %in% allowedCategorical
+    if (sum(notAllowed) > 0) {
+      cli::cli_warn("{estimatesCategorical[notAllowed]} in `estimates` not allowed for 'measurement_value_as_concept', and will be ignored.")
+      estimates[["measurement_value_as_concept"]] <- estimatesCategorical[!notAllowed]
+    }
+  }
+
+  estimates <- estimates[!sapply(estimates, \(x){length(x)==0})]
+
+  return(estimates)
 }
