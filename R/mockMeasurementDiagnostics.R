@@ -43,12 +43,12 @@ mockMeasurementDiagnostics <- function(nPerson = 100,
     omock::mockCohort(name = "my_cohort", numberCohorts = 2, seed = seed)
   cdm_local$measurement <- cdm_local$measurement |>
     dplyr::mutate(
-      unit_concept_id = dplyr::if_else(dplyr::row_number()%%2 == 0, 9529, NA),
+      unit_concept_id = dplyr::if_else(dplyr::row_number()%%2 == 0, 9529L, NA_integer_),
       value_as_number = dplyr::if_else(dplyr::row_number()<6, NA, seq(from = 5, to = 150, length.out = 2000)),
       value_as_concept_id = dplyr::case_when(
-        dplyr::row_number()%%3 == 0 ~ 4328749,
-        dplyr::row_number()%%3 == 1 ~ 4267416,
-        dplyr::row_number()%%3 == 2 ~ NA,
+        dplyr::row_number()%%3 == 0 ~ 4328749L,
+        dplyr::row_number()%%3 == 1 ~ 4267416L,
+        dplyr::row_number()%%3 == 2 ~ NA_integer_,
       )
     )
   cdm_local$concept <- dplyr::bind_rows(
