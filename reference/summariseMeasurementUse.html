@@ -49,6 +49,10 @@
 <span>  bySex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ageGroup <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dateRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  estimates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>measurement_timings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>, <span class="st">"q75"</span>, <span class="st">"max"</span>,</span>
+<span>    <span class="st">"density"</span><span class="op">)</span>, measurement_value_as_numeric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q01"</span>, <span class="st">"q05"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>,</span>
+<span>    <span class="st">"q75"</span>, <span class="st">"q95"</span>, <span class="st">"q99"</span>, <span class="st">"max"</span>, <span class="st">"count_missing"</span>, <span class="st">"percentage_missing"</span>, <span class="st">"density"</span><span class="op">)</span>,</span>
+<span>    measurement_value_as_concept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count"</span>, <span class="st">"percentage"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"measurement_timings"</span>, <span class="st">"measurement_value_as_numeric"</span>,</span>
 <span>    <span class="st">"measurement_value_as_concept"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -88,6 +92,16 @@ diagnostics.</p></dd>
 date and the second indicating the latest possible measurement date.</p></dd>
 
 
+<dt id="arg-estimates">estimates<a class="anchor" aria-label="anchor" href="#arg-estimates"></a></dt>
+<dd><p>A named list indicating, for each measurement diagnostics
+check, which estimates to retrieve. The names of the list should correspond
+to the diagnostics checks, and each list element should be a character vector
+specifying the estimates to compute.</p>
+<p>Allowed estimates are those supported by the `summariseResult()` function in
+the **PatientProfiles** package. If omitted, all available estimates for
+each check will be returned.</p></dd>
+
+
 <dt id="arg-checks">checks<a class="anchor" aria-label="anchor" href="#arg-checks"></a></dt>
 <dd><p>Diagnostics to run. Options are: "measurement_timing",
 "measurement_value_as_numeric", and "measurement_value_as_concept".</p></dd>
@@ -120,6 +134,7 @@ date and the second indicating the latest possible measurement date.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu"><a href="https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html" class="external-link">cdmDisconnect</a></span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

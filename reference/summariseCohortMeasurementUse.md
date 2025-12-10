@@ -14,6 +14,10 @@ summariseCohortMeasurementUse(
   bySex = FALSE,
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
+  estimates = list(measurement_timings = c("min", "q25", "median", "q75", "max",
+    "density"), measurement_value_as_numeric = c("min", "q01", "q05", "q25", "median",
+    "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
+    measurement_value_as_concept = c("count", "percentage")),
   checks = c("measurement_timings", "measurement_value_as_numeric",
     "measurement_value_as_concept")
 )
@@ -61,6 +65,17 @@ summariseCohortMeasurementUse(
   Two dates. The first indicating the earliest measurement date and the
   second indicating the latest possible measurement date.
 
+- estimates:
+
+  A named list indicating, for each measurement diagnostics check, which
+  estimates to retrieve. The names of the list should correspond to the
+  diagnostics checks, and each list element should be a character vector
+  specifying the estimates to compute.
+
+  Allowed estimates are those supported by the \`summariseResult()\`
+  function in the \*\*PatientProfiles\*\* package. If omitted, all
+  available estimates for each check will be returned.
+
 - checks:
 
   Diagnostics to run. Options are: "measurement_timing",
@@ -85,13 +100,7 @@ result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date"
 )
-#> → Getting measurement records based on 2 concepts.
-#> → Subsetting records to the subjects and timing of interest.
-#> → Getting time between records per person.
-#> ! 2 duplicated rows eliminated.
-#> → Summarising results - value as number.
-#> → Summarising results - value as concept.
-#> → Binding all diagnostic results.
+#> Error in summariseMeasurementUseInternal(cdm = cdm, codes = codes, cohort = cohort,     timing = timing, timingName = timing, byConcept = byConcept,     byYear = byYear, bySex = bySex, ageGroup = ageGroup, dateRange = dateRange,     checks = checks): argument "estimates" is missing, with no default
 
 CDMConnector::cdmDisconnect(cdm = cdm)
 # }
