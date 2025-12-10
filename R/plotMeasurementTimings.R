@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' library(MeasurementDiagnostics)
 #' library(dplyr)
 #'
