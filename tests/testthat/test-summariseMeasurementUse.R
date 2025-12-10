@@ -3,7 +3,6 @@ test_that("summariseMeasurementUse works", {
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
 
-  # simple use case ----
   res <- summariseMeasurementUse(
     cdm = cdm,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
@@ -112,54 +111,9 @@ test_that("summariseMeasurementUse works", {
     c('count', 'count', 'count', 'count', 'count', 'count', 'percentage', 'percentage', 'percentage', 'percentage', 'percentage', 'percentage')
   )
 
-  # suppress ----
+  # suppress
   resSup <- res |> omopgenerics::suppress(minCellCount = 68)
   expect_equal(resSup$estimate_value |> unique(), c("100", "-", "81", "0"))
-
-  # change default estimates ----
-  expect_warning(
-    res <- summariseMeasurementUse(
-      cdm = cdm,
-      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
-      bySex = TRUE,
-      ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
-      estimates = list(
-        "measurement_timings" = c("min", "q25", "median"),
-        "measurement_value_as_numeric" = c("min", "max"),
-        "measurement_value_as_concept" = c("density")
-      )
-    )
-  )
-  expect_false("measurement_value_as_concept" %in%  dplyr::pull(omopgenerics::settings(res), "result_type"))
-  expect_equal(
-    res |>
-      dplyr::filter(.data$result_id == 1) |>
-      dplyr::pull("estimate_name") |>
-      unique(),
-    c("count", "min", "q25", "median")
-  )
-  expect_equal(
-    res |>
-      dplyr::filter(.data$result_id == 2) |>
-      dplyr::pull("estimate_name") |>
-      unique(),
-    c("count", "min", "max")
-  )
-
-  # expected behaviour
-  expect_error(
-    summariseMeasurementUse(
-      cdm = cdm,
-      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
-      bySex = TRUE,
-      ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
-      estimates = list(
-        "measurement_timing" = c("min", "q25", "median"),
-        "measurement_value_as_numeric" = c("min", "max"),
-        "measurement_value_as_concept" = c("density")
-      )
-    )
-  )
 
   dropCreatedTables(cdm = cdm)
 })

@@ -13,10 +13,6 @@ summariseCohortMeasurementUse(
   bySex = FALSE,
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
-  estimates = list(measurement_timings = c("min", "q25", "median", "q75", "max",
-    "density"), measurement_value_as_numeric = c("min", "q01", "q05", "q25", "median",
-    "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
-    measurement_value_as_concept = c("count", "percentage")),
   checks = c("measurement_timings", "measurement_value_as_numeric",
     "measurement_value_as_concept")
 )
@@ -44,15 +40,6 @@ subject is in the cohort (or in observation if cohort = NULL), and 3)
 
 \item{dateRange}{Two dates. The first indicating the earliest measurement
 date and the second indicating the latest possible measurement date.}
-
-\item{estimates}{A named list indicating, for each measurement diagnostics
-check, which estimates to retrieve. The names of the list should correspond
-to the diagnostics checks, and each list element should be a character vector
-specifying the estimates to compute.
-
-Allowed estimates are those supported by the `summariseResult()` function in
-the **PatientProfiles** package. If omitted, all available estimates for
-each check will be returned.}
 
 \item{checks}{Diagnostics to run. Options are: "measurement_timing",
 "measurement_value_as_numeric", and "measurement_value_as_concept".}

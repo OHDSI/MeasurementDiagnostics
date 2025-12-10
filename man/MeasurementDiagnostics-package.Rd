@@ -14,7 +14,6 @@ Diagnostics of list of codes based on concepts from the domains measurement and 
 Useful links:
 \itemize{
   \item \url{https://ohdsi.github.io/MeasurementDiagnostics/}
-  \item Report bugs at \url{https://github.com/ohdsi/MeasurementDiagnostics/issues}
 }
 
 }

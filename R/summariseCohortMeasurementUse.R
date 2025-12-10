@@ -27,11 +27,6 @@ summariseCohortMeasurementUse <- function(cohort,
                                           bySex = FALSE,
                                           ageGroup = NULL,
                                           dateRange = as.Date(c(NA, NA)),
-                                          estimates = list(
-                                            "measurement_timings" = c("min", "q25", "median", "q75", "max", "density"),
-                                            "measurement_value_as_numeric" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
-                                            "measurement_value_as_concept" = c("count", "percentage")
-                                          ),
                                           checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")) {
 
   # check inputs
