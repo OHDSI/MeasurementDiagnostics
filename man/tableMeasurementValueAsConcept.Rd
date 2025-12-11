@@ -6,20 +6,17 @@
 \usage{
 tableMeasurementValueAsConcept(
   result,
-  type = "gt",
   header = c(visOmopResults::strataColumns(result)),
   groupColumn = c("codelist_name"),
   settingsColumn = character(),
   hide = character(),
   style = NULL,
+  type = NULL,
   .options = list()
 )
 }
 \arguments{
 \item{result}{A summarised_result object.}
-
-\item{type}{Type of table. Check supported types with
-`visOmopResults::tableType()`.}
 
 \item{header}{Columns to use as header. See options with
 `visOmopResults::tableColumns(result)`.}
@@ -37,6 +34,9 @@ options with `visOmopResults::settingsColumns(result)`.}
 the table generated. It can either be a pre-defined style ("default" or
 "darwin" - the latter just for gt and flextable), or NULL which converts to
 "default" style, or custom code.}
+
+\item{type}{Type of table. Check supported types with
+`visOmopResults::tableType()`. If NULL 'gt' type will be used.}
 
 \item{.options}{A named list with additional formatting options.
 `visOmopResults::tableOptions()` shows allowed arguments and their default values.}

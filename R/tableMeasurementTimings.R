@@ -23,12 +23,12 @@
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 tableMeasurementTimings <- function(result,
-                                    type = "gt",
                                     header = c(visOmopResults::strataColumns(result)),
                                     groupColumn = c("codelist_name"),
                                     settingsColumn = character(),
                                     hide = c("variable_level"),
                                     style = NULL,
+                                    type = NULL,
                                     .options = list()){
   rlang::check_installed("visOmopResults")
 
