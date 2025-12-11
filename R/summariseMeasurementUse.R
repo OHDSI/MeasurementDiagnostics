@@ -27,11 +27,11 @@ summariseMeasurementUse <- function(cdm,
                                     ageGroup = NULL,
                                     dateRange = as.Date(c(NA, NA)),
                                     estimates = list(
-                                      "measurement_timings" = c("min", "q25", "median", "q75", "max", "density"),
+                                      "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
                                       "measurement_value_as_numeric" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
                                       "measurement_value_as_concept" = c("count", "percentage")
                                     ),
-                                    checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")) {
+                                    checks = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept")) {
   # check inputs
   cdm <- omopgenerics::validateCdmArgument(cdm)
 
@@ -79,7 +79,7 @@ summariseMeasurementUseInternal <- function(cdm,
   omopgenerics::assertLogical(byYear, length = 1)
   omopgenerics::assertLogical(bySex, length = 1)
   omopgenerics::assertDate(dateRange, length = 2, na = TRUE)
-  allowedChecks <- c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")
+  allowedChecks <- c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept")
   omopgenerics::assertChoice(checks, choices = allowedChecks)
   estimates <- validateEstimates(estimates, allowedChecks)
   if (all(!is.na(dateRange))) {
@@ -155,7 +155,7 @@ summariseMeasurementUseInternal <- function(cdm,
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
   ## measurements per subject
-  if ("measurement_timings" %in% checks & "measurement_timings" %in% names(estimates)) {
+  if ("measurement_summary" %in% checks & "measurement_summary" %in% names(estimates)) {
     cli::cli_inform(c(">" = "Getting time between records per person."))
     groupCols <- c("cohort_name"[!is.null(cohort)], "codelist_name", "subject_id")
     measurementTiming <- measurement |>
@@ -178,7 +178,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = c("time", "measurements_per_subject"),
-        estimates = estimates$measurement_timings,
+        estimates = estimates$measurement_summary,
         counts = TRUE
       ) |>
       suppressMessages() |>
@@ -447,7 +447,7 @@ transformMeasurementRecords <- function(x, cdm, newSet, installedVersion, timing
     ) |>
     omopgenerics::uniteAdditional() |>
     dplyr::select(omopgenerics::resultColumns()) |>
-    updateSummarisedResultSettings(resultType = "measurement_timings", installedVersion, timingName, dateRange)
+    updateSummarisedResultSettings(resultType = "measurement_summary", installedVersion, timingName, dateRange)
 
   return(x)
 }
@@ -637,7 +637,7 @@ validateEstimates <- function(estimates, checks) {
     dplyr::pull("estimate_name")
 
   # check numeric
-  for (nm in c("measurement_value_as_numeric", "measurement_timings")) {
+  for (nm in c("measurement_value_as_numeric", "measurement_summary")) {
     if (nm %in% names(estimates)) {
       estimatesNumeric <- estimates[[nm]][!grepl("q", estimates[[nm]])]
       notAllowed <- !estimatesNumeric %in% allowedNumeric
