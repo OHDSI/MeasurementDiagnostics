@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpnCDSQC/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpbHj3RP/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -152,9 +152,9 @@ tableMeasurementValueAsConcept(repiratory_function_measurements)
 |----------------------|-------------------------------------|------------|-------------|-----------------------|-----------------------|---------------------|---------------|-----------------|
 | respiratory function |                                     |            |             |                       |                       |                     |               |                 |
 | Eunomia              | overall                             | overall    | overall     | Value as concept name | No matching concept   | 0                   | N (%)         | 8,728 (100.00%) |
+|                      | Measurement of respiratory function | 4052083    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 4,088 (100.00%) |
 |                      | FEV1/FVC                            | 3011505    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 2,320 (100.00%) |
 |                      | Spirometry                          | 4133840    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 2,320 (100.00%) |
-|                      | Measurement of respiratory function | 4052083    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 4,088 (100.00%) |
 
 As well as overview of the values of measurements, we can also see a
 summary of the timing between measurements for individuals in the

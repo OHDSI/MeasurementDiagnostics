@@ -7,12 +7,12 @@ Format a measurement_timings object into a visual table
 ``` r
 tableMeasurementTimings(
   result,
-  type = "gt",
   header = c(visOmopResults::strataColumns(result)),
   groupColumn = c("codelist_name"),
   settingsColumn = character(),
   hide = c("variable_level"),
   style = NULL,
+  type = NULL,
   .options = list()
 )
 ```
@@ -22,11 +22,6 @@ tableMeasurementTimings(
 - result:
 
   A summarised_result object.
-
-- type:
-
-  Type of table. Check supported types with
-  \`visOmopResults::tableType()\`.
 
 - header:
 
@@ -54,6 +49,11 @@ tableMeasurementTimings(
   table generated. It can either be a pre-defined style ("default" or
   "darwin" - the latter just for gt and flextable), or NULL which
   converts to "default" style, or custom code.
+
+- type:
+
+  Type of table. Check supported types with
+  \`visOmopResults::tableType()\`. If NULL 'gt' type will be used.
 
 - .options:
 

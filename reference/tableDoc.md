@@ -7,7 +7,7 @@ Helper for consistent documentation of \`table\`.
 - type:
 
   Type of table. Check supported types with
-  \`visOmopResults::tableType()\`.
+  \`visOmopResults::tableType()\`. If NULL 'gt' type will be used.
 
 - header:
 

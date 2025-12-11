@@ -10,6 +10,9 @@ Useful links:
 
 - <https://ohdsi.github.io/MeasurementDiagnostics/>
 
+- Report bugs at
+  <https://github.com/ohdsi/MeasurementDiagnostics/issues>
+
 ## Author
 
 **Maintainer**: Nuria Mercade-Besora
