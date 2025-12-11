@@ -66,9 +66,6 @@ A summarised result
 library(MeasurementDiagnostics)
 
 cdm <- mockMeasurementDiagnostics()
-#> Warning: ! 2 casted column in measurement as do not match expected column type:
-#> • `value_as_concept_id` from numeric to integer
-#> • `unit_concept_id` from numeric to integer
 
 result <- summariseMeasurementUse(
   cdm = cdm, codes = list("test_codelist" = c(3001467L, 45875977L))
