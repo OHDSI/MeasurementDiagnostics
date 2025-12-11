@@ -18,11 +18,11 @@
 #'   codes = list("test_codelist" = c(3001467L, 45875977L))
 #' )
 #'
-#' plotMeasurementValueAsNumeric(result)
+#' plotMeasurementValueAsNumber(result)
 #'
 #' CDMConnector::cdmDisconnect(cdm)
 #' }
-plotMeasurementValueAsNumeric <- function(result,
+plotMeasurementValueAsNumber <- function(result,
                                           x = c("unit_concept_name"),
                                           plotType = "boxplot",
                                           facet = c("codelist_name", "concept_name"),
@@ -39,10 +39,10 @@ plotMeasurementValueAsNumeric <- function(result,
   colour <- intersect(colour, plotCols)
 
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric")
+    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_number")
 
   if (nrow(result) == 0) {
-    cli::cli_warn("There are no results with `result_type = measurement_value_as_numeric`")
+    cli::cli_warn("There are no results with `result_type = measurement_value_as_number`")
     return(visOmopResults::emptyPlot())
   }
 

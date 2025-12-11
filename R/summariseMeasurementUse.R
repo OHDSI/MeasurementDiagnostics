@@ -28,10 +28,10 @@ summariseMeasurementUse <- function(cdm,
                                     dateRange = as.Date(c(NA, NA)),
                                     estimates = list(
                                       "measurement_timings" = c("min", "q25", "median", "q75", "max", "density"),
-                                      "measurement_value_as_numeric" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
+                                      "measurement_value_as_number" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
                                       "measurement_value_as_concept" = c("count", "percentage")
                                     ),
-                                    checks = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")) {
+                                    checks = c("measurement_timings", "measurement_value_as_number", "measurement_value_as_concept")) {
   # check inputs
   cdm <- omopgenerics::validateCdmArgument(cdm)
 
@@ -79,7 +79,7 @@ summariseMeasurementUseInternal <- function(cdm,
   omopgenerics::assertLogical(byYear, length = 1)
   omopgenerics::assertLogical(bySex, length = 1)
   omopgenerics::assertDate(dateRange, length = 2, na = TRUE)
-  allowedChecks <- c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept")
+  allowedChecks <- c("measurement_timings", "measurement_value_as_number", "measurement_value_as_concept")
   omopgenerics::assertChoice(checks, choices = allowedChecks)
   estimates <- validateEstimates(estimates, allowedChecks)
   if (all(!is.na(dateRange))) {
@@ -191,7 +191,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## measurement value
-  if ("measurement_value_as_numeric" %in% checks & "measurement_value_as_numeric" %in% names(estimates)) {
+  if ("measurement_value_as_number" %in% checks & "measurement_value_as_number" %in% names(estimates)) {
     cli::cli_inform(c(">" = "Summarising results - value as number."))
     # as numeric
     # 1) summarise numeric distribution
@@ -204,7 +204,7 @@ summariseMeasurementUseInternal <- function(cdm,
         strata = strata,
         includeOverallStrata = TRUE,
         variables = "value_as_number",
-        estimates = estimates$measurement_value_as_numeric,
+        estimates = estimates$measurement_value_as_number,
         counts = TRUE,
         weights = NULL
       ) |>
@@ -489,7 +489,7 @@ transformMeasurementValue <- function(x, cdm, newSet, cohortName, installedVersi
 
   x <- x  |>
     dplyr::select(omopgenerics::resultColumns()) |>
-    updateSummarisedResultSettings(resultType = "measurement_value_as_numeric", installedVersion, timing, dateRange)
+    updateSummarisedResultSettings(resultType = "measurement_value_as_number", installedVersion, timing, dateRange)
 
   return(x)
 }
@@ -637,7 +637,7 @@ validateEstimates <- function(estimates, checks) {
     dplyr::pull("estimate_name")
 
   # check numeric
-  for (nm in c("measurement_value_as_numeric", "measurement_timings")) {
+  for (nm in c("measurement_value_as_number", "measurement_timings")) {
     if (nm %in% names(estimates)) {
       estimatesNumeric <- estimates[[nm]][!grepl("q", estimates[[nm]])]
       notAllowed <- !estimatesNumeric %in% allowedNumeric
