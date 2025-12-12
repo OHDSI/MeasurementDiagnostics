@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpbHj3RP/GiBleed_5.3.zip
+#> Creating CDM database /tmp/Rtmph4Ceyu/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -100,7 +100,7 @@ We can see each of the checks performed.
 settings(repiratory_function_measurements) |> 
   pull("result_type") |> 
   unique()
-#> [1] "measurement_timings"          "measurement_value_as_numeric"
+#> [1] "measurement_summary"          "measurement_value_as_numeric"
 #> [3] "measurement_value_as_concept"
 ```
 
@@ -152,16 +152,16 @@ tableMeasurementValueAsConcept(repiratory_function_measurements)
 |----------------------|-------------------------------------|------------|-------------|-----------------------|-----------------------|---------------------|---------------|-----------------|
 | respiratory function |                                     |            |             |                       |                       |                     |               |                 |
 | Eunomia              | overall                             | overall    | overall     | Value as concept name | No matching concept   | 0                   | N (%)         | 8,728 (100.00%) |
-|                      | Measurement of respiratory function | 4052083    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 4,088 (100.00%) |
 |                      | FEV1/FVC                            | 3011505    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 2,320 (100.00%) |
 |                      | Spirometry                          | 4133840    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 2,320 (100.00%) |
+|                      | Measurement of respiratory function | 4052083    | Measurement | Value as concept name | No matching concept   | 0                   | N (%)         | 4,088 (100.00%) |
 
 As well as overview of the values of measurements, we can also see a
 summary of the timing between measurements for individuals in the
 dataset.
 
 ``` r
-tableMeasurementTimings(repiratory_function_measurements)
+tableMeasurementSummary(repiratory_function_measurements)
 ```
 
 | CDM name             | Variable name            | Estimate name        | Estimate value         |

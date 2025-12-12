@@ -109,7 +109,7 @@
 <code class="sourceCode R"><span><span class="va">respiratory_function_measurements</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/summariseMeasurementUse.html">summariseMeasurementUse</a></span><span class="op">(</span><span class="va">cdm</span>, <span class="va">respiratory_function_codes</span>, bySex <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Among our results is a summary of timings between measurements for individuals in our dataset. We can quickly create a plot of these results like so</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/plotMeasurementTimings.html">plotMeasurementTimings</a></span><span class="op">(</span><span class="va">respiratory_function_measurements</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plotMeasurementSummary.html">plotMeasurementSummary</a></span><span class="op">(</span><span class="va">respiratory_function_measurements</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variable_name</span> <span class="op">==</span> <span class="st">"time"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

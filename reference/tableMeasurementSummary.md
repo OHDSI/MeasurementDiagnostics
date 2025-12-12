@@ -5,12 +5,12 @@ Format a measurement_summary object into a visual table
 ## Usage
 
 ``` r
-tableMeasurementValueAsNumeric(
+tableMeasurementSummary(
   result,
   header = c(visOmopResults::strataColumns(result)),
   groupColumn = c("codelist_name"),
   settingsColumn = character(),
-  hide = c("variable_name", "variable_level"),
+  hide = c("variable_level"),
   style = NULL,
   type = NULL,
   .options = list()
@@ -84,7 +84,7 @@ result <- summariseMeasurementUse(
 #> → Summarising results - value as concept.
 #> → Binding all diagnostic results.
 
-tableMeasurementValueAsNumeric(result)
+tableMeasurementSummary(result)
 
 
   
@@ -92,15 +92,7 @@ tableMeasurementValueAsNumeric(result)
 CDM name
 ```
 
-Concept name
-
-Concept ID
-
-Domain ID
-
-Unit concept name
-
-Unit concept ID
+Variable name
 
 Estimate name
 
@@ -110,130 +102,37 @@ test_codelist
 
 mock database
 
-overall
-
-overall
-
-overall
-
-kilogram
-
-9529
+Number records
 
 N
 
-50
+100
 
-Median \[Q25 - Q75\]
-
-8.77 \[7.07 - 10.48\]
-
-Q05 - Q95
-
-5.70 - 11.84
-
-Q01 - Q99
-
-5.43 - 12.11
-
-Range
-
-5.36 to 12.18
-
-Missing value, N (%)
-
-2 (4.00%)
-
-\-
-
-\-
+Number subjects
 
 N
 
-50
+67
+
+Time (days)
 
 Median \[Q25 - Q75\]
 
-8.77 \[7.10 - 10.44\]
-
-Q05 - Q95
-
-5.77 - 11.77
-
-Q01 - Q99
-
-5.50 - 12.04
+249 \[67 - 645\]
 
 Range
 
-5.44 to 12.11
+8 to 2,886
 
-Missing value, N (%)
-
-3 (6.00%)
-
-Alkaline phosphatase.bone \[Enzymatic activity/volume\] in Serum or
-Plasma
-
-3001467
-
-Measurement
-
-kilogram
-
-9529
-
-N
-
-50
+Measurements per subject
 
 Median \[Q25 - Q75\]
 
-8.77 \[7.07 - 10.48\]
-
-Q05 - Q95
-
-5.70 - 11.84
-
-Q01 - Q99
-
-5.43 - 12.11
+2.00 \[1.00 - 2.00\]
 
 Range
 
-5.36 to 12.18
-
-Missing value, N (%)
-
-2 (4.00%)
-
-\-
-
-\-
-
-N
-
-50
-
-Median \[Q25 - Q75\]
-
-8.77 \[7.10 - 10.44\]
-
-Q05 - Q95
-
-5.77 - 11.77
-
-Q01 - Q99
-
-5.50 - 12.04
-
-Range
-
-5.44 to 12.11
-
-Missing value, N (%)
-
-3 (6.00%)
+1.00 to 4.00
 
 CDMConnector::[cdmDisconnect](https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html)(cdm
 = cdm) \# }

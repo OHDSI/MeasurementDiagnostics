@@ -72,6 +72,6 @@ individuals in our dataset. We can quickly create a plot of these
 results like so
 
 ``` r
-plotMeasurementTimings(respiratory_function_measurements |> 
+plotMeasurementSummary(respiratory_function_measurements |> 
   filter(variable_name == "time"))
 ```

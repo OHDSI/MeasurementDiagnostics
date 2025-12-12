@@ -50,11 +50,11 @@
 <span>  bySex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ageGroup <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dateRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  estimates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>measurement_timings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>, <span class="st">"q75"</span>, <span class="st">"max"</span>,</span>
+<span>  estimates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>measurement_summary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>, <span class="st">"q75"</span>, <span class="st">"max"</span>,</span>
 <span>    <span class="st">"density"</span><span class="op">)</span>, measurement_value_as_numeric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q01"</span>, <span class="st">"q05"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>,</span>
 <span>    <span class="st">"q75"</span>, <span class="st">"q95"</span>, <span class="st">"q99"</span>, <span class="st">"max"</span>, <span class="st">"count_missing"</span>, <span class="st">"percentage_missing"</span>, <span class="st">"density"</span><span class="op">)</span>,</span>
 <span>    measurement_value_as_concept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"count"</span>, <span class="st">"percentage"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"measurement_timings"</span>, <span class="st">"measurement_value_as_numeric"</span>,</span>
+<span>  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"measurement_summary"</span>, <span class="st">"measurement_value_as_numeric"</span>,</span>
 <span>    <span class="st">"measurement_value_as_concept"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -113,7 +113,7 @@ each check will be returned.</p></dd>
 
 
 <dt id="arg-checks">checks<a class="anchor" aria-label="anchor" href="#arg-checks"></a></dt>
-<dd><p>Diagnostics to run. Options are: "measurement_timing",
+<dd><p>Diagnostics to run. Options are: "measurement_summary",
 "measurement_value_as_numeric", and "measurement_value_as_concept".</p></dd>
 
 </dl></div>

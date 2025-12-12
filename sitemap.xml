@@ -9,7 +9,7 @@
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/index.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/mockMeasurementDiagnostics.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/plotDoc.html</loc></url>
-<url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementTimings.html</loc></url>
+<url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementSummary.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementValueAsConcept.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementValueAsNumeric.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/resultDoc.html</loc></url>
@@ -17,7 +17,7 @@
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementDoc.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementUse.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/tableDoc.html</loc></url>
-<url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementTimings.html</loc></url>
+<url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementSummary.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementValueAsConcept.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementValueAsNumeric.html</loc></url>
 <url><loc>https://ohdsi.github.io/MeasurementDiagnostics/reference/timeScaleDoc.html</loc></url>

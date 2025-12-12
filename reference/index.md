@@ -4,7 +4,7 @@
 
 - [`mockMeasurementDiagnostics()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/mockMeasurementDiagnostics.md)
   : Function to create a mock cdm reference.
-- [`plotMeasurementTimings()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementTimings.md)
+- [`plotMeasurementSummary()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementSummary.md)
   : Plot summariseMeasurementTiming results.
 - [`plotMeasurementValueAsConcept()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/plotMeasurementValueAsConcept.md)
   : Plot summariseMeasurementTiming results.
@@ -14,9 +14,9 @@
   : Diagnostics of a codelist of measurement codes within a cohort
 - [`summariseMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementUse.md)
   : Diagnostics of a codelist of measurement codes in the database
-- [`tableMeasurementTimings()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementTimings.md)
-  : Format a measurement_timings object into a visual table
+- [`tableMeasurementSummary()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementSummary.md)
+  : Format a measurement_summary object into a visual table
 - [`tableMeasurementValueAsConcept()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementValueAsConcept.md)
-  : Format a measurement_timings object into a visual table
+  : Format a measurement_summary object into a visual table
 - [`tableMeasurementValueAsNumeric()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/tableMeasurementValueAsNumeric.md)
-  : Format a measurement_timings object into a visual table
+  : Format a measurement_summary object into a visual table

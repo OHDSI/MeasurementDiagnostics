@@ -61,5 +61,5 @@ functions.
 
 - checks:
 
-  Diagnostics to run. Options are: "measurement_timing",
+  Diagnostics to run. Options are: "measurement_summary",
   "measurement_value_as_numeric", and "measurement_value_as_concept".
