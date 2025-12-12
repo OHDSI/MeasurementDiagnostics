@@ -80,6 +80,7 @@ result <- summariseMeasurementUse(
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
+#> → Getting measurements per subject.
 #> → Summarising results - value as number.
 #> → Summarising results - value as concept.
 #> → Binding all diagnostic results.
@@ -106,7 +107,7 @@ Number records
 
 N
 
-100
+200
 
 Number subjects
 
@@ -128,7 +129,7 @@ Measurements per subject
 
 Median \[Q25 - Q75\]
 
-2.00 \[1.00 - 2.00\]
+1.00 \[1.00 - 2.00\]
 
 Range
 

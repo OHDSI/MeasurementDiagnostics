@@ -100,6 +100,7 @@ result <- summariseCohortMeasurementUse(
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
+#> → Getting measurements per subject.
 #> ! 2 duplicated rows eliminated.
 #> → Summarising results - value as number.
 #> → Summarising results - value as concept.

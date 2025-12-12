@@ -80,6 +80,7 @@ result <- summariseMeasurementUse(
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
+#> → Getting measurements per subject.
 #> → Summarising results - value as number.
 #> → Summarising results - value as concept.
 #> → Binding all diagnostic results.
@@ -110,7 +111,7 @@ Estimate value
 
 test_codelist
 
-mock database
+unknown
 
 overall
 
@@ -126,7 +127,7 @@ Low
 
 N (%)
 
-34 (34.00%)
+68 (34.00%)
 
 High
 
@@ -134,7 +135,7 @@ High
 
 N (%)
 
-33 (33.00%)
+66 (33.00%)
 
 \-
 
@@ -142,7 +143,7 @@ N (%)
 
 N (%)
 
-33 (33.00%)
+66 (33.00%)
 
 Alkaline phosphatase.bone \[Enzymatic activity/volume\] in Serum or
 Plasma
@@ -159,7 +160,7 @@ Low
 
 N (%)
 
-34 (34.00%)
+68 (34.00%)
 
 High
 
@@ -167,7 +168,7 @@ High
 
 N (%)
 
-33 (33.00%)
+66 (33.00%)
 
 \-
 
@@ -175,7 +176,7 @@ N (%)
 
 N (%)
 
-33 (33.00%)
+66 (33.00%)
 
 CDMConnector::[cdmDisconnect](https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html)(cdm
 = cdm) \# }

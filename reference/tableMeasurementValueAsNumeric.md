@@ -80,6 +80,7 @@ result <- summariseMeasurementUse(
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
+#> → Getting measurements per subject.
 #> → Summarising results - value as number.
 #> → Summarising results - value as concept.
 #> → Binding all diagnostic results.
@@ -122,7 +123,7 @@ kilogram
 
 N
 
-50
+100
 
 Median \[Q25 - Q75\]
 
@@ -130,11 +131,11 @@ Median \[Q25 - Q75\]
 
 Q05 - Q95
 
-5.70 - 11.84
+5.65 - 11.89
 
 Q01 - Q99
 
-5.43 - 12.11
+5.36 - 12.18
 
 Range
 
@@ -142,7 +143,7 @@ Range
 
 Missing value, N (%)
 
-2 (4.00%)
+4 (4.00%)
 
 \-
 
@@ -150,19 +151,19 @@ Missing value, N (%)
 
 N
 
-50
+100
 
 Median \[Q25 - Q75\]
 
-8.77 \[7.10 - 10.44\]
+8.77 \[7.07 - 10.48\]
 
 Q05 - Q95
 
-5.77 - 11.77
+5.73 - 11.82
 
 Q01 - Q99
 
-5.50 - 12.04
+5.44 - 12.11
 
 Range
 
@@ -170,7 +171,7 @@ Range
 
 Missing value, N (%)
 
-3 (6.00%)
+6 (6.00%)
 
 Alkaline phosphatase.bone \[Enzymatic activity/volume\] in Serum or
 Plasma
@@ -185,7 +186,7 @@ kilogram
 
 N
 
-50
+100
 
 Median \[Q25 - Q75\]
 
@@ -193,11 +194,11 @@ Median \[Q25 - Q75\]
 
 Q05 - Q95
 
-5.70 - 11.84
+5.65 - 11.89
 
 Q01 - Q99
 
-5.43 - 12.11
+5.36 - 12.18
 
 Range
 
@@ -205,7 +206,7 @@ Range
 
 Missing value, N (%)
 
-2 (4.00%)
+4 (4.00%)
 
 \-
 
@@ -213,19 +214,19 @@ Missing value, N (%)
 
 N
 
-50
+100
 
 Median \[Q25 - Q75\]
 
-8.77 \[7.10 - 10.44\]
+8.77 \[7.07 - 10.48\]
 
 Q05 - Q95
 
-5.77 - 11.77
+5.73 - 11.82
 
 Q01 - Q99
 
-5.50 - 12.04
+5.44 - 12.11
 
 Range
 
@@ -233,7 +234,7 @@ Range
 
 Missing value, N (%)
 
-3 (6.00%)
+6 (6.00%)
 
 CDMConnector::[cdmDisconnect](https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html)(cdm
 = cdm) \# }
