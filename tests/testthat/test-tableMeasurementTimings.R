@@ -6,7 +6,7 @@ test_that("check that it works ", {
   result <- summariseMeasurementUse(cdm = cdm,
                                     codes = list("test_codelist" = c(3001467L, 45875977L)))
   # Table types
-  expect_no_error(x <- tableMeasurementTimings(result,
+  expect_no_error(x <- tableMeasurementSummary(result,
                                                type = "gt",
                                                header = c(visOmopResults::strataColumns(result)),
                                                groupColumn = c("codelist_name"),
@@ -15,13 +15,13 @@ test_that("check that it works ", {
   expect_true("gt_tbl" %in% class(x))
   expect_true(all(c("Codelist name", "CDM name", "Estimate name", "Estimate value") %in% colnames(x$`_data`)))
 
-  expect_no_error(x <- tableMeasurementTimings(result, type = "flextable"))
+  expect_no_error(x <- tableMeasurementSummary(result, type = "flextable"))
   expect_true("flextable" %in% class(x))
 
-  expect_no_error(x <- tableMeasurementTimings(result, type = "tibble"))
+  expect_no_error(x <- tableMeasurementSummary(result, type = "tibble"))
   expect_true(all(class(x) %in% c("tbl_df", "tbl", "data.frame")))
 
-  expect_error(tableMeasurementTimings(result, type = "hola"))
+  expect_error(tableMeasurementSummary(result, type = "hola"))
 
   # Different package versions
   x <- result |>
@@ -29,17 +29,17 @@ test_that("check that it works ", {
       "settings" = omopgenerics::settings(result) |>
         dplyr::mutate("package_version" = "0.0.0")
     )
-  expect_message(tableMeasurementTimings(x))
+  expect_message(tableMeasurementSummary(x))
 
   # Empty output message
-  expect_warning(x <- tableMeasurementTimings(
+  expect_warning(x <- tableMeasurementSummary(
     result = omopgenerics::emptySummarisedResult(), type = "gt"
   ))
 
   # Summarise cohort measurement use ----
   result <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, bySex = TRUE,
                                           codes = list("test_codelist" = c(3001467L, 45875977L)))
-  expect_no_error(x <- tableMeasurementTimings(result,
+  expect_no_error(x <- tableMeasurementSummary(result,
                                                type = "gt",
                                                header = c(visOmopResults::strataColumns(result)),
                                                groupColumn = c("codelist_name"),

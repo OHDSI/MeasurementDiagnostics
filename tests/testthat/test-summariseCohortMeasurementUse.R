@@ -8,7 +8,7 @@ test_that("summariseCohortMeasurementUse works", {
     omopgenerics::settings(res),
     dplyr::tibble(
       result_id = 1:3L,
-      result_type = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept"),
+      result_type = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
       group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name"),
@@ -20,7 +20,7 @@ test_that("summariseCohortMeasurementUse works", {
   )
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
@@ -31,7 +31,7 @@ test_that("summariseCohortMeasurementUse works", {
   )
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
@@ -39,7 +39,7 @@ test_that("summariseCohortMeasurementUse works", {
   )
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
@@ -142,7 +142,7 @@ test_that("test timings with eunomia", {
   )
   expect_equal(
     res_any |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
@@ -152,7 +152,7 @@ test_that("test timings with eunomia", {
   )
   expect_equal(
     res_during |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
@@ -162,7 +162,7 @@ test_that("test timings with eunomia", {
   )
   expect_equal(
     res_start |>
-      omopgenerics::filterSettings(result_type == "measurement_timings") |>
+      omopgenerics::filterSettings(result_type == "measurement_summary") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
@@ -259,7 +259,7 @@ test_that("summariseCohortMeasurementUse straifications work", {
     omopgenerics::settings(res),
     dplyr::tibble(
       result_id = 1:3L,
-      result_type = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept"),
+      result_type = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
       group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name"),
@@ -283,7 +283,7 @@ test_that("summariseCohortMeasurementUse straifications work", {
     omopgenerics::settings(res),
     dplyr::tibble(
       result_id = 1:3L,
-      result_type = c("measurement_timings", "measurement_value_as_numeric", "measurement_value_as_concept"),
+      result_type = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
       group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& unit_concept_name", "cohort_name &&& codelist_name"),
@@ -314,10 +314,10 @@ test_that("summariseMeasurementUse checks", {
     bySex = FALSE,
     byYear = FALSE,
     ageGroup = NULL,
-    checks = "measurement_timings"
+    checks = "measurement_summary"
   )
   expect_true(unique(res$result_id) == 1)
-  expect_true(omopgenerics::settings(res)$result_type == "measurement_timings")
+  expect_true(omopgenerics::settings(res)$result_type == "measurement_summary")
 
   res <- summariseCohortMeasurementUse(
     cohort = cdm$my_cohort,

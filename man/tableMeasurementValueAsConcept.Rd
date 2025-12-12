@@ -2,7 +2,7 @@
 % Please edit documentation in R/tableMeasurementValueAsConcept.R
 \name{tableMeasurementValueAsConcept}
 \alias{tableMeasurementValueAsConcept}
-\title{Format a measurement_timings object into a visual table}
+\title{Format a measurement_summary object into a visual table}
 \usage{
 tableMeasurementValueAsConcept(
   result,
@@ -45,7 +45,7 @@ the table generated. It can either be a pre-defined style ("default" or
 A formatted table
 }
 \description{
-Format a measurement_timings object into a visual table
+Format a measurement_summary object into a visual table
 }
 \examples{
 \donttest{

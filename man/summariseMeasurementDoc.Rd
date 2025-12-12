@@ -38,7 +38,7 @@ Allowed estimates are those supported by the `summariseResult()` function in
 the **PatientProfiles** package. If omitted, all available estimates for
 each check will be returned.}
 
-\item{checks}{Diagnostics to run. Options are: "measurement_timing",
+\item{checks}{Diagnostics to run. Options are: "measurement_summary",
 "measurement_value_as_numeric", and "measurement_value_as_concept".}
 }
 \description{
