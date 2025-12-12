@@ -30,7 +30,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '1', '1', '100', '1427', '14973', '2', '2', '3', '3522', '5334', '64', '96')
+    c('0', '0', '1', '1', '1', '100', '1427', '14973', '2', '3', '3522', '5334', '64', '96')
   )
   expect_equal(
     res |>
