@@ -175,25 +175,29 @@ summariseMeasurementUseInternal <- function(cdm,
 
     measurementSummary <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
-      measurementSummary[[codelistName]] <- measurement |>
+      measurementTimingCollect <- measurement |>
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
-        dplyr::collect() |>
-        PatientProfiles::summariseResult(
-          group = list(baseGroup),
-          includeOverallGroup = FALSE,
-          strata = strata,
-          includeOverallStrata = TRUE,
-          variables = c("time", "measurements_per_subject"),
-          estimates = estimates$measurement_timings,
-          counts = TRUE
-        ) |>
-        suppressMessages()
+        dplyr::collect()
+      if (nrow(measurementTimingCollect) > 0) {
+        measurementSummary[[codelistName]] <- measurementTimingCollect |>
+          PatientProfiles::summariseResult(
+            group = list(baseGroup),
+            includeOverallGroup = FALSE,
+            strata = strata,
+            includeOverallStrata = TRUE,
+            variables = c("time", "measurements_per_subject"),
+            estimates = estimates$measurement_summary,
+            counts = TRUE
+          ) |>
+          suppressMessages()
+      }
     }
+    rm(measurementTimingCollect)
 
     cli::cli_inform(c(">" = "Getting measurements per subject."))
     measurementSummary[["subjects"]] <- measurement |>
@@ -211,9 +215,9 @@ summariseMeasurementUseInternal <- function(cdm,
         includeOverallStrata = TRUE,
         variables = c("time", "measurements_per_subject"),
         estimates = estimates$measurement_summary,
-        counts = TRUE
+        counts = FALSE
       ) |>
-      suppressMessages() |>
+      suppressMessages()
 
       # Bind and transform results
       measurementSummary <- omopgenerics::bind(measurementSummary) |>
@@ -255,8 +259,9 @@ summariseMeasurementUseInternal <- function(cdm,
           suppressMessages()
       }
     }
+    rm(valueAsNumberCollect)
     measurementNumeric <- omopgenerics::bind(valueAsNumber) |>
-      dplyr::filter(variable_name != "number subjects") |>
+      dplyr::filter(.data$variable_name != "number subjects") |>
       transformMeasurementValue(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
         cohortName = cohortName, installedVersion = installedVersion,
@@ -271,7 +276,7 @@ summariseMeasurementUseInternal <- function(cdm,
     cli::cli_inform(c(">" = "Summarising results - value as concept."))
     valueAsConcept <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
-      valueAsConcept[[codelistName]] <- measurement |>
+      valueAsConceptCollected <-  measurement |>
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
@@ -279,19 +284,23 @@ summariseMeasurementUseInternal <- function(cdm,
           by = "codelist_name"
         ) |>
         dplyr::mutate(value_as_concept_id = as.character(.data$value_as_concept_id)) |>
-        dplyr::collect() |>
-        PatientProfiles::summariseResult(
-          group = list(baseGroup, c(baseGroup, "concept_id"))[c(TRUE, byConcept)],
-          includeOverallGroup = FALSE,
-          strata = strata,
-          includeOverallStrata = TRUE,
-          variables = "value_as_concept_id",
-          estimates = estimates$measurement_value_as_concept,
-          counts = FALSE,
-          weights = NULL
-        ) |>
-        suppressMessages()
+        dplyr::collect()
+      if (nrow(valueAsConceptCollected) > 0) {
+        valueAsConcept[[codelistName]] <- valueAsConceptCollected |>
+          PatientProfiles::summariseResult(
+            group = list(baseGroup, c(baseGroup, "concept_id"))[c(TRUE, byConcept)],
+            includeOverallGroup = FALSE,
+            strata = strata,
+            includeOverallStrata = TRUE,
+            variables = "value_as_concept_id",
+            estimates = estimates$measurement_value_as_concept,
+            counts = FALSE,
+            weights = NULL
+          ) |>
+          suppressMessages()
+      }
     }
+    rm(valueAsConceptCollected)
     measurementConcept <- omopgenerics::bind(valueAsConcept) |>
       transformMeasurementConcept(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),

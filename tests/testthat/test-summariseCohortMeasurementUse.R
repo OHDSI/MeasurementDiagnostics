@@ -25,7 +25,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::pull(estimate_value) |>
       sort(),
     as.character(c(
-      '1', '1', '1', '1', '1', '1093', '11', '1206', '14', '1761', '2', '2', '2',
+      '1', '1', '1', '1', '1', '1', '1', '1093', '11', '1206', '14', '1761', '2',
       '2', '20', '2316', '3', '3320', '4354', '5026', '651', '9', '96', '96'
       ))
   )
@@ -118,7 +118,7 @@ test_that("summariseCohortMeasurementUse works", {
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& kilogram',
       'cohort_1 &&& test &&& kilogram', 'cohort_2 &&& test')
   )
-  
+
   dropCreatedTables(cdm = cdm)
 })
 
@@ -146,9 +146,9 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656', '3',
-      '31573', '31880', '3493', '38', '39', '4', '4', '4962', '5498', '6',
-      '7481', '8', '9')
+    c('1', '1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656',
+      '3', '3', '31573', '31880', '3493', '38', '39', '4962', '5', '5498', '6',
+      '7481', '9')
   )
   expect_equal(
     res_during |>
