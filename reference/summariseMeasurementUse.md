@@ -14,10 +14,10 @@ summariseMeasurementUse(
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
   estimates = list(measurement_summary = c("min", "q25", "median", "q75", "max",
-    "density"), measurement_value_as_numeric = c("min", "q01", "q05", "q25", "median",
+    "density"), measurement_value_as_number = c("min", "q01", "q05", "q25", "median",
     "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
     measurement_value_as_concept = c("count", "percentage")),
-  checks = c("measurement_summary", "measurement_value_as_numeric",
+  checks = c("measurement_summary", "measurement_value_as_number",
     "measurement_value_as_concept")
 )
 ```
@@ -68,7 +68,7 @@ summariseMeasurementUse(
 - checks:
 
   Diagnostics to run. Options are: "measurement_summary",
-  "measurement_value_as_numeric", and "measurement_value_as_concept".
+  "measurement_value_as_number", and "measurement_value_as_concept".
 
 ## Value
 

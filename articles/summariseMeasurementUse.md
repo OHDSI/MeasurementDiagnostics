@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpiCntgs/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmptU4YMz/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -100,7 +100,7 @@ We can see each of the checks performed.
 settings(repiratory_function_measurements) |> 
   pull("result_type") |> 
   unique()
-#> [1] "measurement_summary"          "measurement_value_as_numeric"
+#> [1] "measurement_summary"          "measurement_value_as_number" 
 #> [3] "measurement_value_as_concept"
 ```
 
@@ -108,7 +108,7 @@ One of the checks summarises the numeric values associated with tests.
 We can quickly create a table summarising these results.
 
 ``` r
-tableMeasurementValueAsNumeric(repiratory_function_measurements)
+tableMeasurementValueAsNumber(repiratory_function_measurements)
 ```
 
 | CDM name             | Concept name                        | Concept ID | Domain ID   | Unit concept name   | Unit concept ID | Estimate name        | Estimate value   |

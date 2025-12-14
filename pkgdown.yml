@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   summariseMeasurementUse: summariseMeasurementUse.html
-last_built: 2025-12-12T17:38Z
+last_built: 2025-12-14T15:56Z
 urls:
   reference: https://ohdsi.github.io/MeasurementDiagnostics/reference
   article: https://ohdsi.github.io/MeasurementDiagnostics/articles
