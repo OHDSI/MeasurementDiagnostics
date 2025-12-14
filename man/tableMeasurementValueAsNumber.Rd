@@ -2,7 +2,7 @@
 % Please edit documentation in R/tableMeasurementValueAsNumeric.R
 \name{tableMeasurementValueAsNumber}
 \alias{tableMeasurementValueAsNumber}
-\title{Format a measurement_timings object into a visual table}
+\title{Format a measurement_summary object into a visual table}
 \usage{
 tableMeasurementValueAsNumber(
   result,

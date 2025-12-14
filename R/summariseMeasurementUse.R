@@ -260,7 +260,7 @@ summariseMeasurementUseInternal <- function(cdm,
       }
     }
     rm(valueAsNumberCollect)
-    measurementNumeric <- omopgenerics::bind(valueAsNumber) |>
+    measurementNumber <- omopgenerics::bind(valueAsNumber) |>
       dplyr::filter(.data$variable_name != "number subjects") |>
       transformMeasurementValue(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
@@ -268,7 +268,7 @@ summariseMeasurementUseInternal <- function(cdm,
         timing = timingName, byConcept = byConcept, dateRange
       )
   } else {
-    measurementNumeric <- NULL
+    measurementNumber <- NULL
   }
 
   ## measurement value as concept
@@ -316,7 +316,7 @@ summariseMeasurementUseInternal <- function(cdm,
 
   return(
     omopgenerics::bind(
-      measurementSummary, measurementNumeric, measurementConcept
+      measurementSummary, measurementNumber, measurementConcept
     )
   )
 }
