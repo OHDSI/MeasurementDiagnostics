@@ -25,7 +25,7 @@
 #' the **PatientProfiles** package. If omitted, all available estimates for
 #' each check will be returned.
 #' @param checks Diagnostics to run. Options are: "measurement_summary",
-#' "measurement_value_as_numeric", and "measurement_value_as_concept".
+#' "measurement_value_as_number", and "measurement_value_as_concept".
 #'
 #' @name summariseMeasurementDoc
 #' @keywords internal

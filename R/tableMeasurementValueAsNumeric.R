@@ -18,11 +18,11 @@
 #'   codes = list("test_codelist" = c(3001467L, 45875977L))
 #' )
 #'
-#' tableMeasurementValueAsNumeric(result)
+#' tableMeasurementValueAsNumber(result)
 #'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
-tableMeasurementValueAsNumeric <- function(result,
+tableMeasurementValueAsNumber <- function(result,
                                            header = c(visOmopResults::strataColumns(result)),
                                            groupColumn = c("codelist_name"),
                                            settingsColumn = character(),
@@ -37,11 +37,11 @@ tableMeasurementValueAsNumeric <- function(result,
 
   # subset to rows of interest
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_numeric") |>
+    omopgenerics::filterSettings(.data$result_type == "measurement_value_as_number") |>
     dplyr::filter(!grepl("density", .data$estimate_name))
 
   if (nrow(result) == 0) {
-    cli::cli_warn("There are no results with `result_type = measurement_value_as_numeric`")
+    cli::cli_warn("There are no results with `result_type = measurement_value_as_number`")
     return(visOmopResults::emptyTable(type = type))
   }
 

@@ -14,7 +14,7 @@ test_that("summariseMeasurementUse works", {
     omopgenerics::settings(res),
     dplyr::tibble(
       result_id = 1:3L,
-      result_type = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept"),
+      result_type = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
       group = c("codelist_name", "codelist_name &&& concept_name &&& unit_concept_name", "codelist_name &&& concept_name"),
@@ -60,7 +60,7 @@ test_that("summariseMeasurementUse works", {
 
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
+      omopgenerics::filterSettings(result_type == "measurement_value_as_number") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::filter(estimate_name == "q25",
                     additional_level == "9529") |>
@@ -73,7 +73,7 @@ test_that("summariseMeasurementUse works", {
       as.numeric())
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
+      omopgenerics::filterSettings(result_type == "measurement_value_as_number") |>
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       unique() |>
@@ -87,7 +87,7 @@ test_that("summariseMeasurementUse works", {
   )
   expect_equal(
     res |>
-      omopgenerics::filterSettings(result_type == "measurement_value_as_numeric") |>
+      omopgenerics::filterSettings(result_type == "measurement_value_as_number") |>
       dplyr::filter(strata_name == "overall") |>
       dplyr::pull(estimate_name) |>
       sort() |>
@@ -125,7 +125,7 @@ test_that("summariseMeasurementUse works", {
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       estimates = list(
         "measurement_summary" = c("min", "q25", "median"),
-        "measurement_value_as_numeric" = c("min", "max"),
+        "measurement_value_as_number" = c("min", "max"),
         "measurement_value_as_concept" = c("density")
       )
     )
@@ -155,7 +155,7 @@ test_that("summariseMeasurementUse works", {
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       estimates = list(
         "measurement_timing" = c("min", "q25", "median"),
-        "measurement_value_as_numeric" = c("min", "max"),
+        "measurement_value_as_number" = c("min", "max"),
         "measurement_value_as_concept" = c("density")
       )
     )
@@ -210,7 +210,7 @@ test_that("summariseMeasurementUse straifications work", {
     omopgenerics::settings(res),
     dplyr::tibble(
       result_id = 1:3L,
-      result_type = c("measurement_summary", "measurement_value_as_numeric", "measurement_value_as_concept"),
+      result_type = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
       group = c("codelist_name", "codelist_name &&& unit_concept_name", "codelist_name"),
@@ -303,9 +303,9 @@ test_that("summariseMeasurementUse checks", {
     byYear = FALSE,
     ageGroup = NULL,
     dateRange = as.Date(c("2000-01-01", "2005-01-01")),
-    checks = c("measurement_value_as_numeric", "measurement_value_as_concept")
+    checks = c("measurement_value_as_number", "measurement_value_as_concept")
   )
-  expect_true(all(omopgenerics::settings(res)$result_type %in% c("measurement_value_as_numeric", "measurement_value_as_concept")))
+  expect_true(all(omopgenerics::settings(res)$result_type %in% c("measurement_value_as_number", "measurement_value_as_concept")))
 
   expect_null(
     summariseMeasurementUse(
@@ -334,7 +334,7 @@ test_that("summariseMeasurementUse observation domain", {
     byYear = FALSE,
     ageGroup = NULL,
     dateRange = as.Date(c("2000-01-01", "2005-01-01")),
-    checks = c("measurement_value_as_numeric", "measurement_value_as_concept")
+    checks = c("measurement_value_as_number", "measurement_value_as_concept")
   )
   tab <- res |> visOmopResults::splitAdditional() |> dplyr::filter(result_id == 2) |> dplyr::distinct(concept_id, domain_id)
   expect_equal(
