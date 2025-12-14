@@ -1,4 +1,4 @@
-#' Format a measurement_timings object into a visual table
+#' Format a measurement_summary object into a visual table
 #'
 #' @inheritParams resultDoc
 #' @inheritParams tableDoc
@@ -18,11 +18,11 @@
 #'   codes = list("test_codelist" = c(3001467L, 45875977L))
 #' )
 #'
-#' tableMeasurementTimings(result)
+#' tableMeasurementSummary(result)
 #'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
-tableMeasurementTimings <- function(result,
+tableMeasurementSummary <- function(result,
                                     header = c(visOmopResults::strataColumns(result)),
                                     groupColumn = c("codelist_name"),
                                     settingsColumn = character(),
@@ -37,10 +37,10 @@ tableMeasurementTimings <- function(result,
 
   # subset to rows of interest
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_timings")
+    omopgenerics::filterSettings(.data$result_type == "measurement_summary")
 
   if (nrow(result) == 0) {
-    cli::cli_warn("There are no results with `result_type = measurement_timings`")
+    cli::cli_warn("There are no results with `result_type = measurement_summary`")
     return(visOmopResults::emptyTable(type = type))
   }
 

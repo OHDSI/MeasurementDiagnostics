@@ -28,10 +28,10 @@ test_that("table works", {
       "settings" = omopgenerics::settings(result) |>
         dplyr::mutate("package_version" = "0.0.0")
     )
-  expect_message(tableMeasurementTimings(x))
+  expect_message(tableMeasurementSummary(x))
 
   # Empty output message
-  expect_warning(x <- tableMeasurementTimings(
+  expect_warning(x <- tableMeasurementSummary(
     result = omopgenerics::emptySummarisedResult(), type = "gt"
   ))
 

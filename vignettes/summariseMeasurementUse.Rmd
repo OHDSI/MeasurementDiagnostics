@@ -86,5 +86,5 @@ tableMeasurementValueAsConcept(repiratory_function_measurements)
 
 As well as overview of the values of measurements, we can also see a summary of the timing between measurements for individuals in the dataset.
 ```{r}
-tableMeasurementTimings(repiratory_function_measurements)
+tableMeasurementSummary(repiratory_function_measurements)
 ```

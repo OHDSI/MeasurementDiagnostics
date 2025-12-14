@@ -1,4 +1,4 @@
-#' Format a measurement_timings object into a visual table
+#' Format a measurement_summary object into a visual table
 #'
 #' @inheritParams resultDoc
 #' @inheritParams tableDoc

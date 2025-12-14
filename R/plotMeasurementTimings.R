@@ -23,11 +23,11 @@
 #'
 #' result |>
 #'   filter(variable_name == "time") |>
-#'   plotMeasurementTimings()
+#'   plotMeasurementSummary()
 #'
 #' CDMConnector::cdmDisconnect(cdm)
 #'}
-plotMeasurementTimings <- function(result,
+plotMeasurementSummary <- function(result,
                                    y = "time",
                                    plotType = "boxplot",
                                    timeScale = "days",
@@ -43,10 +43,10 @@ plotMeasurementTimings <- function(result,
 
   # pre process
   result <- result |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_timings")
+    omopgenerics::filterSettings(.data$result_type == "measurement_summary")
 
   if (nrow(result) == 0) {
-    mes <- "No results found with `result_type == 'measurement_timings'`"
+    mes <- "No results found with `result_type == 'measurement_summary'`"
     cli::cli_warn("{mes}")
     return(visOmopResults::emptyPlot(subtitle = mes))
   }
