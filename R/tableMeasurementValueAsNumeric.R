@@ -23,13 +23,13 @@
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 tableMeasurementValueAsNumber <- function(result,
-                                           header = c(visOmopResults::strataColumns(result)),
-                                           groupColumn = c("codelist_name"),
-                                           settingsColumn = character(),
-                                           hide = c("variable_name", "variable_level"),
-                                           style = NULL,
-                                           type = NULL,
-                                           .options = list()){
+                                          header = c(visOmopResults::strataColumns(result)),
+                                          groupColumn = c("codelist_name"),
+                                          settingsColumn = character(),
+                                          hide = c("variable_name", "variable_level"),
+                                          style = NULL,
+                                          type = NULL,
+                                          .options = list()){
   rlang::check_installed("visOmopResults")
 
   # check inputs
@@ -49,8 +49,9 @@ tableMeasurementValueAsNumber <- function(result,
 
   columnOrder <- c(
     "cdm_name", "cohort_name", "codelist_name", "concept_name", "concept_id",
-    "domain_id", "unit_concept_name", "unit_concept_id", "sex", "age_group",
-    "year", settingsColumn, "variable_name", "variable_level", "estimate_name",
+    "source_concept_name", "source_concept_id", "domain_id",
+    "unit_concept_name", "unit_concept_id", "sex", "age_group", "year",
+    settingsColumn, "variable_name", "variable_level", "estimate_name",
     "estimate_value"
   )
   # temp fix for visOmpReuslts issue 355
@@ -84,7 +85,13 @@ tableMeasurementValueAsNumber <- function(result,
       header = header,
       settingsColumn = settingsColumn,
       groupColumn = groupColumn,
-      rename = c("CDM name" = "cdm_name", "Concept ID" = "concept_id", "Unit concept ID" = "unit_concept_id", "Domain ID" = "domain_id"),
+      rename = c(
+        "CDM name" = "cdm_name",
+        "Concept ID" = "concept_id",
+        "Source concept ID" = "source_concept_id",
+        "Unit concept ID" = "unit_concept_id",
+        "Domain ID" = "domain_id"
+      ),
       type = type,
       hide = hide,
       columnOrder = columnOrder,

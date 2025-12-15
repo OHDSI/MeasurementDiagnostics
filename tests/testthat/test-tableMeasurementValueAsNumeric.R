@@ -13,7 +13,7 @@ test_that("table works", {
                                                       hide = c("variable_name", "variable_level", "domain_id"),
                                                       .options = list()))
   expect_true("gt_tbl" %in% class(x))
-  expect_true(all(c("Codelist name", "CDM name", "Concept name", "Concept ID", "Unit concept name", "Unit concept ID", "Estimate name", "Estimate value") %in% colnames(x$`_data`)))
+  expect_true(all(c("Codelist name", "CDM name", "Concept name", "Concept ID", "Source concept name", "Source concept ID", "Unit concept name", "Unit concept ID", "Estimate name", "Estimate value") %in% colnames(x$`_data`)))
 
   expect_no_error(x <- tableMeasurementValueAsNumber(result, type = "flextable"))
   expect_true("flextable" %in% class(x))

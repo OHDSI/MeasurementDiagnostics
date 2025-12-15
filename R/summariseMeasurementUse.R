@@ -143,15 +143,34 @@ summariseMeasurementUseInternal <- function(cdm,
       cohortSetRef = measurementSettings,
       .softValidation = TRUE # allow overlap
     )
-  addIndex(measurement, cols = "codelist_name")
-
   if (dplyr::pull(dplyr::tally(measurement)) == 0) {
     cli::cli_warn("No records were found.")
     return(omopgenerics::emptySummarisedResult())
   }
 
+  # prepare table according to checks to do
+  valueAsNumberFlag <- "measurement_value_as_number" %in% checks & "measurement_value_as_number" %in% names(estimates)
+  valueAsConceptFlag <- "measurement_value_as_concept" %in% checks & "measurement_value_as_concept" %in% names(estimates)
+  sourceConceptFlag <- byConcept & (valueAsNumberFlag | valueAsConceptFlag)
+  indexCols <- c("codelist_name", "unit_concept_id", "source_concept_id", "value_as_concept_id")[c(TRUE, valueAsNumberFlag, sourceConceptFlag, valueAsConceptFlag)]
+  addIndex(measurement, cols = indexCols)
+  # unit concept name
+  if (valueAsNumberFlag) {
+    measurement <- measurement |> addConceptName(prefix = "unit")
+  }
+  # source concept name
+  if (sourceConceptFlag) {
+    measurement <- measurement |> addConceptName(prefix = "source")
+  }
+  # value as concept name
+  if (valueAsConceptFlag) {
+    measurement <- measurement |> addConceptName(prefix = "value_as")
+  }
+
   # group and strata
   baseGroup <- c("cohort_name", "codelist_name")[c(!is.null(cohort), TRUE)]
+  byConceptGroup <- c("concept_id", "source_concept_id", "source_concept_name")
+  unitGroup <- c("unit_concept_id", "unit_concept_name")
   strata <- as.list(c("sex", "age_group", "year")[c(bySex, length(ageGroup)>0, byYear)])
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
@@ -231,7 +250,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## measurement value as numeric
-  if ("measurement_value_as_number" %in% checks & "measurement_value_as_number" %in% names(estimates)) {
+  if (valueAsNumberFlag) {
     cli::cli_inform(c(">" = "Summarising results - value as number."))
     valueAsNumber <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
@@ -242,12 +261,12 @@ summariseMeasurementUseInternal <- function(cdm,
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
-        dplyr::select(!"value_as_concept_id") |>
+        dplyr::select(!dplyr::any_of(c("value_as_concept_id", "value_as_concept_name"))) |>
         dplyr::collect()
       if (nrow(valueAsNumberCollect) > 0) {
         valueAsNumber[[codelistName]] <- valueAsNumberCollect |>
           PatientProfiles::summariseResult(
-            group = list(c(baseGroup, "unit_concept_id"), c(baseGroup, "concept_id", "unit_concept_id"))[c(TRUE, byConcept)],
+            group = list(c(baseGroup, unitGroup), c(baseGroup, byConceptGroup, unitGroup))[c(TRUE, byConcept)],
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
@@ -272,7 +291,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## measurement value as concept
-  if ("measurement_value_as_concept" %in% checks & "measurement_value_as_concept" %in% names(estimates)) {
+  if (valueAsConceptFlag) {
     cli::cli_inform(c(">" = "Summarising results - value as concept."))
     valueAsConcept <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
@@ -283,12 +302,14 @@ summariseMeasurementUseInternal <- function(cdm,
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
-        dplyr::mutate(value_as_concept_id = as.character(.data$value_as_concept_id)) |>
+        dplyr::mutate(
+          value_as_concept_id = paste0(as.character(.data$value_as_concept_id), " &&& ", .data$value_as_concept_name)
+        ) |>
         dplyr::collect()
       if (nrow(valueAsConceptCollected) > 0) {
         valueAsConcept[[codelistName]] <- valueAsConceptCollected |>
           PatientProfiles::summariseResult(
-            group = list(baseGroup, c(baseGroup, "concept_id"))[c(TRUE, byConcept)],
+            group = list(baseGroup, c(baseGroup, byConceptGroup))[c(TRUE, byConcept)],
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
@@ -524,16 +545,6 @@ transformMeasurementValue <- function(x, cdm, newSet, cohortName, installedVersi
   x <- x |>
     omopgenerics::splitGroup() |>
     omopgenerics::splitAdditional() |>
-    dplyr::left_join(
-      cdm$concept |>
-        dplyr::select(
-          "unit_concept_id" = "concept_id",
-          "unit_concept_name" = "concept_name"
-        ) |>
-        dplyr::collect() |>
-        dplyr::mutate(unit_concept_id = as.character(.data$unit_concept_id)),
-      by = "unit_concept_id"
-    ) |>
     dplyr::mutate(
       cdm_name = omopgenerics::cdmName(cdm),
       unit_concept_name = dplyr::if_else(
@@ -545,9 +556,18 @@ transformMeasurementValue <- function(x, cdm, newSet, cohortName, installedVersi
     )
 
   if (byConcept) {
-    x <- x |>
-      groupIdToName(newSet = newSet, cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "concept_name", "unit_concept_name")) |>
-      omopgenerics::uniteAdditional(cols = c("concept_id", "unit_concept_id", "domain_id"))
+    x <- x  |>
+      dplyr::mutate(
+        cdm_name = omopgenerics::cdmName(cdm),
+        source_concept_name = dplyr::if_else(
+          is.na(.data$source_concept_name), "-", .data$source_concept_name
+        ),
+        source_concept_id = dplyr::if_else(
+          .data$source_concept_id == "NA" | is.na(.data$source_concept_id), "-", .data$source_concept_id
+        )
+      ) |>
+      groupIdToName(newSet = newSet, cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "concept_name", "source_concept_name", "unit_concept_name")) |>
+      omopgenerics::uniteAdditional(cols = c("concept_id", "source_concept_id", "unit_concept_id", "domain_id"))
   } else {
     x <- x |>
       omopgenerics::uniteGroup(cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "unit_concept_name")) |>
@@ -566,28 +586,20 @@ transformMeasurementConcept <- function(x, cdm, newSet, cohortName,
   x <- x |>
     dplyr::select(!c("additional_name", "additional_level")) |>
     dplyr::rename("value_as_concept_id" = "variable_level") |>
-    dplyr::left_join(
-      cdm$concept |>
-        dplyr::select(
-          "variable_level" = "concept_name",
-          "value_as_concept_id" = "concept_id"
-        )|>
-        dplyr::collect() |>
-        dplyr::mutate(value_as_concept_id = as.character(.data$value_as_concept_id)),
-      by = "value_as_concept_id"
-    ) |>
     dplyr::mutate(
+      variable_level = gsub(".* &&& ", "", .data$value_as_concept_id),
+      value_as_concept_id = gsub(" &&& .*", "", .data$value_as_concept_id),
       variable_name = gsub("_id", "_name", "value_as_concept_id"),
       cohort_table = cohortName,
-      value_as_concept_id = dplyr::if_else(is.na(.data$value_as_concept_id), "-", .data$value_as_concept_id),
-      variable_level = dplyr::if_else(is.na(.data$variable_level), "-", .data$variable_level)
+      value_as_concept_id = dplyr::if_else(nchar(.data$value_as_concept_id) == 0, "-", .data$value_as_concept_id),
+      variable_level = dplyr::if_else(nchar(.data$variable_level) == 0, "-", .data$variable_level)
     )
 
   if (byConcept) {
     x <- x |>
       omopgenerics::splitGroup() |>
-      groupIdToName(newSet = newSet, cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "concept_name")) |>
-      omopgenerics::uniteAdditional(cols = c("concept_id", "value_as_concept_id", "domain_id")) |>
+      groupIdToName(newSet = newSet, cols = c("cohort_name"[!is.null(cohortName)], "codelist_name", "concept_name", "source_concept_name")) |>
+      omopgenerics::uniteAdditional(cols = c("concept_id", "source_concept_id", "value_as_concept_id", "domain_id")) |>
       dplyr::select(omopgenerics::resultColumns())
   } else {
     x <- x |>
@@ -674,7 +686,8 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
         "concept_id",
         "unit_concept_id",
         "value_as_number",
-        "value_as_concept_id"
+        "value_as_concept_id",
+        "source_concept_id" = paste0(tab, "_source_concept_id")
       ))) |>
       dplyr::mutate(
         unit_concept_id = as.integer(.data$unit_concept_id),
@@ -728,4 +741,17 @@ validateEstimates <- function(estimates, checks) {
   estimates <- estimates[!sapply(estimates, \(x){length(x)==0})]
 
   return(estimates)
+}
+
+addConceptName <- function(table, prefix) {
+  name <- omopgenerics::tableName(table)
+  cdm <- omopgenerics::cdmReference(table)
+  table |>
+    dplyr::left_join(
+      cdm$concept |>
+        dplyr::select(dplyr::all_of(c("concept_id", "concept_name"))) |>
+        dplyr::rename_with(~paste0(prefix, "_", .x)),
+      by = paste0(prefix, "_concept_id")
+    ) |>
+    dplyr::compute(name = name, temporary = FALSE)
 }

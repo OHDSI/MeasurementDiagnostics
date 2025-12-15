@@ -39,10 +39,10 @@ plotMeasurementValueAsConcept <- function(result,
   result <- result |>
     omopgenerics::filterSettings(.data$result_type == "measurement_value_as_concept")
 
-  #Remove overall option when byConcept is TRUE
-  if("codelist_name &&& concept_name" %in% result$group_name){
+  # Remove overall option when byConcept is TRUE
+  if("codelist_name &&& concept_name &&& source_concept_name" %in% result$group_name){
     result <- result |>
-      dplyr::filter(.data$group_name == "codelist_name &&& concept_name")
+      dplyr::filter(.data$group_name == "codelist_name &&& concept_name &&& source_concept_name")
   }
 
   if (nrow(result) == 0) {

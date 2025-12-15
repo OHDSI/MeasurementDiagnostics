@@ -11,9 +11,9 @@ test_that("summariseCohortMeasurementUse works", {
       result_type = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
-      group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name"),
+      group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& source_concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name &&& source_concept_name"),
       strata = c(rep("", 3)),
-      additional = c("", "concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& value_as_concept_id &&& domain_id"),
+      additional = c("", "concept_id &&& source_concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& source_concept_id &&& value_as_concept_id &&& domain_id"),
       min_cell_count = "0",
       timing = "any"
     )
@@ -112,11 +112,11 @@ test_that("summariseCohortMeasurementUse works", {
   resAttribute <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, timing = "any")
   expect_equal(
     resAttribute$group_level |> unique() |> sort(),
-    c('cohort_1 &&& test', 'cohort_1 &&& test &&& -',
-      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma',
-      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& -',
-      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& kilogram',
-      'cohort_1 &&& test &&& kilogram', 'cohort_2 &&& test')
+    c('cohort_1 &&& test',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone &&& kilogram',
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone &&& NA',
+      'cohort_1 &&& test &&& kilogram', 'cohort_1 &&& test &&& NA', 'cohort_2 &&& test')
   )
 
   dropCreatedTables(cdm = cdm)
@@ -262,9 +262,9 @@ test_that("summariseCohortMeasurementUse straifications work", {
       result_type = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
-      group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name"),
+      group = c("cohort_name &&& codelist_name", "cohort_name &&& codelist_name &&& concept_name &&& source_concept_name &&& unit_concept_name", "cohort_name &&& codelist_name &&& concept_name &&& source_concept_name"),
       strata = c(rep("sex &&& year", 3)),
-      additional = c("", "concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& value_as_concept_id &&& domain_id"),
+      additional = c("", "concept_id &&& source_concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& source_concept_id &&& value_as_concept_id &&& domain_id"),
       min_cell_count = "0",
       date_range = "1995-01-01 to 2020-01-01",
       timing = "during"
