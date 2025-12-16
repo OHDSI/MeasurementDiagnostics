@@ -111,12 +111,12 @@ test_that("summariseCohortMeasurementUse works", {
     )
   resAttribute <- summariseCohortMeasurementUse(cohort = cdm$my_cohort, timing = "any")
   expect_equal(
-    resAttribute$group_level |> unique() |> sort(),
-    c('cohort_1 &&& test',
-      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone',
+    resAttribute$group_level |> unique(),
+    c('cohort_1 &&& test', 'cohort_2 &&& test', 'cohort_1 &&& test &&& kilogram',
+      'cohort_1 &&& test &&& NA',
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone &&& kilogram',
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone &&& NA',
-      'cohort_1 &&& test &&& kilogram', 'cohort_1 &&& test &&& NA', 'cohort_2 &&& test')
+      'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone')
   )
 
   dropCreatedTables(cdm = cdm)
