@@ -15,6 +15,39 @@
 #'   cdm = cdm, codes = list("test_codelist" = c(3001467L, 45875977L))
 #' )
 #'
+#' resultHistogram <- summariseMeasurementUse(
+#'   cdm = cdm,
+#'   codes = list("test_codelist" = c(3001467L, 45875977L)),
+#'   byConcept = TRUE,
+#'   byYear = FALSE,
+#'   bySex = FALSE,
+#'   ageGroup = NULL,
+#'   dateRange = as.Date(c(NA, NA)),
+#'   estimates = list(
+#'     "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
+#'     "measurement_value_as_number" = c(
+#'       "min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max",
+#'       "count_missing", "percentage_missing", "density"
+#'     ),
+#'     "measurement_value_as_concept" = c("count", "percentage")
+#'   ),
+#'   histogram = list(
+#'     "time" = list(
+#'       '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
+#'       '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
+#'     ),
+#'     "measurements_per_subject" = list(
+#'       '0 to 10' = c(0, 10), '11 to 20' = c(11, 20),
+#'       '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)
+#'     ),
+#'     "value_as_number" =  list(
+#'       '0 to 5' = c(0, 5), '6 to 10' = c(6, 10),
+#'       '11 to 15' = c(11, 15), '>15' = c(16, Inf)
+#'     )
+#'   ),
+#'   checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
+#' )
+#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 #'
@@ -31,6 +64,7 @@ summariseMeasurementUse <- function(cdm,
                                       "measurement_value_as_number" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
                                       "measurement_value_as_concept" = c("count", "percentage")
                                     ),
+                                    histogram = NULL,
                                     checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")) {
   # check inputs
   cdm <- omopgenerics::validateCdmArgument(cdm)
@@ -47,6 +81,7 @@ summariseMeasurementUse <- function(cdm,
     ageGroup = ageGroup,
     dateRange = dateRange,
     estimates = estimates,
+    histogram = histogram,
     checks = checks
   )
 
@@ -65,6 +100,7 @@ summariseMeasurementUseInternal <- function(cdm,
                                             ageGroup,
                                             dateRange,
                                             estimates,
+                                            histogram,
                                             checks) {
   # checks
   if (is.null(codes)) {
@@ -82,6 +118,7 @@ summariseMeasurementUseInternal <- function(cdm,
   allowedChecks <- c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
   omopgenerics::assertChoice(checks, choices = allowedChecks)
   estimates <- validateEstimates(estimates, allowedChecks)
+  histogram <- validateHistogram(histogram)
   if (all(!is.na(dateRange))) {
     if (dateRange[1] > dateRange[2]) {
       cli::cli_abort("First date component in `dateRange` must be smaller than the second.")
@@ -192,6 +229,13 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::ungroup() |>
       dplyr::compute(name = measurementCohortName, temporary = FALSE)
 
+    timeHistogram <- "time" %in% names(histogram)
+    if (timeHistogram) {
+      measurement <- measurement |>
+        dplyr::mutate(!!!histogramBandExpr(histogram[["time"]], name = "time", newName = "time_band")) |>
+        dplyr::compute(name = measurementCohortName, temporary = FALSE)
+    }
+
     measurementSummary <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
       measurementTimingCollect <- measurement |>
@@ -209,8 +253,8 @@ summariseMeasurementUseInternal <- function(cdm,
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
-            variables = c("time", "measurements_per_subject"),
-            estimates = estimates$measurement_summary,
+            variables = c("time", "time_band")[c(TRUE, timeHistogram)],
+            estimates = c(estimates$measurement_summary, "count"[timeHistogram]),
             counts = TRUE
           ) |>
           suppressMessages()
@@ -219,7 +263,7 @@ summariseMeasurementUseInternal <- function(cdm,
     rm(measurementTimingCollect)
 
     cli::cli_inform(c(">" = "Getting measurements per subject."))
-    measurementSummary[["subjects"]] <- measurement |>
+    measurementSubjects<- measurement |>
       dplyr::mutate(overall = "overall") |>
       dplyr::group_by_at(c(groupCols, unlist(strata))) |>
       dplyr::summarise(
@@ -227,24 +271,34 @@ summariseMeasurementUseInternal <- function(cdm,
         .groups = "drop"
       ) |>
       dplyr::ungroup() |>
+      dplyr::collect()
+
+    subjectHistogram <- "measurements_per_subject" %in% names(histogram)
+    if (subjectHistogram) {
+      measurementSubjects <- measurementSubjects |>
+        dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
+    }
+
+    measurementSummary[["subjects"]] <- measurementSubjects |>
       PatientProfiles::summariseResult(
         group = list(baseGroup),
         includeOverallGroup = FALSE,
         strata = strata,
         includeOverallStrata = TRUE,
-        variables = c("time", "measurements_per_subject"),
-        estimates = estimates$measurement_summary,
+        variables = c("measurements_per_subject", "measurements_per_subject_band"[subjectHistogram]),
+        estimates = c(estimates$measurement_summary, "count"[subjectHistogram]),
         counts = FALSE
       ) |>
       suppressMessages()
 
     # Bind and transform results
     measurementSummary <- omopgenerics::bind(measurementSummary) |>
+      dplyr::filter(!(.data$variable_name %in% c("time", "measurements_per_subject") & .data$estimate_name == "count")) |>
+      dplyr::mutate(variable_name = gsub("_band", "", .data$variable_name)) |>
       transformMeasurementRecords(
         cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
         installedVersion, timingName, cohortName, dateRange
       )
-
   } else {
     measurementSummary <- NULL
   }
@@ -253,6 +307,14 @@ summariseMeasurementUseInternal <- function(cdm,
   if (valueAsNumberFlag) {
     cli::cli_inform(c(">" = "Summarising results - value as number."))
     valueAsNumber <- list()
+
+    numberHistogram <- "value_as_number" %in% names(histogram)
+    if (numberHistogram) {
+      measurement <- measurement |>
+        dplyr::mutate(!!!histogramBandExpr(histogram[["value_as_number"]], name = "value_as_number", newName = "value_as_number_band")) |>
+        dplyr::compute(name = measurementCohortName, temporary = FALSE)
+    }
+
     for (codelistName in unique(measurementSettings$codelist_name)) {
       valueAsNumberCollect <- measurement |>
         dplyr::inner_join(
@@ -270,8 +332,8 @@ summariseMeasurementUseInternal <- function(cdm,
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
-            variables = "value_as_number",
-            estimates = estimates$measurement_value_as_number,
+            variables = c("value_as_number", "value_as_number_band"[numberHistogram]),
+            estimates = c(estimates$measurement_value_as_number, "count"[numberHistogram]),
             counts = TRUE,
             weights = NULL
           ) |>
@@ -281,6 +343,8 @@ summariseMeasurementUseInternal <- function(cdm,
     rm(valueAsNumberCollect)
     measurementNumber <- omopgenerics::bind(valueAsNumber) |>
       dplyr::filter(.data$variable_name != "number subjects") |>
+      dplyr::filter(!(.data$variable_name %in% c("time", "measurements_per_subject") & .data$estimate_name == "count")) |>
+      dplyr::mutate(variable_name = gsub("_band", "", .data$variable_name)) |>
       transformMeasurementValue(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
         cohortName = cohortName, installedVersion = installedVersion,
@@ -743,6 +807,23 @@ validateEstimates <- function(estimates, checks) {
   return(estimates)
 }
 
+validateHistogram <- function(histogram) {
+  omopgenerics::assertList(histogram, null = TRUE, named = TRUE)
+  newHistogram <- list()
+  for (nm in names(histogram)) {
+    # check name
+    if (!nm %in% c("time", "measurements_per_subject", "value_as_number")) {
+      cli::cli_warn(c(
+        "{nm} is not a `check` for which to get estimates for a histogram.",
+        "i" = "Options are: 'time', 'measurements_per_subject', and 'value_as_number'."
+      ))
+    }
+    # check bandwidth & correct/add names
+    newHistogram[[nm]] <- omopgenerics::validateWindowArgument(histogram[[nm]], snakeCase = FALSE)
+  }
+  return(newHistogram)
+}
+
 addConceptName <- function(table, prefix) {
   name <- omopgenerics::tableName(table)
   cdm <- omopgenerics::cdmReference(table)
@@ -754,4 +835,18 @@ addConceptName <- function(table, prefix) {
       by = paste0(prefix, "_concept_id")
     ) |>
     dplyr::compute(name = name, temporary = FALSE)
+}
+
+histogramBandExpr <- function(x, name, newName) {
+  caseWhen <- character()
+  for (jj in names(x)) {
+    if (is.infinite(x[[jj]][2])) {
+      caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} ~ '{jj}'")
+    } else {
+      caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} & .data${name} <= {x[[jj]][2]} ~ '{jj}'")
+    }
+  }
+  glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = NA)") |>
+    rlang::parse_exprs() |>
+    rlang::set_names(newName)
 }

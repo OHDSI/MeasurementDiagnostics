@@ -16,6 +16,7 @@ summariseMeasurementUse(
     "density"), measurement_value_as_number = c("min", "q01", "q05", "q25", "median",
     "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
     measurement_value_as_concept = c("count", "percentage")),
+  histogram = NULL,
   checks = c("measurement_summary", "measurement_value_as_number",
     "measurement_value_as_concept")
 )
@@ -46,6 +47,11 @@ Allowed estimates are those supported by the `summariseResult()` function in
 the **PatientProfiles** package. If omitted, all available estimates for
 each check will be returned.}
 
+\item{histogram}{Named list where names point to checks for which to get
+estimates for a histogram, and elements are numeric vectors indicating the
+bind-width. See function examples. Histogram only available for
+"measurement_summary" and "measurement_value_as_number".}
+
 \item{checks}{Diagnostics to run. Options are: "measurement_summary",
 "measurement_value_as_number", and "measurement_value_as_concept".}
 }
@@ -63,6 +69,39 @@ cdm <- mockMeasurementDiagnostics()
 
 result <- summariseMeasurementUse(
   cdm = cdm, codes = list("test_codelist" = c(3001467L, 45875977L))
+)
+
+resultHistogram <- summariseMeasurementUse(
+  cdm = cdm,
+  codes = list("test_codelist" = c(3001467L, 45875977L)),
+  byConcept = TRUE,
+  byYear = FALSE,
+  bySex = FALSE,
+  ageGroup = NULL,
+  dateRange = as.Date(c(NA, NA)),
+  estimates = list(
+    "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
+    "measurement_value_as_number" = c(
+      "min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max",
+      "count_missing", "percentage_missing", "density"
+    ),
+    "measurement_value_as_concept" = c("count", "percentage")
+  ),
+  histogram = list(
+    "time" = list(
+      '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
+      '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
+    ),
+    "measurements_per_subject" = list(
+      '0 to 10' = c(0, 10), '11 to 20' = c(11, 20),
+      '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)
+    ),
+    "value_as_number" =  list(
+      '0 to 5' = c(0, 5), '6 to 10' = c(6, 10),
+      '11 to 15' = c(11, 15), '>15' = c(16, Inf)
+    )
+  ),
+  checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
 )
 
 CDMConnector::cdmDisconnect(cdm = cdm)

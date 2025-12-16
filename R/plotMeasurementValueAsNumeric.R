@@ -23,12 +23,12 @@
 #' CDMConnector::cdmDisconnect(cdm)
 #' }
 plotMeasurementValueAsNumber <- function(result,
-                                         x = c("unit_concept_name"),
+                                         x = "unit_concept_name",
                                          plotType = "boxplot",
                                          facet = c("codelist_name", "concept_name"),
                                          colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result)),
                                          style = NULL) {
-  omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
+  omopgenerics::assertChoice(plotType, c("boxplot", "densityplot", "barplot"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
 
@@ -53,6 +53,9 @@ plotMeasurementValueAsNumber <- function(result,
   } else if (plotType == "densityplot"){
     result <- result |>
       dplyr::filter(grepl("density", .data$estimate_name))
+  } else if (plotType == "barplot"){
+    result <- result |>
+      dplyr::filter(.data$estimate_name == "count" & .data$variable_name == "value_as_number")
   }
 
   # Remove overall option when byConcept is TRUE
@@ -82,6 +85,7 @@ plotMeasurementValueAsNumber <- function(result,
       label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::xlab(label = paste0(xLab, collapse = ", and "))
+
   } else if (plotType == "densityplot") {
     p <- visOmopResults::scatterPlot(
       result = result,
@@ -96,6 +100,19 @@ plotMeasurementValueAsNumber <- function(result,
       colour = colour,
       label = visOmopResults::plotColumns(result)
     )
+
+  } else if (plotType == "barplot") {
+    p <- result |>
+      visOmopResults::barPlot(
+        x = x,
+        y = "count",
+        just = 0.5,
+        position = "dodge",
+        facet = facet,
+        colour = colour,
+        style = style,
+        label = visOmopResults::plotColumns(result)
+      )
   }
   p +
     ggplot2::ylab(label = "Measurement numeric value") +
