@@ -25,11 +25,11 @@ plotMeasurementSummary(
 - y:
 
   Variable to plot on y axis, it can be "time" or
-  measurements_per_subject".
+  "measurements_per_subject".
 
 - plotType:
 
-  Type of plot, either "boxplot" or "densityplot".
+  Type of plot, either "boxplot", "barplot", or "densityplot".
 
 - timeScale:
 
@@ -87,6 +87,9 @@ result <- summariseMeasurementUse(
 result |>
   filter(variable_name == "time") |>
   plotMeasurementSummary()
+#> Ignoring unknown labels:
+#> • fill : "Cdm name and Codelist name"
+
 
 CDMConnector::cdmDisconnect(cdm)
 # }

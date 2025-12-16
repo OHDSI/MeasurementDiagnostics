@@ -18,6 +18,7 @@ summariseCohortMeasurementUse(
     "density"), measurement_value_as_number = c("min", "q01", "q05", "q25", "median",
     "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
     measurement_value_as_concept = c("count", "percentage")),
+  histogram = NULL,
   checks = c("measurement_summary", "measurement_value_as_number",
     "measurement_value_as_concept")
 )
@@ -76,6 +77,13 @@ summariseCohortMeasurementUse(
   function in the \*\*PatientProfiles\*\* package. If omitted, all
   available estimates for each check will be returned.
 
+- histogram:
+
+  Named list where names point to checks for which to get estimates for
+  a histogram, and elements are numeric vectors indicating the
+  bind-width. See function examples. Histogram only available for
+  "measurement_summary" and "measurement_value_as_number".
+
 - checks:
 
   Diagnostics to run. Options are: "measurement_summary",
@@ -96,6 +104,33 @@ cdm <- mockMeasurementDiagnostics()
 result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date"
+)
+#> → Getting measurement records based on 2 concepts.
+#> → Subsetting records to the subjects and timing of interest.
+#> → Getting time between records per person.
+#> → Getting measurements per subject.
+#> ! 2 duplicated rows eliminated.
+#> → Summarising results - value as number.
+#> → Summarising results - value as concept.
+#> → Binding all diagnostic results.
+
+result <- summariseCohortMeasurementUse(
+  codes = list("test_codelist" = c(3001467L, 45875977L)),
+  cohort = cdm$my_cohort, timing = "cohort_start_date",
+  histogram = list(
+    "time" = list(
+      '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
+      '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
+    ),
+    "measurements_per_subject" = list(
+      '0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30),
+      '31 to Inf' = c(31, Inf)
+    ),
+    "value_as_number" =  list(
+      '0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15),
+      '>15' = c(16, Inf)
+    )
+  )
 )
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.

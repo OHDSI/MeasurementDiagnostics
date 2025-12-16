@@ -16,7 +16,7 @@ Helper for consistent documentation of \`plot\`.
 
 - plotType:
 
-  Type of plot, either "boxplot" or "densityplot".
+  Type of plot, either "boxplot", "barplot", or "densityplot".
 
 - facet:
 

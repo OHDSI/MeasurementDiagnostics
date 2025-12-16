@@ -7,7 +7,7 @@ Plot summariseMeasurementTiming results.
 ``` r
 plotMeasurementValueAsNumber(
   result,
-  x = c("unit_concept_name"),
+  x = "unit_concept_name",
   plotType = "boxplot",
   facet = c("codelist_name", "concept_name"),
   colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result)),
@@ -28,7 +28,7 @@ plotMeasurementValueAsNumber(
 
 - plotType:
 
-  Type of plot, either "boxplot" or "densityplot".
+  Type of plot, either "boxplot", "barplot", or "densityplot".
 
 - facet:
 
