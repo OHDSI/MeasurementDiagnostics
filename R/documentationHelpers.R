@@ -24,6 +24,10 @@
 #' Allowed estimates are those supported by the `summariseResult()` function in
 #' the **PatientProfiles** package. If omitted, all available estimates for
 #' each check will be returned.
+#' @param histogram Named list where names point to checks for which to get
+#' estimates for a histogram, and elements are numeric vectors indicating the
+#' bind-width. See function examples. Histogram only available for
+#' "measurement_summary" and "measurement_value_as_number".
 #' @param checks Diagnostics to run. Options are: "measurement_summary",
 #' "measurement_value_as_number", and "measurement_value_as_concept".
 #'
@@ -68,7 +72,7 @@ NULL
 #' `visOmopResults::plotColumns(result)`.
 #' @param y Columns to use as horizontal axes. See options with
 #' `visOmopResults::plotColumns(result)`.
-#' @param plotType Type of plot, either "boxplot" or "densityplot".
+#' @param plotType Type of plot, either "boxplot", "barplot", or "densityplot".
 #' @param facet Columns to facet by. See options with
 #' `visOmopResults::plotColumns(result)`. Formula input is also allowed to
 #' specify rows and columns.

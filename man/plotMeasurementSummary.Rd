@@ -18,9 +18,9 @@ plotMeasurementSummary(
 \item{result}{A summarised_result object.}
 
 \item{y}{Variable to plot on y axis, it can be "time" or
-measurements_per_subject".}
+"measurements_per_subject".}
 
-\item{plotType}{Type of plot, either "boxplot" or "densityplot".}
+\item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}
 
 \item{timeScale}{Time scale to show, it can be "days" or "years".}
 

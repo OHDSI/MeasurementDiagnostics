@@ -38,6 +38,11 @@ Allowed estimates are those supported by the `summariseResult()` function in
 the **PatientProfiles** package. If omitted, all available estimates for
 each check will be returned.}
 
+\item{histogram}{Named list where names point to checks for which to get
+estimates for a histogram, and elements are numeric vectors indicating the
+bind-width. See function examples. Histogram only available for
+"measurement_summary" and "measurement_value_as_number".}
+
 \item{checks}{Diagnostics to run. Options are: "measurement_summary",
 "measurement_value_as_number", and "measurement_value_as_concept".}
 }

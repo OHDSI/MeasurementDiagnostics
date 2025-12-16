@@ -11,6 +11,7 @@ Authors@R: c(
     role = c("aut"), comment = c(ORCID = "0009-0002-4405-1814")))
 Description: Diagnostics of list of codes based on concepts from the domains measurement and observation. This package works for data mapped to the Observational Medical Outcomes Partnership Common Data Model.
 Imports: 
+    CDMConnector (>= 2.0.0),
     cli,
     clock,
     CohortConstructor (>= 0.4.0),
@@ -23,7 +24,6 @@ Imports:
     rlang,
     tidyr
 Suggests: 
-    CDMConnector (>= 2.0.0),
     CodelistGenerator (>= 3.5.0),
     visOmopResults (>= 1.4.0),
     duckdb,

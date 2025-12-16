@@ -1,7 +1,7 @@
 #' Plot summariseMeasurementTiming results.
 #'
 #' @param y Variable to plot on y axis, it can be "time" or
-#' measurements_per_subject".
+#' "measurements_per_subject".
 #' @inheritParams resultDoc
 #' @inheritParams timeScaleDoc
 #' @inheritParams plotDoc
@@ -36,7 +36,7 @@ plotMeasurementSummary <- function(result,
                                    style = NULL) {
   # specific checks
   omopgenerics::assertChoice(y, c("time", "measurements_per_subject"), length = 1)
-  omopgenerics::assertChoice(plotType, c("boxplot", "densityplot"), length = 1)
+  omopgenerics::assertChoice(plotType, c("boxplot", "densityplot", "barplot"), length = 1)
   omopgenerics::assertChoice(timeScale, c("days", "years"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
@@ -88,12 +88,12 @@ plotMeasurementSummary <- function(result,
       facet = facet,
       colour = colour,
       style = style,
-      label = visOmopResults::plotColumns(result)
+      # label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::labs(
-        title = ggplot2::element_blank(),
+        title = "",
         x = lab,
-        y = ggplot2::element_blank()
+        y = ""
       )
   } else if (plotType == "boxplot") {
     result <- result |>
@@ -112,11 +112,31 @@ plotMeasurementSummary <- function(result,
       label = visOmopResults::plotColumns(result)
     ) +
       ggplot2::labs(
-        title = ggplot2::element_blank(),
+        title = "",
         y = lab,
-        x = ggplot2::element_blank()
+        x = ""
+      )
+  } else if (plotType == "barplot") {
+    result <- result |>
+      dplyr::filter(.data$estimate_name == "count")
+    p <- result |>
+      visOmopResults::barPlot(
+        x = "variable_level",
+        y = "count",
+        just = 0.5,
+        position = "dodge",
+        facet = facet,
+        colour = colour,
+        style = style,
+        label = visOmopResults::plotColumns(result)
+      ) +
+      ggplot2::labs(
+        title = "",
+        x = lab,
+        y = ""
       )
   }
+  p
 }
 
 # change to visOmopResults in next release

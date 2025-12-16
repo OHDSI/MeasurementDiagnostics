@@ -6,7 +6,7 @@
 \usage{
 plotMeasurementValueAsNumber(
   result,
-  x = c("unit_concept_name"),
+  x = "unit_concept_name",
   plotType = "boxplot",
   facet = c("codelist_name", "concept_name"),
   colour = c("cdm_name", "unit_concept_name", visOmopResults::strataColumns(result)),
@@ -19,7 +19,7 @@ plotMeasurementValueAsNumber(
 \item{x}{Columns to use as horizontal axes. See options with
 `visOmopResults::plotColumns(result)`.}
 
-\item{plotType}{Type of plot, either "boxplot" or "densityplot".}
+\item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}
 
 \item{facet}{Columns to facet by. See options with
 `visOmopResults::plotColumns(result)`. Formula input is also allowed to
