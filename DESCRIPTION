@@ -1,7 +1,7 @@
 Package: MeasurementDiagnostics
 Type: Package
 Title: Diagnostics for Lists of Codes Based on Measurements
-Version: 0.1.0.999
+Version: 0.2.0.999
 Authors@R: c(
     person("Edward", "Burn", , "edward.burn@ndorms.ox.ac.uk", 
     role = c("aut"), comment = c(ORCID = "0000-0002-9286-1128")),
