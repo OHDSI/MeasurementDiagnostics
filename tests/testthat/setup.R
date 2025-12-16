@@ -1,4 +1,3 @@
-
 dbToTest <- Sys.getenv("DB_TO_TEST", "duckdb")
 
 writeSchema <- function() {
@@ -100,15 +99,17 @@ testMockCdm <- function() {
   )
 
   # concept
-  conceptSet <- c(8507, 8532, 3001467, 45875977, 194152, 4092121, 1033535, 4328749L, 4267416L, 9529)
+  conceptSet <- c(8507, 8532, 3001467, 45875977, 194152, 4092121, 1033535, 4328749, 4267416L, 9529)
+  sourceSet  <- c(12, 11, 122, 24442, 444, 45663, 2564, 250603, 45678, 23478273)
   conceptName <- c("Male", "Female", "Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma", "PhenX", "Renal agenesis and dysgenesis", "Level of mood", "Minimum Data Set", "High", "Low", "kilogram")
+  sourceName  <- c("Male", "Female", "Alkaline phosphatase.bone", "PhenX", "Agenesis and dysgenesis renal", "Mood", "Minimum Data Set", "High", "Low", "kg")
   domain <- c("Gender", "Gender", "Measurement", "Measurement", "Condition", "Observation", "Observation", "Meas Value", "Meas Value", "Unit")
   concept <- dplyr::tibble(
-    concept_id = as.integer(conceptSet),
-    concept_name = conceptName,
-    domain_id = domain,
+    concept_id = as.integer(c(conceptSet, sourceSet)),
+    concept_name = c(conceptName, sourceName),
+    domain_id = rep(domain, 2),
     vocabulary_id = NA_character_,
-    standard_concept = "S",
+    standard_concept = c(rep("S", length(conceptName)), rep(NA_character_, length(sourceName))),
     concept_class_id = NA_character_,
     concept_code = NA_character_,
     valid_start_date = as.Date(NA),
@@ -122,6 +123,10 @@ testMockCdm <- function() {
   # measurement
   concept_id <- cdm$concept |>
     dplyr::filter(.data$domain_id == "Measurement" & .data$standard_concept == "S") |>
+    dplyr::distinct(concept_id) |>
+    dplyr::pull()
+  source_concept_id <- cdm$concept |>
+    dplyr::filter(.data$domain_id == "Measurement" & is.na(.data$standard_concept)) |>
     dplyr::distinct(concept_id) |>
     dplyr::pull()
   concept_count <- length(concept_id)
@@ -145,7 +150,7 @@ testMockCdm <- function() {
     visit_occurrence_id = NA_integer_,
     visit_detail_id = NA_integer_,
     measurement_source_value = NA_character_,
-    measurement_source_concept_id = NA_integer_,
+    measurement_source_concept_id = source_concept_id[1],
     unit_source_value = NA_character_,
     value_source_value = NA_character_
   )  |>

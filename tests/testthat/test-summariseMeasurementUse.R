@@ -17,9 +17,9 @@ test_that("summariseMeasurementUse works", {
       result_type = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept"),
       package_name = "MeasurementDiagnostics",
       package_version = as.character(utils::packageVersion("MeasurementDiagnostics")),
-      group = c("codelist_name", "codelist_name &&& concept_name &&& unit_concept_name", "codelist_name &&& concept_name"),
+      group = c("codelist_name", "codelist_name &&& concept_name &&& source_concept_name &&& unit_concept_name", "codelist_name &&& concept_name &&& source_concept_name"),
       strata = c(rep("sex &&& age_group", 3)),
-      additional = c("", "concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& value_as_concept_id &&& domain_id"),
+      additional = c("", "concept_id &&& source_concept_id &&& unit_concept_id &&& domain_id", "concept_id &&& source_concept_id &&& value_as_concept_id &&& domain_id"),
       min_cell_count = "0"
     )
   )
@@ -194,7 +194,7 @@ test_that("summariseMeasurementUse straifications work", {
       dplyr::filter(group_name == "codelist_name", result_id != 1) |>
       dplyr::select(strata_name, strata_level, variable_name, variable_level, estimate_name, estimate_type, estimate_value),
     res |>
-      dplyr::filter(group_name == "codelist_name &&& concept_name") |>
+      dplyr::filter(group_name == "codelist_name &&& concept_name &&& source_concept_name") |>
       dplyr::select(strata_name, strata_level, variable_name, variable_level, estimate_name, estimate_type, estimate_value)
   )
 
