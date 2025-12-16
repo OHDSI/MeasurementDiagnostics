@@ -97,9 +97,11 @@ Concept name
 
 Concept ID
 
-Domain ID
+Source concept name
 
-Variable name
+Source concept ID
+
+Domain ID
 
 Value as concept name
 
@@ -119,7 +121,17 @@ overall
 
 overall
 
-Value as concept name
+overall
+
+overall
+
+\-
+
+\-
+
+N (%)
+
+66 (33.00%)
 
 Low
 
@@ -132,14 +144,6 @@ N (%)
 High
 
 4328749
-
-N (%)
-
-66 (33.00%)
-
-\-
-
-\-
 
 N (%)
 
@@ -150,9 +154,19 @@ Plasma
 
 3001467
 
+NA
+
+NA
+
 Measurement
 
-Value as concept name
+\-
+
+\-
+
+N (%)
+
+66 (33.00%)
 
 Low
 
@@ -165,14 +179,6 @@ N (%)
 High
 
 4328749
-
-N (%)
-
-66 (33.00%)
-
-\-
-
-\-
 
 N (%)
 

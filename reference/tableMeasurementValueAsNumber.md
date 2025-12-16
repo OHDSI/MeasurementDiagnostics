@@ -97,6 +97,10 @@ Concept name
 
 Concept ID
 
+Source concept name
+
+Source concept ID
+
 Domain ID
 
 Unit concept name
@@ -110,6 +114,10 @@ Estimate value
 test_codelist
 
 mock database
+
+overall
+
+overall
 
 overall
 
@@ -145,7 +153,7 @@ Missing value, N (%)
 
 4 (4.00%)
 
-\-
+NA
 
 \-
 
@@ -178,6 +186,10 @@ Plasma
 
 3001467
 
+NA
+
+\-
+
 Measurement
 
 kilogram
@@ -208,7 +220,7 @@ Missing value, N (%)
 
 4 (4.00%)
 
-\-
+NA
 
 \-
 
