@@ -241,11 +241,88 @@ test_that("summariseMeasurementUse straifications work", {
   dropCreatedTables(cdm = cdm)
 })
 
-test_that("summariseMeasurementUse expected fails", {
+test_that("summariseMeasurementUse expected behaviour", {
   skip_on_cran()
   cdm <- testMockCdm()
   cdm <- copyCdm(cdm)
 
+  # combinations of estimates ----
+  ## no numeric estimates + numeric histograms
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    estimates = list(
+      measurement_summary = c("min", "q25", "median", "q75", "max", "density"),
+      measurement_value_as_concept = c("count", "percentage")
+    ),
+    histogram = list(
+      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
+      "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
+    )
+  )
+  expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name != "count")) == 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name == "count")) != 0)
+
+  ## no numeric estimates + numeric histograms
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    estimates = NULL,
+    histogram = list(
+      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
+      "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
+    )
+  )
+  expect_equal(
+    res |> omopgenerics::settings() |> dplyr::pull(result_type),
+    c("measurement_summary", "measurement_value_as_number")
+  )
+  expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name != "count")) == 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name == "count")) != 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "time" & estimate_name != "count")) == 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "time" & estimate_name == "count")) != 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "measurements_per_subject" & estimate_name != "count")) == 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "measurements_per_subject" & estimate_name == "count")) != 0)
+
+  ## checks
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    histogram = list(
+      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
+      "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
+    ),
+    checks = c("measurement_value_as_number")
+  )
+  expect_equal(
+    res |> omopgenerics::settings() |> dplyr::pull(result_type), "measurement_value_as_number"
+  )
+  expect_equal(
+    res |> dplyr::pull(estimate_name) |> unique(),
+    c('count', 'min', 'q01', 'q05', 'q25', 'median', 'q75', 'q95', 'q99', 'max',
+      'count_missing', 'percentage_missing', 'density_x', 'density_y')
+  )
+
+  ## empty summarised result
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    estimates = NULL
+  )
+  expect_true("summarised_result" %in% class(res))
+
+  # errors ----
   expect_error(
     summariseMeasurementUse(
       cdm = cdm,
@@ -300,6 +377,15 @@ test_that("summariseMeasurementUse expected fails", {
     ageGroup = NULL,
     checks = "measurement_records"
   ))
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      bySex = TRUE,
+      ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+      checks = NULL
+    )
+  )
 
   dropCreatedTables(cdm = cdm)
 })
