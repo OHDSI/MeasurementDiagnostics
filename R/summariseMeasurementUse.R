@@ -138,6 +138,10 @@ summariseMeasurementUseInternal <- function(cdm,
 
   installedVersion <- as.character(utils::packageVersion("MeasurementDiagnostics"))
 
+  if (length(estimates) == 0 & length(histogram) == 0) {
+    return(omopgenerics::emptySummarisedResult())
+  }
+
   ## measurement cohort
   # settings
   measurementSettings <- purrr::imap_dfr(
@@ -185,14 +189,20 @@ summariseMeasurementUseInternal <- function(cdm,
     return(omopgenerics::emptySummarisedResult())
   }
 
+  # histogram flags
+  timeHistogramFlag <- "time" %in% names(histogram) & "measurement_summary" %in% checks
+  measurementsSubjectHistogramFlag <- "measurements_per_subject" %in% names(histogram) & "measurement_summary" %in% checks
+  numericHistogramFlag <- "value_as_number" %in% names(histogram) & "measurement_value_as_number" %in% checks
+
   # prepare table according to checks to do
+  summaryFlag <- "measurement_summary" %in% checks & "measurement_summary" %in% names(estimates)
   valueAsNumberFlag <- "measurement_value_as_number" %in% checks & "measurement_value_as_number" %in% names(estimates)
   valueAsConceptFlag <- "measurement_value_as_concept" %in% checks & "measurement_value_as_concept" %in% names(estimates)
-  sourceConceptFlag <- byConcept & (valueAsNumberFlag | valueAsConceptFlag)
+  sourceConceptFlag <- byConcept & (valueAsNumberFlag | valueAsConceptFlag  | timeHistogramFlag | measurementsSubjectHistogramFlag | numericHistogramFlag)
   indexCols <- c("codelist_name", "unit_concept_id", "source_concept_id", "value_as_concept_id")[c(TRUE, valueAsNumberFlag, sourceConceptFlag, valueAsConceptFlag)]
   addIndex(measurement, cols = indexCols)
   # unit concept name
-  if (valueAsNumberFlag) {
+  if (valueAsNumberFlag | numericHistogramFlag) {
     measurement <- measurement |> addConceptName(prefix = "unit")
   }
   # source concept name
@@ -212,9 +222,10 @@ summariseMeasurementUseInternal <- function(cdm,
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
   ## measurements per subject
-  if ("measurement_summary" %in% checks & "measurement_summary" %in% names(estimates)) {
+  if (summaryFlag | measurementsSubjectHistogramFlag | timeHistogramFlag) {
     cli::cli_inform(c(">" = "Getting time between records per person."))
     groupCols <- c("cohort_name"[!is.null(cohort)], "codelist_name", "subject_id")
+
     measurement <- measurement |>
       dplyr::group_by_at(groupCols) |>
       dplyr::arrange(.data$cohort_start_date) |>
@@ -229,67 +240,69 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::ungroup() |>
       dplyr::compute(name = measurementCohortName, temporary = FALSE)
 
-    timeHistogram <- "time" %in% names(histogram)
-    if (timeHistogram) {
+    if (timeHistogramFlag) {
       measurement <- measurement |>
         dplyr::mutate(!!!histogramBandExpr(histogram[["time"]], name = "time", newName = "time_band")) |>
         dplyr::compute(name = measurementCohortName, temporary = FALSE)
     }
 
-    measurementSummary <- list()
-    for (codelistName in unique(measurementSettings$codelist_name)) {
-      measurementTimingCollect <- measurement |>
-        dplyr::inner_join(
-          cdm[[settingsTableName]] |>
-            dplyr::filter(.data$codelist_name == .env$codelistName) |>
-            dplyr::select("codelist_name"),
-          by = "codelist_name"
-        ) |>
-        dplyr::collect()
-      if (nrow(measurementTimingCollect) > 0) {
-        measurementSummary[[codelistName]] <- measurementTimingCollect |>
-          PatientProfiles::summariseResult(
-            group = list(baseGroup),
-            includeOverallGroup = FALSE,
-            strata = strata,
-            includeOverallStrata = TRUE,
-            variables = c("time", "time_band")[c(TRUE, timeHistogram)],
-            estimates = c(estimates$measurement_summary, "count"[timeHistogram]),
-            counts = TRUE
+    if (summaryFlag | timeHistogramFlag) {
+      measurementSummary <- list()
+      for (codelistName in unique(measurementSettings$codelist_name)) {
+        measurementTimingCollect <- measurement |>
+          dplyr::inner_join(
+            cdm[[settingsTableName]] |>
+              dplyr::filter(.data$codelist_name == .env$codelistName) |>
+              dplyr::select("codelist_name"),
+            by = "codelist_name"
           ) |>
-          suppressMessages()
+          dplyr::collect()
+        if (nrow(measurementTimingCollect) > 0) {
+          measurementSummary[[codelistName]] <- measurementTimingCollect |>
+            PatientProfiles::summariseResult(
+              group = list(baseGroup),
+              includeOverallGroup = FALSE,
+              strata = strata,
+              includeOverallStrata = TRUE,
+              variables = c("time", "time_band")[c(summaryFlag, timeHistogramFlag)],
+              estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[timeHistogramFlag]),
+              counts = TRUE
+            ) |>
+            suppressMessages()
+        }
       }
-    }
-    rm(measurementTimingCollect)
-
-    cli::cli_inform(c(">" = "Getting measurements per subject."))
-    measurementSubjects<- measurement |>
-      dplyr::mutate(overall = "overall") |>
-      dplyr::group_by_at(c(groupCols, unlist(strata))) |>
-      dplyr::summarise(
-        measurements_per_subject = dplyr::n(),
-        .groups = "drop"
-      ) |>
-      dplyr::ungroup() |>
-      dplyr::collect()
-
-    subjectHistogram <- "measurements_per_subject" %in% names(histogram)
-    if (subjectHistogram) {
-      measurementSubjects <- measurementSubjects |>
-        dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
+      rm(measurementTimingCollect)
     }
 
-    measurementSummary[["subjects"]] <- measurementSubjects |>
-      PatientProfiles::summariseResult(
-        group = list(baseGroup),
-        includeOverallGroup = FALSE,
-        strata = strata,
-        includeOverallStrata = TRUE,
-        variables = c("measurements_per_subject", "measurements_per_subject_band"[subjectHistogram]),
-        estimates = c(estimates$measurement_summary, "count"[subjectHistogram]),
-        counts = FALSE
-      ) |>
-      suppressMessages()
+    if (summaryFlag | measurementsSubjectHistogramFlag) {
+      cli::cli_inform(c(">" = "Getting measurements per subject."))
+      measurementSubjects<- measurement |>
+        dplyr::mutate(overall = "overall") |>
+        dplyr::group_by_at(c(groupCols, unlist(strata))) |>
+        dplyr::summarise(
+          measurements_per_subject = dplyr::n(),
+          .groups = "drop"
+        ) |>
+        dplyr::ungroup() |>
+        dplyr::collect()
+
+      if (measurementsSubjectHistogramFlag) {
+        measurementSubjects <- measurementSubjects |>
+          dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
+      }
+
+      measurementSummary[["subjects"]] <- measurementSubjects |>
+        PatientProfiles::summariseResult(
+          group = list(baseGroup),
+          includeOverallGroup = FALSE,
+          strata = strata,
+          includeOverallStrata = TRUE,
+          variables = c("measurements_per_subject"[summaryFlag], "measurements_per_subject_band"[measurementsSubjectHistogramFlag]),
+          estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[measurementsSubjectHistogramFlag]),
+          counts = FALSE
+        ) |>
+        suppressMessages()
+    }
 
     # Bind and transform results
     measurementSummary <- omopgenerics::bind(measurementSummary) |>
@@ -304,12 +317,11 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   ## measurement value as numeric
-  if (valueAsNumberFlag) {
+  if (valueAsNumberFlag | numericHistogramFlag) {
     cli::cli_inform(c(">" = "Summarising results - value as number."))
     valueAsNumber <- list()
 
-    numberHistogram <- "value_as_number" %in% names(histogram)
-    if (numberHistogram) {
+    if (numericHistogramFlag) {
       measurement <- measurement |>
         dplyr::mutate(!!!histogramBandExpr(histogram[["value_as_number"]], name = "value_as_number", newName = "value_as_number_band")) |>
         dplyr::compute(name = measurementCohortName, temporary = FALSE)
@@ -332,8 +344,8 @@ summariseMeasurementUseInternal <- function(cdm,
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
-            variables = list("value_as_number", "value_as_number_band"[numberHistogram]),
-            estimates = list(estimates$measurement_value_as_number, "count"[numberHistogram]),
+            variables = c("value_as_number"[valueAsNumberFlag], "value_as_number_band"[numericHistogramFlag]),
+            estimates = c(estimates$measurement_value_as_number[c(rep(valueAsNumberFlag, length(estimates$measurement_value_as_number)))], "count"[numericHistogramFlag]),
             counts = TRUE,
             weights = NULL
           ) |>
@@ -765,7 +777,9 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
 
 validateEstimates <- function(estimates, checks) {
 
-  if (is.null(estimates)) cli::cli_abort("`estimates` cannot be NULL.")
+  if (is.null(estimates)) {
+    return(list())
+  }
   if (any(!names(estimates) %in% checks)) {
     cli::cli_abort(c(
       "x" = "All elements of `estimates` must be named with valid diagnostics checks in `checks`.",
