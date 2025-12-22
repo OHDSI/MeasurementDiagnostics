@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/Rtmp5sUV9a/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpTuEu40/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
