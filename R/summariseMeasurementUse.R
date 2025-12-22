@@ -332,8 +332,8 @@ summariseMeasurementUseInternal <- function(cdm,
             includeOverallGroup = FALSE,
             strata = strata,
             includeOverallStrata = TRUE,
-            variables = c("value_as_number", "value_as_number_band"[numberHistogram]),
-            estimates = c(estimates$measurement_value_as_number, "count"[numberHistogram]),
+            variables = list("value_as_number", "value_as_number_band"[numberHistogram]),
+            estimates = list(estimates$measurement_value_as_number, "count"[numberHistogram]),
             counts = TRUE,
             weights = NULL
           ) |>
