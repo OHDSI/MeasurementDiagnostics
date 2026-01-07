@@ -249,16 +249,16 @@ summariseMeasurementUseInternal <- function(cdm,
     if (summaryFlag | timeHistogramFlag) {
       measurementSummary <- list()
       for (codelistName in unique(measurementSettings$codelist_name)) {
-        measurementTimingCollect <- measurement |>
+        measurementTimingTbl <- measurement |>
           dplyr::inner_join(
             cdm[[settingsTableName]] |>
               dplyr::filter(.data$codelist_name == .env$codelistName) |>
               dplyr::select("codelist_name"),
             by = "codelist_name"
-          ) |>
-          dplyr::collect()
-        if (nrow(measurementTimingCollect) > 0) {
-          measurementSummary[[codelistName]] <- measurementTimingCollect |>
+          )
+        if (hasRecords(measurementTimingTbl)) {
+          cli::cli_inform("Summarising timings")
+          measurementSummary[[codelistName]] <- measurementTimingTbl |>
             PatientProfiles::summariseResult(
               group = list(baseGroup),
               includeOverallGroup = FALSE,
@@ -267,31 +267,29 @@ summariseMeasurementUseInternal <- function(cdm,
               variables = c("time", "time_band")[c(summaryFlag, timeHistogramFlag)],
               estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[timeHistogramFlag]),
               counts = TRUE
-            ) |>
-            suppressMessages()
+            )
         }
       }
-      rm(measurementTimingCollect)
     }
 
     if (summaryFlag | measurementsSubjectHistogramFlag) {
       cli::cli_inform(c(">" = "Getting measurements per subject."))
-      measurementSubjects<- measurement |>
+      measurementSubjectsTbl <- measurement |>
         dplyr::mutate(overall = "overall") |>
         dplyr::group_by_at(c(groupCols, unlist(strata))) |>
         dplyr::summarise(
           measurements_per_subject = dplyr::n(),
           .groups = "drop"
         ) |>
-        dplyr::ungroup() |>
-        dplyr::collect()
+        dplyr::ungroup()
 
       if (measurementsSubjectHistogramFlag) {
-        measurementSubjects <- measurementSubjects |>
+        measurementSubjectsTbl <- measurementSubjectsTbl |>
           dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
       }
 
-      measurementSummary[["subjects"]] <- measurementSubjects |>
+      cli::cli_inform("Summarising subjects")
+      measurementSummary[["subjects"]] <- measurementSubjectsTbl |>
         PatientProfiles::summariseResult(
           group = list(baseGroup),
           includeOverallGroup = FALSE,
@@ -300,8 +298,7 @@ summariseMeasurementUseInternal <- function(cdm,
           variables = c("measurements_per_subject"[summaryFlag], "measurements_per_subject_band"[measurementsSubjectHistogramFlag]),
           estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[measurementsSubjectHistogramFlag]),
           counts = FALSE
-        ) |>
-        suppressMessages()
+        )
     }
 
     # Bind and transform results
@@ -328,17 +325,17 @@ summariseMeasurementUseInternal <- function(cdm,
     }
 
     for (codelistName in unique(measurementSettings$codelist_name)) {
-      valueAsNumberCollect <- measurement |>
+      valueAsNumberTbl <- measurement |>
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
-        dplyr::select(!dplyr::any_of(c("value_as_concept_id", "value_as_concept_name"))) |>
-        dplyr::collect()
-      if (nrow(valueAsNumberCollect) > 0) {
-        valueAsNumber[[codelistName]] <- valueAsNumberCollect |>
+        dplyr::select(!dplyr::any_of(c("value_as_concept_id", "value_as_concept_name")))
+      if (hasRecords(valueAsNumberTbl)) {
+        cli::cli_inform("Summarising value as number")
+        valueAsNumber[[codelistName]] <- valueAsNumberTbl |>
           PatientProfiles::summariseResult(
             group = list(c(baseGroup, unitGroup), c(baseGroup, byConceptGroup, unitGroup))[c(TRUE, byConcept)],
             includeOverallGroup = FALSE,
@@ -348,11 +345,9 @@ summariseMeasurementUseInternal <- function(cdm,
             estimates = c(estimates$measurement_value_as_number[c(rep(valueAsNumberFlag, length(estimates$measurement_value_as_number)))], "count"[numericHistogramFlag]),
             counts = TRUE,
             weights = NULL
-          ) |>
-          suppressMessages()
+          )
       }
     }
-    rm(valueAsNumberCollect)
     measurementNumber <- omopgenerics::bind(valueAsNumber) |>
       dplyr::filter(.data$variable_name != "number subjects") |>
       dplyr::filter(!(.data$variable_name %in% c("time", "measurements_per_subject") & .data$estimate_name == "count")) |>
@@ -371,19 +366,20 @@ summariseMeasurementUseInternal <- function(cdm,
     cli::cli_inform(c(">" = "Summarising results - value as concept."))
     valueAsConcept <- list()
     for (codelistName in unique(measurementSettings$codelist_name)) {
-      valueAsConceptCollected <-  measurement |>
+      valueAsConceptTbl <-  measurement |>
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
+        dplyr::collect() |>
         dplyr::mutate(
           value_as_concept_id = paste0(as.character(.data$value_as_concept_id), " &&& ", .data$value_as_concept_name)
-        ) |>
-        dplyr::collect()
-      if (nrow(valueAsConceptCollected) > 0) {
-        valueAsConcept[[codelistName]] <- valueAsConceptCollected |>
+        )
+      if (hasRecords(valueAsConceptTbl)) {
+        cli::cli_inform("Summarising value as number")
+        valueAsConcept[[codelistName]] <- valueAsConceptTbl |>
           PatientProfiles::summariseResult(
             group = list(baseGroup, c(baseGroup, byConceptGroup))[c(TRUE, byConcept)],
             includeOverallGroup = FALSE,
@@ -393,11 +389,9 @@ summariseMeasurementUseInternal <- function(cdm,
             estimates = estimates$measurement_value_as_concept,
             counts = FALSE,
             weights = NULL
-          ) |>
-          suppressMessages()
+          )
       }
     }
-    rm(valueAsConceptCollected)
     measurementConcept <- omopgenerics::bind(valueAsConcept) |>
       transformMeasurementConcept(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
