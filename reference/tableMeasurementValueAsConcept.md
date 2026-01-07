@@ -80,9 +80,36 @@ result <- summariseMeasurementUse(
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
+#> Summarising timings
+#> ℹ The following estimates will be computed:
+#> • time: min, q25, median, q75, max, density
+#> ! Table is collected to memory as not all requested estimates are supported on
+#>   the database side
+#> → Start summary of data, at 2026-01-07 17:50:44.965184
+#> ✔ Summary finished, at 2026-01-07 17:50:45.088523
 #> → Getting measurements per subject.
+#> Summarising subjects
+#> ℹ The following estimates will be computed:
+#> • measurements_per_subject: min, q25, median, q75, max, density
+#> ! Table is collected to memory as not all requested estimates are supported on
+#>   the database side
+#> → Start summary of data, at 2026-01-07 17:50:45.589384
+#> ✔ Summary finished, at 2026-01-07 17:50:45.695804
 #> → Summarising results - value as number.
+#> Summarising value as number
+#> ℹ The following estimates will be computed:
+#> • value_as_number: min, q01, q05, q25, median, q75, q95, q99, max,
+#>   count_missing, percentage_missing, density
+#> ! Table is collected to memory as not all requested estimates are supported on
+#>   the database side
+#> → Start summary of data, at 2026-01-07 17:50:46.881905
+#> ✔ Summary finished, at 2026-01-07 17:50:47.189553
 #> → Summarising results - value as concept.
+#> Summarising value as number
+#> ℹ The following estimates will be computed:
+#> • value_as_concept_id: count, percentage
+#> → Start summary of data, at 2026-01-07 17:50:47.843339
+#> ✔ Summary finished, at 2026-01-07 17:50:48.01506
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsConcept(result)
@@ -125,14 +152,6 @@ overall
 
 overall
 
-\-
-
-\-
-
-N (%)
-
-66 (33.00%)
-
 Low
 
 4267416
@@ -144,6 +163,14 @@ N (%)
 High
 
 4328749
+
+N (%)
+
+66 (33.00%)
+
+NA
+
+NA
 
 N (%)
 
@@ -160,14 +187,6 @@ NA
 
 Measurement
 
-\-
-
-\-
-
-N (%)
-
-66 (33.00%)
-
 Low
 
 4267416
@@ -179,6 +198,14 @@ N (%)
 High
 
 4328749
+
+N (%)
+
+66 (33.00%)
+
+NA
+
+NA
 
 N (%)
 
