@@ -2,6 +2,6 @@ hasRecords <- function(tbl){
   tbl |>
     utils::head(1) |>
     dplyr::tally() |>
-    dplyr::pull("n") == 0
+    dplyr::pull("n") > 0
 }
 
