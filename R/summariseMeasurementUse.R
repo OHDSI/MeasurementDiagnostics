@@ -258,6 +258,7 @@ summariseMeasurementUseInternal <- function(cdm,
           ) |>
           dplyr::collect()
         if (nrow(measurementTimingCollect) > 0) {
+          cli::cli_inform("Summarising timings")
           measurementSummary[[codelistName]] <- measurementTimingCollect |>
             PatientProfiles::summariseResult(
               group = list(baseGroup),
@@ -267,8 +268,7 @@ summariseMeasurementUseInternal <- function(cdm,
               variables = c("time", "time_band")[c(summaryFlag, timeHistogramFlag)],
               estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[timeHistogramFlag]),
               counts = TRUE
-            ) |>
-            suppressMessages()
+            )
         }
       }
       rm(measurementTimingCollect)
@@ -291,6 +291,7 @@ summariseMeasurementUseInternal <- function(cdm,
           dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
       }
 
+      cli::cli_inform("Summarising subjects")
       measurementSummary[["subjects"]] <- measurementSubjects |>
         PatientProfiles::summariseResult(
           group = list(baseGroup),
@@ -300,8 +301,7 @@ summariseMeasurementUseInternal <- function(cdm,
           variables = c("measurements_per_subject"[summaryFlag], "measurements_per_subject_band"[measurementsSubjectHistogramFlag]),
           estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[measurementsSubjectHistogramFlag]),
           counts = FALSE
-        ) |>
-        suppressMessages()
+        )
     }
 
     # Bind and transform results
@@ -338,6 +338,7 @@ summariseMeasurementUseInternal <- function(cdm,
         dplyr::select(!dplyr::any_of(c("value_as_concept_id", "value_as_concept_name"))) |>
         dplyr::collect()
       if (nrow(valueAsNumberCollect) > 0) {
+        cli::cli_inform("Summarising value as number")
         valueAsNumber[[codelistName]] <- valueAsNumberCollect |>
           PatientProfiles::summariseResult(
             group = list(c(baseGroup, unitGroup), c(baseGroup, byConceptGroup, unitGroup))[c(TRUE, byConcept)],
@@ -348,8 +349,7 @@ summariseMeasurementUseInternal <- function(cdm,
             estimates = c(estimates$measurement_value_as_number[c(rep(valueAsNumberFlag, length(estimates$measurement_value_as_number)))], "count"[numericHistogramFlag]),
             counts = TRUE,
             weights = NULL
-          ) |>
-          suppressMessages()
+          )
       }
     }
     rm(valueAsNumberCollect)
@@ -383,6 +383,7 @@ summariseMeasurementUseInternal <- function(cdm,
         ) |>
         dplyr::collect()
       if (nrow(valueAsConceptCollected) > 0) {
+        cli::cli_inform("Summarising value as number")
         valueAsConcept[[codelistName]] <- valueAsConceptCollected |>
           PatientProfiles::summariseResult(
             group = list(baseGroup, c(baseGroup, byConceptGroup))[c(TRUE, byConcept)],
@@ -393,8 +394,7 @@ summariseMeasurementUseInternal <- function(cdm,
             estimates = estimates$measurement_value_as_concept,
             counts = FALSE,
             weights = NULL
-          ) |>
-          suppressMessages()
+          )
       }
     }
     rm(valueAsConceptCollected)
