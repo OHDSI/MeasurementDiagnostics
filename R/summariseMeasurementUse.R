@@ -373,6 +373,7 @@ summariseMeasurementUseInternal <- function(cdm,
             dplyr::select("codelist_name"),
           by = "codelist_name"
         ) |>
+        dplyr::collect() |>
         dplyr::mutate(
           value_as_concept_id = paste0(as.character(.data$value_as_concept_id), " &&& ", .data$value_as_concept_name)
         )
