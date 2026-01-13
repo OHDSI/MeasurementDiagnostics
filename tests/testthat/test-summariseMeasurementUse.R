@@ -146,6 +146,19 @@ test_that("summariseMeasurementUse works", {
     c("count", "min", "max")
   )
 
+  # personSample ----
+  set.seed(123)
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    personSample = 10
+  )
+  expect_true(
+    res |> dplyr::filter(group_level == "test", variable_name == "number subjects", strata_name == "overall") |> dplyr::pull(estimate_value) == "10"
+  )
+
   # Histograms ----
   expect_warning(
     res <- summariseMeasurementUse(

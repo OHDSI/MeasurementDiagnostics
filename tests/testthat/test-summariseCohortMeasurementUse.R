@@ -119,6 +119,13 @@ test_that("summariseCohortMeasurementUse works", {
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone')
   )
 
+  # personSample ----
+  set.seed(123)
+  res <- summariseCohortMeasurementUse(codes = list("test" = 3001467L), cohort = cdm$my_cohort, timing = "any", personSample = 2)
+  expect_equal(
+    res |> dplyr::filter(variable_name == "number subjects", strata_name == "overall") |> dplyr::pull(estimate_value), c("6", "4")
+  )
+
   # Histogram ----
   expect_warning(
     res <- summariseCohortMeasurementUse(

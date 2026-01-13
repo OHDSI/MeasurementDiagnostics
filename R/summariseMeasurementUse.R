@@ -59,6 +59,7 @@ summariseMeasurementUse <- function(cdm,
                                     bySex = FALSE,
                                     ageGroup = NULL,
                                     dateRange = as.Date(c(NA, NA)),
+                                    personSample = 20000,
                                     estimates = list(
                                       "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
                                       "measurement_value_as_number" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
@@ -80,6 +81,7 @@ summariseMeasurementUse <- function(cdm,
     bySex = bySex,
     ageGroup = ageGroup,
     dateRange = dateRange,
+    personSample = personSample,
     estimates = estimates,
     histogram = histogram,
     checks = checks
@@ -99,6 +101,7 @@ summariseMeasurementUseInternal <- function(cdm,
                                             bySex,
                                             ageGroup,
                                             dateRange,
+                                            personSample,
                                             estimates,
                                             histogram,
                                             checks) {
@@ -171,11 +174,18 @@ summariseMeasurementUseInternal <- function(cdm,
 
   # cohort
   measurementCohortName <- omopgenerics::uniqueTableName(prefix = prefix)
-  cdm[[measurementCohortName]] <- getCohortFromCodes(cdm, codes, settingsTableName, name = measurementCohortName)
+  cdm[[measurementCohortName]] <- getCohortFromCodes(
+    cdm = cdm, codes = codes,  settingsTableName = settingsTableName,
+    name = measurementCohortName
+  )
 
   cli::cli_inform(c(">" = "Subsetting records to the subjects and timing of interest."))
   # subset to cohort and timing
-  measurement <- subsetMeasurementTable(cdm, cohortName, codesTable, timing, measurementCohortName, dateRange, prefix)
+  measurement <- subsetMeasurementTable(
+    cdm = cdm, cohortName = cohortName, codesTable = codesTable,
+    timing = timing, name = measurementCohortName, dateRange = dateRange,
+    prefix = prefix, personSample = personSample
+  )
   measurement <- measurement |>
     dplyr::rename("subject_id" = "person_id", "cohort_start_date" = "record_date") |>
     dplyr::mutate(cohort_end_date = .data$cohort_start_date) |>
@@ -424,15 +434,19 @@ groupIdToName <- function(x, newSet, cols = c("codelist_name", "concept_name")) 
     omopgenerics::uniteGroup(cols = cols)
 }
 
-subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, dateRange, prefix) {
+subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, dateRange, prefix, personSample) {
   # if ANY : no need to filter for dates
   # if DURING : needs to be in observation / in cohort
   # if COHORT_START_DATE : cohort_start_date/observation_period_start_date = measurement date
 
   if (is.null(cohortName) & timing == "any") {
-    return(
-      cdm[[name]] |> measurementInDateRange(dateRange, name)
-    )
+    measurement <- cdm[[name]] |>
+      measurementInDateRange(dateRange, name)
+    if (!is.null(personSample)) {
+      measurement <- measurement |>
+        sampleByPerson(personSample)
+    }
+    return(measurement)
   }
 
   codelistAttribute <- !is.null(codesTable)
@@ -494,6 +508,11 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
   }
 
   measurement <- measurement |> measurementInDateRange(dateRange, name)
+
+  if (!is.null(personSample)) {
+    measurement <- measurement |> sampleByPerson(personSample)
+  }
+
   return(measurement)
 }
 
@@ -765,8 +784,10 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
       )
   }
 
-  Reduce(dplyr::union_all, tables) |>
+  measurementCohort <- Reduce(dplyr::union_all, tables) |>
     dplyr::compute(name = name, temporary = FALSE)
+
+  return(measurementCohort)
 }
 
 validateEstimates <- function(estimates, checks) {
@@ -857,4 +878,16 @@ histogramBandExpr <- function(x, name, newName) {
   glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = NA)") |>
     rlang::parse_exprs() |>
     rlang::set_names(newName)
+}
+
+sampleByPerson <- function(x, samplePerson) {
+  name <- omopgenerics::tableName(x)
+  x |>
+    dplyr::inner_join(
+      x |>
+        dplyr::distinct(.data$person_id) |>
+        dplyr::slice_sample(n = personSample),
+      by = "person_id"
+    ) |>
+    dplyr::compute(name = name, temporary = FALSE)
 }
