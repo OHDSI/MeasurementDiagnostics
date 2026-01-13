@@ -184,12 +184,13 @@ summariseMeasurementUseInternal <- function(cdm,
   measurement <- subsetMeasurementTable(
     cdm = cdm, cohortName = cohortName, codesTable = codesTable,
     timing = timing, name = measurementCohortName, dateRange = dateRange,
-    prefix = prefix, personSample = personSample
+    prefix = prefix
   )
   measurement <- measurement |>
     dplyr::rename("subject_id" = "person_id", "cohort_start_date" = "record_date") |>
     dplyr::mutate(cohort_end_date = .data$cohort_start_date) |>
     dplyr::compute(name = measurementCohortName, temporary = FALSE) |>
+    sampleCodelistByPerson(n = personSample, prefix = prefix) |>
     omopgenerics::newCohortTable(
       cohortSetRef = measurementSettings,
       .softValidation = TRUE # allow overlap
@@ -434,19 +435,13 @@ groupIdToName <- function(x, newSet, cols = c("codelist_name", "concept_name")) 
     omopgenerics::uniteGroup(cols = cols)
 }
 
-subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, dateRange, prefix, personSample) {
+subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, dateRange, prefix) {
   # if ANY : no need to filter for dates
   # if DURING : needs to be in observation / in cohort
   # if COHORT_START_DATE : cohort_start_date/observation_period_start_date = measurement date
 
   if (is.null(cohortName) & timing == "any") {
-    measurement <- cdm[[name]] |>
-      measurementInDateRange(dateRange, name)
-    if (!is.null(personSample)) {
-      measurement <- measurement |>
-        sampleByPerson(personSample)
-    }
-    return(measurement)
+    return(cdm[[name]] |> measurementInDateRange(dateRange, name))
   }
 
   codelistAttribute <- !is.null(codesTable)
@@ -508,10 +503,6 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
   }
 
   measurement <- measurement |> measurementInDateRange(dateRange, name)
-
-  if (!is.null(personSample)) {
-    measurement <- measurement |> sampleByPerson(personSample)
-  }
 
   return(measurement)
 }
@@ -880,14 +871,22 @@ histogramBandExpr <- function(x, name, newName) {
     rlang::set_names(newName)
 }
 
-sampleByPerson <- function(x, samplePerson) {
-  name <- omopgenerics::tableName(x)
-  x |>
-    dplyr::inner_join(
-      x |>
-        dplyr::distinct(.data$person_id) |>
-        dplyr::slice_sample(n = personSample),
-      by = "person_id"
-    ) |>
-    dplyr::compute(name = name, temporary = FALSE)
+sampleCodelistByPerson <- function(x, n, prefix) {
+  if (!is.null(n)) {
+    name <- omopgenerics::tableName(x)
+    nameTemp <- omopgenerics::uniqueTableName(prefix = prefix)
+    sampleX <- x |>
+      dplyr::distinct(.data$codelist_name, .data$subject_id) |>
+      dplyr::group_by(.data$codelist_name) |>
+      dplyr::slice_sample(n = n) |>
+      dplyr::ungroup() |>
+      dplyr::compute(name = nameTemp, temporary = FALSE)
+    x <- x |>
+      dplyr::inner_join(
+        sampleX,
+        by = c("subject_id", "codelist_name")
+      ) |>
+      dplyr::compute(name = name, temporary = FALSE)
+  }
+  return(x)
 }

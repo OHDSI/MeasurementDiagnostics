@@ -123,7 +123,7 @@ test_that("summariseCohortMeasurementUse works", {
   set.seed(123)
   res <- summariseCohortMeasurementUse(codes = list("test" = 3001467L), cohort = cdm$my_cohort, timing = "any", personSample = 2)
   expect_equal(
-    res |> dplyr::filter(variable_name == "number subjects", strata_name == "overall") |> dplyr::pull(estimate_value), c("6", "4")
+    res |> dplyr::filter(variable_name == "number subjects", strata_name == "overall") |> dplyr::pull(estimate_value), c("2", "1")
   )
 
   # Histogram ----
