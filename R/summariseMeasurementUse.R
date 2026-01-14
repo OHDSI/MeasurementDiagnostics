@@ -176,7 +176,7 @@ summariseMeasurementUseInternal <- function(cdm,
   measurementCohortName <- omopgenerics::uniqueTableName(prefix = prefix)
   cdm[[measurementCohortName]] <- getCohortFromCodes(
     cdm = cdm, codes = codes,  settingsTableName = settingsTableName,
-    name = measurementCohortName
+    name = measurementCohortName, personSample = personSample
   )
 
   cli::cli_inform(c(">" = "Subsetting records to the subjects and timing of interest."))
@@ -190,7 +190,6 @@ summariseMeasurementUseInternal <- function(cdm,
     dplyr::rename("subject_id" = "person_id", "cohort_start_date" = "record_date") |>
     dplyr::mutate(cohort_end_date = .data$cohort_start_date) |>
     dplyr::compute(name = measurementCohortName, temporary = FALSE) |>
-    sampleCodelistByPerson(n = personSample, prefix = prefix) |>
     omopgenerics::newCohortTable(
       cohortSetRef = measurementSettings,
       .softValidation = TRUE # allow overlap
@@ -739,7 +738,7 @@ updateSummarisedResultSettings <- function(x, resultType, installedVersion, timi
     )
 }
 
-getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
+getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample) {
 
   domains <- cdm[[settingsTableName]] |> dplyr::pull("domain_id") |> unique() |> tolower()
   tables <- list()
@@ -749,6 +748,18 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
       dplyr::filter(tolower(.data$domain_id) == tab) |>
       dplyr::tally() |>
       dplyr::pull()
+
+    if (!is.null(personSample)) {
+      cli::cli_inform(c(">" = "Sampling {tab} table to {personSample} subjects"))
+      cdm[[tab]] <- cdm[[tab]] |>
+        dplyr::inner_join(
+          cdm$person |>
+            dplyr::slice_sample(n = personSample) |>
+            dplyr::select(dplyr::all_of("person_id")),
+          by = "person_id"
+        )
+    }
+
     cli::cli_inform(c(">" = "Getting {tab} records based on {n} concept{?s}."))
     tables[[tab]] <- cdm[[tab]] |>
       dplyr::rename("concept_id" = !!paste0(tab, "_concept_id")) |>
@@ -869,24 +880,4 @@ histogramBandExpr <- function(x, name, newName) {
   glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = NA)") |>
     rlang::parse_exprs() |>
     rlang::set_names(newName)
-}
-
-sampleCodelistByPerson <- function(x, n, prefix) {
-  if (!is.null(n)) {
-    name <- omopgenerics::tableName(x)
-    nameTemp <- omopgenerics::uniqueTableName(prefix = prefix)
-    sampleX <- x |>
-      dplyr::distinct(.data$codelist_name, .data$subject_id) |>
-      dplyr::group_by(.data$codelist_name) |>
-      dplyr::slice_sample(n = n) |>
-      dplyr::ungroup() |>
-      dplyr::compute(name = nameTemp, temporary = FALSE)
-    x <- x |>
-      dplyr::inner_join(
-        sampleX,
-        by = c("subject_id", "codelist_name")
-      ) |>
-      dplyr::compute(name = name, temporary = FALSE)
-  }
-  return(x)
 }

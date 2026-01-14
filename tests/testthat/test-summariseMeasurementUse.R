@@ -157,7 +157,7 @@ test_that("summariseMeasurementUse works", {
   )
   expect_equal(
     res |> dplyr::filter(group_level %in% c("test", "test4"), variable_name == "number subjects", strata_name == "overall") |> dplyr::pull(estimate_value),
-    c("10", "10")
+    c("6", "6")
   )
 
   # Histograms ----
