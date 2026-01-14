@@ -762,7 +762,8 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample
         ) |>
         dplyr::compute(name = tempName, temporary = FALSE)
     } else {
-      cdm[[tempName]] <- cdm[[tab]]
+      cdm[[tempName]] <- cdm[[tab]] |>
+        dplyr::compute(name = tempName, temporary = FALSE)
     }
 
     cli::cli_inform(c(">" = "Getting {tab} records based on {n} concept{?s}."))
