@@ -13,7 +13,6 @@ summariseCohortMeasurementUse(
   bySex = FALSE,
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
-  personSample = 20000,
   estimates = list(measurement_summary = c("min", "q25", "median", "q75", "max",
     "density"), measurement_value_as_number = c("min", "q01", "q05", "q25", "median",
     "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
@@ -46,9 +45,6 @@ subject is in the cohort (or in observation if cohort = NULL), and 3)
 
 \item{dateRange}{Two dates. The first indicating the earliest measurement
 date and the second indicating the latest possible measurement date.}
-
-\item{personSample}{Integerish or `NULL`. Number of distinct persons to
-sample per `codelist`. If `NULL`, no sampling is performed.}
 
 \item{estimates}{A named list indicating, for each measurement diagnostics
 check, which estimates to retrieve. The names of the list should correspond
