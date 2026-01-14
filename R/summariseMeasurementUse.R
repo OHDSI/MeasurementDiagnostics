@@ -176,7 +176,7 @@ summariseMeasurementUseInternal <- function(cdm,
   measurementCohortName <- omopgenerics::uniqueTableName(prefix = prefix)
   cdm[[measurementCohortName]] <- getCohortFromCodes(
     cdm = cdm, codes = codes,  settingsTableName = settingsTableName,
-    name = measurementCohortName, personSample = personSample
+    name = measurementCohortName, personSample = personSample, prefix = prefix
   )
 
   cli::cli_inform(c(">" = "Subsetting records to the subjects and timing of interest."))
@@ -738,7 +738,7 @@ updateSummarisedResultSettings <- function(x, resultType, installedVersion, timi
     )
 }
 
-getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample) {
+getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample, prefix) {
 
   domains <- cdm[[settingsTableName]] |> dplyr::pull("domain_id") |> unique() |> tolower()
   tables <- list()
@@ -749,19 +749,24 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample
       dplyr::tally() |>
       dplyr::pull()
 
+    tempName <- paste0(prefix, tab)
+
     if (!is.null(personSample)) {
       cli::cli_inform(c(">" = "Sampling {tab} table to {personSample} subjects"))
-      cdm[[tab]] <- cdm[[tab]] |>
+      cdm[[tempName]] <- cdm[[tab]] |>
         dplyr::inner_join(
           cdm$person |>
             dplyr::slice_sample(n = personSample) |>
             dplyr::select(dplyr::all_of("person_id")),
           by = "person_id"
-        )
+        ) |>
+        dplyr::compute(name = tempName, temporary = FALSE)
+    } else {
+      cdm[[tempName]] <- cdm[[tab]]
     }
 
     cli::cli_inform(c(">" = "Getting {tab} records based on {n} concept{?s}."))
-    tables[[tab]] <- cdm[[tab]] |>
+    tables[[tab]] <- cdm[[tempName]] |>
       dplyr::rename("concept_id" = !!paste0(tab, "_concept_id")) |>
       dplyr::inner_join(
         cdm[[settingsTableName]] |>
@@ -783,7 +788,8 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample
       dplyr::mutate(
         unit_concept_id = as.integer(.data$unit_concept_id),
         value_as_concept_id = as.integer(.data$value_as_concept_id)
-      )
+      ) |>
+      dplyr::compute(name = tempName, temporary = FALSE)
   }
 
   measurementCohort <- Reduce(dplyr::union_all, tables) |>

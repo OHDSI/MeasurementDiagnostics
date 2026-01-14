@@ -16,8 +16,8 @@
 #' @param ageGroup If not NULL, a list of ageGroup vectors of length two.
 #' @param dateRange Two dates. The first indicating the earliest measurement
 #' date and the second indicating the latest possible measurement date.
-#' @param personSample Integerish or `NULL`. Number of distinct persons to
-#' sample per `codelist`. If `NULL`, no sampling is performed.
+#' @param personSample Integerish or `NULL`. Number of persons to sample the
+#' measurement and observation tables. If `NULL`, no sampling is performed.
 #' @param estimates A named list indicating, for each measurement diagnostics
 #' check, which estimates to retrieve. The names of the list should correspond
 #' to the diagnostics checks, and each list element should be a character vector
