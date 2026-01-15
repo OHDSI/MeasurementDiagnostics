@@ -64,6 +64,7 @@ result <- summariseMeasurementUse(
   bySex = TRUE,
   codes = list("test_codelist" = c(3001467L, 45875977L))
 )
+#> → Sampling measurement table to 20000 subjects
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
@@ -72,16 +73,16 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:49:32.987478
-#> ✔ Summary finished, at 2026-01-07 17:49:33.249114
+#> → Start summary of data, at 2026-01-15 11:40:48.467703
+#> ✔ Summary finished, at 2026-01-15 11:40:48.702423
 #> → Getting measurements per subject.
 #> Summarising subjects
 #> ℹ The following estimates will be computed:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:49:33.820734
-#> ✔ Summary finished, at 2026-01-07 17:49:34.061553
+#> → Start summary of data, at 2026-01-15 11:40:49.226599
+#> ✔ Summary finished, at 2026-01-15 11:40:49.463319
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
@@ -89,14 +90,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:49:35.431694
-#> ✔ Summary finished, at 2026-01-07 17:49:36.097346
+#> → Start summary of data, at 2026-01-15 11:40:50.699908
+#> ✔ Summary finished, at 2026-01-15 11:40:51.322274
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-07 17:49:36.829132
-#> ✔ Summary finished, at 2026-01-07 17:49:37.206758
+#> → Start summary of data, at 2026-01-15 11:40:51.992097
+#> ✔ Summary finished, at 2026-01-15 11:40:52.335655
 #> → Binding all diagnostic results.
 
 plotMeasurementValueAsConcept(result)

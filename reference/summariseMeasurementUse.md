@@ -13,6 +13,7 @@ summariseMeasurementUse(
   bySex = FALSE,
   ageGroup = NULL,
   dateRange = as.Date(c(NA, NA)),
+  personSample = 20000,
   estimates = list(measurement_summary = c("min", "q25", "median", "q75", "max",
     "density"), measurement_value_as_number = c("min", "q01", "q05", "q25", "median",
     "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
@@ -55,6 +56,11 @@ summariseMeasurementUse(
   Two dates. The first indicating the earliest measurement date and the
   second indicating the latest possible measurement date.
 
+- personSample:
+
+  Integerish or \`NULL\`. Number of persons to sample the measurement
+  and observation tables. If \`NULL\`, no sampling is performed.
+
 - estimates:
 
   A named list indicating, for each measurement diagnostics check, which
@@ -93,6 +99,7 @@ cdm <- mockMeasurementDiagnostics()
 result <- summariseMeasurementUse(
   cdm = cdm, codes = list("test_codelist" = c(3001467L, 45875977L))
 )
+#> → Sampling measurement table to 20000 subjects
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
@@ -101,16 +108,16 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:16.576042
-#> ✔ Summary finished, at 2026-01-07 17:50:16.701477
+#> → Start summary of data, at 2026-01-15 11:41:29.338892
+#> ✔ Summary finished, at 2026-01-15 11:41:29.455356
 #> → Getting measurements per subject.
 #> Summarising subjects
 #> ℹ The following estimates will be computed:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:17.202862
-#> ✔ Summary finished, at 2026-01-07 17:50:17.312133
+#> → Start summary of data, at 2026-01-15 11:41:29.931957
+#> ✔ Summary finished, at 2026-01-15 11:41:30.044196
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
@@ -118,14 +125,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:18.520377
-#> ✔ Summary finished, at 2026-01-07 17:50:18.805006
+#> → Start summary of data, at 2026-01-15 11:41:31.316738
+#> ✔ Summary finished, at 2026-01-15 11:41:31.584976
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-07 17:50:19.44634
-#> ✔ Summary finished, at 2026-01-07 17:50:19.618519
+#> → Start summary of data, at 2026-01-15 11:41:32.179459
+#> ✔ Summary finished, at 2026-01-15 11:41:32.338148
 #> → Binding all diagnostic results.
 
 resultHistogram <- summariseMeasurementUse(
@@ -160,6 +167,7 @@ resultHistogram <- summariseMeasurementUse(
   ),
   checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
 )
+#> → Sampling measurement table to 20000 subjects
 #> → Getting measurement records based on 2 concepts.
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
@@ -169,8 +177,8 @@ resultHistogram <- summariseMeasurementUse(
 #> • time_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:22.744112
-#> ✔ Summary finished, at 2026-01-07 17:50:22.872439
+#> → Start summary of data, at 2026-01-15 11:41:35.384028
+#> ✔ Summary finished, at 2026-01-15 11:41:35.518773
 #> → Getting measurements per subject.
 #> Summarising subjects
 #> ℹ The following estimates will be computed:
@@ -178,8 +186,8 @@ resultHistogram <- summariseMeasurementUse(
 #> • measurements_per_subject_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:23.581253
-#> ✔ Summary finished, at 2026-01-07 17:50:23.703591
+#> → Start summary of data, at 2026-01-15 11:41:36.191066
+#> ✔ Summary finished, at 2026-01-15 11:41:36.306731
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
@@ -188,14 +196,14 @@ resultHistogram <- summariseMeasurementUse(
 #> • value_as_number_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-07 17:50:25.160268
-#> ✔ Summary finished, at 2026-01-07 17:50:25.475202
+#> → Start summary of data, at 2026-01-15 11:41:37.661286
+#> ✔ Summary finished, at 2026-01-15 11:41:37.956024
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be computed:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-07 17:50:26.133343
-#> ✔ Summary finished, at 2026-01-07 17:50:26.309674
+#> → Start summary of data, at 2026-01-15 11:41:38.570585
+#> ✔ Summary finished, at 2026-01-15 11:41:38.732553
 #> → Binding all diagnostic results.
 
 CDMConnector::cdmDisconnect(cdm = cdm)

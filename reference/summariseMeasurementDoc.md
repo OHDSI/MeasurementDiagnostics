@@ -48,6 +48,11 @@ functions.
   Two dates. The first indicating the earliest measurement date and the
   second indicating the latest possible measurement date.
 
+- personSample:
+
+  Integerish or \`NULL\`. Number of persons to sample the measurement
+  and observation tables. If \`NULL\`, no sampling is performed.
+
 - estimates:
 
   A named list indicating, for each measurement diagnostics check, which

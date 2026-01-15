@@ -49,6 +49,7 @@
 <span>  bySex <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ageGroup <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dateRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  personSample <span class="op">=</span> <span class="fl">20000</span>,</span>
 <span>  estimates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>measurement_summary <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>, <span class="st">"q75"</span>, <span class="st">"max"</span>,</span>
 <span>    <span class="st">"density"</span><span class="op">)</span>, measurement_value_as_number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"min"</span>, <span class="st">"q01"</span>, <span class="st">"q05"</span>, <span class="st">"q25"</span>, <span class="st">"median"</span>,</span>
 <span>    <span class="st">"q75"</span>, <span class="st">"q95"</span>, <span class="st">"q99"</span>, <span class="st">"max"</span>, <span class="st">"count_missing"</span>, <span class="st">"percentage_missing"</span>, <span class="st">"density"</span><span class="op">)</span>,</span>
@@ -93,6 +94,11 @@ diagnostics.</p></dd>
 date and the second indicating the latest possible measurement date.</p></dd>
 
 
+<dt id="arg-personsample">personSample<a class="anchor" aria-label="anchor" href="#arg-personsample"></a></dt>
+<dd><p>Integerish or `NULL`. Number of persons to sample the
+measurement and observation tables. If `NULL`, no sampling is performed.</p></dd>
+
+
 <dt id="arg-estimates">estimates<a class="anchor" aria-label="anchor" href="#arg-estimates"></a></dt>
 <dd><p>A named list indicating, for each measurement diagnostics
 check, which estimates to retrieve. The names of the list should correspond
@@ -130,6 +136,7 @@ bind-width. See function examples. Histogram only available for
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">summariseMeasurementUse</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  cdm <span class="op">=</span> <span class="va">cdm</span>, codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"test_codelist"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3001467L</span>, <span class="fl">45875977L</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Sampling measurement table to 20000 subjects</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting measurement records based on 2 concepts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Subsetting records to the subjects and timing of interest.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting time between records per person.</span>
@@ -138,16 +145,16 @@ bind-width. See function examples. Histogram only available for
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> time: min, q25, median, q75, max, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:16.576042</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:16.701477</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:29.338892</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:29.455356</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting measurements per subject.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising subjects</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> measurements_per_subject: min, q25, median, q75, max, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:17.202862</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:17.312133</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:29.931957</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:30.044196</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as number.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
@@ -155,14 +162,14 @@ bind-width. See function examples. Histogram only available for
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   count_missing, percentage_missing, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:18.520377</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:18.805006</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:31.316738</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:31.584976</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as concept.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> value_as_concept_id: count, percentage</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:19.44634</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:19.618519</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:32.179459</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:32.338148</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Binding all diagnostic results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">resultHistogram</span> <span class="op">&lt;-</span> <span class="fu">summariseMeasurementUse</span><span class="op">(</span></span></span>
@@ -197,6 +204,7 @@ bind-width. See function examples. Histogram only available for
 <span class="r-in"><span>  <span class="op">)</span>,</span></span>
 <span class="r-in"><span>  checks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"measurement_summary"</span>, <span class="st">"measurement_value_as_number"</span>, <span class="st">"measurement_value_as_concept"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Sampling measurement table to 20000 subjects</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting measurement records based on 2 concepts.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Subsetting records to the subjects and timing of interest.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting time between records per person.</span>
@@ -206,8 +214,8 @@ bind-width. See function examples. Histogram only available for
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> time_band: count</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:22.744112</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:22.872439</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:35.384028</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:35.518773</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting measurements per subject.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising subjects</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
@@ -215,8 +223,8 @@ bind-width. See function examples. Histogram only available for
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> measurements_per_subject_band: count</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:23.581253</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:23.703591</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:36.191066</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:36.306731</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as number.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
@@ -225,14 +233,14 @@ bind-width. See function examples. Histogram only available for
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> value_as_number_band: count</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:25.160268</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:25.475202</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:37.661286</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:37.956024</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as concept.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be computed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> value_as_concept_id: count, percentage</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-07 17:50:26.133343</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-07 17:50:26.309674</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-01-15 11:41:38.570585</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-01-15 11:41:38.732553</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Binding all diagnostic results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu"><a href="https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html" class="external-link">cdmDisconnect</a></span><span class="op">(</span>cdm <span class="op">=</span> <span class="va">cdm</span><span class="op">)</span></span></span>
