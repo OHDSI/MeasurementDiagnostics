@@ -59,6 +59,7 @@ summariseMeasurementUse <- function(cdm,
                                     bySex = FALSE,
                                     ageGroup = NULL,
                                     dateRange = as.Date(c(NA, NA)),
+                                    personSample = 20000,
                                     estimates = list(
                                       "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
                                       "measurement_value_as_number" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
@@ -80,6 +81,7 @@ summariseMeasurementUse <- function(cdm,
     bySex = bySex,
     ageGroup = ageGroup,
     dateRange = dateRange,
+    personSample = personSample,
     estimates = estimates,
     histogram = histogram,
     checks = checks
@@ -99,6 +101,7 @@ summariseMeasurementUseInternal <- function(cdm,
                                             bySex,
                                             ageGroup,
                                             dateRange,
+                                            personSample,
                                             estimates,
                                             histogram,
                                             checks) {
@@ -111,6 +114,7 @@ summariseMeasurementUseInternal <- function(cdm,
     codes <- omopgenerics::validateConceptSetArgument(codes)
   }
   ageGroup <- omopgenerics::validateAgeGroupArgument(ageGroup = ageGroup)
+  omopgenerics::assertNumeric(personSample, min = 1, null = TRUE, length = 1)
   omopgenerics::assertLogical(byConcept, length = 1)
   omopgenerics::assertLogical(byYear, length = 1)
   omopgenerics::assertLogical(bySex, length = 1)
@@ -171,11 +175,18 @@ summariseMeasurementUseInternal <- function(cdm,
 
   # cohort
   measurementCohortName <- omopgenerics::uniqueTableName(prefix = prefix)
-  cdm[[measurementCohortName]] <- getCohortFromCodes(cdm, codes, settingsTableName, name = measurementCohortName)
+  cdm[[measurementCohortName]] <- getCohortFromCodes(
+    cdm = cdm, codes = codes,  settingsTableName = settingsTableName,
+    name = measurementCohortName, personSample = personSample, prefix = prefix
+  )
 
   cli::cli_inform(c(">" = "Subsetting records to the subjects and timing of interest."))
   # subset to cohort and timing
-  measurement <- subsetMeasurementTable(cdm, cohortName, codesTable, timing, measurementCohortName, dateRange, prefix)
+  measurement <- subsetMeasurementTable(
+    cdm = cdm, cohortName = cohortName, codesTable = codesTable,
+    timing = timing, name = measurementCohortName, dateRange = dateRange,
+    prefix = prefix
+  )
   measurement <- measurement |>
     dplyr::rename("subject_id" = "person_id", "cohort_start_date" = "record_date") |>
     dplyr::mutate(cohort_end_date = .data$cohort_start_date) |>
@@ -430,9 +441,7 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
   # if COHORT_START_DATE : cohort_start_date/observation_period_start_date = measurement date
 
   if (is.null(cohortName) & timing == "any") {
-    return(
-      cdm[[name]] |> measurementInDateRange(dateRange, name)
-    )
+    return(cdm[[name]] |> measurementInDateRange(dateRange, name))
   }
 
   codelistAttribute <- !is.null(codesTable)
@@ -494,6 +503,7 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
   }
 
   measurement <- measurement |> measurementInDateRange(dateRange, name)
+
   return(measurement)
 }
 
@@ -729,7 +739,7 @@ updateSummarisedResultSettings <- function(x, resultType, installedVersion, timi
     )
 }
 
-getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
+getCohortFromCodes <- function(cdm, codes, settingsTableName, name, personSample, prefix) {
 
   domains <- cdm[[settingsTableName]] |> dplyr::pull("domain_id") |> unique() |> tolower()
   tables <- list()
@@ -739,8 +749,26 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
       dplyr::filter(tolower(.data$domain_id) == tab) |>
       dplyr::tally() |>
       dplyr::pull()
+
+    tempName <- paste0(prefix, tab)
+
+    if (!is.null(personSample)) {
+      cli::cli_inform(c(">" = "Sampling {tab} table to {personSample} subjects"))
+      cdm[[tempName]] <- cdm[[tab]] |>
+        dplyr::inner_join(
+          cdm$person |>
+            dplyr::slice_sample(n = personSample) |>
+            dplyr::select(dplyr::all_of("person_id")),
+          by = "person_id"
+        ) |>
+        dplyr::compute(name = tempName, temporary = FALSE)
+    } else {
+      cdm[[tempName]] <- cdm[[tab]] |>
+        dplyr::compute(name = tempName, temporary = FALSE)
+    }
+
     cli::cli_inform(c(">" = "Getting {tab} records based on {n} concept{?s}."))
-    tables[[tab]] <- cdm[[tab]] |>
+    tables[[tab]] <- cdm[[tempName]] |>
       dplyr::rename("concept_id" = !!paste0(tab, "_concept_id")) |>
       dplyr::inner_join(
         cdm[[settingsTableName]] |>
@@ -762,11 +790,14 @@ getCohortFromCodes <- function(cdm, codes, settingsTableName, name) {
       dplyr::mutate(
         unit_concept_id = as.integer(.data$unit_concept_id),
         value_as_concept_id = as.integer(.data$value_as_concept_id)
-      )
+      ) |>
+      dplyr::compute(name = tempName, temporary = FALSE)
   }
 
-  Reduce(dplyr::union_all, tables) |>
+  measurementCohort <- Reduce(dplyr::union_all, tables) |>
     dplyr::compute(name = name, temporary = FALSE)
+
+  return(measurementCohort)
 }
 
 validateEstimates <- function(estimates, checks) {

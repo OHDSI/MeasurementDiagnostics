@@ -29,6 +29,9 @@ subject is in the cohort (or in observation if cohort = NULL), and 3)
 \item{dateRange}{Two dates. The first indicating the earliest measurement
 date and the second indicating the latest possible measurement date.}
 
+\item{personSample}{Integerish or `NULL`. Number of persons to sample the
+measurement and observation tables. If `NULL`, no sampling is performed.}
+
 \item{estimates}{A named list indicating, for each measurement diagnostics
 check, which estimates to retrieve. The names of the list should correspond
 to the diagnostics checks, and each list element should be a character vector

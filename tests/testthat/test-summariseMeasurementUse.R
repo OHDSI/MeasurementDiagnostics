@@ -8,7 +8,8 @@ test_that("summariseMeasurementUse works", {
     cdm = cdm,
     codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
     bySex = TRUE,
-    ageGroup = list(c(0, 17), c(18, 64), c(65, 150))
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    personSample = NULL
   )
   expect_equal(
     omopgenerics::settings(res),
@@ -144,6 +145,21 @@ test_that("summariseMeasurementUse works", {
       dplyr::pull("estimate_name") |>
       unique(),
     c("count", "min", "max")
+  )
+
+  # personSample ----
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
+    personSample = 10
+  )
+  expect_true(
+    res |>
+      dplyr::filter(group_level %in% c("test"), variable_name == "number subjects", strata_name == "overall") |>
+      dplyr::pull(estimate_value) |>
+      as.numeric() <= 10
   )
 
   # Histograms ----
@@ -384,6 +400,27 @@ test_that("summariseMeasurementUse expected behaviour", {
       bySex = TRUE,
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       checks = NULL
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = "10"
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = 0
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = 1:2
     )
   )
 
