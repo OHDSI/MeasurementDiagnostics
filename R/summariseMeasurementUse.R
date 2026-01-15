@@ -114,6 +114,7 @@ summariseMeasurementUseInternal <- function(cdm,
     codes <- omopgenerics::validateConceptSetArgument(codes)
   }
   ageGroup <- omopgenerics::validateAgeGroupArgument(ageGroup = ageGroup)
+  omopgenerics::assertNumeric(personSample, min = 1, null = TRUE, length = 1)
   omopgenerics::assertLogical(byConcept, length = 1)
   omopgenerics::assertLogical(byYear, length = 1)
   omopgenerics::assertLogical(bySex, length = 1)

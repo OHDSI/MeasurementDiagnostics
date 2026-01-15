@@ -159,7 +159,7 @@ test_that("summariseMeasurementUse works", {
     res |>
       dplyr::filter(group_level %in% c("test"), variable_name == "number subjects", strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
-      as.numeric() < 10
+      as.numeric() <= 10
   )
 
   # Histograms ----
@@ -400,6 +400,27 @@ test_that("summariseMeasurementUse expected behaviour", {
       bySex = TRUE,
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       checks = NULL
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = "10"
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = 0
+    )
+  )
+  expect_error(
+    res <- summariseMeasurementUse(
+      cdm = cdm,
+      codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+      personSample = 1:2
     )
   )
 
