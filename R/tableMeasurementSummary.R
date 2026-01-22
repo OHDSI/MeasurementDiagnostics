@@ -70,7 +70,7 @@ tableMeasurementSummary <- function(result,
     visOmopResults::visOmopTable(
       estimateName = c(
         "N" = "<count>",
-        "Median [Q25 – Q75]" = "<median> [<q25> – <q75>]",
+        "Median [Q25 \u2013 Q75]" = "<median> [<q25> \u2013 <q75>]",
         "Range" = "<min> to <max>"
       ),
       header = header,
