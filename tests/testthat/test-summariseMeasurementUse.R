@@ -178,8 +178,8 @@ test_that("summariseMeasurementUse works", {
     )
   )
   expect_equal(
-    res |> dplyr::filter(.data$variable_name == "measurements_per_subject", .data$estimate_name == "max"),
-    c(3, 3, 3, 2, 3, 1)
+    res |> dplyr::filter(.data$variable_name == "measurements_per_subject", .data$estimate_name == "max") |> dplyr::pull(estimate_value),
+    as.character(c(3, 3, 3, 2, 3, 1))
   )
 
   expect_true(all(
