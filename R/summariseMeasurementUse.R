@@ -61,7 +61,7 @@ summariseMeasurementUse <- function(cdm,
                                     dateRange = as.Date(c(NA, NA)),
                                     personSample = 20000,
                                     estimates = list(
-                                      "measurement_summary" = c("min", "q25", "median", "q75", "max", "density", "count"),
+                                      "measurement_summary" = c("min", "q25", "median", "q75", "max", "density"),
                                       "measurement_value_as_number" = c("min", "q01", "q05", "q25", "median", "q75", "q95", "q99", "max", "count_missing", "percentage_missing", "density"),
                                       "measurement_value_as_concept" = c("count", "percentage")
                                     ),
