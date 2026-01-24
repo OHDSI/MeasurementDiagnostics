@@ -143,7 +143,7 @@ test_that("summariseCohortMeasurementUse works", {
   ))
   expect_equal(
     res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("time", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
-    c(NA_character_, "0 to 10", ">15" )
+    c("0 to 10", ">15" )
   )
 
   dropCreatedTables(cdm = cdm)
