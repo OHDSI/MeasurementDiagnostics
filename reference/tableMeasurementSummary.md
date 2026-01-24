@@ -86,16 +86,16 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:15.52712
-#> ✔ Summary finished, at 2026-01-24 17:15:15.617755
+#> → Start summary of data, at 2026-01-24 21:07:07.975229
+#> ✔ Summary finished, at 2026-01-24 21:07:08.076347
 #> → Getting measurements per subject.
 #> Summarising subjects
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:16.105524
-#> ✔ Summary finished, at 2026-01-24 17:15:16.198039
+#> → Start summary of data, at 2026-01-24 21:07:08.575505
+#> ✔ Summary finished, at 2026-01-24 21:07:08.671601
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -103,14 +103,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:17.367601
-#> ✔ Summary finished, at 2026-01-24 17:15:17.632716
+#> → Start summary of data, at 2026-01-24 21:07:09.900546
+#> ✔ Summary finished, at 2026-01-24 21:07:10.173093
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-24 17:15:18.27879
-#> ✔ Summary finished, at 2026-01-24 17:15:18.42079
+#> → Start summary of data, at 2026-01-24 21:07:10.83067
+#> ✔ Summary finished, at 2026-01-24 21:07:10.98319
 #> → Binding all diagnostic results.
 
 tableMeasurementSummary(result)
@@ -145,9 +145,9 @@ N
 
 Time (days)
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-249 \[67 - 645\]
+249 \[67 – 645\]
 
 Range
 
@@ -155,9 +155,9 @@ Range
 
 Measurements per subject
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-1.00 \[1.00 - 2.00\]
+1.00 \[1.00 – 2.00\]
 
 Range
 

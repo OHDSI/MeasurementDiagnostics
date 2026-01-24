@@ -86,16 +86,16 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:37.951429
-#> ✔ Summary finished, at 2026-01-24 17:15:38.04568
+#> → Start summary of data, at 2026-01-24 21:07:30.139976
+#> ✔ Summary finished, at 2026-01-24 21:07:30.233397
 #> → Getting measurements per subject.
 #> Summarising subjects
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:38.560097
-#> ✔ Summary finished, at 2026-01-24 17:15:38.649284
+#> → Start summary of data, at 2026-01-24 21:07:30.752271
+#> ✔ Summary finished, at 2026-01-24 21:07:30.841533
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -103,14 +103,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-24 17:15:39.868707
-#> ✔ Summary finished, at 2026-01-24 17:15:40.140163
+#> → Start summary of data, at 2026-01-24 21:07:32.073295
+#> ✔ Summary finished, at 2026-01-24 21:07:32.345761
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-24 17:15:40.800318
-#> ✔ Summary finished, at 2026-01-24 17:15:40.948879
+#> → Start summary of data, at 2026-01-24 21:07:33.007433
+#> ✔ Summary finished, at 2026-01-24 21:07:33.154358
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsNumber(result)
@@ -161,17 +161,17 @@ N
 
 100
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-8.77 \[7.07 - 10.48\]
+8.77 \[7.07 – 10.48\]
 
-Q05 - Q95
+Q05 – Q95
 
-5.65 - 11.89
+5.65 – 11.89
 
-Q01 - Q99
+Q01 – Q99
 
-5.36 - 12.18
+5.36 – 12.18
 
 Range
 
@@ -189,17 +189,17 @@ N
 
 100
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-8.77 \[7.07 - 10.48\]
+8.77 \[7.07 – 10.48\]
 
-Q05 - Q95
+Q05 – Q95
 
-5.73 - 11.82
+5.73 – 11.82
 
-Q01 - Q99
+Q01 – Q99
 
-5.44 - 12.11
+5.44 – 12.11
 
 Range
 
@@ -228,17 +228,17 @@ N
 
 100
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-8.77 \[7.07 - 10.48\]
+8.77 \[7.07 – 10.48\]
 
-Q05 - Q95
+Q05 – Q95
 
-5.65 - 11.89
+5.65 – 11.89
 
-Q01 - Q99
+Q01 – Q99
 
-5.36 - 12.18
+5.36 – 12.18
 
 Range
 
@@ -256,17 +256,17 @@ N
 
 100
 
-Median \[Q25 - Q75\]
+Median \[Q25 – Q75\]
 
-8.77 \[7.07 - 10.48\]
+8.77 \[7.07 – 10.48\]
 
-Q05 - Q95
+Q05 – Q95
 
-5.73 - 11.82
+5.73 – 11.82
 
-Q01 - Q99
+Q01 – Q99
 
-5.44 - 12.11
+5.44 – 12.11
 
 Range
 

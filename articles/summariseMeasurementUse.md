@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpJmo6br/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpR6uE3J/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -115,27 +115,27 @@ tableMeasurementValueAsNumber(repiratory_function_measurements)
 |----------------------|-------------------------------------|------------|-------------------------------------|-------------------|-------------|---------------------|-----------------|----------------------|------------------|
 | respiratory function |                                     |            |                                     |                   |             |                     |                 |                      |                  |
 | Eunomia              | overall                             | overall    | overall                             | overall           | overall     | No matching concept | 0               | N                    | 26,184           |
-|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 - Q75\] | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q05 - Q95            | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q01 - Q99            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 – Q75\] | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q05 – Q95            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q01 – Q99            | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Range                | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Missing value, N (%) | 26,184 (100.00%) |
 |                      | Measurement of respiratory function | 4052083    | Measurement of respiratory function | 4052083           | Measurement | No matching concept | 0               | N                    | 12,264           |
-|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 - Q75\] | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q05 - Q95            | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q01 - Q99            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 – Q75\] | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q05 – Q95            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q01 – Q99            | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Range                | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Missing value, N (%) | 12,264 (100.00%) |
 |                      | FEV1/FVC                            | 3011505    | FEV1/FVC                            | 3011505           | Measurement | No matching concept | 0               | N                    | 6,960            |
-|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 - Q75\] | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q05 - Q95            | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q01 - Q99            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 – Q75\] | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q05 – Q95            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q01 – Q99            | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Range                | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Missing value, N (%) | 6,960 (100.00%)  |
 |                      | Spirometry                          | 4133840    | Spirometry                          | 4133840           | Measurement | No matching concept | 0               | N                    | 6,960            |
-|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 - Q75\] | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q05 - Q95            | –                |
-|                      |                                     |            |                                     |                   |             |                     |                 | Q01 - Q99            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Median \[Q25 – Q75\] | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q05 – Q95            | –                |
+|                      |                                     |            |                                     |                   |             |                     |                 | Q01 – Q99            | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Range                | –                |
 |                      |                                     |            |                                     |                   |             |                     |                 | Missing value, N (%) | 6,960 (100.00%)  |
 
@@ -169,7 +169,7 @@ tableMeasurementSummary(repiratory_function_measurements)
 | respiratory function |                          |                      |                      |
 | Eunomia              | Number records           | N                    | 26,184               |
 |                      | Number subjects          | N                    | 2,096                |
-|                      | Time (days)              | Median \[Q25 - Q75\] | 371 \[0 - 1,726\]    |
+|                      | Time (days)              | Median \[Q25 – Q75\] | 371 \[0 – 1,726\]    |
 |                      |                          | Range                | 0 to 33,541          |
-|                      | Measurements per subject | Median \[Q25 - Q75\] | 2.00 \[1.00 - 3.00\] |
+|                      | Measurements per subject | Median \[Q25 – Q75\] | 2.00 \[1.00 – 3.00\] |
 |                      |                          | Range                | 1.00 to 138.00       |
