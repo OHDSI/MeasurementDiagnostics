@@ -81,35 +81,35 @@ result <- summariseMeasurementUse(
 #> → Subsetting records to the subjects and timing of interest.
 #> → Getting time between records per person.
 #> Summarising timings
-#> ℹ The following estimates will be computed:
+#> ℹ The following estimates will be calculated:
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-15 11:40:36.925248
-#> ✔ Summary finished, at 2026-01-15 11:40:37.052281
+#> → Start summary of data, at 2026-01-24 17:14:03.142261
+#> ✔ Summary finished, at 2026-01-24 17:14:03.250289
 #> → Getting measurements per subject.
 #> Summarising subjects
-#> ℹ The following estimates will be computed:
+#> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-15 11:40:37.568016
-#> ✔ Summary finished, at 2026-01-15 11:40:37.683647
+#> → Start summary of data, at 2026-01-24 17:14:03.771509
+#> ✔ Summary finished, at 2026-01-24 17:14:03.863913
 #> → Summarising results - value as number.
 #> Summarising value as number
-#> ℹ The following estimates will be computed:
+#> ℹ The following estimates will be calculated:
 #> • value_as_number: min, q01, q05, q25, median, q75, q95, q99, max,
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-15 11:40:38.89385
-#> ✔ Summary finished, at 2026-01-15 11:40:39.187828
+#> → Start summary of data, at 2026-01-24 17:14:05.09105
+#> ✔ Summary finished, at 2026-01-24 17:14:05.364288
 #> → Summarising results - value as concept.
 #> Summarising value as number
-#> ℹ The following estimates will be computed:
+#> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-15 11:40:39.841426
-#> ✔ Summary finished, at 2026-01-15 11:40:40.009132
+#> → Start summary of data, at 2026-01-24 17:14:06.043905
+#> ✔ Summary finished, at 2026-01-24 17:14:06.186417
 #> → Binding all diagnostic results.
 
 result |>
