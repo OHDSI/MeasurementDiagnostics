@@ -877,7 +877,7 @@ addConceptName <- function(table, prefix) {
 }
 
 histogramBandExpr <- function(x, name, newName) {
-  caseWhen <- character()
+  caseWhen <- glue::glue("is.na(.data${name}) ~ NA")
   for (jj in names(x)) {
     if (is.infinite(x[[jj]][2])) {
       caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} ~ '{jj}'")
@@ -885,7 +885,7 @@ histogramBandExpr <- function(x, name, newName) {
       caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} & .data${name} <= {x[[jj]][2]} ~ '{jj}'")
     }
   }
-  glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = NA)") |>
+  glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = 'None')") |>
     rlang::parse_exprs() |>
     rlang::set_names(newName)
 }
