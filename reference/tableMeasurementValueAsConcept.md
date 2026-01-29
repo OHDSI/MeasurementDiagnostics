@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-29 11:56:36.8836
-#> ✔ Summary finished, at 2026-01-29 11:56:36.973175
+#> → Start summary of data, at 2026-01-29 14:48:16.724148
+#> ✔ Summary finished, at 2026-01-29 14:48:16.82312
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-29 11:56:37.464816
-#> ✔ Summary finished, at 2026-01-29 11:56:37.55076
+#> → Start summary of data, at 2026-01-29 14:48:17.328002
+#> ✔ Summary finished, at 2026-01-29 14:48:17.416421
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-29 11:56:38.954327
-#> ✔ Summary finished, at 2026-01-29 11:56:39.223477
+#> → Start summary of data, at 2026-01-29 14:48:18.887341
+#> ✔ Summary finished, at 2026-01-29 14:48:19.148616
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-29 11:56:39.926762
-#> ✔ Summary finished, at 2026-01-29 11:56:40.073862
+#> → Start summary of data, at 2026-01-29 14:48:19.80461
+#> ✔ Summary finished, at 2026-01-29 14:48:19.947941
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsConcept(result)
@@ -140,7 +140,7 @@ Estimate value
 
 test_codelist
 
-unknown
+mock database
 
 overall
 

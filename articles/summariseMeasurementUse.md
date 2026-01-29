@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpfonUsH/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpYxii1r/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -151,7 +151,7 @@ tableMeasurementValueAsConcept(repiratory_function_measurements)
 | CDM name             | Concept name                        | Concept ID | Source concept name                 | Source concept ID | Domain ID   | Value as concept name | Value as concept ID | Estimate name | Estimate value   |
 |----------------------|-------------------------------------|------------|-------------------------------------|-------------------|-------------|-----------------------|---------------------|---------------|------------------|
 | respiratory function |                                     |            |                                     |                   |             |                       |                     |               |                  |
-| unknown              | overall                             | overall    | overall                             | overall           | overall     | No matching concept   | 0                   | N (%)         | 26,184 (100.00%) |
+| Eunomia              | overall                             | overall    | overall                             | overall           | overall     | No matching concept   | 0                   | N (%)         | 26,184 (100.00%) |
 |                      | FEV1/FVC                            | 3011505    | FEV1/FVC                            | 3011505           | Measurement | No matching concept   | 0                   | N (%)         | 6,960 (100.00%)  |
 |                      | Measurement of respiratory function | 4052083    | Measurement of respiratory function | 4052083           | Measurement | No matching concept   | 0                   | N (%)         | 12,264 (100.00%) |
 |                      | Spirometry                          | 4133840    | Spirometry                          | 4133840           | Measurement | No matching concept   | 0                   | N (%)         | 6,960 (100.00%)  |
