@@ -32,7 +32,7 @@ mockMeasurementDiagnostics <- function(nPerson = 100,
   omopgenerics::assertCharacter(writeSchema, length = 1, na = FALSE, null = FALSE)
 
   cdm_local <- omock::mockCdmReference() |>
-    omock::mockPerson(nPerson = 100, seed = seed) |>
+    omock::mockPerson(nPerson = nPerson, seed = seed) |>
     omock::mockObservationPeriod(seed = seed) |>
     omock::mockConditionOccurrence(seed = seed) |>
     omock::mockVisitOccurrence(seed = seed) |>
@@ -44,7 +44,7 @@ mockMeasurementDiagnostics <- function(nPerson = 100,
   cdm_local$measurement <- cdm_local$measurement |>
     dplyr::mutate(
       unit_concept_id = dplyr::if_else(dplyr::row_number()%%2 == 0, 9529L, NA_integer_),
-      value_as_number = dplyr::if_else(dplyr::row_number()<6, NA, seq(from = 5, to = 150, length.out = 2000)),
+      value_as_number = dplyr::if_else(dplyr::row_number()<6, NA, seq(from = 5, to = 150, length.out = dplyr::n())),
       value_as_concept_id = dplyr::case_when(
         dplyr::row_number()%%3 == 0 ~ 4328749L,
         dplyr::row_number()%%3 == 1 ~ 4267416L,
