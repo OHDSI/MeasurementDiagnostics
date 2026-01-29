@@ -177,6 +177,10 @@ test_that("summariseMeasurementUse works", {
       )
     )
   )
+  expect_equal(
+    res |> dplyr::filter(.data$variable_name == "measurements_per_subject", .data$estimate_name == "max") |> dplyr::pull(estimate_value),
+    as.character(c(3, 3, 3, 2, 3, 1))
+  )
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
@@ -186,7 +190,7 @@ test_that("summariseMeasurementUse works", {
   ))
   expect_equal(
     res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("time", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
-    c("0 to 100", "210 to 300", "310 to Inf", NA_character_, "0 to 10", "11 to 15", ">15" )
+    c("0 to 100", "210 to 300", "310 to Inf", "0 to 10", "11 to 15", ">15", "None")
   )
 
   dropCreatedTables(cdm = cdm)
@@ -281,6 +285,7 @@ test_that("summariseMeasurementUse expected behaviour", {
   )
   expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name != "count")) == 0)
   expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name == "count")) != 0)
+  expect_true(nrow(res |> dplyr::filter(variable_level == "None")) == 6) # value_as_number = 15.23 --> category "None"
 
   ## no numeric estimates + numeric histograms
   res <- summariseMeasurementUse(

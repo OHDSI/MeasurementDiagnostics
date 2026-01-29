@@ -37,7 +37,12 @@ tableMeasurementSummary <- function(result,
 
   # subset to rows of interest
   result <- result |>
+    dplyr::filter(!.data$estimate_name %in% c("density_x", "density_y")) |>
     omopgenerics::filterSettings(.data$result_type == "measurement_summary")
+
+  if(sum(!is.na(unique(result$variable_level)), na.rm = TRUE) > 0) {
+    hide <- hide[hide != "variable_level"]
+  }
 
   if (nrow(result) == 0) {
     cli::cli_warn("There are no results with `result_type = measurement_summary`")
@@ -68,13 +73,12 @@ tableMeasurementSummary <- function(result,
   }
 
   result |>
-    dplyr::filter(!.data$estimate_name %in% c("density_x", "density_y")) |>
     dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name, custom = c("Time (days)" = "time"))) |>
     visOmopResults::visOmopTable(
       estimateName = c(
         "N (%)" = "<count> (<percentage>%)",
         "N" = "<count>",
-        "Median [Q25 - Q75]" = "<median> [<q25> - <q75>]",
+        "Median [Q25 \u2013 Q75]" = "<median> [<q25> \u2013 <q75>]",
         "Range" = "<min> to <max>"
       ),
       header = header,

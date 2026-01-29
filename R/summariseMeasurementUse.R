@@ -294,31 +294,42 @@ summariseMeasurementUseInternal <- function(cdm,
 
     if (summaryFlag | measurementsSubjectHistogramFlag) {
       cli::cli_inform(c(">" = "Getting measurements per subject."))
-      measurementSubjectsTbl <- measurement |>
-        dplyr::mutate(overall = "overall") |>
-        dplyr::group_by_at(c(groupCols, unlist(strata))) |>
-        dplyr::summarise(
-          measurements_per_subject = dplyr::n(),
-          .groups = "drop"
-        ) |>
-        dplyr::ungroup()
 
-      if (measurementsSubjectHistogramFlag) {
-        measurementSubjectsTbl <- measurementSubjectsTbl |>
-          dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band"))
+      measurementsSubjectName <- omopgenerics::uniqueTableName(prefix = prefix)
+      measurement <- measurement |>
+        dplyr::mutate(overall = "overall")
+
+      for (strataName in c("overall", unlist(strata))) {
+        measurementSubjects <- measurement |>
+          dplyr::group_by_at(c(unlist(baseGroup), strataName, "subject_id")) |>
+          dplyr::summarise(
+            measurements_per_subject = dplyr::n(),
+            .groups = "drop"
+          ) |>
+          dplyr::compute(name = measurementsSubjectName, temporary = FALSE)
+
+        if (measurementsSubjectHistogramFlag) {
+          measurementSubjects <- measurementSubjects |>
+            dplyr::mutate(!!!histogramBandExpr(histogram[["measurements_per_subject"]], name = "measurements_per_subject", newName = "measurements_per_subject_band")) |>
+            dplyr::compute(name = measurementsSubjectName, temporary = FALSE)
+        }
+
+        x <- measurementSubjects |>
+          PatientProfiles::summariseResult(
+            group = list(baseGroup),
+            includeOverallGroup = FALSE,
+            strata = strataName,
+            includeOverallStrata = FALSE,
+            variables = c("measurements_per_subject"[summaryFlag], "measurements_per_subject_band"[measurementsSubjectHistogramFlag]),
+            estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[measurementsSubjectHistogramFlag]),
+            counts = FALSE
+          )
+        measurementSummary[[paste0("subjects_", strataName)]] <- x |>
+          omopgenerics::newSummarisedResult(
+            settings = omopgenerics::settings(x) |>
+              dplyr::mutate(strata = paste0(unlist(.env$strata), collapse = " &&& "))
+          )
       }
-
-      cli::cli_inform("Summarising subjects")
-      measurementSummary[["subjects"]] <- measurementSubjectsTbl |>
-        PatientProfiles::summariseResult(
-          group = list(baseGroup),
-          includeOverallGroup = FALSE,
-          strata = strata,
-          includeOverallStrata = TRUE,
-          variables = c("measurements_per_subject"[summaryFlag], "measurements_per_subject_band"[measurementsSubjectHistogramFlag]),
-          estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[measurementsSubjectHistogramFlag]),
-          counts = FALSE
-        )
     }
 
     measurementSummary <- measurementSummary |>
@@ -885,7 +896,7 @@ addConceptName <- function(table, prefix) {
 }
 
 histogramBandExpr <- function(x, name, newName) {
-  caseWhen <- character()
+  caseWhen <- glue::glue("is.na(.data${name}) ~ NA")
   for (jj in names(x)) {
     if (is.infinite(x[[jj]][2])) {
       caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} ~ '{jj}'")
@@ -893,7 +904,7 @@ histogramBandExpr <- function(x, name, newName) {
       caseWhen[jj] <- glue::glue(".data${name} >= {x[[jj]][1]} & .data${name} <= {x[[jj]][2]} ~ '{jj}'")
     }
   }
-  glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = NA)") |>
+  glue::glue("dplyr::case_when({paste0(caseWhen, collapse = ', ')}, .default = 'None')") |>
     rlang::parse_exprs() |>
     rlang::set_names(newName)
 }
