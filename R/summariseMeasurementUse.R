@@ -430,7 +430,8 @@ summariseMeasurementUseInternal <- function(cdm,
   return(
     omopgenerics::bind(
       measurementSummary, measurementNumber, measurementConcept
-    )
+    ) |>
+      dplyr::mutate(cdm_name = omopgenerics::cdmName(cdm))
   )
 }
 
