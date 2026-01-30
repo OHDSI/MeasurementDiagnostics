@@ -35,8 +35,10 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::pull(variable_name) |>
       sort(),
     c(
-      rep("measurements_per_subject", 10), "Number records", "Number records",
-      "Number subjects", "Number subjects", rep("Subjects with measurement", 4),
+      "cohort_records", "cohort_records",
+      "cohort_subjects", "cohort_subjects",
+      rep("measurements_per_subject", 10),
+      rep("number_subjects", 4),
       rep("time", 10)
     )
   )
@@ -147,7 +149,8 @@ test_that("summariseCohortMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "number records", "number subjects", "time", "measurements_per_subject",
+      "cohort_records", "cohort_subjects", "number_subjects", "time",
+      "measurements_per_subject", "number records",
       "value_as_number", "value_as_concept_name"
     )
   ))
@@ -183,7 +186,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1', '1035', '1487', '15', '17268', '2', '2329', '2442', '2656', '2686', '3', '3', '31573', '31880', '3493', '38', '39', '4962', '5', '6', '7481', '86.7088607594937', '9', '98.8830975428146')
+    c('1', '1', '1', '1035', '1487', '15', '17268', '17268', '2', '2329', '2442', '2656', '2686', '2686', '3', '3', '31573', '31880', '3493', '38', '39', '4962', '5', '6', '7481', '86.7088607594937', '9', '98.8830975428146')
   )
   expect_equal(
     res_during |>
@@ -191,7 +194,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1', '1', '1', '1', '1', '1', '1.04244229337305', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '17268', '2', '2', '2.23380491437081', '2686', '28', '60')
+    c('1', '1', '1', '1', '1', '1', '1', '1', '1.04244229337305', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '17268', '17268', '2', '2', '2.23380491437081', '2686', '2686', '28', '60')
   )
   expect_equal(
     res_start |>
@@ -376,3 +379,4 @@ test_that("summariseMeasurementUse checks", {
 
   dropCreatedTables(cdm = cdm)
 })
+

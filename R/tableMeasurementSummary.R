@@ -57,7 +57,7 @@ tableMeasurementSummary <- function(result,
 
   factors <- result |>
     dplyr::filter(
-      .data$variable_name %in% c("Number records", "Subjects with measurement")
+      .data$variable_name %in% c("cohort_records", "number_subjects")
       ) |>
     visOmopResults::splitAll() |>
     dplyr::select(dplyr::any_of(c("cdm_name", "cohort_name", "codelist_name", "concept_name", "unit_concept_name", "estimate_value"))) |>
