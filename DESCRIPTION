@@ -14,6 +14,7 @@ Imports:
     CDMConnector (>= 2.0.0),
     cli,
     clock,
+    CohortCharacteristics,
     CohortConstructor (>= 0.4.0),
     DBI,
     dplyr,

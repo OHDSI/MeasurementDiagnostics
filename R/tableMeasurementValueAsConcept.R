@@ -58,7 +58,7 @@ tableMeasurementValueAsConcept <- function(result,
   factors <- result |>
     dplyr::filter(.data$variable_name == "count") |>
     visOmopResults::splitAll() |>
-    dplyr::select(dplyr::any_of(c("cdm_name", "codelist_name", "concept_name", "variable_level"))) |>
+    dplyr::select(dplyr::any_of(c("cdm_name", "cohort_name", "codelist_name", "concept_name", "variable_level"))) |>
     dplyr::distinct()
 
   if (nrow(factors) == 0) {

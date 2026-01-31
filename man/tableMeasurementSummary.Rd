@@ -7,7 +7,7 @@
 tableMeasurementSummary(
   result,
   header = c(visOmopResults::strataColumns(result)),
-  groupColumn = c("codelist_name"),
+  groupColumn = character(),
   settingsColumn = character(),
   hide = c("variable_level"),
   style = NULL,

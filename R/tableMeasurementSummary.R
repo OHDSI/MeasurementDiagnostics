@@ -24,7 +24,7 @@
 #'}
 tableMeasurementSummary <- function(result,
                                     header = c(visOmopResults::strataColumns(result)),
-                                    groupColumn = c("codelist_name"),
+                                    groupColumn = character(),
                                     settingsColumn = character(),
                                     hide = c("variable_level"),
                                     style = NULL,
@@ -56,23 +56,27 @@ tableMeasurementSummary <- function(result,
   columnOrder <- columnOrder[columnOrder %in% visOmopResults::tableColumns(result)]
 
   factors <- result |>
-    dplyr::filter(.data$variable_name == "number records") |>
+    dplyr::filter(
+      .data$variable_name %in% c("cohort_records", "number_subjects")
+      ) |>
     visOmopResults::splitAll() |>
-    dplyr::select(dplyr::any_of(c("cdm_name", "codelist_name", "concept_name", "unit_concept_name", "estimate_value"))) |>
+    dplyr::select(dplyr::any_of(c("cdm_name", "cohort_name", "codelist_name", "concept_name", "unit_concept_name", "estimate_value"))) |>
     dplyr::mutate(estimate_value = as.numeric(.data$estimate_value)) |>
-    dplyr::arrange(.data$estimate_value) |>
+    dplyr::arrange(dplyr::desc(.data$estimate_value)) |>
     dplyr::select(!"estimate_value")
 
   if (nrow(factors) == 0) {
     factors <- NULL
   }  else {
     factors <- factors |> as.list() |> purrr::map(\(x){unique(x)})
+    factors$codelist_name <- unique(c("overall", factors$codelist_name))
   }
 
   result |>
     dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name, custom = c("Time (days)" = "time"))) |>
     visOmopResults::visOmopTable(
       estimateName = c(
+        "N (%)" = "<count> (<percentage>%)",
         "N" = "<count>",
         "Median [Q25 \u2013 Q75]" = "<median> [<q25> \u2013 <q75>]",
         "Range" = "<min> to <max>"
