@@ -73,7 +73,7 @@ tableMeasurementSummary <- function(result,
   }
 
   result |>
-    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name, custom = c("Time (days)" = "time"))) |>
+    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name)) |>
     visOmopResults::visOmopTable(
       estimateName = c(
         "N (%)" = "<count> (<percentage>%)",

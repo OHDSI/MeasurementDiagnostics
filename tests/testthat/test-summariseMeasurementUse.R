@@ -39,7 +39,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 5), rep("number_subjects", 4), rep("time", 5))
+    c(rep("measurements_per_subject", 5), rep("number_subjects", 4), rep("days_between_measurements", 5))
   )
   expect_equal(
     res |>
@@ -172,7 +172,7 @@ test_that("summariseMeasurementUse works", {
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       histogram = list(
         "blahblah" = list("blah" = c(0, Inf)),
-        "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+        "days_between_measurements" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
         "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
         "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
       )
@@ -185,12 +185,12 @@ test_that("summariseMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "number_subjects", "number records", "time", "measurements_per_subject",
+      "number_subjects", "number records", "days_between_measurements", "measurements_per_subject",
       "value_as_number", "value_as_concept_name"
     )
   ))
   expect_equal(
-    res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("time", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
+    res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("days_between_measurements", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
     c("0 to 100", "210 to 300", "310 to Inf", "0 to 10", "11 to 15", ">15", "None")
   )
 
@@ -289,7 +289,7 @@ test_that("summariseMeasurementUse expected behaviour", {
       measurement_value_as_concept = c("count", "percentage")
     ),
     histogram = list(
-      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "days_between_measurements" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
       "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
       "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
     )
@@ -306,7 +306,7 @@ test_that("summariseMeasurementUse expected behaviour", {
     ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
     estimates = NULL,
     histogram = list(
-      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "days_between_measurements" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
       "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
       "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
     )
@@ -317,8 +317,8 @@ test_that("summariseMeasurementUse expected behaviour", {
   )
   expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name != "count")) == 0)
   expect_true(nrow(res |> dplyr::filter(variable_name == "value_as_number" & estimate_name == "count")) != 0)
-  expect_true(nrow(res |> dplyr::filter(variable_name == "time" & estimate_name != "count")) == 0)
-  expect_true(nrow(res |> dplyr::filter(variable_name == "time" & estimate_name == "count")) != 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "days_between_measurements" & estimate_name != "count")) == 0)
+  expect_true(nrow(res |> dplyr::filter(variable_name == "days_between_measurements" & estimate_name == "count")) != 0)
   expect_true(nrow(res |> dplyr::filter(variable_name == "measurements_per_subject" & estimate_name != "count")) == 0)
   expect_true(nrow(res |> dplyr::filter(variable_name == "measurements_per_subject" & estimate_name == "count")) != 0)
 
@@ -329,7 +329,7 @@ test_that("summariseMeasurementUse expected behaviour", {
     bySex = TRUE,
     ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
     histogram = list(
-      "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+      "days_between_measurements" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
       "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
       "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
     ),

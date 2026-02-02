@@ -89,5 +89,5 @@ results like so
 
 ``` r
 plotMeasurementSummary(respiratory_function_measurements |> 
-  filter(variable_name == "time"))
+  filter(variable_name == "days_between_measurements"))
 ```

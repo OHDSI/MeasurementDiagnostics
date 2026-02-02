@@ -32,7 +32,7 @@
 #'     "measurement_value_as_concept" = c("count", "percentage")
 #'   ),
 #'   histogram = list(
-#'     "time" = list(
+#'     "days_between_measurements" = list(
 #'       '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
 #'       '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
 #'     ),
@@ -211,7 +211,7 @@ summariseMeasurementUseInternal <- function(cdm,
   }
 
   # histogram flags
-  timeHistogramFlag <- "time" %in% names(histogram) & "measurement_summary" %in% checks
+  timeHistogramFlag <- "days_between_measurements" %in% names(histogram) & "measurement_summary" %in% checks
   measurementsSubjectHistogramFlag <- "measurements_per_subject" %in% names(histogram) & "measurement_summary" %in% checks
   numericHistogramFlag <- "value_as_number" %in% names(histogram) & "measurement_value_as_number" %in% checks
 
@@ -253,7 +253,7 @@ summariseMeasurementUseInternal <- function(cdm,
       dplyr::arrange(.data$cohort_start_date) |>
       dplyr::mutate(previous_measurement = dplyr::lag(.data$cohort_start_date)) |>
       dplyr::mutate(
-        time = as.integer(clock::date_count_between(
+        days_between_measurements = as.integer(clock::date_count_between(
           start = .data$previous_measurement,
           end = .data$cohort_start_date,
           precision = "day"
@@ -264,7 +264,7 @@ summariseMeasurementUseInternal <- function(cdm,
 
     if (timeHistogramFlag) {
       measurement <- measurement |>
-        dplyr::mutate(!!!histogramBandExpr(histogram[["time"]], name = "time", newName = "time_band")) |>
+        dplyr::mutate(!!!histogramBandExpr(histogram[["days_between_measurements"]], name = "days_between_measurements", newName = "days_between_measurements_band")) |>
         dplyr::compute(name = measurementCohortName, temporary = FALSE)
     }
 
@@ -286,7 +286,7 @@ summariseMeasurementUseInternal <- function(cdm,
               includeOverallGroup = FALSE,
               strata = strata,
               includeOverallStrata = TRUE,
-              variables = c("time", "time_band")[c(summaryFlag, timeHistogramFlag)],
+              variables = c("days_between_measurements", "days_between_measurements_band")[c(summaryFlag, timeHistogramFlag)],
               estimates = c(estimates$measurement_summary[c(rep(summaryFlag, length(estimates$measurement_summary)))], "count"[timeHistogramFlag]),
               counts = TRUE
             )
@@ -390,7 +390,7 @@ summariseMeasurementUseInternal <- function(cdm,
     }
     measurementNumber <- omopgenerics::bind(valueAsNumber) |>
       dplyr::filter(.data$variable_name != "number subjects") |>
-      dplyr::filter(!(.data$variable_name %in% c("time", "measurements_per_subject") & .data$estimate_name == "count")) |>
+      dplyr::filter(!(.data$variable_name %in% c("days_between_measurements", "measurements_per_subject") & .data$estimate_name == "count")) |>
       dplyr::mutate(variable_name = gsub("_band", "", .data$variable_name)) |>
       transformMeasurementValue(
         cdm = cdm, newSet = cdm[[settingsTableName]] |> dplyr::collect(),
@@ -882,10 +882,10 @@ validateHistogram <- function(histogram) {
   newHistogram <- list()
   for (nm in names(histogram)) {
     # check name
-    if (!nm %in% c("time", "measurements_per_subject", "value_as_number")) {
+    if (!nm %in% c("days_between_measurements", "measurements_per_subject", "value_as_number")) {
       cli::cli_warn(c(
         "{nm} is not a `check` for which to get estimates for a histogram.",
-        "i" = "Options are: 'time', 'measurements_per_subject', and 'value_as_number'."
+        "i" = "Options are: 'days_between_measurements', 'measurements_per_subject', and 'value_as_number'."
       ))
     }
     # check bandwidth & correct/add names
@@ -925,7 +925,7 @@ addSubjectsWithMeasurement <- function(x, cdm, cohortName, baseGroup, strata, pr
 
   # Subjects with measurement COUNTS
   measurementSummary <- omopgenerics::bind(x) |>
-    dplyr::filter(!(.data$variable_name %in% c("time", "measurements_per_subject") & .data$estimate_name == "count")) |>
+    dplyr::filter(!(.data$variable_name %in% c("days_between_measurements", "measurements_per_subject") & .data$estimate_name == "count")) |>
     dplyr::filter(.data$variable_name != "number records") |>
     dplyr::mutate(
       variable_name = gsub("_band", "", .data$variable_name),

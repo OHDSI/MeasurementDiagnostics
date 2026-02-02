@@ -22,7 +22,7 @@
 #'   codes = list("test_codelist" = c(3001467L, 45875977L)),
 #'   cohort = cdm$my_cohort, timing = "cohort_start_date",
 #'   histogram = list(
-#'     "time" = list(
+#'     "days_between_measurements" = list(
 #'       '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
 #'       '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
 #'     ),

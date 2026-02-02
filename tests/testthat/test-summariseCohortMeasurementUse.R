@@ -39,7 +39,7 @@ test_that("summariseCohortMeasurementUse works", {
       "cohort_subjects", "cohort_subjects",
       rep("measurements_per_subject", 10),
       rep("number_subjects", 4),
-      rep("time", 10)
+      rep("days_between_measurements", 10)
     )
   )
   expect_equal(
@@ -150,7 +150,7 @@ test_that("summariseCohortMeasurementUse works", {
       ageGroup = list(c(0, 17), c(18, 64), c(65, 150)),
       histogram = list(
         "blahblah" = list("blah" = c(0, Inf)),
-        "time" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
+        "days_between_measurements" = list('0 to 100' = c(0, 100), '110 to 200' = c(110, 200), '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)),
         "measurements_per_subject" = list('0 to 10' = c(0, 10), '11 to 20' = c(11, 20), '21 to 30' = c(21, 30), '31 to Inf' = c(31, Inf)),
         "value_as_number" =  list('0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15), '>15' = c(16, Inf))
       )
@@ -159,13 +159,13 @@ test_that("summariseCohortMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "cohort_records", "cohort_subjects", "number_subjects", "time",
+      "cohort_records", "cohort_subjects", "number_subjects", "days_between_measurements",
       "measurements_per_subject", "number records",
       "value_as_number", "value_as_concept_name"
     )
   ))
   expect_equal(
-    res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("time", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
+    res |> dplyr::filter(.data$estimate_name == "count", .data$variable_name %in% c("days_between_measurements", "measurements_per_subject", "value_as_number")) |> dplyr::pull(variable_level) |> unique(),
     c("0 to 10", ">15" )
   )
 
