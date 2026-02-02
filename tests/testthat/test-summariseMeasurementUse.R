@@ -31,7 +31,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '1', '1', '1', '100', '1427', '14973', '2', '3', '3522', '5334', '64', '96')
+    c('0', '0', '1', '1', '1', '1427', '14973', '2', '3', '3522', '5334', '64', '64', '96')
   )
   expect_equal(
     res |>
@@ -39,7 +39,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 5), rep("number records", 2), rep("number subjects", 2), rep("time", 5))
+    c(rep("measurements_per_subject", 5), rep("number_subjects", 4), rep("time", 5))
   )
   expect_equal(
     res |>
@@ -47,7 +47,8 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), "max",  "max", "median", "median", "min", "min", "q25", "q25", "q75", "q75")
+    c("count", "count", "max",  "max", "median", "median", "min", "min", "percentage","percentage",
+      "q25", "q25", "q75", "q75")
   )
   expect_equal(
     res |>
@@ -56,7 +57,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::pull(estimate_name) |>
       sort() |>
       unique(),
-    c("count", "density_x", "density_y", "max", "median", "min", "q25", "q75")
+    c("count", "density_x", "density_y", "max", "median", "min", "percentage", "q25", "q75")
   )
 
   expect_equal(
@@ -115,7 +116,7 @@ test_that("summariseMeasurementUse works", {
 
   # suppress ----
   resSup <- res |> omopgenerics::suppress(minCellCount = 68)
-  expect_equal(resSup$estimate_value |> unique(), c("100", "-", "81", "0"))
+  expect_equal(resSup$estimate_value |> unique(), c("-", "0"))
 
   # change default estimates ----
   expect_warning(
@@ -137,7 +138,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(.data$result_id == 1) |>
       dplyr::pull("estimate_name") |>
       unique(),
-    c("count", "min", "q25", "median")
+    c("count", "min", "q25", "median", "percentage")
   )
   expect_equal(
     res |>
@@ -156,10 +157,10 @@ test_that("summariseMeasurementUse works", {
     personSample = 10
   )
   expect_true(
-    res |>
-      dplyr::filter(group_level %in% c("test"), variable_name == "number subjects", strata_name == "overall") |>
+    all(res |>
+      dplyr::filter(group_level %in% c("test"), variable_name == "number_subjects", strata_name == "overall") |>
       dplyr::pull(estimate_value) |>
-      as.numeric() <= 10
+      as.numeric() <= 10)
   )
 
   # Histograms ----
@@ -184,7 +185,7 @@ test_that("summariseMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "number records", "number subjects", "time", "measurements_per_subject",
+      "number_subjects", "number records", "time", "measurements_per_subject",
       "value_as_number", "value_as_concept_name"
     )
   ))
@@ -483,7 +484,7 @@ test_that("summariseMeasurementUse observation domain", {
 
   res <- summariseMeasurementUse(
     cdm = cdm,
-    codes = list("mix" = c(3001467, 45875977, 194152, 4092121, 1033535)),
+    codes = list("mix" = c(3001467L, 45875977L, 194152L, 4092121L, 1033535L)),
     bySex = FALSE,
     byYear = FALSE,
     ageGroup = NULL,

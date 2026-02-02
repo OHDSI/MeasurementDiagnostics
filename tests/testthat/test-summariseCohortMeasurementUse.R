@@ -25,9 +25,8 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::pull(estimate_value) |>
       sort(),
     as.character(c(
-      '1', '1', '1', '1', '1', '1', '1', '1093', '11', '1206', '14', '1761', '2',
-      '2', '20', '2316', '3', '3320', '4354', '5026', '651', '9', '96', '96'
-      ))
+      '1', '1', '1', '1', '1', '1', '1', '1093', '1206', '14', '16', '1761', '2', '2', '2316', '24', '24', '29', '3', '3320', '4354', '5026', '56.25', '58.3333333333333', '651', '9', '96', '96'
+    ))
   )
   expect_equal(
     res |>
@@ -35,7 +34,13 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 10), "number records", "number records", "number subjects", "number subjects", rep("time", 10))
+    c(
+      "cohort_records", "cohort_records",
+      "cohort_subjects", "cohort_subjects",
+      rep("measurements_per_subject", 10),
+      rep("number_subjects", 4),
+      rep("time", 10)
+    )
   )
   expect_equal(
     res |>
@@ -43,7 +48,7 @@ test_that("summariseCohortMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_name) |>
       sort(),
-    c(rep("count", 4), rep("max", 4), rep("median", 4), rep("min", 4), rep("q25", 4), rep("q75", 4))
+    c(rep("count", 6), rep("max", 4), rep("median", 4), rep("min", 4), rep("percentage", 2), rep("q25", 4), rep("q75", 4))
   )
   expect_equal(
     res |>
@@ -118,6 +123,13 @@ test_that("summariseCohortMeasurementUse works", {
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone &&& NA',
       'cohort_1 &&& test &&& Alkaline phosphatase.bone [Enzymatic activity/volume] in Serum or Plasma &&& Alkaline phosphatase.bone')
   )
+  # "Subjects with measurement" indicating 0 subjects:
+  expect_equal(
+    resAttribute |>
+      omopgenerics::filterGroup(cohort_name == "cohort_2", codelist_name == "test") |>
+      dplyr::pull("estimate_value"),
+    c("0", "0")
+  )
 
   # Histogram ----
   expect_warning(
@@ -137,7 +149,8 @@ test_that("summariseCohortMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "number records", "number subjects", "time", "measurements_per_subject",
+      "cohort_records", "cohort_subjects", "number_subjects", "time",
+      "measurements_per_subject", "number records",
       "value_as_number", "value_as_concept_name"
     )
   ))
@@ -173,9 +186,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1', '1035', '12852', '1487', '15', '2', '2329', '2442', '2656',
-      '3', '3', '31573', '31880', '3493', '38', '39', '4962', '5', '5498', '6',
-      '7481', '9')
+    c('1', '1', '1', '1035', '1487', '15', '17268', '17268', '2', '2329', '2442', '2656', '2686', '2686', '3', '3', '31573', '31880', '3493', '38', '39', '4962', '5', '6', '7481', '86.7088607594937', '9', '98.8830975428146')
   )
   expect_equal(
     res_during |>
@@ -183,9 +194,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('1', '1', '1', '1', '1', '1', '1', '1', '1602', '1602', '1602', '1602',
-      '1602', '1602', '1602', '1602', '1602', '1602', '2', '2', '28', '29',
-      '60', '61')
+    c('1', '1', '1', '1', '1', '1', '1', '1', '1.04244229337305', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '1602', '17268', '17268', '2', '2', '2.23380491437081', '2686', '2686', '28', '60')
   )
   expect_equal(
     res_start |>
@@ -193,7 +202,7 @@ test_that("test timings with eunomia", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(estimate_value) |>
       sort(),
-    c('0', '0', '1', '1', '1', '1', '1', '1', '1')
+    c('0', '0', '0.0372300819061802', '1', '1', '1', '1', '1', '1', '17268', '2686')
   )
   expect_equal(
     res_any |>
@@ -370,3 +379,4 @@ test_that("summariseMeasurementUse checks", {
 
   dropCreatedTables(cdm = cdm)
 })
+

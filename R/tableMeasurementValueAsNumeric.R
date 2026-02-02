@@ -60,7 +60,7 @@ tableMeasurementValueAsNumber <- function(result,
   factors <- result |>
     dplyr::filter(.data$variable_name == "number records") |>
     visOmopResults::splitAll() |>
-    dplyr::select(dplyr::any_of(c("cdm_name", "codelist_name", "concept_name", "unit_concept_name", "estimate_value"))) |>
+    dplyr::select(dplyr::any_of(c("cdm_name", "cohort_name", "codelist_name", "concept_name", "unit_concept_name", "estimate_value"))) |>
     dplyr::mutate(estimate_value = as.numeric(.data$estimate_value)) |>
     dplyr::arrange(dplyr::desc(.data$estimate_value)) |>
     dplyr::select(!"estimate_value")
