@@ -194,6 +194,16 @@ test_that("summariseMeasurementUse works", {
     c("0 to 100", "210 to 300", "310 to Inf", "0 to 10", "11 to 15", ">15", "None")
   )
 
+  # > 1 age group ----
+  res <- summariseMeasurementUse(
+    cdm = cdm,
+    codes = list("test" = 3001467L, "test2" = 1L, "test3" = 45875977L),
+    bySex = TRUE,
+    ageGroup = list(list(c(0, 17), c(18, 64), c(65, 150)), "age_group_named" = list(c(0, 64), c(65, 150))),
+    personSample = NULL
+  )
+  expect_equal(omopgenerics::settings(res)$strata |> unique(), "sex &&& age_group_1 &&& age_group_named")
+
   dropCreatedTables(cdm = cdm)
 })
 

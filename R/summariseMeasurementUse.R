@@ -48,6 +48,16 @@
 #'   checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
 #' )
 #'
+#' # more than one age group:
+#' result <- summariseMeasurementUse(
+#'   cdm = cdm,
+#'   codes = list("test_codelist" = c(3001467L, 45875977L)),
+#'   ageGroup = list(
+#'     "age_group_1" = list(c(0, 17), c(18, 64), c(65, 150)),
+#'     "age_group_2" = list(c(0, 19), c(20, 39), c(40, 59), c(60, 79), c(80, 99), c(100, 120))
+#'   )
+#' )
+#'
 #' CDMConnector::cdmDisconnect(cdm = cdm)
 #'}
 #'
@@ -229,7 +239,8 @@ summariseMeasurementUseInternal <- function(cdm,
   baseGroup <- c("cohort_name", "codelist_name")[c(!is.null(cohort), TRUE)]
   byConceptGroup <- c("concept_id", "source_concept_id", "source_concept_name")
   unitGroup <- c("unit_concept_id", "unit_concept_name")
-  strata <- as.list(c("sex", "age_group", "year")[c(bySex, length(ageGroup)>0, byYear)])
+  ageStrata <- names(ageGroup)
+  strata <- as.list(c("sex"[bySex], ageStrata[length(ageGroup)>0], "year"[byYear]))
   measurement <- measurement |> addStrata(bySex, byYear, ageGroup, measurementCohortName)
 
   ## measurements per subject

@@ -131,6 +131,16 @@ test_that("summariseCohortMeasurementUse works", {
     c("0", "0")
   )
 
+  # > 1 age group ----
+  res <- summariseCohortMeasurementUse(
+    codes = list("test" = 3001467L),
+    cohort = cdm$my_cohort,
+    timing = "any",
+    bySex = TRUE,
+    ageGroup = list(list(c(0, 17), c(18, 64), c(65, 150)), "age_group_named" = list(c(0, 64), c(65, 150)))
+  )
+  expect_equal(omopgenerics::settings(res)$strata |> unique(), "sex &&& age_group_1 &&& age_group_named")
+
   # Histogram ----
   expect_warning(
     res <- summariseCohortMeasurementUse(

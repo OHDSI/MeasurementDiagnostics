@@ -80,6 +80,7 @@ result <- summariseCohortMeasurementUse(
   cohort = cdm$my_cohort, timing = "cohort_start_date"
 )
 
+# Histogram
 result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date",
@@ -96,6 +97,16 @@ result <- summariseCohortMeasurementUse(
       '0 to 5' = c(0, 5), '6 to 10' = c(6, 10), '11 to 15' = c(11, 15),
       '>15' = c(16, Inf)
     )
+  )
+)
+
+# Different age groups
+result <- summariseCohortMeasurementUse(
+  codes = list("test_codelist" = c(3001467L, 45875977L)),
+  cohort = cdm$my_cohort,
+  ageGroup = list(
+    "age_group_1" = list(c(0, 17), c(18, 64), c(65, 150)),
+    "age_group_2" = list(c(0, 19), c(20, 39), c(40, 59), c(60, 79), c(80, 99), c(100, 120))
   )
 )
 
