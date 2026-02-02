@@ -39,7 +39,7 @@ test_that("summariseMeasurementUse works", {
       dplyr::filter(strata_name == "overall", estimate_name != "density_x", estimate_name != "density_y") |>
       dplyr::pull(variable_name) |>
       sort(),
-    c(rep("measurements_per_subject", 5), rep("number_subjects", 4), rep("days_between_measurements", 5))
+    c(rep("days_between_measurements", 5), rep("measurements_per_subject", 5), rep("number_subjects", 4))
   )
   expect_equal(
     res |>

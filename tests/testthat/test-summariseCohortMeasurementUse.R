@@ -37,9 +37,9 @@ test_that("summariseCohortMeasurementUse works", {
     c(
       "cohort_records", "cohort_records",
       "cohort_subjects", "cohort_subjects",
+      rep("days_between_measurements", 10),
       rep("measurements_per_subject", 10),
-      rep("number_subjects", 4),
-      rep("days_between_measurements", 10)
+      rep("number_subjects", 4)
     )
   )
   expect_equal(
