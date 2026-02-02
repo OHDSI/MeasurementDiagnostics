@@ -8,7 +8,7 @@ Format a measurement_summary object into a visual table
 tableMeasurementSummary(
   result,
   header = c(visOmopResults::strataColumns(result)),
-  groupColumn = c("codelist_name"),
+  groupColumn = character(),
   settingsColumn = character(),
   hide = c("variable_level"),
   style = NULL,
@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:21:27.631509
-#> ✔ Summary finished, at 2026-01-31 13:21:27.730072
+#> → Start summary of data, at 2026-02-02 15:40:05.950602
+#> ✔ Summary finished, at 2026-02-02 15:40:06.050735
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:21:28.230008
-#> ✔ Summary finished, at 2026-01-31 13:21:28.325032
+#> → Start summary of data, at 2026-02-02 15:40:06.568494
+#> ✔ Summary finished, at 2026-02-02 15:40:06.667974
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,17 +102,18 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:21:29.746285
-#> ✔ Summary finished, at 2026-01-31 13:21:30.005855
+#> → Start summary of data, at 2026-02-02 15:40:08.190297
+#> ✔ Summary finished, at 2026-02-02 15:40:08.459623
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-31 13:21:30.644742
-#> ✔ Summary finished, at 2026-01-31 13:21:30.780621
+#> → Start summary of data, at 2026-02-02 15:40:09.284261
+#> ✔ Summary finished, at 2026-02-02 15:40:09.420725
 #> → Binding all diagnostic results.
 
 tableMeasurementSummary(result)
+#> ℹ <count> has not been formatted.
 
 
   
@@ -120,27 +121,23 @@ tableMeasurementSummary(result)
 CDM name
 ```
 
+Codelist name
+
 Variable name
 
 Estimate name
 
 Estimate value
 
-test_codelist
-
 mock database
 
-Number records
-
-N
-
-200
+test_codelist
 
 Number subjects
 
-N
+N (%)
 
-67
+67 (67.00%)
 
 Time (days)
 

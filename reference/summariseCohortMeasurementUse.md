@@ -113,15 +113,20 @@ result <- summariseCohortMeasurementUse(
 #> • time: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:20:52.815078
-#> ✔ Summary finished, at 2026-01-31 13:20:52.959374
+#> → Start summary of data, at 2026-02-02 15:39:26.784825
+#> ✔ Summary finished, at 2026-02-02 15:39:26.951428
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:20:53.497326
-#> ✔ Summary finished, at 2026-01-31 13:20:53.591341
+#> → Start summary of data, at 2026-02-02 15:39:27.513641
+#> ✔ Summary finished, at 2026-02-02 15:39:27.605178
+#> ℹ summarising data
+#> ℹ summarising cohort cohort_1
+#> ℹ summarising cohort cohort_2
+#> ✔ summariseCharacteristics finished!
+#> `group` is not present in settings.
 #> ! 2 duplicated rows eliminated.
 #> → Summarising results - value as number.
 #> Summarising value as number
@@ -130,14 +135,14 @@ result <- summariseCohortMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:20:55.068276
-#> ✔ Summary finished, at 2026-01-31 13:20:55.306013
+#> → Start summary of data, at 2026-02-02 15:39:30.305615
+#> ✔ Summary finished, at 2026-02-02 15:39:30.555914
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-31 13:20:55.929959
-#> ✔ Summary finished, at 2026-01-31 13:20:56.068435
+#> → Start summary of data, at 2026-02-02 15:39:31.213712
+#> ✔ Summary finished, at 2026-02-02 15:39:31.35185
 #> → Binding all diagnostic results.
 
 result <- summariseCohortMeasurementUse(
@@ -167,16 +172,21 @@ result <- summariseCohortMeasurementUse(
 #> • time_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:20:59.309423
-#> ✔ Summary finished, at 2026-01-31 13:20:59.499313
+#> → Start summary of data, at 2026-02-02 15:39:34.792263
+#> ✔ Summary finished, at 2026-02-02 15:39:34.988225
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density, count
 #> • measurements_per_subject_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:21:00.196327
-#> ✔ Summary finished, at 2026-01-31 13:21:00.329372
+#> → Start summary of data, at 2026-02-02 15:39:35.71573
+#> ✔ Summary finished, at 2026-02-02 15:39:35.848334
+#> ℹ summarising data
+#> ℹ summarising cohort cohort_1
+#> ℹ summarising cohort cohort_2
+#> ✔ summariseCharacteristics finished!
+#> `group` is not present in settings.
 #> ! 2 duplicated rows eliminated.
 #> → Summarising results - value as number.
 #> Summarising value as number
@@ -186,14 +196,14 @@ result <- summariseCohortMeasurementUse(
 #> • value_as_number_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-01-31 13:21:01.915539
-#> ✔ Summary finished, at 2026-01-31 13:21:02.193852
+#> → Start summary of data, at 2026-02-02 15:39:38.717953
+#> ✔ Summary finished, at 2026-02-02 15:39:39.007743
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-01-31 13:21:02.82584
-#> ✔ Summary finished, at 2026-01-31 13:21:02.957634
+#> → Start summary of data, at 2026-02-02 15:39:39.682374
+#> ✔ Summary finished, at 2026-02-02 15:39:39.825592
 #> → Binding all diagnostic results.
 
 CDMConnector::cdmDisconnect(cdm = cdm)
