@@ -48,8 +48,8 @@ tableMeasurementValueAsConcept <- function(result,
 
   columnOrder <- c(
     "cdm_name", "cohort_name", "codelist_name", "concept_name", "concept_id",
-    "source_concept_name", "source_concept_id", "domain_id", "sex", "age_group",
-    "year", settingsColumn, "variable_name", "variable_level",
+    "source_concept_name", "source_concept_id", "domain_id", omopgenerics::strataColumns(result),
+    settingsColumn, "variable_name", "variable_level",
     "value_as_concept_id", "estimate_name", "estimate_value"
   )
   # temp fix for visOmpReuslts issue 355

@@ -51,7 +51,7 @@ tableMeasurementSummary <- function(result,
 
   checkVersion(result)
 
-  columnOrder <- c("cdm_name", "cohort_name", "codelist_name", "sex", "age_group", "year", settingsColumn, "variable_name", "variable_level", "estimate_name", "estimate_value")
+  columnOrder <- c("cdm_name", "cohort_name", "codelist_name", omopgenerics::strataColumns(result), settingsColumn, "variable_name", "variable_level", "estimate_name", "estimate_value")
   # temp fix for visOmpReuslts issue 355
   columnOrder <- columnOrder[columnOrder %in% visOmopResults::tableColumns(result)]
 
@@ -77,7 +77,7 @@ tableMeasurementSummary <- function(result,
     visOmopResults::visOmopTable(
       estimateName = c(
         "N (%)" = "<count> (<percentage>%)",
-        "N" = "<count>",
+        "N" = "<count>" ["cohort_name" %in% omopgenerics::groupColumns(result)],
         "Median [Q25 \u2013 Q75]" = "<median> [<q25> \u2013 <q75>]",
         "Range" = "<min> to <max>"
       ),

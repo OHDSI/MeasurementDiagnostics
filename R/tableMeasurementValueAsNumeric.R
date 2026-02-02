@@ -50,7 +50,7 @@ tableMeasurementValueAsNumber <- function(result,
   columnOrder <- c(
     "cdm_name", "cohort_name", "codelist_name", "concept_name", "concept_id",
     "source_concept_name", "source_concept_id", "domain_id",
-    "unit_concept_name", "unit_concept_id", "sex", "age_group", "year",
+    "unit_concept_name", "unit_concept_id", omopgenerics::strataColumns(result),
     settingsColumn, "variable_name", "variable_level", "estimate_name",
     "estimate_value"
   )

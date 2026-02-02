@@ -108,6 +108,16 @@ resultHistogram <- summariseMeasurementUse(
   checks = c("measurement_summary", "measurement_value_as_number", "measurement_value_as_concept")
 )
 
+# more than one age group:
+result <- summariseMeasurementUse(
+  cdm = cdm,
+  codes = list("test_codelist" = c(3001467L, 45875977L)),
+  ageGroup = list(
+    "age_group_1" = list(c(0, 17), c(18, 64), c(65, 150)),
+    "age_group_2" = list(c(0, 19), c(20, 39), c(40, 59), c(60, 79), c(80, 99), c(100, 120))
+  )
+)
+
 CDMConnector::cdmDisconnect(cdm = cdm)
 }
 
