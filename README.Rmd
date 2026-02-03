@@ -95,7 +95,6 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
 tableMeasurementValueAsNumber(respiratory_function_measurements)
 ```
 
-
 ### Visualise results: Plots
 
 Each diagnostic result can also be visualised using plotting functions. For instance, the time between measurements can be displayed using boxplots:

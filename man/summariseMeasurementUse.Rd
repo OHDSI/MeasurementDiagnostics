@@ -92,7 +92,7 @@ resultHistogram <- summariseMeasurementUse(
     "measurement_value_as_concept" = c("count", "percentage")
   ),
   histogram = list(
-    "time" = list(
+    "days_between_measurements" = list(
       '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
       '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
     ),
