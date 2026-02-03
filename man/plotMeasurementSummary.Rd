@@ -6,7 +6,7 @@
 \usage{
 plotMeasurementSummary(
   result,
-  y = "time",
+  y = "days_between_measurements",
   plotType = "boxplot",
   timeScale = "days",
   facet = visOmopResults::strataColumns(result),
@@ -17,7 +17,7 @@ plotMeasurementSummary(
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{y}{Variable to plot on y axis, it can be "time" or
+\item{y}{Variable to plot on y axis, it can be "days_between_measurements" or
 "measurements_per_subject".}
 
 \item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}
@@ -54,7 +54,7 @@ result <- summariseMeasurementUse(
 )
 
 result |>
-  filter(variable_name == "time") |>
+  filter(variable_name == "days_between_measurements") |>
   plotMeasurementSummary()
 
 CDMConnector::cdmDisconnect(cdm)
