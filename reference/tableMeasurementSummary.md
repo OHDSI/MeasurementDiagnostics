@@ -83,18 +83,18 @@ result <- summariseMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:23.675241
-#> ✔ Summary finished, at 2026-02-02 16:29:23.762551
+#> → Start summary of data, at 2026-02-03 18:47:10.465404
+#> ✔ Summary finished, at 2026-02-03 18:47:10.565353
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:24.261215
-#> ✔ Summary finished, at 2026-02-02 16:29:24.349093
+#> → Start summary of data, at 2026-02-03 18:47:11.070338
+#> ✔ Summary finished, at 2026-02-03 18:47:11.167263
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:25.811966
-#> ✔ Summary finished, at 2026-02-02 16:29:26.071683
+#> → Start summary of data, at 2026-02-03 18:47:12.666472
+#> ✔ Summary finished, at 2026-02-03 18:47:12.928394
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:29:26.702128
-#> ✔ Summary finished, at 2026-02-02 16:29:26.84108
+#> → Start summary of data, at 2026-02-03 18:47:13.609342
+#> ✔ Summary finished, at 2026-02-03 18:47:13.752871
 #> → Binding all diagnostic results.
 
 tableMeasurementSummary(result)
@@ -138,7 +138,7 @@ N (%)
 
 67 (67.00%)
 
-Time (days)
+Days between measurements
 
 Median \[Q25 – Q75\]
 

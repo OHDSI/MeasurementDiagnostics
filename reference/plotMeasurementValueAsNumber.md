@@ -69,24 +69,24 @@ result <- summariseMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:11.463188
-#> ✔ Summary finished, at 2026-02-02 16:28:11.655382
+#> → Start summary of data, at 2026-02-03 18:45:57.080358
+#> ✔ Summary finished, at 2026-02-03 18:45:57.28465
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:12.168763
-#> ✔ Summary finished, at 2026-02-02 16:28:12.258343
+#> → Start summary of data, at 2026-02-03 18:45:57.8061
+#> ✔ Summary finished, at 2026-02-03 18:45:57.899824
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:12.844494
-#> ✔ Summary finished, at 2026-02-02 16:28:12.953315
+#> → Start summary of data, at 2026-02-03 18:45:58.49063
+#> ✔ Summary finished, at 2026-02-03 18:45:58.590225
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -94,19 +94,17 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:14.544899
-#> ✔ Summary finished, at 2026-02-02 16:28:15.134219
+#> → Start summary of data, at 2026-02-03 18:46:00.21592
+#> ✔ Summary finished, at 2026-02-03 18:46:00.813474
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:28:15.994061
-#> ✔ Summary finished, at 2026-02-02 16:28:16.274471
+#> → Start summary of data, at 2026-02-03 18:46:01.54644
+#> ✔ Summary finished, at 2026-02-03 18:46:02.008194
 #> → Binding all diagnostic results.
 
 plotMeasurementValueAsNumber(result)
-#> Ignoring unknown labels:
-#> • fill : "Cdm name, Unit concept name and Sex"
 
 
 CDMConnector::cdmDisconnect(cdm)

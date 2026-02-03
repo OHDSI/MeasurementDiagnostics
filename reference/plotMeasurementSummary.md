@@ -7,7 +7,7 @@ Plot summariseMeasurementTiming results.
 ``` r
 plotMeasurementSummary(
   result,
-  y = "time",
+  y = "days_between_measurements",
   plotType = "boxplot",
   timeScale = "days",
   facet = visOmopResults::strataColumns(result),
@@ -24,7 +24,7 @@ plotMeasurementSummary(
 
 - y:
 
-  Variable to plot on y axis, it can be "time" or
+  Variable to plot on y axis, it can be "days_between_measurements" or
   "measurements_per_subject".
 
 - plotType:
@@ -82,18 +82,18 @@ result <- summariseMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:27:46.06101
-#> ✔ Summary finished, at 2026-02-02 16:27:46.168018
+#> → Start summary of data, at 2026-02-03 18:45:31.556912
+#> ✔ Summary finished, at 2026-02-03 18:45:31.666062
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:27:46.697545
-#> ✔ Summary finished, at 2026-02-02 16:27:46.800223
+#> → Start summary of data, at 2026-02-03 18:45:32.202851
+#> ✔ Summary finished, at 2026-02-03 18:45:32.299755
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -101,21 +101,19 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:27:48.342287
-#> ✔ Summary finished, at 2026-02-02 16:27:48.619683
+#> → Start summary of data, at 2026-02-03 18:45:33.862085
+#> ✔ Summary finished, at 2026-02-03 18:45:34.150613
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:27:49.298222
-#> ✔ Summary finished, at 2026-02-02 16:27:49.447095
+#> → Start summary of data, at 2026-02-03 18:45:34.833271
+#> ✔ Summary finished, at 2026-02-03 18:45:34.980874
 #> → Binding all diagnostic results.
 
 result |>
-  filter(variable_name == "time") |>
+  filter(variable_name == "days_between_measurements") |>
   plotMeasurementSummary()
-#> Ignoring unknown labels:
-#> • fill : "Cdm name and Codelist name"
 
 
 CDMConnector::cdmDisconnect(cdm)

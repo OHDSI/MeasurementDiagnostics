@@ -110,18 +110,18 @@ result <- summariseCohortMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:24.343962
-#> ✔ Summary finished, at 2026-02-02 16:28:24.503134
+#> → Start summary of data, at 2026-02-03 18:46:10.187645
+#> ✔ Summary finished, at 2026-02-03 18:46:10.340739
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:25.029539
-#> ✔ Summary finished, at 2026-02-02 16:28:25.11431
+#> → Start summary of data, at 2026-02-03 18:46:10.870537
+#> ✔ Summary finished, at 2026-02-03 18:46:10.965607
 #> ℹ summarising data
 #> ℹ summarising cohort cohort_1
 #> ℹ summarising cohort cohort_2
@@ -135,14 +135,14 @@ result <- summariseCohortMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:27.672385
-#> ✔ Summary finished, at 2026-02-02 16:28:27.913756
+#> → Start summary of data, at 2026-02-03 18:46:13.595575
+#> ✔ Summary finished, at 2026-02-03 18:46:13.836582
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:28:28.538028
-#> ✔ Summary finished, at 2026-02-02 16:28:28.669031
+#> → Start summary of data, at 2026-02-03 18:46:14.473805
+#> ✔ Summary finished, at 2026-02-03 18:46:14.614948
 #> → Binding all diagnostic results.
 
 # Histogram
@@ -150,7 +150,7 @@ result <- summariseCohortMeasurementUse(
   codes = list("test_codelist" = c(3001467L, 45875977L)),
   cohort = cdm$my_cohort, timing = "cohort_start_date",
   histogram = list(
-    "time" = list(
+    "days_between_measurements" = list(
       '0 to 100' = c(0, 100), '110 to 200' = c(110, 200),
       '210 to 300' = c(210, 300), '310 to Inf' = c(310, Inf)
     ),
@@ -169,20 +169,20 @@ result <- summariseCohortMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density, count
-#> • time_band: count
+#> • days_between_measurements: min, q25, median, q75, max, density, count
+#> • days_between_measurements_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:31.89983
-#> ✔ Summary finished, at 2026-02-02 16:28:32.087688
+#> → Start summary of data, at 2026-02-03 18:46:17.9881
+#> ✔ Summary finished, at 2026-02-03 18:46:18.178995
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density, count
 #> • measurements_per_subject_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:32.780453
-#> ✔ Summary finished, at 2026-02-02 16:28:32.904978
+#> → Start summary of data, at 2026-02-03 18:46:18.874998
+#> ✔ Summary finished, at 2026-02-03 18:46:19.008614
 #> ℹ summarising data
 #> ℹ summarising cohort cohort_1
 #> ℹ summarising cohort cohort_2
@@ -197,14 +197,14 @@ result <- summariseCohortMeasurementUse(
 #> • value_as_number_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:35.579982
-#> ✔ Summary finished, at 2026-02-02 16:28:35.857397
+#> → Start summary of data, at 2026-02-03 18:46:21.724017
+#> ✔ Summary finished, at 2026-02-03 18:46:21.996248
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:28:36.48166
-#> ✔ Summary finished, at 2026-02-02 16:28:36.614253
+#> → Start summary of data, at 2026-02-03 18:46:22.634423
+#> ✔ Summary finished, at 2026-02-03 18:46:22.775908
 #> → Binding all diagnostic results.
 
 # Different age groups
@@ -221,30 +221,30 @@ result <- summariseCohortMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:40.373509
-#> ✔ Summary finished, at 2026-02-02 16:28:40.861443
+#> → Start summary of data, at 2026-02-03 18:46:26.577666
+#> ✔ Summary finished, at 2026-02-03 18:46:27.087407
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:41.3868
-#> ✔ Summary finished, at 2026-02-02 16:28:41.487705
+#> → Start summary of data, at 2026-02-03 18:46:27.648283
+#> ✔ Summary finished, at 2026-02-03 18:46:27.747889
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:42.095065
-#> ✔ Summary finished, at 2026-02-02 16:28:42.219693
+#> → Start summary of data, at 2026-02-03 18:46:28.531698
+#> ✔ Summary finished, at 2026-02-03 18:46:28.660989
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:42.819281
-#> ✔ Summary finished, at 2026-02-02 16:28:42.987278
+#> → Start summary of data, at 2026-02-03 18:46:29.262017
+#> ✔ Summary finished, at 2026-02-03 18:46:29.40183
 #> ℹ summarising data
 #> ℹ summarising cohort cohort_1
 #> ℹ summarising cohort cohort_2
@@ -257,14 +257,14 @@ result <- summariseCohortMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:28:45.78414
-#> ✔ Summary finished, at 2026-02-02 16:28:46.972692
+#> → Start summary of data, at 2026-02-03 18:46:32.20106
+#> ✔ Summary finished, at 2026-02-03 18:46:33.396414
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:28:48.133397
-#> ✔ Summary finished, at 2026-02-02 16:28:48.556168
+#> → Start summary of data, at 2026-02-03 18:46:34.679949
+#> ✔ Summary finished, at 2026-02-03 18:46:35.12468
 #> → Binding all diagnostic results.
 
 CDMConnector::cdmDisconnect(cdm = cdm)

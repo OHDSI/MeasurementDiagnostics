@@ -83,18 +83,18 @@ result <- summariseMeasurementUse(
 #> → Getting time between records per person.
 #> Summarising timings
 #> ℹ The following estimates will be calculated:
-#> • time: min, q25, median, q75, max, density
+#> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:45.76756
-#> ✔ Summary finished, at 2026-02-02 16:29:45.869788
+#> → Start summary of data, at 2026-02-03 18:47:32.783844
+#> ✔ Summary finished, at 2026-02-03 18:47:32.883688
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:46.370685
-#> ✔ Summary finished, at 2026-02-02 16:29:46.469321
+#> → Start summary of data, at 2026-02-03 18:47:33.396881
+#> ✔ Summary finished, at 2026-02-03 18:47:33.484765
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-02 16:29:47.979716
-#> ✔ Summary finished, at 2026-02-02 16:29:48.242838
+#> → Start summary of data, at 2026-02-03 18:47:34.995804
+#> ✔ Summary finished, at 2026-02-03 18:47:35.266715
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-02 16:29:48.889835
-#> ✔ Summary finished, at 2026-02-02 16:29:49.03063
+#> → Start summary of data, at 2026-02-03 18:47:35.924374
+#> ✔ Summary finished, at 2026-02-03 18:47:36.059845
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsNumber(result)

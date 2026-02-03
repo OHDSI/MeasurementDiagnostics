@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpaSTpfv/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpswdpCq/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -85,7 +85,7 @@ repiratory_function_measurements |>
 #> $ group_level      <chr> "respiratory function", "respiratory function", "resp…
 #> $ strata_name      <chr> "overall", "overall", "overall", "overall", "overall"…
 #> $ strata_level     <chr> "overall", "overall", "overall", "overall", "overall"…
-#> $ variable_name    <chr> "number_subjects", "time", "time", "time", "time", "t…
+#> $ variable_name    <chr> "number_subjects", "days_between_measurements", "days…
 #> $ variable_level   <chr> NA, NA, NA, NA, NA, NA, "density_001", "density_001",…
 #> $ estimate_name    <chr> "count", "min", "q25", "median", "q75", "max", "densi…
 #> $ estimate_type    <chr> "integer", "integer", "integer", "integer", "integer"…
@@ -164,10 +164,10 @@ dataset.
 tableMeasurementSummary(repiratory_function_measurements)
 ```
 
-| CDM name | Codelist name        | Variable name            | Estimate name        | Estimate value       |
-|:---------|:---------------------|:-------------------------|:---------------------|:---------------------|
-| Eunomia  | respiratory function | Number subjects          | N (%)                | 2,096 (77.80%)       |
-|          |                      | Time (days)              | Median \[Q25 – Q75\] | 371 \[0 – 1,726\]    |
-|          |                      |                          | Range                | 0 to 33,541          |
-|          |                      | Measurements per subject | Median \[Q25 – Q75\] | 2.00 \[1.00 – 3.00\] |
-|          |                      |                          | Range                | 1.00 to 138.00       |
+| CDM name | Codelist name        | Variable name             | Estimate name        | Estimate value       |
+|:---------|:---------------------|:--------------------------|:---------------------|:---------------------|
+| Eunomia  | respiratory function | Number subjects           | N (%)                | 2,096 (77.80%)       |
+|          |                      | Days between measurements | Median \[Q25 – Q75\] | 371 \[0 – 1,726\]    |
+|          |                      |                           | Range                | 0 to 33,541          |
+|          |                      | Measurements per subject  | Median \[Q25 – Q75\] | 2.00 \[1.00 – 3.00\] |
+|          |                      |                           | Range                | 1.00 to 138.00       |

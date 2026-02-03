@@ -43,7 +43,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plotMeasurementSummary</span><span class="op">(</span></span>
 <span>  <span class="va">result</span>,</span>
-<span>  y <span class="op">=</span> <span class="st">"time"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"days_between_measurements"</span>,</span>
 <span>  plotType <span class="op">=</span> <span class="st">"boxplot"</span>,</span>
 <span>  timeScale <span class="op">=</span> <span class="st">"days"</span>,</span>
 <span>  facet <span class="op">=</span> <span class="fu">visOmopResults</span><span class="fu">::</span><span class="fu"><a href="https://darwin-eu.github.io/omopgenerics/reference/strataColumns.html" class="external-link">strataColumns</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span>,</span>
@@ -61,7 +61,7 @@
 
 
 <dt id="arg-y">y<a class="anchor" aria-label="anchor" href="#arg-y"></a></dt>
-<dd><p>Variable to plot on y axis, it can be "time" or
+<dd><p>Variable to plot on y axis, it can be "days_between_measurements" or
 "measurements_per_subject".</p></dd>
 
 
@@ -121,18 +121,18 @@ is used.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting time between records per person.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising timings</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be calculated:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> time: min, q25, median, q75, max, density</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> days_between_measurements: min, q25, median, q75, max, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-02 16:27:46.06101</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-02 16:27:46.168018</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-03 18:45:31.556912</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-03 18:45:31.666062</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Getting measurements per subject.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be calculated:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> measurements_per_subject: min, q25, median, q75, max, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-02 16:27:46.697545</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-02 16:27:46.800223</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-03 18:45:32.202851</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-03 18:45:32.299755</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as number.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be calculated:</span>
@@ -140,21 +140,19 @@ is used.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   count_missing, percentage_missing, density</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Table is collected to memory as not all requested estimates are supported on</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   the database side</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-02 16:27:48.342287</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-02 16:27:48.619683</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-03 18:45:33.862085</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-03 18:45:34.150613</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Summarising results - value as concept.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Summarising value as number</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The following estimates will be calculated:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> value_as_concept_id: count, percentage</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-02 16:27:49.298222</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-02 16:27:49.447095</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Start summary of data, at 2026-02-03 18:45:34.833271</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Summary finished, at 2026-02-03 18:45:34.980874</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Binding all diagnostic results.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variable_name</span> <span class="op">==</span> <span class="st">"time"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">variable_name</span> <span class="op">==</span> <span class="st">"days_between_measurements"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">plotMeasurementSummary</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Ignoring unknown labels:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">fill</span> : <span style="color: #0000BB;">"Cdm name and Codelist name"</span></span>
 <span class="r-plt img"><img src="plotMeasurementSummary-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">CDMConnector</span><span class="fu">::</span><span class="fu"><a href="https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html" class="external-link">cdmDisconnect</a></span><span class="op">(</span><span class="va">cdm</span><span class="op">)</span></span></span>
