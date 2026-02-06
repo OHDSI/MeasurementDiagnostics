@@ -11,7 +11,7 @@ plotMeasurementSummary(
   y = "days_between_measurements",
   plotType = "boxplot",
   facet = visOmopResults::strataColumns(result),
-  colour = c("cdm_name", "codelist_name"),
+  colour = c("codelist_name"),
   style = NULL
 )
 ```
@@ -85,15 +85,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 19:00:28.414995
-#> ✔ Summary finished, at 2026-02-06 19:00:28.52234
+#> → Start summary of data, at 2026-02-06 19:21:55.40102
+#> ✔ Summary finished, at 2026-02-06 19:21:55.511344
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 19:00:29.091831
-#> ✔ Summary finished, at 2026-02-06 19:00:29.207438
+#> → Start summary of data, at 2026-02-06 19:21:56.081546
+#> ✔ Summary finished, at 2026-02-06 19:21:56.195003
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -101,14 +101,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 19:00:30.862262
-#> ✔ Summary finished, at 2026-02-06 19:00:31.148962
+#> → Start summary of data, at 2026-02-06 19:21:57.865129
+#> ✔ Summary finished, at 2026-02-06 19:21:58.151801
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-06 19:00:31.883738
-#> ✔ Summary finished, at 2026-02-06 19:00:32.042922
+#> → Start summary of data, at 2026-02-06 19:21:58.872504
+#> ✔ Summary finished, at 2026-02-06 19:21:59.027656
 #> → Binding all diagnostic results.
 
 result |>
