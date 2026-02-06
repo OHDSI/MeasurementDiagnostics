@@ -31,7 +31,7 @@ plotMeasurementSummary <- function(result,
                                    y = "days_between_measurements",
                                    plotType = "boxplot",
                                    facet = visOmopResults::strataColumns(result),
-                                   colour = c("cdm_name", "codelist_name"),
+                                   colour = c("codelist_name"),
                                    style = NULL) {
   # specific checks
   omopgenerics::assertChoice(y, c("days_between_measurements", "measurements_per_subject"), length = 1)
