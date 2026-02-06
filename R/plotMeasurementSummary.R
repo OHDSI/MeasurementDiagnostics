@@ -1,9 +1,8 @@
 #' Plot summariseMeasurementTiming results.
-#'
-#' @param y Variable to plot on y axis, it can be "days_between_measurements" or
+#' @param x Variable to plot on the x axis when plotType is "boxlot".
+#' @param y Variable to plot, it can be "days_between_measurements" or
 #' "measurements_per_subject".
 #' @inheritParams resultDoc
-#' @inheritParams timeScaleDoc
 #' @inheritParams plotDoc
 #'
 #' @return A ggplot.
@@ -28,16 +27,15 @@
 #' CDMConnector::cdmDisconnect(cdm)
 #'}
 plotMeasurementSummary <- function(result,
+                                   x = "codelist_name",
                                    y = "days_between_measurements",
                                    plotType = "boxplot",
-                                   timeScale = "days",
                                    facet = visOmopResults::strataColumns(result),
                                    colour = c("cdm_name", "codelist_name"),
                                    style = NULL) {
   # specific checks
   omopgenerics::assertChoice(y, c("days_between_measurements", "measurements_per_subject"), length = 1)
   omopgenerics::assertChoice(plotType, c("boxplot", "densityplot", "barplot"), length = 1)
-  omopgenerics::assertChoice(timeScale, c("days", "years"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
 
@@ -64,11 +62,6 @@ plotMeasurementSummary <- function(result,
 
   if (y == "days_between_measurements") {
     lab <- "Days between measurements"
-    if (timeScale == "years") {
-      result <- result |>
-        dplyr::mutate("estimate_value" = as.character(as.numeric(.data$estimate_value)/365.25))
-      lab <- "Years between measurements"
-    }
   } else {
     lab <- "Number of measurements per subject"
   }
@@ -100,7 +93,7 @@ plotMeasurementSummary <- function(result,
       dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))
     p <- visOmopResults::boxPlot(
       result = result,
-      x = "codelist_name",
+      x = x,
       lower = "q25",
       middle = "median",
       upper  = "q75",

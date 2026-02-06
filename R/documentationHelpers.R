@@ -97,11 +97,3 @@ NULL
 #' @keywords internal
 NULL
 
-#' Helper for consistent documentation of `timeScale`.
-#'
-#' @param timeScale Time scale to show, it can be "days" or "years".
-#'
-#' @name timeScaleDoc
-#' @keywords internal
-NULL
-
