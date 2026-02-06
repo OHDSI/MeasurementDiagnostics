@@ -1,0 +1,100 @@
+---
+title: "Cohort-specific measurement diagnostics"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{summariseCohortMeasurementUse}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  message = FALSE, 
+  warning = FALSE,
+  fig.width = 7
+)
+
+CDMConnector::requireEunomia()
+```
+
+# Introduction
+
+This vignette demonstrates how to use `summariseCohortMeasurementUse()` from **MeasurementDiagnostics** to run measurement diagnostics restricted to a cohort. The function computes the same three diagnostic checks available for full-dataset summaries — `measurement_summary`, `measurement_value_as_number`, and `measurement_value_as_concept` — but only for measurements that fall within a specified cohort, and at specific times relative to cohort entry.
+
+We use the package-provided mock data to keep the example fully reproducible.
+
+```{r}
+library(MeasurementDiagnostics)
+library(dplyr)
+library(omopgenerics) 
+library(CohortConstructor)
+
+cdm <- mockMeasurementDiagnostics()
+cdm
+```
+
+# Basic usage
+Below we run diagnostics for a simple codelist restricted to the example cohort.
+We set `timing = "cohort_start_date"` to examine measurements recorded at cohort entry.
+
+```{r}
+result <- summariseCohortMeasurementUse(
+  codes = list("measurement_codelist" = c(3001467L, 45875977L)),
+  cohort = cdm$my_cohort,
+  timing = "cohort_start_date"
+)
+
+# Inspect structure
+result |> glimpse()
+```
+
+
+Results are returned as a `summarised_result` object (see **omopgenerics**). As an example, the following table shows the `measurement_summary` results. Note that number of subjects is relative to the cohort (not to the entire database).
+
+```{r}
+tableMeasurementSummary(result)
+```
+
+# Timing options
+
+The `timing` argument controls which measurement records are considered:
+
+- `"any"` — any measurement record for the person (no timing restriction)
+
+- `"during"` — measurements while the person is in the cohort (default)
+
+- `"cohort_start_date"` — measurements recorded on the cohort start date 
+
+The following example shows measurement summary results when using `timing = "any"` and `timing = "cohort_start_date"`: 
+```{r}
+result_any <- summariseCohortMeasurementUse(
+  codes = list("measurement_codelist" = c(3001467L, 45875977L)),
+  cohort = cdm$my_cohort,
+  timing = "any"
+)
+
+result_cohort_start <- summariseCohortMeasurementUse(
+  codes = list("measurement_codelist" = c(3001467L, 45875977L)),
+  cohort = cdm$my_cohort,
+  timing = "cohort_start_date"
+)
+
+tableMeasurementSummary(result_any)
+tableMeasurementSummary(result_cohort_start)
+
+```
+
+# Measurement cohorts
+
+If no explicit codelist is provided (`codes = NULL`), the function will use the concept set associated with the cohort (if exists) to perform diagnostics.
+
+For example, using **CohortConstructor** we can create a cohort from a concept set based on measurement codes and then run diagnostics on that cohort's codelist:
+
+```{r}
+
+```
+
+# Other arguments
+Other arguments in this function include arguments to stratify results, restrict date range to look at measurement codes, and customise estimates and obtain histogram summaries. These work exactly as in the function `summariseMeasurmentUse", which can eb found in vignette X.
