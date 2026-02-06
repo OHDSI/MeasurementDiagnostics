@@ -1,9 +1,9 @@
 #' Plot summariseMeasurementTiming results.
-#'
+#' @param x Variable to plot on the x axis. This will be ignored for plotType
+#' "density".
 #' @param y Variable to plot on y axis, it can be "days_between_measurements" or
 #' "measurements_per_subject".
 #' @inheritParams resultDoc
-#' @inheritParams timeScaleDoc
 #' @inheritParams plotDoc
 #'
 #' @return A ggplot.
@@ -28,9 +28,9 @@
 #' CDMConnector::cdmDisconnect(cdm)
 #'}
 plotMeasurementSummary <- function(result,
+                                   x = "codelist_name",
                                    y = "days_between_measurements",
                                    plotType = "boxplot",
-                                   timeScale = "days",
                                    facet = visOmopResults::strataColumns(result),
                                    colour = c("cdm_name", "codelist_name"),
                                    style = NULL) {
@@ -64,11 +64,6 @@ plotMeasurementSummary <- function(result,
 
   if (y == "days_between_measurements") {
     lab <- "Days between measurements"
-    if (timeScale == "years") {
-      result <- result |>
-        dplyr::mutate("estimate_value" = as.character(as.numeric(.data$estimate_value)/365.25))
-      lab <- "Years between measurements"
-    }
   } else {
     lab <- "Number of measurements per subject"
   }
@@ -100,7 +95,7 @@ plotMeasurementSummary <- function(result,
       dplyr::filter(.data$estimate_name %in% c("min", "q25", "median", "q75", "max"))
     p <- visOmopResults::boxPlot(
       result = result,
-      x = "codelist_name",
+      x = x,
       lower = "q25",
       middle = "median",
       upper  = "q75",
