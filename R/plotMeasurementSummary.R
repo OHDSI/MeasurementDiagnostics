@@ -1,7 +1,6 @@
 #' Plot summariseMeasurementTiming results.
-#' @param x Variable to plot on the x axis. This will be ignored for plotType
-#' "density".
-#' @param y Variable to plot on y axis, it can be "days_between_measurements" or
+#' @param x Variable to plot on the x axis when plotType is "boxlot".
+#' @param y Variable to plot, it can be "days_between_measurements" or
 #' "measurements_per_subject".
 #' @inheritParams resultDoc
 #' @inheritParams plotDoc
@@ -37,7 +36,6 @@ plotMeasurementSummary <- function(result,
   # specific checks
   omopgenerics::assertChoice(y, c("days_between_measurements", "measurements_per_subject"), length = 1)
   omopgenerics::assertChoice(plotType, c("boxplot", "densityplot", "barplot"), length = 1)
-  omopgenerics::assertChoice(timeScale, c("days", "years"), length = 1)
   result <- omopgenerics::validateResultArgument(result)
   rlang::check_installed("visOmopResults")
 

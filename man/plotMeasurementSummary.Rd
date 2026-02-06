@@ -17,10 +17,9 @@ plotMeasurementSummary(
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{x}{Variable to plot on the x axis. This will be ignored for plotType
-"density".}
+\item{x}{Variable to plot on the x axis when plotType is "boxlot".}
 
-\item{y}{Variable to plot on y axis, it can be "days_between_measurements" or
+\item{y}{Variable to plot, it can be "days_between_measurements" or
 "measurements_per_subject".}
 
 \item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}

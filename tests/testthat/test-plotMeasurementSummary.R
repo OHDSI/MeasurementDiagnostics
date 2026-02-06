@@ -14,7 +14,7 @@ test_that("test measurement timing", {
 
   boxplot2 <- result |>
     plotMeasurementSummary(y = "days_between_measurements",
-                           facet = "cdm_name", colour = NULL, timeScale = "years")
+                           facet = "cdm_name", colour = NULL, x = "cdm_name")
   expect_true(all(c("gg", "ggplot") %in% class(boxplot2)))
 
   boxplot3 <- result |>
