@@ -7,9 +7,9 @@ Plot summariseMeasurementTiming results.
 ``` r
 plotMeasurementSummary(
   result,
+  x = "codelist_name",
   y = "days_between_measurements",
   plotType = "boxplot",
-  timeScale = "days",
   facet = visOmopResults::strataColumns(result),
   colour = c("cdm_name", "codelist_name"),
   style = NULL
@@ -22,18 +22,18 @@ plotMeasurementSummary(
 
   A summarised_result object.
 
+- x:
+
+  Variable to plot on the x axis when plotType is "boxlot".
+
 - y:
 
-  Variable to plot on y axis, it can be "days_between_measurements" or
+  Variable to plot, it can be "days_between_measurements" or
   "measurements_per_subject".
 
 - plotType:
 
   Type of plot, either "boxplot", "barplot", or "densityplot".
-
-- timeScale:
-
-  Time scale to show, it can be "days" or "years".
 
 - facet:
 
@@ -85,15 +85,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-03 18:45:31.556912
-#> ✔ Summary finished, at 2026-02-03 18:45:31.666062
+#> → Start summary of data, at 2026-02-06 18:45:02.735062
+#> ✔ Summary finished, at 2026-02-06 18:45:02.84265
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-03 18:45:32.202851
-#> ✔ Summary finished, at 2026-02-03 18:45:32.299755
+#> → Start summary of data, at 2026-02-06 18:45:03.383006
+#> ✔ Summary finished, at 2026-02-06 18:45:03.482402
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -101,14 +101,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-03 18:45:33.862085
-#> ✔ Summary finished, at 2026-02-03 18:45:34.150613
+#> → Start summary of data, at 2026-02-06 18:45:05.043396
+#> ✔ Summary finished, at 2026-02-06 18:45:05.315334
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-03 18:45:34.833271
-#> ✔ Summary finished, at 2026-02-03 18:45:34.980874
+#> → Start summary of data, at 2026-02-06 18:45:05.986092
+#> ✔ Summary finished, at 2026-02-06 18:45:06.127941
 #> → Binding all diagnostic results.
 
 result |>
