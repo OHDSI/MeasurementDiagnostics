@@ -108,15 +108,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:11.664963
-#> ✔ Summary finished, at 2026-02-06 18:46:11.753502
+#> → Start summary of data, at 2026-02-06 19:01:42.102073
+#> ✔ Summary finished, at 2026-02-06 19:01:42.201307
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:12.242639
-#> ✔ Summary finished, at 2026-02-06 18:46:12.335581
+#> → Start summary of data, at 2026-02-06 19:01:42.732208
+#> ✔ Summary finished, at 2026-02-06 19:01:42.821623
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -124,14 +124,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:13.780605
-#> ✔ Summary finished, at 2026-02-06 18:46:14.035527
+#> → Start summary of data, at 2026-02-06 19:01:44.374875
+#> ✔ Summary finished, at 2026-02-06 19:01:44.649316
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-06 18:46:14.661414
-#> ✔ Summary finished, at 2026-02-06 18:46:14.797948
+#> → Start summary of data, at 2026-02-06 19:01:45.307413
+#> ✔ Summary finished, at 2026-02-06 19:01:45.463401
 #> → Binding all diagnostic results.
 
 resultHistogram <- summariseMeasurementUse(
@@ -176,16 +176,16 @@ resultHistogram <- summariseMeasurementUse(
 #> • days_between_measurements_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:17.929688
-#> ✔ Summary finished, at 2026-02-06 18:46:18.030442
+#> → Start summary of data, at 2026-02-06 19:01:48.836682
+#> ✔ Summary finished, at 2026-02-06 19:01:48.941913
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> • measurements_per_subject_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:18.679715
-#> ✔ Summary finished, at 2026-02-06 18:46:18.785091
+#> → Start summary of data, at 2026-02-06 19:01:49.653793
+#> ✔ Summary finished, at 2026-02-06 19:01:49.757725
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -194,14 +194,14 @@ resultHistogram <- summariseMeasurementUse(
 #> • value_as_number_band: count
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:20.331421
-#> ✔ Summary finished, at 2026-02-06 18:46:20.621459
+#> → Start summary of data, at 2026-02-06 19:01:51.421572
+#> ✔ Summary finished, at 2026-02-06 19:01:51.723661
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-06 18:46:21.245843
-#> ✔ Summary finished, at 2026-02-06 18:46:21.37458
+#> → Start summary of data, at 2026-02-06 19:01:52.568497
+#> ✔ Summary finished, at 2026-02-06 19:01:52.707559
 #> → Binding all diagnostic results.
 
 # more than one age group:
@@ -222,27 +222,27 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:24.866763
-#> ✔ Summary finished, at 2026-02-06 18:46:25.181698
+#> → Start summary of data, at 2026-02-06 19:01:56.401686
+#> ✔ Summary finished, at 2026-02-06 19:01:56.73567
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:25.692234
-#> ✔ Summary finished, at 2026-02-06 18:46:25.778461
+#> → Start summary of data, at 2026-02-06 19:01:57.27004
+#> ✔ Summary finished, at 2026-02-06 19:01:57.35843
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:26.348158
-#> ✔ Summary finished, at 2026-02-06 18:46:26.456304
+#> → Start summary of data, at 2026-02-06 19:01:57.973224
+#> ✔ Summary finished, at 2026-02-06 19:01:58.109898
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:27.026884
-#> ✔ Summary finished, at 2026-02-06 18:46:27.150964
+#> → Start summary of data, at 2026-02-06 19:01:58.715343
+#> ✔ Summary finished, at 2026-02-06 19:01:58.851742
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -250,14 +250,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-06 18:46:28.788174
-#> ✔ Summary finished, at 2026-02-06 18:46:29.779972
+#> → Start summary of data, at 2026-02-06 19:02:00.589072
+#> ✔ Summary finished, at 2026-02-06 19:02:01.62044
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-06 18:46:30.576499
-#> ✔ Summary finished, at 2026-02-06 18:46:30.996829
+#> → Start summary of data, at 2026-02-06 19:02:02.470633
+#> ✔ Summary finished, at 2026-02-06 19:02:02.907271
 #> → Binding all diagnostic results.
 
 CDMConnector::cdmDisconnect(cdm = cdm)

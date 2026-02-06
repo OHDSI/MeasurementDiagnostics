@@ -1,43 +1,52 @@
 # MeasurementDiagnostics
 
-The MeasurementDiagnostics package helps us to assess the use of
-measurements present in data mapped to the OMOP CDM, either for the
-dataset as a whole or for a particular cohort.
+The MeasurementDiagnostics package provides tools to assess how
+measurements are recorded and used in data mapped to the OMOP Common
+Data Model (CDM).
+
+Diagnostics can be run either on the full dataset or restricted to a
+specific cohort, helping users better understand data completeness,
+frequency, and value distributions for measurements of interest.
 
 ## Installation
 
-You can install the development version of MeasurementDiagnostics from
-[GitHub](https://github.com/) with:
+The package can be installed from CRAN:
 
 ``` r
-# install.packages("pak")
-pak::pak("ohdsi/MeasurementDiagnostics")
+install.packages("MeasurementDiagnostics")
+```
+
+Or you can install the development version of the package from GitHub:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ohdsi/MeasurementDiagnostics")
 ```
 
 ## Example
 
-Let’s say we are going to do a study where we are going to be using
-measurements of respiratory function. We can use MeasurementDiagnostics
-to better understand the use of these measurements.
+Suppose you are conducting a study that relies on measurements of
+respiratory function. Before using these measurements analytically, you
+may want to understand how frequently they are recorded, how values are
+stored, and whether they vary across subgroups. MeasurementDiagnostics
+can be used to explore these aspects.
 
-For this example we’ll use the Eunomia data.
+For this example we’ll use the GiBleed mock data.
 
 ``` r
-library(duckdb)
-library(omopgenerics)
-library(CDMConnector)
-library(dplyr)
+library(omock)
 library(MeasurementDiagnostics)
+library(OmopViewer)
 ```
 
 ``` r
-con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-cdm <- cdmFromCon(
-  con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
-)
+cdm <- mockCdmFromDataset(datasetName = "GiBleed")
+#> ℹ Reading GiBleed tables.
+#> ℹ Adding drug_strength table.
+#> ℹ Creating local <cdm_reference> object.
 cdm
 #> 
-#> ── # OMOP CDM reference (duckdb) of Eunomia ────────────────────────────────────
+#> ── # OMOP CDM reference (local) of GiBleed ─────────────────────────────────────
 #> • omop tables: care_site, cdm_source, concept, concept_ancestor, concept_class,
 #> concept_relationship, concept_synonym, condition_era, condition_occurrence,
 #> cost, death, device_exposure, domain, dose_era, drug_era, drug_exposure,
@@ -54,26 +63,71 @@ Now we have a cdm reference with our data, we will create a codelist
 with measurement concepts.
 
 ``` r
-respiratory_function_codes <- newCodelist(list("respiratory function" = c(4052083L, 4133840L, 3011505L)))
-respiratory_function_codes
-#> 
-#> - respiratory function (3 codes)
+respiratory_function_codes <- list("respiratory_function" = c(4052083L, 4133840L, 3011505L))
 ```
 
-And now we can run a set of measurement diagnostic checks, here
-stratifying results by sex.
+And now we can run all measurement diagnostic checks, stratifying
+results by sex.
 
 ``` r
-respiratory_function_measurements <- summariseMeasurementUse(cdm, respiratory_function_codes, bySex = TRUE)
+respiratory_function_measurements <- summariseMeasurementUse(
+  cdm = cdm, codes = respiratory_function_codes, bySex = TRUE
+)
 ```
 
-Among our results is a summary of timings between measurements for
-individuals in our dataset. We can quickly create a plot of these
-results like so
+The results include three main components:
+
+1.  A summary of measurement use, including the number of subjects with
+    measurements, the number of measurements per subject, and the time
+    between measurements.
+
+2.  A summary of measurement values recorded as numeric.
+
+3.  A summary of measurement values recorded using concepts.
+
+### Visualise results: Tables
+
+Tabular summaries can be produced using the corresponding table
+functions. For example, the following tables display summaries of
+numeric values and concept-based values:
 
 ``` r
-plotMeasurementSummary(respiratory_function_measurements |> 
-  filter(variable_name == "days_between_measurements"))
+tableMeasurementValueAsConcept(respiratory_function_measurements)
+```
+
+[TABLE]
+
+``` r
+tableMeasurementValueAsNumber(respiratory_function_measurements)
+```
+
+[TABLE]
+
+### Visualise results: Plots
+
+Each diagnostic result can also be visualised using plotting functions.
+For instance, the time between measurements can be displayed using
+boxplots:
+
+``` r
+respiratory_function_measurements |>
+  plotMeasurementSummary( 
+    x = "sex", 
+    colour = "sex",
+    facet = NULL
+  ) 
+```
+
+![](reference/figures/README-unnamed-chunk-10-1.png)
+
+## Visualise results: Shiny App
+
+The package `OmopViewer` supports `MeasurementDiagnostics` results and
+provides a user-friendly way of quickly get a shiny app to visualise
+these results.
+
+``` r
+exportStaticApp(result = respiratory_function_measurements, directory = tempdir())
 ```
 
 # Package index
