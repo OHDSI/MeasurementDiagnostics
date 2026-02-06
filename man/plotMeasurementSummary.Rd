@@ -6,9 +6,9 @@
 \usage{
 plotMeasurementSummary(
   result,
+  x = "codelist_name",
   y = "days_between_measurements",
   plotType = "boxplot",
-  timeScale = "days",
   facet = visOmopResults::strataColumns(result),
   colour = c("cdm_name", "codelist_name"),
   style = NULL
@@ -17,12 +17,12 @@ plotMeasurementSummary(
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{y}{Variable to plot on y axis, it can be "days_between_measurements" or
+\item{x}{Variable to plot on the x axis when plotType is "boxlot".}
+
+\item{y}{Variable to plot, it can be "days_between_measurements" or
 "measurements_per_subject".}
 
 \item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}
-
-\item{timeScale}{Time scale to show, it can be "days" or "years".}
 
 \item{facet}{Columns to facet by. See options with
 `visOmopResults::plotColumns(result)`. Formula input is also allowed to
