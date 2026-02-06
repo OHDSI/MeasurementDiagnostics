@@ -102,9 +102,10 @@ Each diagnostic result can also be visualised using plotting functions. For inst
 ```{r}
 respiratory_function_measurements |>
   plotMeasurementSummary( 
-    colour = "sex", 
+    x = "sex", 
+    colour = "sex",
     facet = NULL
-  )
+  ) 
 ```
 
 ## Visualise results: Shiny App
