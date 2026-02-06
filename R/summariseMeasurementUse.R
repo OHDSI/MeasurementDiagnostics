@@ -958,7 +958,8 @@ addSubjectsWithMeasurement <- function(x, cdm, cohortName, baseGroup, strata, pr
           dplyr::filter(.data$variable_name == "Number subjects") |>
           omopgenerics::tidy() |>
           dplyr::select(dplyr::any_of(c("cohort_name"[!is.null(cohortName)], "cohort_count" = "count"))),
-        by = c("cohort_name"[!is.null(cohortName)])
+        by = c("cohort_name"[!is.null(cohortName)]),
+        relationship = "many-to-many"
       ) |>
       dplyr::mutate(
         result_id = 1L,
@@ -978,7 +979,8 @@ addSubjectsWithMeasurement <- function(x, cdm, cohortName, baseGroup, strata, pr
           omopgenerics::splitAll() |>
           dplyr::mutate(variable_name = gsub("Number ", "cohort_", .data$variable_name)) |>
           dplyr::select(!c("cdm_name", "result_id")),
-        by = "cohort_name"
+        by = "cohort_name",
+        relationship = "many-to-many"
       ) |>
       omopgenerics::uniteGroup(cols = baseGroup)
     set <- omopgenerics::settings(measurementSummary)

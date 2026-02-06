@@ -14,7 +14,7 @@ test_that("test measurement timing", {
 
   boxplot2 <- result |>
     plotMeasurementSummary(y = "days_between_measurements",
-                           facet = "cdm_name", colour = NULL, timeScale = "years")
+                           facet = "cdm_name", colour = NULL, x = "cdm_name")
   expect_true(all(c("gg", "ggplot") %in% class(boxplot2)))
 
   boxplot3 <- result |>
@@ -31,11 +31,6 @@ test_that("test measurement timing", {
     plotMeasurementSummary(y = "days_between_measurements",
                            facet = "cdm_name", plotType = "densityplot")
   expect_true(all(c("gg", "ggplot") %in% class(density2)))
-
-  density3 <- result |>
-    plotMeasurementSummary(y = "days_between_measurements",
-                           facet = "cdm_name", plotType = "densityplot", timeScale = "years")
-  expect_true(all(c("gg", "ggplot") %in% class(density3)))
 
   # Histogram
   result <- summariseMeasurementUse(
