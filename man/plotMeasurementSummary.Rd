@@ -10,7 +10,7 @@ plotMeasurementSummary(
   y = "days_between_measurements",
   plotType = "boxplot",
   facet = visOmopResults::strataColumns(result),
-  colour = c("cdm_name", "codelist_name"),
+  colour = c("codelist_name"),
   style = NULL
 )
 }
