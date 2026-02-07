@@ -889,7 +889,7 @@ validateHistogram <- function(histogram) {
       ))
     }
     # check bandwidth & correct/add names
-    newHistogram[[nm]] <- omopgenerics::validateWindowArgument(histogram[[nm]], snakeCase = FALSE)
+    newHistogram[[nm]] <- validateWindowArgumentMD(histogram[[nm]], snakeCase = FALSE)
   }
   return(newHistogram)
 }

@@ -1,5 +1,5 @@
 #' Plot summariseMeasurementTiming results.
-#' @param x Variable to plot on the x axis when plotType is "boxlot".
+#' @param x Variable to plot on the x axis when plotType is "boxlot" or "barplot".
 #' @param y Variable to plot, it can be "days_between_measurements" or
 #' "measurements_per_subject".
 #' @inheritParams resultDoc
@@ -80,8 +80,7 @@ plotMeasurementSummary <- function(result,
       ymax = NULL,
       facet = facet,
       colour = colour,
-      style = style,
-      # label = visOmopResults::plotColumns(result)
+      style = style
     ) +
       ggplot2::labs(
         title = "",
@@ -114,7 +113,7 @@ plotMeasurementSummary <- function(result,
       dplyr::filter(.data$estimate_name == "count")
     p <- result |>
       visOmopResults::barPlot(
-        x = "variable_level",
+        x = x,
         y = "count",
         just = 0.5,
         position = "dodge",
@@ -125,9 +124,12 @@ plotMeasurementSummary <- function(result,
       ) +
       ggplot2::labs(
         title = "",
-        x = lab,
         y = ""
       )
+    if (x == "variable_level") {
+      p <- p +
+        ggplot2::labs(x = lab)
+    }
   }
   p
 }

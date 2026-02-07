@@ -2,6 +2,7 @@
 #'
 #' @inheritParams resultDoc
 #' @inheritParams plotDoc
+#' @param x Variable to plot on the x axis when plotType is "boxlot" or "barplot".
 #'
 #' @return A ggplot.
 #' @export
