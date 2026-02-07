@@ -9,6 +9,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
+  fig.dpi = 300,
   out.width = "100%", 
   message = FALSE, 
   warning = FALSE
@@ -56,6 +57,7 @@ For this example we'll use the GiBleed mock data.
 library(omock)
 library(MeasurementDiagnostics)
 library(OmopViewer)
+library(omopgenerics)
 ```
 
 ```{r, message=TRUE}
@@ -92,7 +94,9 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
 ```
 
 ```{r}
-tableMeasurementValueAsNumber(respiratory_function_measurements)
+respiratory_function_measurements |>
+  filterGroup(concept_name == "overall") |>
+  tableMeasurementValueAsNumber()
 ```
 
 ### Visualise results: Plots

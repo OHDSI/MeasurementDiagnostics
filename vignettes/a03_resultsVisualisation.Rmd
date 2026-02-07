@@ -234,10 +234,25 @@ result |>
 
 # Visualisation with other packages
 
-## Shiny
+## Shiny Apps with OmopViewer
 
-expalin OmopViewer package
+The [**OmopViewer**](https://github.com/ohdsi/OmopViewer/) package supports results produced by **MeasurementDiagnostics** and provides a user-friendly way to quickly generate a Shiny application for interactive exploration of diagnostic results.
 
-## Custom tables and plots
+For example, the following code exports a static Shiny app that allows users to navigate the tables and plots generated in this vignette.
 
-explain vis omOP RESULTS PACKAGE
+```{r, eval=FALSE}
+library(OmopViewer)
+exportStaticApp(result = result, directory = tempdir())
+```
+
+## Customisation of plots and tables with visOmopResults
+
+Tables and plots in **MeasurementDiagnostics** are generated using the [**visOmopResults**](https://github.com/darwin-eu/visOmopResults) package. Users who wish to create custom tables or visualisations directly from a `summarised_result` object can do so by leveraging the functionality provided by **visOmopResults**.
+
+Refer to the **visOmopResults** package documentation for more details on available plotting and table-generation options.
+
+## Application of MeasurementDiagnostics in PhenotypeR
+
+**MeasurementDiagnostics** is integrated into the [**PhenotypeR**](https://github.com/OHDSI/PhenotypeR) package. When cohorts are defined based on measurement codes, **PhenotypeR** automatically applies `summariseCohortMeasurementUse()` to generate measurement diagnostics during cohort construction, using the codelists linked to each cohort.
+
+This integration allows users to assess measurement usage and data quality as part of a broader phenotype development workflow.

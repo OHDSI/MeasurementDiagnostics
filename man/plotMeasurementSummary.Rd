@@ -17,7 +17,7 @@ plotMeasurementSummary(
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{x}{Variable to plot on the x axis when plotType is "boxlot".}
+\item{x}{Variable to plot on the x axis when plotType is "boxlot" or "barplot".}
 
 \item{y}{Variable to plot, it can be "days_between_measurements" or
 "measurements_per_subject".}
