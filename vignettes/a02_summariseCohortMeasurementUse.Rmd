@@ -51,13 +51,14 @@ result |> glimpse()
 
 
 Results are returned as a `summarised_result` object (see **omopgenerics**).
-As an example, the table below shows the `measurement_value_as_concept` results. From this output, we can see that for this codelist and mock dataset, measurement values are not recorded using concepts.
+As an example, the table below shows the `measurement_value_as_concept` results. From this output, we can see that for this codelist and mock dataset, some measurement values are recorded using concepts for "Low" and "High", while others are missing a concept value.
 
 ```{r}
 tableMeasurementValueAsConcept(result)
 ```
 
 Next, we examine the `measurement_value_as_number` results. This table shows the range of numeric measurement values for the overall codelist and for each individual concept, stratified by unit where available. 
+In the following results we see some numeric values referring to kilograms (unit concept), while other are not associated with any unit, and lastly there are 4 records with missing values as numbers.
 ```{r}
 tableMeasurementValueAsNumber(result)
 ```
