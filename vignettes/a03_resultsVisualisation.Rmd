@@ -21,7 +21,7 @@ CDMConnector::requireEunomia()
 
 # Introduction
 
-This vignette demonstrates how to use table and plotting functions provided by **MeasurementDiagnostics** to visualise results. Finally it shows how to use **OmopViewer** package to produce a shiny this package's results.
+This vignette demonstrates how to use table and plotting functions provided by **MeasurementDiagnostics** to visualise results. 
 
 We use the package mock data so examples are fully reproducible.
 
@@ -39,7 +39,7 @@ alkaline_phosphatase_codes <- list("alkaline_phosphatase" = c(3001467L, 45875977
 
 # Create diagnostics results
 
-We call `summariseMeasurementUse()` once and request histogram bins for the variables we intend to show as barplots. This returns a `summarised_result` containing all the diagnostics checks, summary estimates, and density and histogram estimates to visualise distributions of numeric variables.
+We call `summariseMeasurementUse()` once and obtain histogram bins for all numeric variables. This returns a `summarised_result` containing all the diagnostics checks, summary estimates, and density and histogram estimates to visualise distributions of numeric variables; all for the overall measurements codelist and stratified by sex.
 
 ```{r}
 result <- summariseMeasurementUse(
@@ -64,15 +64,15 @@ result <- summariseMeasurementUse(
 
 # Tables
 
-There is one table helper corresponding to each diagnostic check:
+There is one table function corresponding to each diagnostic check:
 
-- `tableMeasurementSummary()` — timings & counts (subjects with measurements, counts per subject, days between measurements).
+- `tableMeasurementSummary()` — subjects with measurements, counts per subject, days between measurements.
 
 - `tableMeasurementValueAsNumber()` — numeric value summaries (by unit where available).
 
-- `tableMeasurementValueAsConcept()` — frequency tables for values recorded as concepts.
+- `tableMeasurementValueAsConcept()` — frequency of concept values.
 
-You can customise which columns appear in the header, which are used as grouping columns, and which to hide.
+You can customise which columns appear in the *header*, which are used as *grouping columns*, and which to *hide*.
 
 ```{r}
 # 1. Measurement summary table (timings / counts)
@@ -92,11 +92,11 @@ tableMeasurementValueAsConcept(result)
 
 # Plots
 
-The plotting helpers allow to plot certain types of graphics, while giving flexibility for variables to use for colouring, facetting, and which to have in the horizontla and vertical axes. They return `ggplot` objects, which allows further customisation using standard **ggplot2** layers.
+The plotting helpers allow to plot certain types of graphics, while giving flexibility for variables to use for colouring, facetting, and which to have in the horizontla and vertical axes. They return `ggplot` objects, which allows further customisation using standard [**ggplot2**](https://ggplot2.tidyverse.org) layers.
 
 ## Measurement summary
 
-`plotMeasurementSummary()` visualises `days_between_measurements`, and `measurements_per_subject`. Supported plotType values include `"boxplot"`, `"barplot"`, and `"densityplot"`.
+`plotMeasurementSummary()` visualises `days_between_measurements`, and `measurements_per_subject`. Supported plot type are `"boxplot"`, `"barplot"`, and `"densityplot"`.
 
 The variable specified in `y` must be either "days_between_measurements" or "measurements_per_subject" as it is used to filter which of the summary results to plot.
 
@@ -219,7 +219,7 @@ result |>
   ylab("Value as Concept Name")
 ```
 
-Instead of counts, we can also plot the percentafe for each concept:
+Instead of counts, we can also plot the percentage for each concept:
 
 ```{r}
 result |>
@@ -236,7 +236,7 @@ result |>
 
 ## Shiny Apps with OmopViewer
 
-The [**OmopViewer**](https://github.com/ohdsi/OmopViewer/) package supports results produced by **MeasurementDiagnostics** and provides a user-friendly way to quickly generate a Shiny application for interactive exploration of diagnostic results.
+The [**OmopViewer**](https://ohdsi.github.io/OmopViewer/) package supports results produced by **MeasurementDiagnostics** and provides a user-friendly way to quickly generate a Shiny application to explore diagnostic results in an interactive way.
 
 For example, the following code exports a static Shiny app that allows users to navigate the tables and plots generated in this vignette.
 
@@ -247,12 +247,11 @@ exportStaticApp(result = result, directory = tempdir())
 
 ## Customisation of plots and tables with visOmopResults
 
-Tables and plots in **MeasurementDiagnostics** are generated using the [**visOmopResults**](https://github.com/darwin-eu/visOmopResults) package. Users who wish to create custom tables or visualisations directly from a `summarised_result` object can do so by leveraging the functionality provided by **visOmopResults**.
+Tables and plots in **MeasurementDiagnostics** are generated using the [**visOmopResults**](https://darwin-eu.github.io/visOmopResults/) package. Users who wish to create custom tables or visualisations directly from a `summarised_result` object can do so by leveraging the functions provided by this package.
 
-Refer to the **visOmopResults** package documentation for more details on available plotting and table-generation options.
 
 ## Application of MeasurementDiagnostics in PhenotypeR
 
-**MeasurementDiagnostics** is integrated into the [**PhenotypeR**](https://github.com/OHDSI/PhenotypeR) package. When cohorts are defined based on measurement codes, **PhenotypeR** automatically applies `summariseCohortMeasurementUse()` to generate measurement diagnostics during cohort construction, using the codelists linked to each cohort.
+**MeasurementDiagnostics** is integrated into the [**PhenotypeR**](https://ohdsi.github.io/PhenotypeR/) package. When cohorts are defined based on measurement codes, **PhenotypeR** automatically applies `summariseCohortMeasurementUse()` to generate measurement diagnostics during cohort construction, using the codelists linked to each cohort.
 
-This integration allows users to assess measurement usage and data quality as part of a broader phenotype development workflow.
+This integration allows users to assess measurement codelists and cohorts as part of a broader phenotype development workflow.

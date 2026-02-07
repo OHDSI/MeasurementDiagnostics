@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-The MeasurementDiagnostics package provides tools to assess how measurements are recorded and used in data mapped to the OMOP Common Data Model (CDM). 
+The MeasurementDiagnostics package provides tools to assess how measurements are recorded and used in data mapped to the OMOP Common Data Model. 
 
 Diagnostics can be run either on the full dataset or restricted to a specific cohort, helping users better understand data completeness, frequency, and value distributions for measurements of interest.
 
@@ -90,13 +90,21 @@ The results include three main components:
 Tabular summaries can be produced using the corresponding table functions. For example, the following tables display summaries of numeric values and concept-based values:
 
 ```{r}
-tableMeasurementValueAsConcept(respiratory_function_measurements)
+tableMeasurementValueAsConcept(
+  respiratory_function_measurements,
+  hide = c("cdm_name", "domain_id", "value_as_concept_id")
+)
 ```
 
 ```{r}
 respiratory_function_measurements |>
   filterGroup(concept_name == "overall") |>
-  tableMeasurementValueAsNumber()
+  tableMeasurementValueAsNumber(
+    hide = c(
+      "concept_name", "concept_id", "source_concept_name", "source_concept_id", 
+      "domain_id", "unit_concept_id"
+    )
+  )
 ```
 
 ### Visualise results: Plots

@@ -113,20 +113,20 @@ numeric values and concept-based values:
 tableMeasurementValueAsConcept(respiratory_function_measurements)
 ```
 
-<div id="xmtlvrhfqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xmtlvrhfqa table {
+<div id="tmdrvwomar" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tmdrvwomar table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#xmtlvrhfqa thead, #xmtlvrhfqa tbody, #xmtlvrhfqa tfoot, #xmtlvrhfqa tr, #xmtlvrhfqa td, #xmtlvrhfqa th {
+&#10;#tmdrvwomar thead, #tmdrvwomar tbody, #tmdrvwomar tfoot, #tmdrvwomar tr, #tmdrvwomar td, #tmdrvwomar th {
   border-style: none;
 }
-&#10;#xmtlvrhfqa p {
+&#10;#tmdrvwomar p {
   margin: 0;
   padding: 0;
 }
-&#10;#xmtlvrhfqa .gt_table {
+&#10;#tmdrvwomar .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -151,11 +151,11 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-left-width: 3px;
   border-left-color: #D9D9D9;
 }
-&#10;#xmtlvrhfqa .gt_caption {
+&#10;#tmdrvwomar .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#xmtlvrhfqa .gt_title {
+&#10;#tmdrvwomar .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -166,7 +166,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#xmtlvrhfqa .gt_subtitle {
+&#10;#tmdrvwomar .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -177,7 +177,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#xmtlvrhfqa .gt_heading {
+&#10;#tmdrvwomar .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -188,12 +188,12 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_bottom_border {
+&#10;#tmdrvwomar .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_col_headings {
+&#10;#tmdrvwomar .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -207,7 +207,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_col_heading {
+&#10;#tmdrvwomar .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -226,7 +226,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#xmtlvrhfqa .gt_column_spanner_outer {
+&#10;#tmdrvwomar .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -237,13 +237,13 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#xmtlvrhfqa .gt_column_spanner_outer:first-child {
+&#10;#tmdrvwomar .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#xmtlvrhfqa .gt_column_spanner_outer:last-child {
+&#10;#tmdrvwomar .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#xmtlvrhfqa .gt_column_spanner {
+&#10;#tmdrvwomar .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -254,10 +254,10 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   display: inline-block;
   width: 100%;
 }
-&#10;#xmtlvrhfqa .gt_spanner_row {
+&#10;#tmdrvwomar .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#xmtlvrhfqa .gt_group_heading {
+&#10;#tmdrvwomar .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -282,7 +282,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   vertical-align: middle;
   text-align: left;
 }
-&#10;#xmtlvrhfqa .gt_empty_group_heading {
+&#10;#tmdrvwomar .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -296,13 +296,13 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#xmtlvrhfqa .gt_from_md > :first-child {
+&#10;#tmdrvwomar .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#xmtlvrhfqa .gt_from_md > :last-child {
+&#10;#tmdrvwomar .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#xmtlvrhfqa .gt_row {
+&#10;#tmdrvwomar .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -320,7 +320,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#xmtlvrhfqa .gt_stub {
+&#10;#tmdrvwomar .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -332,7 +332,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#xmtlvrhfqa .gt_stub_row_group {
+&#10;#tmdrvwomar .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -345,13 +345,13 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#xmtlvrhfqa .gt_row_group_first td {
+&#10;#tmdrvwomar .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#xmtlvrhfqa .gt_row_group_first th {
+&#10;#tmdrvwomar .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#xmtlvrhfqa .gt_summary_row {
+&#10;#tmdrvwomar .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -360,14 +360,14 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#xmtlvrhfqa .gt_first_summary_row {
+&#10;#tmdrvwomar .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_first_summary_row.thick {
+&#10;#tmdrvwomar .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#xmtlvrhfqa .gt_last_summary_row {
+&#10;#tmdrvwomar .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -376,7 +376,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_grand_summary_row {
+&#10;#tmdrvwomar .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -385,7 +385,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#xmtlvrhfqa .gt_first_grand_summary_row {
+&#10;#tmdrvwomar .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -394,7 +394,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_last_grand_summary_row_top {
+&#10;#tmdrvwomar .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -403,10 +403,10 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_striped {
+&#10;#tmdrvwomar .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#xmtlvrhfqa .gt_table_body {
+&#10;#tmdrvwomar .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -414,7 +414,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_footnotes {
+&#10;#tmdrvwomar .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -427,7 +427,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_footnote {
+&#10;#tmdrvwomar .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -435,7 +435,7 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#xmtlvrhfqa .gt_sourcenotes {
+&#10;#tmdrvwomar .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -448,64 +448,64 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#xmtlvrhfqa .gt_sourcenote {
+&#10;#tmdrvwomar .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#xmtlvrhfqa .gt_left {
+&#10;#tmdrvwomar .gt_left {
   text-align: left;
 }
-&#10;#xmtlvrhfqa .gt_center {
+&#10;#tmdrvwomar .gt_center {
   text-align: center;
 }
-&#10;#xmtlvrhfqa .gt_right {
+&#10;#tmdrvwomar .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#xmtlvrhfqa .gt_font_normal {
+&#10;#tmdrvwomar .gt_font_normal {
   font-weight: normal;
 }
-&#10;#xmtlvrhfqa .gt_font_bold {
+&#10;#tmdrvwomar .gt_font_bold {
   font-weight: bold;
 }
-&#10;#xmtlvrhfqa .gt_font_italic {
+&#10;#tmdrvwomar .gt_font_italic {
   font-style: italic;
 }
-&#10;#xmtlvrhfqa .gt_super {
+&#10;#tmdrvwomar .gt_super {
   font-size: 65%;
 }
-&#10;#xmtlvrhfqa .gt_footnote_marks {
+&#10;#tmdrvwomar .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#xmtlvrhfqa .gt_asterisk {
+&#10;#tmdrvwomar .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#xmtlvrhfqa .gt_indent_1 {
+&#10;#tmdrvwomar .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#xmtlvrhfqa .gt_indent_2 {
+&#10;#tmdrvwomar .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#xmtlvrhfqa .gt_indent_3 {
+&#10;#tmdrvwomar .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#xmtlvrhfqa .gt_indent_4 {
+&#10;#tmdrvwomar .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#xmtlvrhfqa .gt_indent_5 {
+&#10;#tmdrvwomar .gt_indent_5 {
   text-indent: 25px;
 }
-&#10;#xmtlvrhfqa .katex-display {
+&#10;#tmdrvwomar .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
-&#10;#xmtlvrhfqa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+&#10;#tmdrvwomar div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -602,23 +602,28 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
 ``` r
 respiratory_function_measurements |>
   filterGroup(concept_name == "overall") |>
-  tableMeasurementValueAsNumber()
+  tableMeasurementValueAsNumber(
+    hide = c(
+      "concept_name", "concept_id", "source_concept_name", "source_concept_id", 
+      "domain_id", "unit_concept_id"
+    )
+  )
 ```
 
-<div id="skindyufms" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#skindyufms table {
+<div id="hxcwkzxhxk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hxcwkzxhxk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-&#10;#skindyufms thead, #skindyufms tbody, #skindyufms tfoot, #skindyufms tr, #skindyufms td, #skindyufms th {
+&#10;#hxcwkzxhxk thead, #hxcwkzxhxk tbody, #hxcwkzxhxk tfoot, #hxcwkzxhxk tr, #hxcwkzxhxk td, #hxcwkzxhxk th {
   border-style: none;
 }
-&#10;#skindyufms p {
+&#10;#hxcwkzxhxk p {
   margin: 0;
   padding: 0;
 }
-&#10;#skindyufms .gt_table {
+&#10;#hxcwkzxhxk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -643,11 +648,11 @@ respiratory_function_measurements |>
   border-left-width: 3px;
   border-left-color: #D9D9D9;
 }
-&#10;#skindyufms .gt_caption {
+&#10;#hxcwkzxhxk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
-&#10;#skindyufms .gt_title {
+&#10;#hxcwkzxhxk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -658,7 +663,7 @@ respiratory_function_measurements |>
   border-bottom-color: #FFFFFF;
   border-bottom-width: 0;
 }
-&#10;#skindyufms .gt_subtitle {
+&#10;#hxcwkzxhxk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -669,7 +674,7 @@ respiratory_function_measurements |>
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
-&#10;#skindyufms .gt_heading {
+&#10;#hxcwkzxhxk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -680,12 +685,12 @@ respiratory_function_measurements |>
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_bottom_border {
+&#10;#hxcwkzxhxk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_col_headings {
+&#10;#hxcwkzxhxk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -699,7 +704,7 @@ respiratory_function_measurements |>
   border-right-width: 1px;
   border-right-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_col_heading {
+&#10;#hxcwkzxhxk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -718,7 +723,7 @@ respiratory_function_measurements |>
   padding-right: 5px;
   overflow-x: hidden;
 }
-&#10;#skindyufms .gt_column_spanner_outer {
+&#10;#hxcwkzxhxk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -729,13 +734,13 @@ respiratory_function_measurements |>
   padding-left: 4px;
   padding-right: 4px;
 }
-&#10;#skindyufms .gt_column_spanner_outer:first-child {
+&#10;#hxcwkzxhxk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
-&#10;#skindyufms .gt_column_spanner_outer:last-child {
+&#10;#hxcwkzxhxk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
-&#10;#skindyufms .gt_column_spanner {
+&#10;#hxcwkzxhxk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -746,10 +751,10 @@ respiratory_function_measurements |>
   display: inline-block;
   width: 100%;
 }
-&#10;#skindyufms .gt_spanner_row {
+&#10;#hxcwkzxhxk .gt_spanner_row {
   border-bottom-style: hidden;
 }
-&#10;#skindyufms .gt_group_heading {
+&#10;#hxcwkzxhxk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -774,7 +779,7 @@ respiratory_function_measurements |>
   vertical-align: middle;
   text-align: left;
 }
-&#10;#skindyufms .gt_empty_group_heading {
+&#10;#hxcwkzxhxk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -788,13 +793,13 @@ respiratory_function_measurements |>
   border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
-&#10;#skindyufms .gt_from_md > :first-child {
+&#10;#hxcwkzxhxk .gt_from_md > :first-child {
   margin-top: 0;
 }
-&#10;#skindyufms .gt_from_md > :last-child {
+&#10;#hxcwkzxhxk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
-&#10;#skindyufms .gt_row {
+&#10;#hxcwkzxhxk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -812,7 +817,7 @@ respiratory_function_measurements |>
   vertical-align: middle;
   overflow-x: hidden;
 }
-&#10;#skindyufms .gt_stub {
+&#10;#hxcwkzxhxk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -824,7 +829,7 @@ respiratory_function_measurements |>
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#skindyufms .gt_stub_row_group {
+&#10;#hxcwkzxhxk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,13 +842,13 @@ respiratory_function_measurements |>
   padding-right: 5px;
   vertical-align: top;
 }
-&#10;#skindyufms .gt_row_group_first td {
+&#10;#hxcwkzxhxk .gt_row_group_first td {
   border-top-width: 2px;
 }
-&#10;#skindyufms .gt_row_group_first th {
+&#10;#hxcwkzxhxk .gt_row_group_first th {
   border-top-width: 2px;
 }
-&#10;#skindyufms .gt_summary_row {
+&#10;#hxcwkzxhxk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -852,14 +857,14 @@ respiratory_function_measurements |>
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#skindyufms .gt_first_summary_row {
+&#10;#hxcwkzxhxk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_first_summary_row.thick {
+&#10;#hxcwkzxhxk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
-&#10;#skindyufms .gt_last_summary_row {
+&#10;#hxcwkzxhxk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -868,7 +873,7 @@ respiratory_function_measurements |>
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_grand_summary_row {
+&#10;#hxcwkzxhxk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -877,7 +882,7 @@ respiratory_function_measurements |>
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#skindyufms .gt_first_grand_summary_row {
+&#10;#hxcwkzxhxk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -886,7 +891,7 @@ respiratory_function_measurements |>
   border-top-width: 6px;
   border-top-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_last_grand_summary_row_top {
+&#10;#hxcwkzxhxk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -895,10 +900,10 @@ respiratory_function_measurements |>
   border-bottom-width: 6px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_striped {
+&#10;#hxcwkzxhxk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
-&#10;#skindyufms .gt_table_body {
+&#10;#hxcwkzxhxk .gt_table_body {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #D9D9D9;
@@ -906,7 +911,7 @@ respiratory_function_measurements |>
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_footnotes {
+&#10;#hxcwkzxhxk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -919,7 +924,7 @@ respiratory_function_measurements |>
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_footnote {
+&#10;#hxcwkzxhxk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -927,7 +932,7 @@ respiratory_function_measurements |>
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#skindyufms .gt_sourcenotes {
+&#10;#hxcwkzxhxk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -940,64 +945,64 @@ respiratory_function_measurements |>
   border-right-width: 2px;
   border-right-color: #D3D3D3;
 }
-&#10;#skindyufms .gt_sourcenote {
+&#10;#hxcwkzxhxk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
-&#10;#skindyufms .gt_left {
+&#10;#hxcwkzxhxk .gt_left {
   text-align: left;
 }
-&#10;#skindyufms .gt_center {
+&#10;#hxcwkzxhxk .gt_center {
   text-align: center;
 }
-&#10;#skindyufms .gt_right {
+&#10;#hxcwkzxhxk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
-&#10;#skindyufms .gt_font_normal {
+&#10;#hxcwkzxhxk .gt_font_normal {
   font-weight: normal;
 }
-&#10;#skindyufms .gt_font_bold {
+&#10;#hxcwkzxhxk .gt_font_bold {
   font-weight: bold;
 }
-&#10;#skindyufms .gt_font_italic {
+&#10;#hxcwkzxhxk .gt_font_italic {
   font-style: italic;
 }
-&#10;#skindyufms .gt_super {
+&#10;#hxcwkzxhxk .gt_super {
   font-size: 65%;
 }
-&#10;#skindyufms .gt_footnote_marks {
+&#10;#hxcwkzxhxk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
-&#10;#skindyufms .gt_asterisk {
+&#10;#hxcwkzxhxk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
-&#10;#skindyufms .gt_indent_1 {
+&#10;#hxcwkzxhxk .gt_indent_1 {
   text-indent: 5px;
 }
-&#10;#skindyufms .gt_indent_2 {
+&#10;#hxcwkzxhxk .gt_indent_2 {
   text-indent: 10px;
 }
-&#10;#skindyufms .gt_indent_3 {
+&#10;#hxcwkzxhxk .gt_indent_3 {
   text-indent: 15px;
 }
-&#10;#skindyufms .gt_indent_4 {
+&#10;#hxcwkzxhxk .gt_indent_4 {
   text-indent: 20px;
 }
-&#10;#skindyufms .gt_indent_5 {
+&#10;#hxcwkzxhxk .gt_indent_5 {
   text-indent: 25px;
 }
-&#10;#skindyufms .katex-display {
+&#10;#hxcwkzxhxk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
-&#10;#skindyufms div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+&#10;#hxcwkzxhxk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1005,13 +1010,9 @@ respiratory_function_measurements |>
   <thead>
     <tr class="gt_col_headings gt_spanner_row">
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="CDM-name">CDM name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Concept-name">Concept name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Concept-ID">Concept ID</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Source-concept-name">Source concept name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Source-concept-ID">Source concept ID</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Domain-ID">Domain ID</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Unit-concept-name">Unit concept name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Unit-concept-ID">Unit concept ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Variable-name">Variable name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Variable-level">Variable level</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" style="background-color: #E1E1E1; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="col" id="Estimate-name">Estimate name</th>
       <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="3" style="background-color: #D9D9D9; font-family: Arial; font-size: 10; text-align: center; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="colgroup" id="spanner-[header_name]Sex&#10;[header_level]overall">
         <div class="gt_column_spanner">Sex</div>
@@ -1025,16 +1026,12 @@ respiratory_function_measurements |>
   </thead>
   <tbody class="gt_table_body">
     <tr class="gt_group_heading_row">
-      <th colspan="12" class="gt_group_heading" style="background-color: #E9E9E9; font-family: Arial; font-size: 10; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="colgroup" id="respiratory_function">respiratory_function</th>
+      <th colspan="8" class="gt_group_heading" style="background-color: #E9E9E9; font-family: Arial; font-size: 10; font-weight: bold; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;" scope="colgroup" id="respiratory_function">respiratory_function</th>
     </tr>
     <tr class="gt_row_group_first"><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">GiBleed</td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">overall</td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">overall</td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">overall</td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">overall</td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">overall</td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">No matching concept</td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">0</td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Number records</td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">N</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">26,184</td>
@@ -1043,13 +1040,9 @@ respiratory_function_measurements |>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]Male" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; background-color: rgba(255,255,255,0); border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;">11,763</td></tr>
     <tr><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Value as number</td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Median [Q25 – Q75]</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
@@ -1058,13 +1051,9 @@ respiratory_function_measurements |>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]Male" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; background-color: rgba(255,255,255,0); border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;">–</td></tr>
     <tr><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Q05 – Q95</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
@@ -1073,13 +1062,9 @@ respiratory_function_measurements |>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]Male" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; background-color: rgba(255,255,255,0); border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;">–</td></tr>
     <tr><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Q01 – Q99</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
@@ -1088,13 +1073,9 @@ respiratory_function_measurements |>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]Male" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; background-color: rgba(255,255,255,0); border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;">–</td></tr>
     <tr><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Range</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">–</td>
@@ -1103,13 +1084,9 @@ respiratory_function_measurements |>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]Male" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; background-color: rgba(255,255,255,0); border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8;">–</td></tr>
     <tr><td headers="respiratory_function  CDM name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Source concept ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Domain ID" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Unit concept name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
-<td headers="respiratory_function  Unit concept ID" class="gt_row gt_right" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
+<td headers="respiratory_function  Variable level" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: hidden; border-top-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);"></td>
 <td headers="respiratory_function  Estimate name" class="gt_row gt_left" style="text-align: left; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">Missing value, N (%)</td>
 <td headers="respiratory_function  [header_name]Sex
 [header_level]overall" class="gt_row gt_left" style="text-align: right; font-family: Arial; font-size: 10; border-left-width: 1px; border-left-style: solid; border-left-color: #c8c8c8; border-right-width: 1px; border-right-style: solid; border-right-color: #c8c8c8; border-top-width: 1px; border-top-style: solid; border-top-color: #c8c8c8; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #c8c8c8; background-color: rgba(255,255,255,0);">26,184 (100.00%)</td>
