@@ -2,8 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  summariseMeasurementUse: summariseMeasurementUse.html
-last_built: 2026-02-06T19:21Z
+  a01_summariseMeasurementUse: a01_summariseMeasurementUse.html
+  a02_summariseCohortMeasurementUse: a02_summariseCohortMeasurementUse.html
+last_built: 2026-02-07T16:25Z
 urls:
   reference: https://ohdsi.github.io/MeasurementDiagnostics/reference
   article: https://ohdsi.github.io/MeasurementDiagnostics/articles

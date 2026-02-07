@@ -23,9 +23,8 @@ functions.
 
   Three options: 1) "any" if the interest is on measurement recorded any
   time, 2) "during", if interested in measurements while the subject is
-  in the cohort (or in observation if cohort = NULL), and 3)
-  "cohort_start_date" for measurements occurring at cohort start date
-  (or at "observation_period_start_date if cohort = NULL).
+  in the cohort, and 3) "cohort_start_date" for measurements occurring
+  at cohort start date.
 
 - byConcept:
 
