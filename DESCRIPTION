@@ -22,6 +22,7 @@ Imports:
     PatientProfiles (>= 1.4.0),
     purrr,
     rlang,
+    stringr,
     tidyr
 Suggests: 
     CDMConnector (>= 2.0.0),

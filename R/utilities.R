@@ -77,7 +77,7 @@ getWindowNames <- function(window, snakeCase) {
     } else {
       id <- windowNames == ""
       windowNames[id] <- purrr::map_chr(window[id], getname)
-      newNames <- toSnakeCase(windowNames)
+      newNames <- omopgenerics::toSnakeCase(windowNames)
       differentNames <- which(windowNames != newNames)
       if (length(differentNames) > 0) {
         newName <- newNames[differentNames]
