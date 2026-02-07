@@ -475,17 +475,20 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
   }
 
   codelistAttribute <- !is.null(codesTable)
-  cohort <- cdm[[cohortName]]
+  cohort <- cdm[[cohortName]] |>
+    PatientProfiles::addCohortName()
   if (codelistAttribute) {
     cohort <- cohort |>
-      dplyr::select(!dplyr::any_of(c("codelist_name", "concept_id"))) |>
+      dplyr::select(dplyr::any_of(c(
+        "cohort_definition_id", "cohort_name", "subject_id", "cohort_start_date", "cohort_end_date"
+      ))) |>
       dplyr::inner_join(
         codesTable |>
           dplyr::distinct(.data$cohort_definition_id, .data$codelist_name, .data$concept_id),
         by = "cohort_definition_id"
       ) |>
       dplyr::compute(name = omopgenerics::uniqueTableName(prefix = prefix), temporary = FALSE) |>
-      omopgenerics::newCohortTable()
+      omopgenerics::newCohortTable(.softValidation = TRUE)
   }
   cohort <- CohortConstructor::addCohortTableIndex(cohort)
 
@@ -493,7 +496,6 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
     measurement <- cdm[[name]] |>
       dplyr::inner_join(
         cohort |>
-          PatientProfiles::addCohortName() |>
           dplyr::select(
             "person_id" = "subject_id", "cohort_start_date", "cohort_end_date", "cohort_name", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]
           ),
@@ -511,7 +513,6 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
     measurement <- cdm[[name]] |>
       dplyr::inner_join(
         cohort |>
-          PatientProfiles::addCohortName() |>
           dplyr::select(
             "person_id" = "subject_id", "record_date" = "cohort_start_date", "cohort_name", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]
           ),
@@ -524,7 +525,6 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
     measurement <- cdm[[name]] |>
       dplyr::inner_join(
         cohort |>
-          PatientProfiles::addCohortName() |>
           dplyr::select("person_id" = "subject_id", "cohort_name", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]) |>
           dplyr::distinct(),
         by = c("person_id", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute])
