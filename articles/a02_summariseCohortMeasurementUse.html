@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -21,11 +21,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">MeasurementDiagnostics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.999</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a01_summariseMeasurementUse.html">Summarising measurement use in a dataset</a></li>
     <li><a class="dropdown-item" href="../articles/a02_summariseCohortMeasurementUse.html">Cohort-specific measurement diagnostics</a></li>
+    <li><a class="dropdown-item" href="../articles/a03_resultsVisualisation.html">Results Visualisation</a></li>
   </ul>
 </li>
       </ul>
@@ -48,6 +49,14 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/ohdsi/MeasurementDiagnostics/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -75,20 +84,19 @@
 <p>This vignette demonstrates how to use
 <code><a href="../reference/summariseCohortMeasurementUse.html">summariseCohortMeasurementUse()</a></code> from
 <strong>MeasurementDiagnostics</strong> to perform measurement
-diagnostics restricted to a cohort. The function computes the same three
-diagnostic checks available for full-dataset summaries
-(<code>measurement_summary</code>,
+diagnostics restricted to a cohort.</p>
+<p>The function computes the same three diagnostic checks available for
+full-dataset summaries (<code>measurement_summary</code>,
 <code>measurement_value_as_number</code>, and
 <code>measurement_value_as_concept</code>) but limits the analysis to
 measurements recorded for subjects in a specified cohort, and optionally
 to specific times relative to cohort entry.</p>
-<p>We use package-provided mock data to keep the example fully
-reproducible.</p>
+<p>We use package provided mock data for the examples.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/MeasurementDiagnostics/">MeasurementDiagnostics</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/MeasurementDiagnostics/" class="external-link">MeasurementDiagnostics</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://darwin-eu.github.io/omopgenerics/" class="external-link">omopgenerics</a></span><span class="op">)</span> </span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/CohortConstructor/" class="external-link">CohortConstructor</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/CohortConstructor/">CohortConstructor</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mockMeasurementDiagnostics.html">mockMeasurementDiagnostics</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">cdm</span></span></code></pre></div>
@@ -124,11 +132,13 @@ records observed among subjects while they are part of the cohort.</p>
 <span><span class="co">#&gt; $ additional_name  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"…</span></span>
 <span><span class="co">#&gt; $ additional_level <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"<span style="color: #949494;">, </span>"overall"…</span></span></code></pre></div>
 <p>Results are returned as a <code>summarised_result</code> object (see
-<strong>omopgenerics</strong>). As an example, the table below shows the
-<code>measurement_value_as_concept</code> results. From this output, we
-can see that for this codelist and mock dataset, some measurement values
-are recorded using concepts for “Low” and “High”, while others are
-missing a concept value.</p>
+<a href="https://darwin-eu.github.io/omopgenerics" class="external-link"><strong>omopgenerics</strong></a>
+package).</p>
+<p>As an example, the table below shows the
+<code>measurement_value_as_concept</code> results.</p>
+<p>From this output, we can see that for this codelist and subject in
+our cohort, some measurement values are recorded using concepts for
+“Low” and “High”, while others are missing a concept value.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tableMeasurementValueAsConcept.html">tableMeasurementValueAsConcept</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <div id="iscdxascwy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -760,10 +770,12 @@ missing a concept value.</p>
 <p>Next, we examine the <code>measurement_value_as_number</code>
 results. This table shows the range of numeric measurement values for
 the overall codelist and for each individual concept, stratified by unit
-where available. In the following results we see some numeric values
-referring to kilograms (unit concept), while other are not associated
-with any unit, and lastly there are 4 records with missing values as
-numbers.</p>
+where available.</p>
+<p>In the following results we see some numeric values referring to
+kilograms (unit concept), while other are not associated with any unit,
+and lastly there are 4 records with missing values as numbers.</p>
+<p>The table shows results for the overall codelist, and for each
+concept separately.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tableMeasurementValueAsNumber.html">tableMeasurementValueAsNumber</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
 <div id="soregtgios" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1867,16 +1879,18 @@ numbers.</p>
 <p>The <code>timing</code> argument controls which measurement records
 are considered:</p>
 <ul>
-<li><p><code>"any"</code> — any measurement record for the person (no
-timing restriction)</p></li>
-<li><p><code>"during"</code> — measurements while the person is in the
+<li><p><code>"any"</code> — any measurement record for subjects in the
+cohort (no timing restriction)</p></li>
+<li><p><code>"during"</code> — measurements while the subject is in the
 cohort (default)</p></li>
 <li><p><code>"cohort_start_date"</code> — measurements recorded on the
 cohort start date</p></li>
 </ul>
 <p>The following example shows measurement summary results when using
 <code>timing = "any"</code> and
-<code>timing = "cohort_start_date"</code>:</p>
+<code>timing = "cohort_start_date"</code>. As expected, when using “any”
+timing we get much more measurements than when restricting to
+measurements occurring on “cohort_start_date”.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result_any</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/summariseCohortMeasurementUse.html">summariseCohortMeasurementUse</a></span><span class="op">(</span></span>
 <span>  codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"measurement_codelist"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3001467L</span>, <span class="fl">45875977L</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -3000,11 +3014,11 @@ cohort start date</p></li>
 <p>If no explicit codelist is provided (<code>codes = NULL</code>), the
 function will use the concept set associated with the cohort (if exists)
 to perform diagnostics.</p>
-<p>For example, using <strong>CohortConstructor</strong>, we can create
-a cohort based on measurement concepts. This cohort stores the codelist
-used to define it as an attribute.</p>
+<p>For example, using <a href="https://ohdsi.github.io/CohortConstructor"><strong>CohortConstructor</strong></a>,
+we can create a cohort based on measurement concepts. This cohort stores
+the codelist used to define it as an attribute.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">measurement_cohort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ohdsi.github.io/CohortConstructor/reference/conceptCohort.html" class="external-link">conceptCohort</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">cdm</span><span class="op">$</span><span class="va">measurement_cohort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ohdsi.github.io/CohortConstructor/reference/conceptCohort.html">conceptCohort</a></span><span class="op">(</span></span>
 <span>  cdm <span class="op">=</span> <span class="va">cdm</span>,</span>
 <span>  conceptSet <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"measurement_codelist"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3001467L</span>, <span class="fl">45875977L</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"measurement_cohort"</span></span>
@@ -4395,10 +4409,10 @@ variables such as sex, age, or year.</p>
 </h2>
 <p>Additional arguments allow users to further stratify results,
 restrict the date range of measurement records, customise the set of
-summary estimates, and obtain histogram-based summaries. These options
-behave in the same way as in <code><a href="../reference/summariseMeasurementUse.html">summariseMeasurementUse()</a></code>,
-which is described in more detail in the <em>“Summarising measurement
-use in a dataset”</em> vignette.</p>
+summary estimates, and obtain counts to plot histograms These options
+behave in the same way as in <code><a href="../reference/summariseMeasurementUse.html">summariseMeasurementUse()</a></code>, and
+are described in more detail in the <em>“Summarising measurement use in
+a dataset”</em> vignette.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

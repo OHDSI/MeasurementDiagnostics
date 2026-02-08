@@ -23,8 +23,7 @@ plotMeasurementValueAsNumber(
 
 - x:
 
-  Columns to use as horizontal axes. See options with
-  \`visOmopResults::plotColumns(result)\`.
+  Variable to plot on the x axis when plotType is "boxlot" or "barplot".
 
 - plotType:
 
@@ -72,21 +71,21 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:26:13.704359
-#> ✔ Summary finished, at 2026-02-07 16:26:13.912433
+#> → Start summary of data, at 2026-02-08 20:39:35.757781
+#> ✔ Summary finished, at 2026-02-08 20:39:35.940805
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:26:14.440467
-#> ✔ Summary finished, at 2026-02-07 16:26:14.527639
+#> → Start summary of data, at 2026-02-08 20:39:36.450466
+#> ✔ Summary finished, at 2026-02-08 20:39:36.536993
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:26:15.134217
-#> ✔ Summary finished, at 2026-02-07 16:26:15.231205
+#> → Start summary of data, at 2026-02-08 20:39:37.136683
+#> ✔ Summary finished, at 2026-02-08 20:39:37.232653
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -94,14 +93,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:26:16.854274
-#> ✔ Summary finished, at 2026-02-07 16:26:17.450882
+#> → Start summary of data, at 2026-02-08 20:39:38.833054
+#> ✔ Summary finished, at 2026-02-08 20:39:39.410763
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-07 16:26:18.352304
-#> ✔ Summary finished, at 2026-02-07 16:26:18.67001
+#> → Start summary of data, at 2026-02-08 20:39:40.098994
+#> ✔ Summary finished, at 2026-02-08 20:39:40.376437
 #> → Binding all diagnostic results.
 
 plotMeasurementValueAsNumber(result)

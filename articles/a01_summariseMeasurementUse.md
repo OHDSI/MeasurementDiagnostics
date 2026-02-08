@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/Rtmp43ChDN/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpFZpuOY/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -51,7 +51,9 @@ respiratory_function_codes
 ```
 
 For a general summary of the use of these codes in our dataset we can
-use `summariseCodeUse` from the **CodelistGenerator** R package.
+use `summariseCodeUse` from the
+[**CodelistGenerator**](https://darwin-eu.github.io/CodelistGenerator) R
+package.
 
 ``` r
 library(CodelistGenerator)
@@ -75,14 +77,14 @@ types of diagnostics:
     between measurements.
 
 2.  `measurement_value_as_number`: summarises measurement values
-    recorded as numeric values, providing descriptive statistics by unit
-    concept..
+    recorded as numeric values, providing descriptive statistics by
+    measurement unit.
 
 3.  `measurement_value_as_concept`: summarises measurement values
     recorded as concepts and their frequencies.
 
 These diagnostics can be performed using the
-[`summariseMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementUse.md)
+[`summariseMeasurementUse()`](https://ohdsi.github.io/CohortConstructor/reference/summariseMeasurementUse.md)
 function.
 
 ``` r
@@ -95,7 +97,8 @@ respiratory_function_measurements <- summariseMeasurementUse(
 ```
 
 As with some other OMOP analytical packages, results are returned in the
-`summarised_result` format defined by the **omopgenerics** package.
+`summarised_result` format defined by the
+[**omopgenerics**](https://darwin-eu.github.io/omopgenerics) package.
 
 ``` r
 respiratory_function_measurements |> 
@@ -121,7 +124,7 @@ respiratory_function_measurements |>
 
 For each diagnostic check, the package provides both **table** and
 **plot** functions. For example, the following table displays results
-from the measurement summary check:
+from the `measurement_summary` check:
 
 ``` r
 tableMeasurementSummary(respiratory_function_measurements)
@@ -141,14 +144,14 @@ To learn more about available tables and plots, see the vignette
 ## Stratifications
 
 By default,
-[`summariseMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementUse.md)
+[`summariseMeasurementUse()`](https://ohdsi.github.io/CohortConstructor/reference/summariseMeasurementUse.md)
 stratifies results by codelist only. That is, all checks are returned
 for the overall codelist, and the value-based checks
 (`measurement_value_as_number` and `measurement_value_as_concept`) are
 further stratified by individual measurement concepts.
 
 However, results can also be stratified by sex, year of measurement, and
-age group. In the following example, we generate
+age group at measurement date In the following example, we generate
 `measurement_value_as_number` results stratified by sex and two
 different age group definitions.
 
@@ -196,12 +199,13 @@ The default estimates are:
 
 Allowed estimates depend on the type of variable being summarised. For
 example, `measurement_value_as_concept` only supports categorical
-estimates, whereas the other checks summarise numeric variables
-(e.g. time between measurements).
+estimates, whereas the others use numeric estimates (as variables are
+numeric, e.g. time between measurements).
 
-Available estimates are defined in the **PatientProfiles** package. To
-see all supported estimates and their naming conventions, use
-`availableEstimates()` from that package. Note that only categorical
+Available estimates are defined in the
+[**PatientProfiles**](https://darwin-eu.github.io/PatientProfiles)
+package. To see all supported estimates and their naming conventions,
+use `availableEstimates()` from that package. Note that only categorical
 estimates are allowed for `measurement_value_as_concept`, while the
 other checks only allow estimates for numeric variable types.
 
@@ -280,17 +284,30 @@ results <- summariseMeasurementUse(
 )
 
 results |>
-  plotMeasurementSummary(plotType = "barplot")
+  plotMeasurementSummary(
+    x = "variable_level", 
+    plotType = "barplot",
+    colour = "variable_level"
+  )
 ```
 
 ![](a01_summariseMeasurementUse_files/figure-html/unnamed-chunk-11-1.png)
 
 ``` r
 results |>
-  plotMeasurementSummary(y = "measurements_per_subject", plotType = "barplot")
+  plotMeasurementSummary(
+    x = "variable_level", 
+    y = "measurements_per_subject",
+    plotType = "barplot",
+    colour = "variable_level"
+  )
 ```
 
 ![](a01_summariseMeasurementUse_files/figure-html/unnamed-chunk-12-1.png)
+
+Note that density and histogram estimates do not appear in tables, these
+are just visualised in plot functions by using the plot types
+“densityplot” and “barplot” respectively.
 
 ## Other arguments
 

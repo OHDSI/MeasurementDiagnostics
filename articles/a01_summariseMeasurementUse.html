@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -21,11 +21,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">MeasurementDiagnostics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.999</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/a01_summariseMeasurementUse.html">Summarising measurement use in a dataset</a></li>
     <li><a class="dropdown-item" href="../articles/a02_summariseCohortMeasurementUse.html">Cohort-specific measurement diagnostics</a></li>
+    <li><a class="dropdown-item" href="../articles/a03_resultsVisualisation.html">Results Visualisation</a></li>
   </ul>
 </li>
       </ul>
@@ -48,6 +49,14 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/ohdsi/MeasurementDiagnostics/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -84,7 +93,7 @@ function and will use the Eunomia synthetic dataset.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, dbdir <span class="op">=</span> <span class="fu"><a href="https://darwin-eu.github.io/CDMConnector/reference/eunomiaDir.html" class="external-link">eunomiaDir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating CDM database /tmp/Rtmp43ChDN/GiBleed_5.3.zip</span></span>
+<span><span class="co">#&gt; Creating CDM database /tmp/RtmpFZpuOY/GiBleed_5.3.zip</span></span>
 <span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://darwin-eu.github.io/CDMConnector/reference/cdmFromCon.html" class="external-link">cdmFromCon</a></span><span class="op">(</span></span>
 <span>  con <span class="op">=</span> <span class="va">con</span>, cdmSchem <span class="op">=</span> <span class="st">"main"</span>, writeSchema <span class="op">=</span> <span class="st">"main"</span>, cdmName <span class="op">=</span> <span class="st">"Eunomia"</span></span>
 <span><span class="op">)</span></span>
@@ -113,8 +122,8 @@ function and will use the Eunomia synthetic dataset.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; - respiratory_function (3 codes)</span></span></code></pre></div>
 <p>For a general summary of the use of these codes in our dataset we can
-use <code>summariseCodeUse</code> from the
-<strong>CodelistGenerator</strong> R package.</p>
+use <code>summariseCodeUse</code> from the <a href="https://darwin-eu.github.io/CodelistGenerator" class="external-link"><strong>CodelistGenerator</strong></a>
+R package.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://darwin-eu.github.io/CodelistGenerator/" class="external-link">CodelistGenerator</a></span><span class="op">)</span></span>
 <span><span class="va">code_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://darwin-eu.github.io/CodelistGenerator/reference/summariseCodeUse.html" class="external-link">summariseCodeUse</a></span><span class="op">(</span><span class="va">respiratory_function_codes</span>, <span class="va">cdm</span><span class="op">)</span></span>
@@ -707,22 +716,22 @@ subjects with measurements, the number of measurements per subject, and
 the time between measurements.</p></li>
 <li><p><code>measurement_value_as_number</code>: summarises measurement
 values recorded as numeric values, providing descriptive statistics by
-unit concept..</p></li>
+measurement unit.</p></li>
 <li><p><code>measurement_value_as_concept</code>: summarises measurement
 values recorded as concepts and their frequencies.</p></li>
 </ol>
 <p>These diagnostics can be performed using the
 <code><a href="../reference/summariseMeasurementUse.html">summariseMeasurementUse()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/MeasurementDiagnostics/">MeasurementDiagnostics</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ohdsi.github.io/MeasurementDiagnostics/" class="external-link">MeasurementDiagnostics</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">respiratory_function_measurements</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/summariseMeasurementUse.html">summariseMeasurementUse</a></span><span class="op">(</span></span>
 <span>  cdm <span class="op">=</span> <span class="va">cdm</span>,</span>
 <span>  codes <span class="op">=</span> <span class="va">respiratory_function_codes</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>As with some other OMOP analytical packages, results are returned in
-the <code>summarised_result</code> format defined by the
-<strong>omopgenerics</strong> package.</p>
+the <code>summarised_result</code> format defined by the <a href="https://darwin-eu.github.io/omopgenerics" class="external-link"><strong>omopgenerics</strong></a>
+package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">respiratory_function_measurements</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -747,8 +756,8 @@ the <code>summarised_result</code> format defined by the
 </h3>
 <p>For each diagnostic check, the package provides both
 <strong>table</strong> and <strong>plot</strong> functions. For example,
-the following table displays results from the measurement summary
-check:</p>
+the following table displays results from the
+<code>measurement_summary</code> check:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tableMeasurementSummary.html">tableMeasurementSummary</a></span><span class="op">(</span><span class="va">respiratory_function_measurements</span><span class="op">)</span></span></code></pre></div>
 <div id="xtyqwtxjxw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1261,7 +1270,7 @@ codelist, and the value-based checks
 <code>measurement_value_as_concept</code>) are further stratified by
 individual measurement concepts.</p>
 <p>However, results can also be stratified by sex, year of measurement,
-and age group. In the following example, we generate
+and age group at measurement date In the following example, we generate
 <code>measurement_value_as_number</code> results stratified by sex and
 two different age group definitions.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -1862,12 +1871,12 @@ estimates. These can be modified using the estimates argument.</p>
 <code>"count"</code>, <code>"percentage"</code></p>
 <p>Allowed estimates depend on the type of variable being summarised.
 For example, <code>measurement_value_as_concept</code> only supports
-categorical estimates, whereas the other checks summarise numeric
-variables (e.g. time between measurements).</p>
-<p>Available estimates are defined in the
-<strong>PatientProfiles</strong> package. To see all supported estimates
-and their naming conventions, use <code>availableEstimates()</code> from
-that package. Note that only categorical estimates are allowed for
+categorical estimates, whereas the others use numeric estimates (as
+variables are numeric, e.g. time between measurements).</p>
+<p>Available estimates are defined in the <a href="https://darwin-eu.github.io/PatientProfiles" class="external-link"><strong>PatientProfiles</strong></a>
+package. To see all supported estimates and their naming conventions,
+use <code>availableEstimates()</code> from that package. Note that only
+categorical estimates are allowed for
 <code>measurement_value_as_concept</code>, while the other checks only
 allow estimates for numeric variable types.</p>
 <p>In the following example, we run all checks without density estimates
@@ -2582,12 +2591,24 @@ bandwidths.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/plotMeasurementSummary.html">plotMeasurementSummary</a></span><span class="op">(</span>plotType <span class="op">=</span> <span class="st">"barplot"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/plotMeasurementSummary.html">plotMeasurementSummary</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"variable_level"</span>, </span>
+<span>    plotType <span class="op">=</span> <span class="st">"barplot"</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"variable_level"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="a01_summariseMeasurementUse_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="672"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="../reference/plotMeasurementSummary.html">plotMeasurementSummary</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"measurements_per_subject"</span>, plotType <span class="op">=</span> <span class="st">"barplot"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/plotMeasurementSummary.html">plotMeasurementSummary</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"variable_level"</span>, </span>
+<span>    y <span class="op">=</span> <span class="st">"measurements_per_subject"</span>,</span>
+<span>    plotType <span class="op">=</span> <span class="st">"barplot"</span>,</span>
+<span>    colour <span class="op">=</span> <span class="st">"variable_level"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="a01_summariseMeasurementUse_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="672"></p>
+<p>Note that density and histogram estimates do not appear in tables,
+these are just visualised in plot functions by using the plot types
+“densityplot” and “barplot” respectively.</p>
 </div>
 </div>
 <div class="section level2">

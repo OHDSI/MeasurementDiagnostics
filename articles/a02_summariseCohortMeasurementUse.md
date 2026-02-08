@@ -3,16 +3,17 @@
 ## Introduction
 
 This vignette demonstrates how to use
-[`summariseCohortMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseCohortMeasurementUse.md)
+[`summariseCohortMeasurementUse()`](https://ohdsi.github.io/CohortConstructor/reference/summariseCohortMeasurementUse.md)
 from **MeasurementDiagnostics** to perform measurement diagnostics
-restricted to a cohort. The function computes the same three diagnostic
-checks available for full-dataset summaries (`measurement_summary`,
+restricted to a cohort.
+
+The function computes the same three diagnostic checks available for
+full-dataset summaries (`measurement_summary`,
 `measurement_value_as_number`, and `measurement_value_as_concept`) but
 limits the analysis to measurements recorded for subjects in a specified
 cohort, and optionally to specific times relative to cohort entry.
 
-We use package-provided mock data to keep the example fully
-reproducible.
+We use package provided mock data for the examples.
 
 ``` r
 library(MeasurementDiagnostics)
@@ -57,11 +58,14 @@ result |> glimpse()
 ```
 
 Results are returned as a `summarised_result` object (see
-**omopgenerics**). As an example, the table below shows the
-`measurement_value_as_concept` results. From this output, we can see
-that for this codelist and mock dataset, some measurement values are
-recorded using concepts for “Low” and “High”, while others are missing a
-concept value.
+[**omopgenerics**](https://darwin-eu.github.io/omopgenerics) package).
+
+As an example, the table below shows the `measurement_value_as_concept`
+results.
+
+From this output, we can see that for this codelist and subject in our
+cohort, some measurement values are recorded using concepts for “Low”
+and “High”, while others are missing a concept value.
 
 ``` r
 tableMeasurementValueAsConcept(result)
@@ -85,10 +89,14 @@ tableMeasurementValueAsConcept(result)
 
 Next, we examine the `measurement_value_as_number` results. This table
 shows the range of numeric measurement values for the overall codelist
-and for each individual concept, stratified by unit where available. In
-the following results we see some numeric values referring to kilograms
-(unit concept), while other are not associated with any unit, and lastly
-there are 4 records with missing values as numbers.
+and for each individual concept, stratified by unit where available.
+
+In the following results we see some numeric values referring to
+kilograms (unit concept), while other are not associated with any unit,
+and lastly there are 4 records with missing values as numbers.
+
+The table shows results for the overall codelist, and for each concept
+separately.
 
 ``` r
 tableMeasurementValueAsNumber(result)
@@ -150,15 +158,17 @@ tableMeasurementValueAsNumber(result)
 
 The `timing` argument controls which measurement records are considered:
 
-- `"any"` — any measurement record for the person (no timing
+- `"any"` — any measurement record for subjects in the cohort (no timing
   restriction)
 
-- `"during"` — measurements while the person is in the cohort (default)
+- `"during"` — measurements while the subject is in the cohort (default)
 
 - `"cohort_start_date"` — measurements recorded on the cohort start date
 
 The following example shows measurement summary results when using
-`timing = "any"` and `timing = "cohort_start_date"`:
+`timing = "any"` and `timing = "cohort_start_date"`. As expected, when
+using “any” timing we get much more measurements than when restricting
+to measurements occurring on “cohort_start_date”.
 
 ``` r
 result_any <- summariseCohortMeasurementUse(
@@ -214,9 +224,10 @@ If no explicit codelist is provided (`codes = NULL`), the function will
 use the concept set associated with the cohort (if exists) to perform
 diagnostics.
 
-For example, using **CohortConstructor**, we can create a cohort based
-on measurement concepts. This cohort stores the codelist used to define
-it as an attribute.
+For example, using
+[**CohortConstructor**](https://ohdsi.github.io/CohortConstructor), we
+can create a cohort based on measurement concepts. This cohort stores
+the codelist used to define it as an attribute.
 
 ``` r
 cdm$measurement_cohort <- conceptCohort(
@@ -230,7 +241,7 @@ cohortCodelist(cdm$measurement_cohort)
 ```
 
 We can then call
-[`summariseCohortMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseCohortMeasurementUse.md)
+[`summariseCohortMeasurementUse()`](https://ohdsi.github.io/CohortConstructor/reference/summariseCohortMeasurementUse.md)
 without specifying codes. In this case, the function automatically uses
 the codelist associated with the cohort. The example below runs
 diagnostics on the measurement records used to define cohort entry:
@@ -301,8 +312,8 @@ tableMeasurementSummary(result)
 
 Additional arguments allow users to further stratify results, restrict
 the date range of measurement records, customise the set of summary
-estimates, and obtain histogram-based summaries. These options behave in
+estimates, and obtain counts to plot histograms These options behave in
 the same way as in
-[`summariseMeasurementUse()`](https://ohdsi.github.io/MeasurementDiagnostics/reference/summariseMeasurementUse.md),
-which is described in more detail in the *“Summarising measurement use
-in a dataset”* vignette.
+[`summariseMeasurementUse()`](https://ohdsi.github.io/CohortConstructor/reference/summariseMeasurementUse.md),
+and are described in more detail in the *“Summarising measurement use in
+a dataset”* vignette.

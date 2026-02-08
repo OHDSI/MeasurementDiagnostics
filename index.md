@@ -37,6 +37,7 @@ For this example we’ll use the GiBleed mock data.
 library(omock)
 library(MeasurementDiagnostics)
 library(OmopViewer)
+library(omopgenerics)
 ```
 
 ``` r
@@ -98,7 +99,14 @@ tableMeasurementValueAsConcept(respiratory_function_measurements)
 [TABLE]
 
 ``` r
-tableMeasurementValueAsNumber(respiratory_function_measurements)
+respiratory_function_measurements |>
+  filterGroup(concept_name == "overall") |>
+  tableMeasurementValueAsNumber(
+    hide = c(
+      "concept_name", "concept_id", "source_concept_name", "source_concept_id", 
+      "domain_id", "unit_concept_id"
+    )
+  )
 ```
 
 [TABLE]

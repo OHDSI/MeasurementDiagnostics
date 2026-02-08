@@ -24,7 +24,7 @@ plotMeasurementSummary(
 
 - x:
 
-  Variable to plot on the x axis when plotType is "boxlot".
+  Variable to plot on the x axis when plotType is "boxlot" or "barplot".
 
 - y:
 
@@ -85,15 +85,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:25:47.773157
-#> ✔ Summary finished, at 2026-02-07 16:25:47.891988
+#> → Start summary of data, at 2026-02-08 20:39:10.873113
+#> ✔ Summary finished, at 2026-02-08 20:39:10.974253
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:25:48.438257
-#> ✔ Summary finished, at 2026-02-07 16:25:48.548542
+#> → Start summary of data, at 2026-02-08 20:39:11.526613
+#> ✔ Summary finished, at 2026-02-08 20:39:11.617641
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -101,14 +101,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-07 16:25:50.12708
-#> ✔ Summary finished, at 2026-02-07 16:25:50.424446
+#> → Start summary of data, at 2026-02-08 20:39:13.21156
+#> ✔ Summary finished, at 2026-02-08 20:39:13.508995
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-07 16:25:51.118929
-#> ✔ Summary finished, at 2026-02-07 16:25:51.271734
+#> → Start summary of data, at 2026-02-08 20:39:14.205437
+#> ✔ Summary finished, at 2026-02-08 20:39:14.352749
 #> → Binding all diagnostic results.
 
 result |>
