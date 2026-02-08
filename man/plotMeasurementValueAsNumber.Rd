@@ -16,8 +16,7 @@ plotMeasurementValueAsNumber(
 \arguments{
 \item{result}{A summarised_result object.}
 
-\item{x}{Columns to use as horizontal axes. See options with
-`visOmopResults::plotColumns(result)`.}
+\item{x}{Variable to plot on the x axis when plotType is "boxlot" or "barplot".}
 
 \item{plotType}{Type of plot, either "boxplot", "barplot", or "densityplot".}
 

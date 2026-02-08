@@ -38,7 +38,8 @@ tableMeasurementSummary <- function(result,
   # subset to rows of interest
   result <- result |>
     dplyr::filter(!.data$estimate_name %in% c("density_x", "density_y")) |>
-    omopgenerics::filterSettings(.data$result_type == "measurement_summary")
+    omopgenerics::filterSettings(.data$result_type == "measurement_summary") |>
+    dplyr::filter(!(.data$variable_name %in% c("days_between_measurements", "measurements_per_subject") & .data$estimate_name == "count"))
 
   if(sum(!is.na(unique(result$variable_level)), na.rm = TRUE) > 0) {
     hide <- hide[hide != "variable_level"]

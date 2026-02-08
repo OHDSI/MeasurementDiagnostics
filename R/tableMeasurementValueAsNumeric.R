@@ -38,7 +38,8 @@ tableMeasurementValueAsNumber <- function(result,
   # subset to rows of interest
   result <- result |>
     omopgenerics::filterSettings(.data$result_type == "measurement_value_as_number") |>
-    dplyr::filter(!grepl("density", .data$estimate_name))
+    dplyr::filter(!grepl("density", .data$estimate_name)) |>
+    dplyr::filter(!(.data$variable_name %in% c("value_as_number") & .data$estimate_name == "count"))
 
   if (nrow(result) == 0) {
     cli::cli_warn("There are no results with `result_type = measurement_value_as_number`")
