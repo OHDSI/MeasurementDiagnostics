@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:24:05.773764
-#> ✔ Summary finished, at 2026-02-09 08:24:05.861
+#> → Start summary of data, at 2026-02-09 16:11:24.79697
+#> ✔ Summary finished, at 2026-02-09 16:11:24.918198
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:24:06.374664
-#> ✔ Summary finished, at 2026-02-09 08:24:06.47976
+#> → Start summary of data, at 2026-02-09 16:11:25.458812
+#> ✔ Summary finished, at 2026-02-09 16:11:25.547004
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:24:07.974004
-#> ✔ Summary finished, at 2026-02-09 08:24:08.239019
+#> → Start summary of data, at 2026-02-09 16:11:27.150754
+#> ✔ Summary finished, at 2026-02-09 16:11:27.428986
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-09 08:24:08.879569
-#> ✔ Summary finished, at 2026-02-09 08:24:09.029741
+#> → Start summary of data, at 2026-02-09 16:11:28.11765
+#> ✔ Summary finished, at 2026-02-09 16:11:28.253433
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsNumber(result)
@@ -158,7 +158,7 @@ kilogram
 
 N
 
-100
+50
 
 Median \[Q25 – Q75\]
 
@@ -166,11 +166,11 @@ Median \[Q25 – Q75\]
 
 Q05 – Q95
 
-5.65 – 11.89
+5.70 – 11.84
 
 Q01 – Q99
 
-5.36 – 12.18
+5.43 – 12.11
 
 Range
 
@@ -178,7 +178,7 @@ Range
 
 Missing value, N (%)
 
-4 (4.00%)
+2 (4.00%)
 
 NA
 
@@ -186,19 +186,19 @@ NA
 
 N
 
-100
+50
 
 Median \[Q25 – Q75\]
 
-8.77 \[7.07 – 10.48\]
+8.77 \[7.10 – 10.44\]
 
 Q05 – Q95
 
-5.73 – 11.82
+5.77 – 11.77
 
 Q01 – Q99
 
-5.44 – 12.11
+5.50 – 12.04
 
 Range
 
@@ -206,7 +206,7 @@ Range
 
 Missing value, N (%)
 
-6 (6.00%)
+3 (6.00%)
 
 Alkaline phosphatase.bone \[Enzymatic activity/volume\] in Serum or
 Plasma
@@ -225,7 +225,7 @@ kilogram
 
 N
 
-100
+50
 
 Median \[Q25 – Q75\]
 
@@ -233,11 +233,11 @@ Median \[Q25 – Q75\]
 
 Q05 – Q95
 
-5.65 – 11.89
+5.70 – 11.84
 
 Q01 – Q99
 
-5.36 – 12.18
+5.43 – 12.11
 
 Range
 
@@ -245,7 +245,7 @@ Range
 
 Missing value, N (%)
 
-4 (4.00%)
+2 (4.00%)
 
 NA
 
@@ -253,19 +253,19 @@ NA
 
 N
 
-100
+50
 
 Median \[Q25 – Q75\]
 
-8.77 \[7.07 – 10.48\]
+8.77 \[7.10 – 10.44\]
 
 Q05 – Q95
 
-5.73 – 11.82
+5.77 – 11.77
 
 Q01 – Q99
 
-5.44 – 12.11
+5.50 – 12.04
 
 Range
 
@@ -273,7 +273,7 @@ Range
 
 Missing value, N (%)
 
-6 (6.00%)
+3 (6.00%)
 
 CDMConnector::[cdmDisconnect](https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html)(cdm
 = cdm) \# }

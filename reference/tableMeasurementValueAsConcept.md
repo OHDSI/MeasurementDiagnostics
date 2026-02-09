@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:23:55.047114
-#> ✔ Summary finished, at 2026-02-09 08:23:55.138088
+#> → Start summary of data, at 2026-02-09 16:11:13.285634
+#> ✔ Summary finished, at 2026-02-09 16:11:13.398119
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:23:55.649888
-#> ✔ Summary finished, at 2026-02-09 08:23:55.757878
+#> → Start summary of data, at 2026-02-09 16:11:13.956313
+#> ✔ Summary finished, at 2026-02-09 16:11:14.04641
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 08:23:57.25393
-#> ✔ Summary finished, at 2026-02-09 08:23:57.519803
+#> → Start summary of data, at 2026-02-09 16:11:15.650851
+#> ✔ Summary finished, at 2026-02-09 16:11:15.928158
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-09 08:23:58.164858
-#> ✔ Summary finished, at 2026-02-09 08:23:58.314696
+#> → Start summary of data, at 2026-02-09 16:11:16.634432
+#> ✔ Summary finished, at 2026-02-09 16:11:16.775383
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsConcept(result)
@@ -158,7 +158,7 @@ Low
 
 N (%)
 
-68 (34.00%)
+34 (34.00%)
 
 High
 
@@ -166,7 +166,7 @@ High
 
 N (%)
 
-66 (33.00%)
+33 (33.00%)
 
 NA
 
@@ -174,7 +174,7 @@ NA
 
 N (%)
 
-66 (33.00%)
+33 (33.00%)
 
 Alkaline phosphatase.bone \[Enzymatic activity/volume\] in Serum or
 Plasma
@@ -193,7 +193,7 @@ Low
 
 N (%)
 
-68 (34.00%)
+34 (34.00%)
 
 High
 
@@ -201,7 +201,7 @@ High
 
 N (%)
 
-66 (33.00%)
+33 (33.00%)
 
 NA
 
@@ -209,7 +209,7 @@ NA
 
 N (%)
 
-66 (33.00%)
+33 (33.00%)
 
 CDMConnector::[cdmDisconnect](https://darwin-eu.github.io/omopgenerics/reference/cdmDisconnect.html)(cdm
 = cdm) \# }
