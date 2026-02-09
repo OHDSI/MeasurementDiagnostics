@@ -275,7 +275,7 @@ summariseMeasurementUseInternal <- function(cdm,
           dplyr::inner_join(
             cdm[[settingsTableName]] |>
               dplyr::filter(.data$codelist_name == .env$codelistName) |>
-              dplyr::select("codelist_name"),
+              dplyr::distinct(.data$codelist_name),
             by = "codelist_name"
           )
         if (hasRecords(measurementTimingTbl)) {
@@ -369,7 +369,7 @@ summariseMeasurementUseInternal <- function(cdm,
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
-            dplyr::select("codelist_name"),
+            dplyr::distinct(.data$codelist_name),
           by = "codelist_name"
         ) |>
         dplyr::select(!dplyr::any_of(c("value_as_concept_id", "value_as_concept_name")))
@@ -410,7 +410,7 @@ summariseMeasurementUseInternal <- function(cdm,
         dplyr::inner_join(
           cdm[[settingsTableName]] |>
             dplyr::filter(.data$codelist_name == .env$codelistName) |>
-            dplyr::select("codelist_name"),
+            dplyr::distinct(.data$codelist_name),
           by = "codelist_name"
         ) |>
         dplyr::collect() |>
