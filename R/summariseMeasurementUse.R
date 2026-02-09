@@ -498,7 +498,8 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
         cohort |>
           dplyr::select(
             "person_id" = "subject_id", "cohort_start_date", "cohort_end_date", "cohort_name", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]
-          ),
+          ) |>
+          dplyr::distinct(),
         by = c("person_id", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]),
         relationship = "many-to-many"
       ) |>
@@ -515,7 +516,8 @@ subsetMeasurementTable <- function(cdm, cohortName, codesTable, timing, name, da
         cohort |>
           dplyr::select(
             "person_id" = "subject_id", "record_date" = "cohort_start_date", "cohort_name", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]
-          ),
+          ) |>
+          dplyr::distinct(),
         by = c("person_id", "record_date", "codelist_name"[codelistAttribute], "concept_id"[codelistAttribute]),
         relationship = "many-to-many"
       ) |>
