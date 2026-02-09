@@ -93,7 +93,7 @@ function and will use the Eunomia synthetic dataset.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html" class="external-link">dbConnect</a></span><span class="op">(</span><span class="fu"><a href="https://r.duckdb.org/reference/duckdb.html" class="external-link">duckdb</a></span><span class="op">(</span><span class="op">)</span>, dbdir <span class="op">=</span> <span class="fu"><a href="https://darwin-eu.github.io/CDMConnector/reference/eunomiaDir.html" class="external-link">eunomiaDir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating CDM database /tmp/RtmpFZpuOY/GiBleed_5.3.zip</span></span>
+<span><span class="co">#&gt; Creating CDM database /tmp/RtmpTKPTAa/GiBleed_5.3.zip</span></span>
 <span><span class="va">cdm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://darwin-eu.github.io/CDMConnector/reference/cdmFromCon.html" class="external-link">cdmFromCon</a></span><span class="op">(</span></span>
 <span>  con <span class="op">=</span> <span class="va">con</span>, cdmSchem <span class="op">=</span> <span class="st">"main"</span>, writeSchema <span class="op">=</span> <span class="st">"main"</span>, cdmName <span class="op">=</span> <span class="st">"Eunomia"</span></span>
 <span><span class="op">)</span></span>
@@ -122,7 +122,7 @@ function and will use the Eunomia synthetic dataset.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; - respiratory_function (3 codes)</span></span></code></pre></div>
 <p>For a general summary of the use of these codes in our dataset we can
-use <code>summariseCodeUse</code> from the <a href="https://darwin-eu.github.io/CodelistGenerator" class="external-link"><strong>CodelistGenerator</strong></a>
+use <code>summariseCodeUse</code> from the <a href="https://darwin-eu.github.io/CodelistGenerator/" class="external-link"><strong>CodelistGenerator</strong></a>
 R package.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://darwin-eu.github.io/CodelistGenerator/" class="external-link">CodelistGenerator</a></span><span class="op">)</span></span>
@@ -730,7 +730,7 @@ values recorded as concepts and their frequencies.</p></li>
 <span>  codes <span class="op">=</span> <span class="va">respiratory_function_codes</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>As with some other OMOP analytical packages, results are returned in
-the <code>summarised_result</code> format defined by the <a href="https://darwin-eu.github.io/omopgenerics" class="external-link"><strong>omopgenerics</strong></a>
+the <code>summarised_result</code> format defined by the <a href="https://darwin-eu.github.io/omopgenerics/" class="external-link"><strong>omopgenerics</strong></a>
 package.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">respiratory_function_measurements</span> <span class="op">|&gt;</span> </span>
@@ -1873,7 +1873,7 @@ estimates. These can be modified using the estimates argument.</p>
 For example, <code>measurement_value_as_concept</code> only supports
 categorical estimates, whereas the others use numeric estimates (as
 variables are numeric, e.g. time between measurements).</p>
-<p>Available estimates are defined in the <a href="https://darwin-eu.github.io/PatientProfiles" class="external-link"><strong>PatientProfiles</strong></a>
+<p>Available estimates are defined in the <a href="https://darwin-eu.github.io/PatientProfiles/" class="external-link"><strong>PatientProfiles</strong></a>
 package. To see all supported estimates and their naming conventions,
 use <code>availableEstimates()</code> from that package. Note that only
 categorical estimates are allowed for

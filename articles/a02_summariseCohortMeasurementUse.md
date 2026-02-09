@@ -58,7 +58,7 @@ result |> glimpse()
 ```
 
 Results are returned as a `summarised_result` object (see
-[**omopgenerics**](https://darwin-eu.github.io/omopgenerics) package).
+[**omopgenerics**](https://darwin-eu.github.io/omopgenerics/) package).
 
 As an example, the table below shows the `measurement_value_as_concept`
 results.
@@ -225,7 +225,7 @@ use the concept set associated with the cohort (if exists) to perform
 diagnostics.
 
 For example, using
-[**CohortConstructor**](https://ohdsi.github.io/CohortConstructor), we
+[**CohortConstructor**](https://ohdsi.github.io/CohortConstructor/), we
 can create a cohort based on measurement concepts. This cohort stores
 the codelist used to define it as an attribute.
 

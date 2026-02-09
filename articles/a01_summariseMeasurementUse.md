@@ -18,7 +18,7 @@ library(dplyr)
 
 ``` r
 con <- dbConnect(duckdb(), dbdir = eunomiaDir())
-#> Creating CDM database /tmp/RtmpFZpuOY/GiBleed_5.3.zip
+#> Creating CDM database /tmp/RtmpTKPTAa/GiBleed_5.3.zip
 cdm <- cdmFromCon(
   con = con, cdmSchem = "main", writeSchema = "main", cdmName = "Eunomia"
 )
@@ -52,8 +52,8 @@ respiratory_function_codes
 
 For a general summary of the use of these codes in our dataset we can
 use `summariseCodeUse` from the
-[**CodelistGenerator**](https://darwin-eu.github.io/CodelistGenerator) R
-package.
+[**CodelistGenerator**](https://darwin-eu.github.io/CodelistGenerator/)
+R package.
 
 ``` r
 library(CodelistGenerator)
@@ -98,7 +98,7 @@ respiratory_function_measurements <- summariseMeasurementUse(
 
 As with some other OMOP analytical packages, results are returned in the
 `summarised_result` format defined by the
-[**omopgenerics**](https://darwin-eu.github.io/omopgenerics) package.
+[**omopgenerics**](https://darwin-eu.github.io/omopgenerics/) package.
 
 ``` r
 respiratory_function_measurements |> 
@@ -203,7 +203,7 @@ estimates, whereas the others use numeric estimates (as variables are
 numeric, e.g. time between measurements).
 
 Available estimates are defined in the
-[**PatientProfiles**](https://darwin-eu.github.io/PatientProfiles)
+[**PatientProfiles**](https://darwin-eu.github.io/PatientProfiles/)
 package. To see all supported estimates and their naming conventions,
 use `availableEstimates()` from that package. Note that only categorical
 estimates are allowed for `measurement_value_as_concept`, while the
