@@ -700,9 +700,9 @@ transformMeasurementConcept <- function(x, cdm, newSet, cohortName,
     dplyr::select(!c("additional_name", "additional_level")) |>
     dplyr::rename("value_as_concept_id" = "variable_level") |>
     dplyr::mutate(
+      variable_name = "measurement_records",
       variable_level = gsub(".* &&& ", "", .data$value_as_concept_id),
       value_as_concept_id = gsub(" &&& .*", "", .data$value_as_concept_id),
-      variable_name = gsub("_id", "_name", "value_as_concept_id"),
       cohort_table = cohortName,
       value_as_concept_id = dplyr::if_else(nchar(.data$value_as_concept_id) == 0, "-", .data$value_as_concept_id),
       variable_level = dplyr::if_else(nchar(.data$variable_level) == 0, "-", .data$variable_level)

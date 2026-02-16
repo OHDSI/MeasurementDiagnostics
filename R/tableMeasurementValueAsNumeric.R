@@ -26,7 +26,7 @@ tableMeasurementValueAsNumber <- function(result,
                                           header = c(visOmopResults::strataColumns(result)),
                                           groupColumn = c("codelist_name"),
                                           settingsColumn = character(),
-                                          hide = c("variable_name", "variable_level"),
+                                          hide = c("variable_level"),
                                           style = NULL,
                                           type = NULL,
                                           .options = list()){
@@ -73,7 +73,7 @@ tableMeasurementValueAsNumber <- function(result,
   }
 
   result |>
-    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name)) |>
+    dplyr::mutate(variable_name = visOmopResults::customiseText(.data$variable_name, custom = c("Measurement records" = "number records"))) |>
     visOmopResults::visOmopTable(
       estimateName = c(
         "N" = "<count>",

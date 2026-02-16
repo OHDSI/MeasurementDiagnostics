@@ -160,7 +160,7 @@ test_that("summariseCohortMeasurementUse works", {
   expect_true(all(
     res$variable_name |> unique() %in% c(
       "cohort_records", "cohort_subjects", "number_subjects", "days_between_measurements",
-      "measurements_per_subject", "number records",
+      "measurement_records", "measurements_per_subject", "number records",
       "value_as_number", "value_as_concept_name"
     )
   ))
@@ -389,4 +389,3 @@ test_that("summariseMeasurementUse checks", {
 
   dropCreatedTables(cdm = cdm)
 })
-
