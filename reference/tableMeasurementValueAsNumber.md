@@ -10,7 +10,7 @@ tableMeasurementValueAsNumber(
   header = c(visOmopResults::strataColumns(result)),
   groupColumn = c("codelist_name"),
   settingsColumn = character(),
-  hide = c("variable_name", "variable_level"),
+  hide = c("variable_level"),
   style = NULL,
   type = NULL,
   .options = list()
@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:24.79697
-#> ✔ Summary finished, at 2026-02-09 16:11:24.918198
+#> → Start summary of data, at 2026-02-16 17:23:58.870749
+#> ✔ Summary finished, at 2026-02-16 17:23:58.989612
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:25.458812
-#> ✔ Summary finished, at 2026-02-09 16:11:25.547004
+#> → Start summary of data, at 2026-02-16 17:23:59.525957
+#> ✔ Summary finished, at 2026-02-16 17:23:59.61904
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:27.150754
-#> ✔ Summary finished, at 2026-02-09 16:11:27.428986
+#> → Start summary of data, at 2026-02-16 17:24:01.265827
+#> ✔ Summary finished, at 2026-02-16 17:24:01.552409
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-09 16:11:28.11765
-#> ✔ Summary finished, at 2026-02-09 16:11:28.253433
+#> → Start summary of data, at 2026-02-16 17:24:02.283607
+#> ✔ Summary finished, at 2026-02-16 17:24:02.43032
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsNumber(result)
@@ -134,6 +134,8 @@ Unit concept name
 
 Unit concept ID
 
+Variable name
+
 Estimate name
 
 Estimate value
@@ -156,9 +158,13 @@ kilogram
 
 9529
 
+Measurement records
+
 N
 
 50
+
+Value as number
 
 Median \[Q25 – Q75\]
 
@@ -184,9 +190,13 @@ NA
 
 \-
 
+Measurement records
+
 N
 
 50
+
+Value as number
 
 Median \[Q25 – Q75\]
 
@@ -223,9 +233,13 @@ kilogram
 
 9529
 
+Measurement records
+
 N
 
 50
+
+Value as number
 
 Median \[Q25 – Q75\]
 
@@ -251,9 +265,13 @@ NA
 
 \-
 
+Measurement records
+
 N
 
 50
+
+Value as number
 
 Median \[Q25 – Q75\]
 

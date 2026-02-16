@@ -86,15 +86,15 @@ result <- summariseMeasurementUse(
 #> • days_between_measurements: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:13.285634
-#> ✔ Summary finished, at 2026-02-09 16:11:13.398119
+#> → Start summary of data, at 2026-02-16 17:23:47.654666
+#> ✔ Summary finished, at 2026-02-16 17:23:47.751588
 #> → Getting measurements per subject.
 #> ℹ The following estimates will be calculated:
 #> • measurements_per_subject: min, q25, median, q75, max, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:13.956313
-#> ✔ Summary finished, at 2026-02-09 16:11:14.04641
+#> → Start summary of data, at 2026-02-16 17:23:48.278014
+#> ✔ Summary finished, at 2026-02-16 17:23:48.383903
 #> → Summarising results - value as number.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
@@ -102,14 +102,14 @@ result <- summariseMeasurementUse(
 #>   count_missing, percentage_missing, density
 #> ! Table is collected to memory as not all requested estimates are supported on
 #>   the database side
-#> → Start summary of data, at 2026-02-09 16:11:15.650851
-#> ✔ Summary finished, at 2026-02-09 16:11:15.928158
+#> → Start summary of data, at 2026-02-16 17:23:49.956583
+#> ✔ Summary finished, at 2026-02-16 17:23:50.23139
 #> → Summarising results - value as concept.
 #> Summarising value as number
 #> ℹ The following estimates will be calculated:
 #> • value_as_concept_id: count, percentage
-#> → Start summary of data, at 2026-02-09 16:11:16.634432
-#> ✔ Summary finished, at 2026-02-09 16:11:16.775383
+#> → Start summary of data, at 2026-02-16 17:23:50.896353
+#> ✔ Summary finished, at 2026-02-16 17:23:51.06035
 #> → Binding all diagnostic results.
 
 tableMeasurementValueAsConcept(result)
@@ -129,6 +129,8 @@ Source concept name
 Source concept ID
 
 Domain ID
+
+Variable name
 
 Value as concept name
 
@@ -151,6 +153,8 @@ overall
 overall
 
 overall
+
+Measurement records
 
 Low
 
@@ -186,6 +190,8 @@ NA
 NA
 
 Measurement
+
+Measurement records
 
 Low
 

@@ -2,7 +2,7 @@
 
 The MeasurementDiagnostics package provides tools to assess how
 measurements are recorded and used in data mapped to the OMOP Common
-Data Model (CDM).
+Data Model.
 
 Diagnostics can be run either on the full dataset or restricted to a
 specific cohort, helping users better understand data completeness,
@@ -93,7 +93,10 @@ functions. For example, the following tables display summaries of
 numeric values and concept-based values:
 
 ``` r
-tableMeasurementValueAsConcept(respiratory_function_measurements)
+tableMeasurementValueAsConcept(
+  respiratory_function_measurements,
+  hide = c("cdm_name", "domain_id", "value_as_concept_id")
+)
 ```
 
 [TABLE]
