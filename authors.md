@@ -13,7 +13,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/ohdsi/MeasurementDiagnostics/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/ohdsi/MeasurementDiagnostics/blob/v0.3.0/DESCRIPTION)
 
 Burn E, Mercade-Besora N, Alcalde-Herraiz M (2026).
 *MeasurementDiagnostics: Diagnostics for Lists of Codes Based on
