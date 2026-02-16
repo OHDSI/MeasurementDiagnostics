@@ -185,7 +185,7 @@ test_that("summariseMeasurementUse works", {
 
   expect_true(all(
     res$variable_name |> unique() %in% c(
-      "number_subjects", "number records", "days_between_measurements", "measurements_per_subject",
+      "number_subjects", "number records", "days_between_measurements", "measurement_records", "measurements_per_subject",
       "value_as_number", "value_as_concept_name"
     )
   ))

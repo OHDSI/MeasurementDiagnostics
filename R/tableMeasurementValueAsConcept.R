@@ -83,7 +83,7 @@ tableMeasurementValueAsConcept <- function(result,
         "Value as concept ID" = "value_as_concept_id"
       ),
       type = type,
-      hide = unique(c(hide, "variable_name")),
+      hide = hide,
       columnOrder = columnOrder,
       factor = factors,
       style = style,
