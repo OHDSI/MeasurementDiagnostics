@@ -513,3 +513,19 @@ test_that("summariseMeasurementUse observation domain", {
 
   dropCreatedTables(cdm = cdm)
 })
+
+test_that("summariseMeasurementUse can be imported", {
+  skip_on_cran()
+  cdm <- testMockCdm() |>
+    copyCdm()
+
+  res <- summariseMeasurementUse(cdm = cdm, codes = list("test" = 3001467L))
+
+  path <- tempdir()
+  omopgenerics::exportSummarisedResult(res, fileName = "res.csv", path = path, minCellCount = 0)
+  x <- omopgenerics::importSummarisedResult(path = file.path(path, "res.csv"))
+
+  expect_identical(res, x)
+
+  dropCreatedTables(cdm = cdm)
+})
